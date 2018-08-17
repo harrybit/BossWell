@@ -1,0 +1,155 @@
+﻿@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<style type="text/css">
+    .coverimg {
+        width: 264px;
+        height: 120px;
+        float: left;
+    }
+
+    input[type=file] {
+        float: left;
+        width: 90px;
+        margin-top: 62px;
+        margin-left: 20px;
+    }
+
+    .UploadError {
+        width: 200px;
+        height:20px;
+        overflow: hidden;
+    }
+</style>
+<script>
+    var keyValue = $.request("keyValue");
+    $(function () {
+        initControl();
+        if (!!keyValue) {
+            $.ajax({
+                url: "/PublicBusines/Banner/GetFormJson",
+                data: { keyValue: keyValue },
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    $("#form1").formSerialize(data);
+                    if (data.Path != null && data.Path.length > 10) {
+                        $(".coverimg").attr("src", data.Path);
+                    }
+                }
+            });
+        }
+    });
+    function initControl() {
+
+        $("#ComClassSid").bindSelect({
+            url: "/PublicBusines/ComClass/GetSelectByParent",
+            param: { parentId: "comclass_bQ8uuUhZf7yAogYP3jDVhtd2ux1VZkBM" }
+        });
+
+    }
+    function submitForm() {
+        if (!$('#form1').formValid()) {
+            return false;
+        }
+        $.submitForm({
+            url: "/PublicBusines/Banner/SubmitForm?keyValue=" + keyValue,
+            param: $("#form1").formSerialize(),
+            success: function () {
+                $.currentWindow().$("#gridList").resetSelection();
+                $.currentWindow().$("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+
+    //上传图片
+    function Upload(e) {
+        var files = e.files;
+        if (files.length < 1) {
+            $.modalMsg("请选择上传的图片");
+            return;
+        }
+        var data = new FormData();
+        data.append("file", files[0]);
+
+        let xhr = new XMLHttpRequest();
+        xhr.upload.onprogress = function (ev) {
+            $(".UploadError").text('获取文件进度：' + (100 * ev.loaded / ev.total).toFixed(2) + '%');
+        }
+        xhr.open('POST', '/SystemManage/UpLoad/UpLoadImage', true);
+        xhr.send(data);
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var result = jQuery.parseJSON(this.response);
+                if (result.data == null) {
+                    $.modalMsg("Upload Error");
+                    return;
+                }
+                $("#Path").val($(result.data)[0]);
+                $(".coverimg").attr("src", $(result.data)[0]);
+                $(".UploadError").text($(result.data)[0]);
+                $.modalMsg("上传成功");
+            }
+        }
+    }
+
+</script>
+
+<form id="form1">
+    <div style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#">基本信息</a></li>
+        </ul>
+        <div>
+            <table class="form">
+                <tr>
+                    <th class="formTitle">图片</th>
+                    <td colspan="3" class="formValue">
+                        <img src="~/Content/img/covering.png" alt="..." class="img-thumbnail coverimg">
+                        <div class="UploadError"></div>
+                        <input type="file" value="上传图片" class="btn btn-default" onchange="Upload(this)" />
+                        <input id="Path" name="Path" type="hidden" />
+                    </td>
+                </tr>
+                <tr>
+                    <th class="formTitle">标题</th>
+                    <td class="formValue">
+                        <input id="Title" name="Title" type="text" class="form-control required" placeholder="请输入标题" />
+                    </td>
+                    <th class="formTitle">排序</th>
+                    <td class="formValue">
+                        <input id="Sort" name="Sort" type="text" class="form-control number" placeholder="请输入排序" />
+                    </td>
+                </tr>
+                <tr>
+                    <th class="formTitle">分类</th>
+                    <td class="formValue">
+                        <select id="ComClassSid" name="ComClassSid" class="form-control required"></select>
+                    </td>
+                    <th class="formTitle" style="height: 35px;">是否启用</th>
+                    <td class="formValue" style="padding-top: 1px;">
+                        <div class="ckbox">
+                            <input id="IsEnable" name="IsEnable" type="checkbox" checked="checked"><label for="IsEnable">是否启用</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="formTitle">链接</th>
+                    <td class="formValue" colspan="3">
+                        <input id="Link" name="Link" type="text" class="form-control" placeholder="请输入链接" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <th class="formTitle" valign="top" style="padding-top: 5px;">
+                        备注
+                    </th>
+                    <td class="formValue" colspan="3">
+                        <textarea id="Remark" name="Remark" class="form-control" style="height: 80px;width: 480px;"></textarea>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,147 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<style>
+    .tok_option {
+        cursor: pointer;
+    }
+</style>
+<script>
+    $(function () {
+        gridList();
+    })
+    function gridList() {
+        var $gridList = $("#gridList");
+        $gridList.dataGrid({
+            url: "/PublicBusines/Client/GetGridJson",
+            postData: { keyword: $("#txt_keyword").val()},
+            height: $(window).height() - 128,
+            colModel: [
+                { label: '主键', name: 'Sid', hidden: true },
+                { label: '账号', name: 'AccountNo', width: 140, align: 'left' },
+				{ label: '昵称', name: 'NickName', width: 80, align: 'left' },
+				{ label: '手机', name: 'Mobile', width: 100, align: 'left' },
+                 {
+                     label: '生日', name: 'Birthday', width: 80, align: 'center',
+                     formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }
+                 },
+                { label: '角色', name: 'Role', width: 80, align: 'center' },
+                { label: '余额', name: 'Balance', width: 80, align: 'center' },
+                { label: '推荐码', name: 'SpreadCode', width: 140, align: 'center' },
+                {
+                    label: '创建时间', name: 'CreateDate', width: 120, align: 'center',
+                    formatter: "date", formatoptions: { srcformat: 'Y-m-d h:i:s', newformat: 'Y-m-d h:i:s' }
+                },
+                {
+                    label: '登录令牌', name: 'Token', width: 80, align: 'center',
+                    formatter: function (cellvalue) {
+                        return "<a class='tok_option' onclick=\"AltSid('" + cellvalue + "')\">查看</a>";
+                    }
+                },
+                { label: 'token', name: 'Token', hidden: true }
+            ],
+            pager: "#gridPager",
+            sortname: 'CreateDate desc',
+            viewrecords: true
+        });
+        $("#btn_search").click(function () {
+            $gridList.jqGrid('setGridParam', {
+                postData: { keyword: $("#txt_keyword").val()},
+            }).trigger('reloadGrid');
+        });
+    }
+
+    function AltSid(sid) {
+        $.modalAlert(sid, "success");
+    }
+
+    function btn_add() {
+        $.modalOpen({
+            id: "Form",
+            title: "添加用户",
+            url: "/PublicBusines/Client/Form",
+            width: "700px",
+            height: "600px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+
+    function btn_edit() {
+        var keyValue = $("#gridList").jqGridRowValue().Sid;
+
+        if (keyValue == undefined || keyValue.length < 16) {
+            $.modalMsg("请选择需要编辑列");
+            return;
+        }
+
+        $.modalOpen({
+            id: "Form",
+            title: "修改用户",
+            url: "/PublicBusines/Client/Form?keyValue=" + keyValue,
+            width: "700px",
+            height: "600px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+    function btn_delete() {
+
+        var keyvalue = $("#gridList").jqGridRowValue().Sid;
+        if (keyvalue == undefined || keyvalue.length < 16) {
+            $.modalMsg("请选择需要删除列");
+            return;
+        }
+
+        $.deleteForm({
+            url: "/PublicBusines/Client/DeleteForm",
+            param: { keyValue: keyvalue },
+            success: function () {
+                $.currentWindow().$("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+
+</script>
+
+
+<div class="topPanel">
+    <div class="toolbar">
+        <div class="btn-group">
+            <a class="btn btn-primary" onclick="$.reload()"><span class="glyphicon glyphicon-refresh"></span></a>
+        </div>
+        <div class="btn-group">
+            <a id="NF-add" authorize="yes" class="btn btn-primary dropdown-text" onclick="btn_add()"><i class="fa fa-plus"></i>添加用户</a>
+        </div>
+        <div class="operate">
+            <ul class="nav nav-pills">
+                <li class="first">已选中<span>1</span>项</li>
+                <li><a id="NF-edit" authorize="yes" onclick="btn_edit()"><i class="fa fa-pencil-square-o"></i>编辑用户</a></li>
+                <li><a id="NF-delete" authorize="yes" onclick="btn_delete()"><i class="fa fa-trash-o"></i>删除用户</a></li>
+            </ul>
+            <a href="javascript:;" class="close"></a>
+        </div>
+        <script>$('.toolbar').authorizeButton()</script>
+    </div>
+    <div class="search">
+        <table>
+            <tr>
+                <td>
+                    <div class="input-group">
+                        <input id="txt_keyword" type="text" class="form-control" placeholder="模糊查询" style="width: 200px;">
+                        <span class="input-group-btn">
+                            <button id="btn_search" type="button" class="btn  btn-primary"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="gridPanel">
+    <table id="gridList"></table>
+    <div id="gridPager"></div>
+</div>

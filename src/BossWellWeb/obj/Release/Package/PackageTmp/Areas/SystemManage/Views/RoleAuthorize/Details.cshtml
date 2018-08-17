@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<script>
+    var keyValue = $.request("keyValue");
+    $(function () {
+        initControl();
+        $.ajax({
+            url: "/SystemManage/RoleAuthorize/GetSinlge",
+            data: { keyValue: keyValue },
+            dataType: "json",
+            async: false,
+            success: function (data) {
+                $("#form1").formSerialize(data);
+            }
+        });
+    });
+    function initControl() {
+       //角色类型
+		 $("#F_ObjectType").bindSelect({
+            url: "/SystemManage/ItemsData/GetSelectJson",
+            param: { enCode: "RoleType" }
+        });
+		//菜单模块
+		$("#F_ItemId").bindSelect({
+            url: "/SystemManage/Module/GetTreeSelectJson",
+        });
+		//角色模块
+		$("#F_ObjectId").bindSelect({
+            url: "/SystemManage/Role/GetTreeSelectJson",
+        });
+		//菜单类型
+		$("#F_ItemType").bindSelect({
+            url: "/SystemManage/RoleAuthorize/GetMenuTypeTreeList",
+        });
+    }
+
+	 function submitForm() {
+        if (!$('#form1').formValid()) {
+            return false;
+        }
+        $.submitForm({
+            url: "/SystemManage/RoleAuthorize/SubmitForm?keyValue=" + keyValue,
+            param: $("#form1").formSerialize(),
+            success: function () {
+                $.currentWindow().$("#gridList").resetSelection();
+                $.currentWindow().$("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+
+</script>
+
+<form id="form1">
+    <div style="padding-top: 20px; margin-right: 20px;">
+        <table class="form">
+             <tr>
+                     <th class="formTitle">角色类型</th>
+                     <td class="formValue">
+                             <select id="F_ObjectType" name="F_ObjectType" class="form-control required">
+                             </select>
+                     </td>
+					<th class="formTitle">菜单类型</th>
+                    <td class="formValue">
+                        <select id="F_ItemType" name="F_ItemType" class="form-control required">
+                        </select>
+                    </td>
+
+                </tr>
+				<tr>
+                     <th class="formTitle">菜单模块</th>
+                         <td class="formValue">
+                             <select id="F_ItemId" name="F_ItemId" class="form-control required">
+                             </select>
+                         </td>
+                    <th class="formTitle">角色</th>
+                    <td class="formValue">
+                        <select id="F_ObjectId" name="F_ObjectId" class="form-control required">
+                        </select>
+                    </td>
+                </tr>
+                 <tr>
+                      <th class="formTitle">显示顺序</th>
+                          <td class="formValue">
+                              <input id="F_SortCode" name="F_SortCode" type="text" class="form-control required" placeholder="请输入显示顺序" />
+                          </td>
+                      </tr>
+					  <tr>
+                <th class="formTitle">创建人员</th>
+                <td class="formValue">
+                    <input id="F_CreatorUserId" name="F_CreatorUserId" type="text" class="form-control" />
+                </td>
+            </tr>
+            <tr>
+
+                <th class="formTitle">创建时间</th>
+                <td class="formValue">
+                    <input id="F_CreatorTime" name="F_CreatorTime" type="text" class="form-control" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>

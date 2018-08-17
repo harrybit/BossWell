@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B4A96969-3078-44A5-AA78-84AF95CBEBB5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BossWellModel</RootNamespace>
+    <AssemblyName>BossWellModel</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Chloe, Version=2.22.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Chloe.2.22.0\lib\net40\Chloe.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Chloe.Extension, Version=1.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Chloe.Extension.1.9.0\lib\net40\Chloe.Extension.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AreaEntity.cs" />
+    <Compile Include="BannerEntity.cs" />
+    <Compile Include="Base\AuthorizeActionModel.cs" />
+    <Compile Include="Base\BaseEntity.cs" />
+    <Compile Include="Base\QueryRequest.cs" />
+    <Compile Include="Base\QueryResponse.cs" />
+    <Compile Include="BossWellModel\SignInModel.cs" />
+    <Compile Include="BossWellModel\AjaxResult.cs" />
+    <Compile Include="BossWellModel\RegisterModel.cs" />
+    <Compile Include="BossWellModel\TreeGridModel.cs" />
+    <Compile Include="BossWellModel\TreeViewModel.cs" />
+    <Compile Include="BossWellModel\WangEditorUpLoadModel.cs" />
+    <Compile Include="ClientEntity.cs" />
+    <Compile Include="ComClassEntity.cs" />
+    <Compile Include="DeviceVersionEntity.cs" />
+    <Compile Include="Enum\LogTypeEnum.cs" />
+    <Compile Include="Enum\ModuleButtonLocationEnum.cs" />
+    <Compile Include="Enum\OrganizeCategoryEnum.cs" />
+    <Compile Include="Enum\ResultType.cs" />
+    <Compile Include="Enum\ResultTypeEnum.cs" />
+    <Compile Include="Enum\RoleAuthorizeModuleEnum.cs" />
+    <Compile Include="Enum\RoleCateEnum.cs" />
+    <Compile Include="FileStorageEntity.cs" />
+    <Compile Include="LogEntity.cs" />
+    <Compile Include="ModuleButtonEntity.cs" />
+    <Compile Include="ModuleEntity.cs" />
+    <Compile Include="BossWellModel\TreeSelectModel.cs" />
+    <Compile Include="NewsEntity.cs" />
+    <Compile Include="OrganizeEntity.cs" />
+    <Compile Include="BossWellModel\RoleAuthorizeList.cs" />
+    <Compile Include="BossWellModel\Pagination.cs" />
+    <Compile Include="Plus\ResultQiNiu.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoleAuthorizeEntity.cs" />
+    <Compile Include="RoleEntity.cs" />
+    <Compile Include="SystemConfigEntity.cs" />
+    <Compile Include="AdminUserEntity.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\SystemConfig\SystemConfig.csproj">
+      <Project>{e8026354-9f4c-44f1-8ab4-c79b3616309f}</Project>
+      <Name>SystemConfig</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

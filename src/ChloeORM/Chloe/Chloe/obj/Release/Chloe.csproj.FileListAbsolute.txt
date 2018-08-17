@@ -1,0 +1,12 @@
+D:\Project_TY\20180502Rest\flyinit\Flying\src\01数据访问\Chloe\Chloe\bin\Release\Chloe.XML
+D:\Project_TY\20180502Rest\flyinit\Flying\src\01数据访问\Chloe\Chloe\bin\Release\Chloe.dll
+D:\Project_TY\20180502Rest\flyinit\Flying\src\01数据访问\Chloe\Chloe\bin\Release\Chloe.pdb
+D:\Project_TY\20180502Rest\flyinit\Flying\src\01数据访问\Chloe\Chloe\obj\Release\Chloe.csprojResolveAssemblyReference.cache
+D:\Project_TY\20180502Rest\flyinit\Flying\src\01数据访问\Chloe\Chloe\obj\Release\Chloe.dll
+D:\Project_TY\20180502Rest\flyinit\Flying\src\01数据访问\Chloe\Chloe\obj\Release\Chloe.pdb
+D:\Project_TY\20180502Rest\Job\flyinit\Flying\src\01数据访问\Chloe\Chloe\bin\Release\Chloe.XML
+D:\Project_TY\20180502Rest\Job\flyinit\Flying\src\01数据访问\Chloe\Chloe\bin\Release\Chloe.dll
+D:\Project_TY\20180502Rest\Job\flyinit\Flying\src\01数据访问\Chloe\Chloe\bin\Release\Chloe.pdb
+D:\Project_TY\20180502Rest\Job\flyinit\Flying\src\01数据访问\Chloe\Chloe\obj\Release\Chloe.csprojResolveAssemblyReference.cache
+D:\Project_TY\20180502Rest\Job\flyinit\Flying\src\01数据访问\Chloe\Chloe\obj\Release\Chloe.dll
+D:\Project_TY\20180502Rest\Job\flyinit\Flying\src\01数据访问\Chloe\Chloe\obj\Release\Chloe.pdb

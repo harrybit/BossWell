@@ -1,0 +1,201 @@
+﻿@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<style type="text/css">
+    .coverimg {
+        width: 264px;
+        height: 120px;
+        float: left;
+    }
+
+    input[type=file] {
+        float: left;
+        width: 90px;
+        margin-top: 62px;
+        margin-left: 20px;
+    }
+
+    .UploadError {
+        width: 200px;
+        height: 20px;
+        overflow: hidden;
+    }
+</style>
+<script src="~/Content/js/wangeditor/wangEditor.min.js" type="text/javascript"></script>
+<script>
+
+    var editor;
+    var keyValue = $.request("keyValue");
+    $(function () {
+        initControl();
+        if (!!keyValue) {
+            $.ajax({
+                url: "/PublicBusines/News/GetFormJson",
+                data: { keyValue: keyValue },
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    $("#form1").formSerialize(data);
+
+                    $("#Content").val(decodeURI(data.Content));
+                    editor.txt.html(decodeURI(data.Content));
+
+                    if (data.CoverImg != null && data.CoverImg.length > 10) {
+                        $(".coverimg").attr("src", data.CoverImg);
+                    }
+                }
+            });
+        }
+    });
+    function initControl() {
+
+        var E = window.wangEditor;
+        editor = new E('#editContent');
+
+        // 自定义菜单配置
+        editor.customConfig.menus = [
+            'head',  // 标题
+            'bold',  // 粗体
+            'fontName',  // 字体
+            'italic',  // 斜体
+            'underline',  // 下划线
+            'foreColor',  // 文字颜色
+            'justify',  // 对齐方式
+            'image',  // 插入图片
+            'table',  // 表格
+        ]
+
+        // 配置服务器端地址
+        editor.customConfig.uploadImgServer = '/SystemManage/UpLoad/UpLoadImage'
+
+        editor.create();
+
+        $("#ComClassSid").bindSelect({
+            url: "/PublicBusines/ComClass/GetSelectByParent",
+            param: { parentId: "comclass_O7JZltiehk5M7PG1emaVTlsBEA9OO7kA" }
+        });
+
+    }
+    function submitForm() {
+        if (!$('#form1').formValid()) {
+            return false;
+        }
+        $("#Content").val(encodeURI(editor.txt.html()));
+
+        $.submitForm({
+            url: "/PublicBusines/News/SubmitForm?keyValue=" + keyValue,
+            param: $("#form1").formSerialize(),
+            success: function () {
+                $.currentWindow().$("#gridList").resetSelection();
+                $.currentWindow().$("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+
+    //上传图片
+    function Upload(e) {
+        var files = e.files;
+        if (files.length < 1) {
+            $.modalMsg("请选择上传的图片");
+            return;
+        }
+        var data = new FormData();
+        data.append("file", files[0]);
+
+        let xhr = new XMLHttpRequest();
+        xhr.upload.onprogress = function (ev) {
+            $(".UploadError").text('获取文件进度：' + (100 * ev.loaded / ev.total).toFixed(2) + '%');
+        }
+        xhr.open('POST', '/SystemManage/UpLoad/UpLoadImage', true);
+        xhr.send(data);
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var result = jQuery.parseJSON(this.response);
+                if (result.data == null) {
+                    $.modalMsg("Upload Error");
+                    return;
+                }
+                $("#CoverImg").val($(result.data)[0]);
+                $(".coverimg").attr("src", $(result.data)[0]);
+                $(".UploadError").text($(result.data)[0]);
+                $.modalMsg("上传成功");
+            }
+        }
+    }
+
+</script>
+
+<form id="form1">
+    <div style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#">基本信息</a></li>
+        </ul>
+        <div>
+            <table class="form">
+                <tr>
+                    <th class="formTitle">列表图</th>
+                    <td colspan="3" class="formValue">
+                        <img src="~/Content/img/covering.png" alt="..." class="img-thumbnail coverimg">
+                        <div class="UploadError"></div>
+                        <input type="file" value="上传图片" class="btn btn-default" onchange="Upload(this)" />
+                        <input id="CoverImg" name="CoverImg" type="hidden" />
+                    </td>
+                </tr>
+                <tr>
+                    <th class="formTitle">标题</th>
+                    <td class="formValue">
+                        <input id="Title" name="Title" type="text" class="form-control required" placeholder="请输入标题" />
+                    </td>
+                    <th class="formTitle">副标题</th>
+                    <td class="formValue">
+                        <input id="SubTitle" name="SubTitle" type="text" class="form-control" placeholder="请输入副标题" />
+                    </td>
+                </tr>
+                <tr>
+                    <th class="formTitle">分类</th>
+                    <td class="formValue">
+                        <select id="ComClassSid" name="ComClassSid" class="form-control required"></select>
+                    </td>
+                    <th class="formTitle">标签</th>
+                    <td class="formValue" style="padding-top: 1px;">
+                        <input id="Tag" name="Tag" type="text" class="form-control" placeholder="请输入标签" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <th class="formTitle">作者</th>
+                    <td class="formValue" style="padding-top: 1px;">
+                        <input id="Author" name="Author" type="text" class="form-control" placeholder="请输入作者" />
+                    </td>
+                    <th class="formTitle" style="height: 35px;">是否启用</th>
+                    <td class="formValue" style="padding-top: 1px;">
+                        <div class="ckbox">
+                            <input id="IsEnable" name="IsEnable" type="checkbox" checked="checked"><label for="IsEnable">是否启用</label>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th class="formTitle" valign="top" style="padding-top: 5px;">
+                        简介
+                    </th>
+                    <td class="formValue" colspan="3">
+                        <textarea id="Desc" name="Desc" class="form-control" style="height: 80px;width: 480px;"></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th class="formTitle" valign="top" style="padding-top: 5px;">
+                        内容
+                    </th>
+                    <td class="formValue" colspan="3">
+                        <div id="editContent" style="height: 80px;width: 480px;">
+                        </div>
+                        <input type="hidden" id="Content" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</form>

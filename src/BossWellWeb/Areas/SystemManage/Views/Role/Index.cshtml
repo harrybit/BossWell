@@ -1,0 +1,123 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<script>
+    $(function () {
+        gridList();
+    })
+    function gridList() {
+        var $gridList = $("#gridList");
+        $gridList.dataGrid({
+            url: "/SystemManage/Role/GetGridJson",
+            height: $(window).height() - 96,
+            colModel: [
+                { label: "主键", name: "Sid", hidden: true, key: true },
+                { label: '角色名称', name: 'FullName', width: 150, align: 'left' },
+                { label: '角色编号', name: 'EnCode', width: 150, align: 'left' },
+                {
+                    label: '角色类型', name: 'Category', width: 80, align: 'left',
+                    formatter: function (cellvalue) {
+                        if (cellvalue == 1) { return "系统管理员"; }
+                        else if (cellvalue == 2) { return "业务角色"; }
+                        else if (cellvalue == 3) { return "其他角色"; }
+                    }
+                },
+                { label: '组织机构', name: 'OrganizeName', width: 80, align: 'left' },
+                {
+                    label: '创建时间', name: 'CreateDate', width: 120, align: 'left',
+                    formatter: "date", formatoptions: { srcformat: 'Y-m-d h:i:s', newformat: 'Y-m-d h:i:s' }
+                },
+                {
+                    label: "有效", name: "IsEnable", width: 60, align: "center",
+                    formatter: function (cellvalue) {
+                        return cellvalue == 1 ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
+                    }
+                },
+                { label: '备注', name: 'Description', width: 300, align: 'left' }
+            ]
+        });
+        $("#btn_search").click(function () {
+            $gridList.jqGrid('setGridParam', {
+                postData: { keyword: $("#txt_keyword").val() },
+            }).trigger('reloadGrid');
+        });
+    }
+    function btn_add() {
+        $.modalOpen({
+            id: "Form",
+            title: "新增角色",
+            url: "/SystemManage/Role/Form",
+            width: "650px",
+            height: "585px",
+            btn: null
+        });
+    }
+    function btn_edit() {
+        var keyValue = $("#gridList").jqGridRowValue().Sid;
+        if (keyValue == undefined || keyValue.length < 16) {
+            $.modalMsg("请选择需要编辑列");
+            return;
+        }
+
+        $.modalOpen({
+            id: "Form",
+            title: "修改角色",
+            url: "/SystemManage/Role/Form?keyValue=" + keyValue,
+            width: "650px",
+            height: "585px",
+            btn: null
+        });
+    }
+    function btn_delete() {
+        var keyValue = $("#gridList").jqGridRowValue().Sid;
+        if (keyValue == undefined || keyValue.length < 16) {
+            $.modalMsg("请选择需要编辑列");
+            return;
+        }
+        $.deleteForm({
+            url: "/SystemManage/Role/DeleteForm",
+            param: { keyValue: keyValue },
+            success: function () {
+                $.currentWindow().$("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+</script>
+
+<div class="topPanel">
+    <div class="toolbar">
+        <div class="btn-group">
+            <a class="btn btn-primary" onclick="$.reload()"><span class="glyphicon glyphicon-refresh"></span></a>
+        </div>
+        <div class="btn-group">
+            <a id="NF-add" authorize="yes" class="btn btn-primary dropdown-text" onclick="btn_add()"><i class="fa fa-plus"></i>添加角色</a>
+        </div>
+        <div class="operate">
+            <ul class="nav nav-pills">
+                <li class="first">已选中<span>1</span>项</li>
+                <li><a id="NF-edit" authorize="yes" onclick="btn_edit()"><i class="fa fa-pencil-square-o"></i>编辑角色</a></li>
+                <li><a id="NF-delete" authorize="yes" onclick="btn_delete()"><i class="fa fa-trash-o"></i>删除角色</a></li>
+            </ul>
+            <a href="javascript:;" class="close"></a>
+        </div>
+        <script>$('.toolbar').authorizeButton()</script>
+    </div>
+    <div class="search">
+        <table>
+            <tr>
+                <td>
+                    <div class="input-group">
+                        <input id="txt_keyword" type="text" class="form-control" placeholder="角色名称/角色编号" style="width: 200px;">
+                        <span class="input-group-btn">
+                            <button id="btn_search" type="button" class="btn  btn-primary"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="gridPanel">
+    <table id="gridList"></table>
+</div>

@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<script>
+    var keyValue = $.request("keyValue");
+    $(function () {
+        initControl();
+        if (!!keyValue) {
+            $.ajax({
+                url: "/PublicBusines/News/GetFormJson",
+                data: { keyValue: keyValue },
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    $("#form1").formSerialize(data);
+                }
+            });
+        }
+    });
+    function initControl() {
+       
+    }
+    function submitForm() {
+        if (!$('#form1').formValid()) {
+            return false;
+        }
+        $.submitForm({
+            url: "/PublicBusines/News/SubmitForm?keyValue=" + keyValue,
+            param: $("#form1").formSerialize(),
+            success: function () {
+                $.currentWindow().$("#gridList").resetSelection();
+                $.currentWindow().$("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+</script>
+
+<form id="form1">
+    <div style="padding-top: 20px; margin-right: 20px;">
+        <table class="form">
+            <tr>
+                <th class="formTitle">标题</th>
+                <td class="formValue">
+                    <input id="title" name="title" type="text" class="form-control required" placeholder="请输入标题" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">类别</th>
+                <td class="formValue">
+                    <input id="type" name="type" type="text" class="form-control required" placeholder="请输入新闻类别" />
+                </td>
+            </tr>
+			 <tr>
+                <th class="formTitle">作者</th>
+                <td class="formValue">
+                    <input id="author" name="author" type="text" class="form-control required" placeholder="请输入作者" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle" valign="top" style="padding-top: 5px;">内容
+                </th>
+                <td class="formValue">
+                    <textarea id="intro" name="intro" class="form-control" style="height: 60px;"></textarea>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>

@@ -1,0 +1,10 @@
+D:\Project_TY\20180502Rest\flyinit\Flying\src\04缓存模块\Cache.Base\bin\Release\Cache.Base.dll
+D:\Project_TY\20180502Rest\flyinit\Flying\src\04缓存模块\Cache.Base\bin\Release\Cache.Base.pdb
+D:\Project_TY\20180502Rest\flyinit\Flying\src\04缓存模块\Cache.Base\obj\Release\Cache.Base.csprojResolveAssemblyReference.cache
+D:\Project_TY\20180502Rest\flyinit\Flying\src\04缓存模块\Cache.Base\obj\Release\Cache.Base.dll
+D:\Project_TY\20180502Rest\flyinit\Flying\src\04缓存模块\Cache.Base\obj\Release\Cache.Base.pdb
+D:\Project_TY\20180502Rest\Job\flyinit\Flying\src\04缓存模块\Cache.Base\bin\Release\Cache.Base.dll
+D:\Project_TY\20180502Rest\Job\flyinit\Flying\src\04缓存模块\Cache.Base\bin\Release\Cache.Base.pdb
+D:\Project_TY\20180502Rest\Job\flyinit\Flying\src\04缓存模块\Cache.Base\obj\Release\Cache.Base.csprojResolveAssemblyReference.cache
+D:\Project_TY\20180502Rest\Job\flyinit\Flying\src\04缓存模块\Cache.Base\obj\Release\Cache.Base.dll
+D:\Project_TY\20180502Rest\Job\flyinit\Flying\src\04缓存模块\Cache.Base\obj\Release\Cache.Base.pdb
