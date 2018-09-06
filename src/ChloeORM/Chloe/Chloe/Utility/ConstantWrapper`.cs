@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Chloe
+﻿namespace Chloe
 {
     public class ConstantWrapper<T>
     {
@@ -8,6 +6,7 @@ namespace Chloe
         {
             this.Value = value;
         }
+
         public T Value { get; private set; }
     }
 }

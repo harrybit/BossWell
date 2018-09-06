@@ -1,11 +1,12 @@
 ﻿using Chloe.Entity;
+
 namespace BossWellModel
 {
     /// <summary>
     /// 系统配置表
     /// </summary>
     [Table("SystemConfig")]
-    public class SystemConfigEntity:BaseEntity
+    public class SystemConfigEntity : BaseEntity
     {
         /// <summary>
         /// 标题
@@ -41,6 +42,5 @@ namespace BossWellModel
         /// 备注
         /// </summary>
         public string Remark { get; set; }
-
     }
 }

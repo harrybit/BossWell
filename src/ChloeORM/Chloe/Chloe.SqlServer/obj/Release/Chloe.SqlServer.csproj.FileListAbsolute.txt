@@ -16,3 +16,12 @@ D:\Project_TY\20180502Rest\Job\flyinit\Flying\src\01数据访问\Chloe\Chloe.Sql
 D:\Project_TY\20180502Rest\Job\flyinit\Flying\src\01数据访问\Chloe\Chloe.SqlServer\obj\Release\Chloe.SqlServer.csprojResolveAssemblyReference.cache
 D:\Project_TY\20180502Rest\Job\flyinit\Flying\src\01数据访问\Chloe\Chloe.SqlServer\obj\Release\Chloe.SqlServer.dll
 D:\Project_TY\20180502Rest\Job\flyinit\Flying\src\01数据访问\Chloe\Chloe.SqlServer\obj\Release\Chloe.SqlServer.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.SqlServer\bin\Release\Chloe.SqlServer.XML
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.SqlServer\bin\Release\Chloe.SqlServer.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.SqlServer\bin\Release\Chloe.SqlServer.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.SqlServer\bin\Release\Chloe.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.SqlServer\bin\Release\Chloe.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.SqlServer\bin\Release\Chloe.xml
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.SqlServer\obj\Release\Chloe.SqlServer.csprojResolveAssemblyReference.cache
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.SqlServer\obj\Release\Chloe.SqlServer.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.SqlServer\obj\Release\Chloe.SqlServer.pdb

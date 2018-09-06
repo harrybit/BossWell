@@ -1,17 +1,15 @@
 ﻿using Chloe.DbExpressions;
-using System;
 using Chloe.Descriptors;
-using System.Reflection;
-using Chloe.InternalExtensions;
-using System.Linq.Expressions;
-using System.Collections.Generic;
 using Chloe.Utility;
+using System;
+using System.Reflection;
 
 namespace Chloe.Query.QueryState
 {
     internal sealed class RootQueryState : QueryStateBase
     {
-        Type _elementType;
+        private Type _elementType;
+
         public RootQueryState(Type elementType, string explicitTableName, ScopeParameterDictionary scopeParameters, KeyDictionary<string> scopeTables)
             : base(CreateResultElement(elementType, explicitTableName, scopeParameters, scopeTables))
         {
@@ -31,7 +29,7 @@ namespace Chloe.Query.QueryState
             return base.ToFromQueryResult();
         }
 
-        static ResultElement CreateResultElement(Type type, string explicitTableName, ScopeParameterDictionary scopeParameters, KeyDictionary<string> scopeTables)
+        private static ResultElement CreateResultElement(Type type, string explicitTableName, ScopeParameterDictionary scopeParameters, KeyDictionary<string> scopeTables)
         {
             if (type.IsAbstract || type.IsInterface)
                 throw new ArgumentException("The type of input can not be abstract class or interface.");
@@ -70,7 +68,8 @@ namespace Chloe.Query.QueryState
 
             return resultElement;
         }
-        static DbFromTableExpression CreateRootTable(DbTable table, string alias)
+
+        private static DbFromTableExpression CreateRootTable(DbTable table, string alias)
         {
             DbTableExpression tableExp = new DbTableExpression(table);
             DbTableSegment tableSeg = new DbTableSegment(tableExp, alias);

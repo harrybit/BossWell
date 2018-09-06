@@ -176,7 +176,7 @@ define(function (require) {
             this._zr = _zr;
 
             // wrap: n,e,d,t for name event data this
-            this._messageCenter.dispatch = function(type, event, eventPackage, that) {
+            this._messageCenter.dispatch = function (type, event, eventPackage, that) {
                 eventPackage = eventPackage || {};
                 eventPackage.type = type;
                 eventPackage.event = event;
@@ -199,7 +199,7 @@ define(function (require) {
                 // }
             };
 
-            this._onevent = function(param){
+            this._onevent = function (param) {
                 return self.__onevent(param);
             };
             for (var e in ecConfig.EVENT) {
@@ -210,10 +210,9 @@ define(function (require) {
                 }
             }
 
-
             var eventBehaviors = {};
             this._onzrevent = function (param) {
-                return self[eventBehaviors[ param.type ]](param);
+                return self[eventBehaviors[param.type]](param);
             };
 
             // 挂载关心的事件
@@ -252,7 +251,7 @@ define(function (require) {
         /**
          * ECharts事件处理中心
          */
-        __onevent: function (param){
+        __onevent: function (param) {
             param.__echartsId = param.__echartsId || this.id;
 
             // 来自其他联动图表的事件
@@ -263,10 +262,10 @@ define(function (require) {
             }
 
             switch (param.type) {
-                case ecConfig.EVENT.LEGEND_SELECTED :
+                case ecConfig.EVENT.LEGEND_SELECTED:
                     this._onlegendSelected(param);
                     break;
-                case ecConfig.EVENT.DATA_ZOOM :
+                case ecConfig.EVENT.DATA_ZOOM:
                     if (!fromMyself) {
                         var dz = this.component.dataZoom;
                         if (dz) {
@@ -277,10 +276,10 @@ define(function (require) {
                     }
                     this._ondataZoom(param);
                     break;
-                case ecConfig.EVENT.DATA_RANGE :
+                case ecConfig.EVENT.DATA_RANGE:
                     fromMyself && this._ondataRange(param);
                     break;
-                case ecConfig.EVENT.MAGIC_TYPE_CHANGED :
+                case ecConfig.EVENT.MAGIC_TYPE_CHANGED:
                     if (!fromMyself) {
                         var tb = this.component.toolbox;
                         if (tb) {
@@ -291,21 +290,21 @@ define(function (require) {
                     }
                     this._onmagicTypeChanged(param);
                     break;
-                case ecConfig.EVENT.DATA_VIEW_CHANGED :
+                case ecConfig.EVENT.DATA_VIEW_CHANGED:
                     fromMyself && this._ondataViewChanged(param);
                     break;
-                case ecConfig.EVENT.TOOLTIP_HOVER :
+                case ecConfig.EVENT.TOOLTIP_HOVER:
                     fromMyself && this._tooltipHover(param);
                     break;
-                case ecConfig.EVENT.RESTORE :
+                case ecConfig.EVENT.RESTORE:
                     this._onrestore();
                     break;
-                case ecConfig.EVENT.REFRESH :
+                case ecConfig.EVENT.REFRESH:
                     fromMyself && this._onrefresh(param);
                     break;
-                // 鼠标同步
-                case ecConfig.EVENT.TOOLTIP_IN_GRID :
-                case ecConfig.EVENT.TOOLTIP_OUT_GRID :
+                    // 鼠标同步
+                case ecConfig.EVENT.TOOLTIP_IN_GRID:
+                case ecConfig.EVENT.TOOLTIP_OUT_GRID:
                     if (!fromMyself) {
                         // 只处理来自外部的鼠标同步
                         var grid = this.component.grid;
@@ -329,13 +328,13 @@ define(function (require) {
                         }
                     }
                     break;
-                /*
-                case ecConfig.EVENT.RESIZE :
-                case ecConfig.EVENT.DATA_CHANGED :
-                case ecConfig.EVENT.PIE_SELECTED :
-                case ecConfig.EVENT.MAP_SELECTED :
-                    break;
-                */
+                    /*
+                    case ecConfig.EVENT.RESIZE :
+                    case ecConfig.EVENT.DATA_CHANGED :
+                    case ecConfig.EVENT.PIE_SELECTED :
+                    case ecConfig.EVENT.MAP_SELECTED :
+                        break;
+                    */
             }
 
             // 多图联动，只做自己的一级事件分发，避免级联事件循环
@@ -614,7 +613,7 @@ define(function (require) {
             return;
         },
 
-        _noDataCheck: function(magicOption) {
+        _noDataCheck: function (magicOption) {
             var series = magicOption.series;
 
             for (var i = 0, l = series.length; i < l; i++) {
@@ -758,7 +757,7 @@ define(function (require) {
 
             // 已有实例但新option不带这类图表的实例释放
             for (chartType in this.chart) {
-                if (chartType != ecConfig.CHART_TYPE_ISLAND  && !chartMap[chartType]) {
+                if (chartType != ecConfig.CHART_TYPE_ISLAND && !chartMap[chartType]) {
                     this.chart[chartType].dispose();
                     this.chart[chartType] = null;
                     delete this.chart[chartType];
@@ -1034,7 +1033,7 @@ define(function (require) {
          */
         setSeries: function (series, notMerge) {
             if (!notMerge) {
-                this.setOption({series: series});
+                this.setOption({ series: series });
             }
             else {
                 this._option.series = series;
@@ -1054,7 +1053,7 @@ define(function (require) {
          * timelineOption接口，配置图表实例任何可配置选项
          * @param {Object} option
          */
-        _setTimelineOption: function(option) {
+        _setTimelineOption: function (option) {
             this._timeline && this._timeline.dispose();
             var Timeline = require('./component/timeline');
             var timeline = new Timeline(
@@ -1199,7 +1198,7 @@ define(function (require) {
                 self._messageCenter.dispatch(
                     ecConfig.EVENT.REFRESH,
                     null,
-                    {option: magicOption},
+                    { option: magicOption },
                     self
                 );
             }
@@ -1233,8 +1232,8 @@ define(function (require) {
                 var markOpt = seriesItem[markType];
                 var markOptR = seriesRItem[markType];
 
-                markOpt = seriesItem[markType] = markOpt || {data: []};
-                markOptR = seriesRItem[markType] = markOptR || {data: []};
+                markOpt = seriesItem[markType] = markOpt || { data: [] };
+                markOptR = seriesRItem[markType] = markOptR || { data: [] };
 
                 for (var key in markData) {
                     if (key === 'data') {
@@ -1364,7 +1363,7 @@ define(function (require) {
             }
 
             var bgColor = this._option.backgroundColor;
-            if (bgColor && bgColor.replace(' ','') === 'rgba(0,0,0,0)') {
+            if (bgColor && bgColor.replace(' ', '') === 'rgba(0,0,0,0)') {
                 bgColor = '#fff';
             }
 
@@ -1615,12 +1614,12 @@ define(function (require) {
 
             var Effect = loadingOption.effect;
             if (typeof Effect === 'string' || Effect == null) {
-                Effect =  effectList[
+                Effect = effectList[
                               loadingOption.effect
                               || (this._option && this._option.loadingEffect)
                               || this._themeConfig.loadingEffect
                               || ecConfig.loadingEffect
-                          ]
+                ]
                           || effectList.spin;
             }
             this._zr.showLoading(new Effect(loadingOption.effectOption));
@@ -1640,7 +1639,7 @@ define(function (require) {
          */
         setTheme: function (theme) {
             if (theme) {
-               if (typeof theme === 'string') {
+                if (typeof theme === 'string') {
                     // 默认主题
                     switch (theme) {
                         case 'macarons':
@@ -1696,7 +1695,7 @@ define(function (require) {
          */
         resize: function () {
             var self = this;
-            return function(){
+            return function () {
                 self._clearEffect();
                 self._zr.resize();
                 if (self._option && self._option.renderAsImage && _canvasSupported) {
@@ -1721,7 +1720,7 @@ define(function (require) {
             };
         },
 
-        _clearEffect: function() {
+        _clearEffect: function () {
             this._zr.modLayer(ecConfig.EFFECT_ZLEVEL, { motionBlur: false });
             this._zr.painter.clearLayer(ecConfig.EFFECT_ZLEVEL);
         },

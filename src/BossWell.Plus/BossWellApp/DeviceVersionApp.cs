@@ -1,16 +1,16 @@
-﻿using BossWellModel;
-using IBossWellService;
+﻿using ApiHelp;
 using BossWellFactory;
+using BossWellModel;
 using BossWellModel.Base;
 using BossWellModel.BossWellModel;
+using IBossWellService;
 using System.Collections.Generic;
-using ApiHelp;
 
 namespace BossWellApp
 {
     public class DeviceVersionApp
     {
-        IDeviceVersionService _service = PublicFactory.GetDeviceVersion();
+        private IDeviceVersionService _service = PublicFactory.GetDeviceVersion();
 
         public string GetGridJson(Pagination pagination, string keyword)
         {

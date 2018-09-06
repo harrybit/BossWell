@@ -1,13 +1,13 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using BossWellApp;
 using BossWellModel;
-using BossWellApp;
 using BossWellModel.BossWellModel;
+using System.Web.Mvc;
+
 namespace BossWellWeb.Areas.PublicBusines.Controllers
 {
     public class NewsController : ControllerBase
     {
-        NewsApp newsAPP = new NewsApp();
+        private NewsApp newsAPP = new NewsApp();
 
         [HttpGet]
         [HandlerAjaxOnly]
@@ -41,6 +41,5 @@ namespace BossWellWeb.Areas.PublicBusines.Controllers
             newsAPP.DeleteForm(keyValue);
             return Success("删除成功。");
         }
-
     }
 }

@@ -32,6 +32,5 @@ namespace BossWellService
         {
             return context.Query<SystemConfigEntity>().Where(t => t.ParentId.Equals(parentId)).Select(t => t.Sid).ToList();
         }
-
     }
 }

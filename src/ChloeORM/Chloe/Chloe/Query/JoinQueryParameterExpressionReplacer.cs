@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Chloe.Query
 {
-    class JoinQueryParameterExpressionReplacer : ExpressionVisitor
+    internal class JoinQueryParameterExpressionReplacer : ExpressionVisitor
     {
-        LambdaExpression _lambda;
-        Expression[] _expressionSubstitutes;
-        ParameterExpression _newParameterExpression;
+        private LambdaExpression _lambda;
+        private Expression[] _expressionSubstitutes;
+        private ParameterExpression _newParameterExpression;
 
-        JoinQueryParameterExpressionReplacer(LambdaExpression lambda, Expression[] expressionSubstitutes, ParameterExpression newParameterExpression)
+        private JoinQueryParameterExpressionReplacer(LambdaExpression lambda, Expression[] expressionSubstitutes, ParameterExpression newParameterExpression)
         {
             this._lambda = lambda;
             this._expressionSubstitutes = expressionSubstitutes;
@@ -25,7 +22,7 @@ namespace Chloe.Query
             return ret;
         }
 
-        LambdaExpression Replace()
+        private LambdaExpression Replace()
         {
             Expression lambdaBody = this._lambda.Body;
             Expression newBody = this.Visit(lambdaBody);

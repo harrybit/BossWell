@@ -1,14 +1,10 @@
-﻿using Chloe.DbExpressions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
 
 namespace Chloe
 {
-    static class UtilConstants
+    internal static class UtilConstants
     {
         public const string DefaultTableAlias = "T";
         public const string DefaultColumnAlias = "C";
@@ -29,7 +25,6 @@ namespace Chloe
         public static readonly Type TypeOfString = typeof(String);
         public static readonly Type TypeOfObject = typeof(Object);
         public static readonly Type TypeOfByteArray = typeof(Byte[]);
-
 
         public static readonly ConstantExpression Constant_Null_String = Expression.Constant(null, typeof(string));
         public static readonly ConstantExpression Constant_Empty_String = Expression.Constant(string.Empty);

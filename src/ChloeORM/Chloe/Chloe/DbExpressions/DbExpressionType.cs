@@ -1,5 +1,4 @@
-﻿
-namespace Chloe.DbExpressions
+﻿namespace Chloe.DbExpressions
 {
     public enum DbExpressionType
     {

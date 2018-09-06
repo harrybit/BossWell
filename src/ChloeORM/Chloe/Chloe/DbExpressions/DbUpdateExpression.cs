@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Chloe.DbExpressions
 {
     public class DbUpdateExpression : DbExpression
     {
-        DbTable _table;
-        DbExpression _condition;
+        private DbTable _table;
+        private DbExpression _condition;
+
         public DbUpdateExpression(DbTable table)
             : this(table, null)
         {
         }
+
         public DbUpdateExpression(DbTable table, DbExpression condition)
             : base(DbExpressionType.Update, UtilConstants.TypeOfVoid)
         {

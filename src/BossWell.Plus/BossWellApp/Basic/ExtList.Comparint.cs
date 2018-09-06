@@ -1,17 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+
 namespace BossWellApp.Basic
 {
     public class ExtList<T> : IEqualityComparer<T> where T : class, new()
     {
         private string[] comparintFiledName = { };
 
-        public ExtList() { }
+        public ExtList()
+        {
+        }
+
         public ExtList(params string[] comparintFiledName)
         {
             this.comparintFiledName = comparintFiledName;
         }
+
         bool IEqualityComparer<T>.Equals(T x, T y)
         {
             if (x == null && y == null)
@@ -36,6 +40,7 @@ namespace BossWellApp.Basic
             }
             return result;
         }
+
         int IEqualityComparer<T>.GetHashCode(T obj)
         {
             return obj.ToString().GetHashCode();

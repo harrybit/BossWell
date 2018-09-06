@@ -34,7 +34,6 @@
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HangfireConfig.cs" />
     <Compile Include="MySqlDataConfig.cs" />
     <Compile Include="PlatPublicConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

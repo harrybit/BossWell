@@ -1,5 +1,4 @@
-﻿using Chloe.DbExpressions;
-using Chloe.InternalExtensions;
+﻿using Chloe.InternalExtensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +9,7 @@ namespace Chloe.Oracle
 {
     internal static class Utils
     {
-        static readonly Dictionary<Type, Type> ToStringableNumericTypes;
+        private static readonly Dictionary<Type, Type> ToStringableNumericTypes;
 
         static Utils()
         {

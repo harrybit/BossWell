@@ -1,11 +1,12 @@
 ﻿using Cache.Base;
 using System;
+
 namespace Cache.Redis
 {
     /// <summary>
     /// 定义缓存接口
     /// </summary>
-    public class CacheByRedis: ICache
+    public class CacheByRedis : ICache
     {
         /// <summary>
         /// 读取缓存
@@ -16,6 +17,7 @@ namespace Cache.Redis
         {
             return RedisCache.Get<T>(cacheKey, dbId);
         }
+
         /// <summary>
         /// 写入缓存
         /// </summary>
@@ -25,6 +27,7 @@ namespace Cache.Redis
         {
             RedisCache.Set(cacheKey, value, dbId);
         }
+
         /// <summary>
         /// 写入缓存
         /// </summary>
@@ -35,6 +38,7 @@ namespace Cache.Redis
         {
             RedisCache.Set(cacheKey, value, expireTime, dbId);
         }
+
         /// <summary>
         /// 写入缓存
         /// </summary>
@@ -45,6 +49,7 @@ namespace Cache.Redis
         {
             RedisCache.Set(cacheKey, value, timeSpan, dbId);
         }
+
         /// <summary>
         /// 移除指定数据缓存
         /// </summary>
@@ -53,6 +58,7 @@ namespace Cache.Redis
         {
             RedisCache.Remove(cacheKey, dbId);
         }
+
         /// <summary>
         /// 移除全部缓存
         /// </summary>

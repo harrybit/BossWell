@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Chloe.DbExpressions
 {
@@ -10,8 +9,9 @@ namespace Chloe.DbExpressions
             : this(UtilConstants.TypeOfVoid)
         {
         }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="type">作为子句时，有时候可以指定返回的 Type，如 select A = (select id from users)，(select id from users) 就可以表示拥有一个返回的类型 Int</param>
         public DbSqlQueryExpression(Type type)
@@ -21,6 +21,7 @@ namespace Chloe.DbExpressions
             this.GroupSegments = new List<DbExpression>();
             this.Orderings = new List<DbOrdering>();
         }
+
         public bool IsDistinct { get; set; }
         public int? TakeCount { get; set; }
         public int? SkipCount { get; set; }

@@ -16,8 +16,9 @@ namespace Chloe.Oracle
 {
     public partial class OracleContext : DbContext
     {
-        DbContextServiceProvider _dbContextServiceProvider;
-        bool _convertToUppercase = true;
+        private DbContextServiceProvider _dbContextServiceProvider;
+        private bool _convertToUppercase = true;
+
         public OracleContext(IDbConnectionFactory dbConnectionFactory)
         {
             Utils.CheckNull(dbConnectionFactory);
@@ -25,11 +26,11 @@ namespace Chloe.Oracle
             this._dbContextServiceProvider = new DbContextServiceProvider(dbConnectionFactory, this);
         }
 
-
         /// <summary>
         /// 是否将 sql 中的表名/字段名转成大写。默认为 true。
         /// </summary>
         public bool ConvertToUppercase { get { return this._convertToUppercase; } set { this._convertToUppercase = value; } }
+
         public override IDbContextServiceProvider DbContextServiceProvider
         {
             get { return this._dbContextServiceProvider; }
@@ -102,6 +103,7 @@ namespace Chloe.Oracle
 
             return entity;
         }
+
         public override object Insert<TEntity>(Expression<Func<TEntity>> content, string table)
         {
             Utils.CheckNull(content);
@@ -173,6 +175,7 @@ namespace Chloe.Oracle
             this.ExecuteSqlCommand(e);
             return keyVal; /* It will return null if an entity does not define primary key. */
         }
+
         public override void InsertRange<TEntity>(List<TEntity> entities, bool keepIdentity = false)
         {
             /*
@@ -309,7 +312,6 @@ namespace Chloe.Oracle
             }
         }
 
-
         public override int Update<TEntity>(TEntity entity, string table)
         {
             Utils.CheckNull(entity);
@@ -361,6 +363,7 @@ namespace Chloe.Oracle
                 entityState.Refresh();
             return ret;
         }
+
         public override int Update<TEntity>(Expression<Func<TEntity, bool>> condition, Expression<Func<TEntity, TEntity>> content, string table)
         {
             Utils.CheckNull(condition);
@@ -403,7 +406,7 @@ namespace Chloe.Oracle
             return this.ExecuteSqlCommand(e);
         }
 
-        int ExecuteSqlCommand(DbExpression e)
+        private int ExecuteSqlCommand(DbExpression e)
         {
             IDbExpressionTranslator translator = this.DbContextServiceProvider.CreateDbExpressionTranslator();
             List<DbParam> parameters;
@@ -412,7 +415,8 @@ namespace Chloe.Oracle
             int r = this.Session.ExecuteNonQuery(cmdText, parameters.ToArray());
             return r;
         }
-        object GetSequenceNextValue(string sequenceName)
+
+        private object GetSequenceNextValue(string sequenceName)
         {
             if (this.ConvertToUppercase)
                 sequenceName = sequenceName.ToUpper();
@@ -427,7 +431,7 @@ namespace Chloe.Oracle
             return ret;
         }
 
-        string AppendInsertRangeSqlTemplate(TypeDescriptor typeDescriptor, List<MappingMemberDescriptor> mappingMemberDescriptors, bool keepIdentity)
+        private string AppendInsertRangeSqlTemplate(TypeDescriptor typeDescriptor, List<MappingMemberDescriptor> mappingMemberDescriptors, bool keepIdentity)
         {
             StringBuilder sqlBuilder = new StringBuilder();
 
@@ -468,14 +472,16 @@ namespace Chloe.Oracle
             string sqlTemplate = sqlBuilder.ToString();
             return sqlTemplate;
         }
-        string AppendTableName(DbTable table)
+
+        private string AppendTableName(DbTable table)
         {
             if (string.IsNullOrEmpty(table.Schema))
                 return this.QuoteName(table.Name);
 
             return string.Format("{0}.{1}", this.QuoteName(table.Schema), this.QuoteName(table.Name));
         }
-        string QuoteName(string name)
+
+        private string QuoteName(string name)
         {
             if (this._convertToUppercase)
                 return string.Concat("\"", name.ToUpper(), "\"");

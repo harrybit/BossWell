@@ -1,11 +1,12 @@
 ﻿using Chloe.Entity;
+
 namespace BossWellModel
 {
     /// <summary>
     /// 综合分类表
     /// </summary>
     [Table("ComClass")]
-    public class ComClassEntity:BaseEntity
+    public class ComClassEntity : BaseEntity
     {
         /// <summary>
         /// 父级ID
@@ -36,6 +37,5 @@ namespace BossWellModel
         /// 备注
         /// </summary>
         public string Remark { get; set; }
-
     }
 }

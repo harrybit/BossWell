@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace ApiHelp
 {
@@ -8,7 +7,7 @@ namespace ApiHelp
     /// </summary>
     public class RegularHelp
     {
-        static string reg = string.Empty;
+        private static string reg = string.Empty;
 
         /// <summary>
         /// 检测手机号码是否正确
@@ -74,6 +73,5 @@ namespace ApiHelp
 
             return Regex.IsMatch(ip, reg);
         }
-
     }
 }

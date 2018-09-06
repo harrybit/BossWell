@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Chloe.Query
 {
-    static class QueryHelper
+    internal static class QueryHelper
     {
         public static Expression<TDelegate> ComposePredicate<TDelegate>(List<LambdaExpression> filterPredicates, Expression[] expressionSubstitutes, ParameterExpression parameter)
         {

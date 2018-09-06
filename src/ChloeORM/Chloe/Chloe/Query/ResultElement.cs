@@ -2,17 +2,13 @@
 using Chloe.Utility;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
 
 namespace Chloe.Query
 {
     /// <summary>
     /// 查询的结果集
     /// </summary>
-    class ResultElement
+    internal class ResultElement
     {
         public ResultElement(ScopeParameterDictionary scopeParameters, KeyDictionary<string> scopeTables)
         {
@@ -44,11 +40,13 @@ namespace Chloe.Query
         /// 如 takequery 了以后，则 table 的 Expression 类似 (select T.Id.. from User as T),Alias 则为新生成的
         /// </summary>
         public DbFromTableExpression FromTable { get; set; }
+
         public DbExpression Condition { get; set; }
         public DbExpression HavingCondition { get; set; }
 
         public KeyDictionary<string> ScopeTables { get; private set; }
         public ScopeParameterDictionary ScopeParameters { get; private set; }
+
         public void AppendCondition(DbExpression condition)
         {
             if (this.Condition == null)
@@ -56,6 +54,7 @@ namespace Chloe.Query
             else
                 this.Condition = new DbAndExpression(this.Condition, condition);
         }
+
         public void AppendHavingCondition(DbExpression condition)
         {
             if (this.HavingCondition == null)
@@ -80,7 +79,7 @@ namespace Chloe.Query
             return alias;
         }
 
-        static bool ExistTableAlias(DbMainTableExpression mainTable, string alias)
+        private static bool ExistTableAlias(DbMainTableExpression mainTable, string alias)
         {
             if (mainTable == null)
                 return false;

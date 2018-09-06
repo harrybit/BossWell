@@ -2,12 +2,10 @@
 using Chloe.InternalExtensions;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Chloe.SQLite
 {
-    static class DbExpressionHelper
+    internal static class DbExpressionHelper
     {
         /// <summary>
         /// 尝试将 exp 转换成 DbParameterExpression。
@@ -80,6 +78,5 @@ namespace Chloe.SQLite
 
             return false;
         }
-
     }
 }

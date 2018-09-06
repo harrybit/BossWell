@@ -1,5 +1,6 @@
-﻿using Chloe.Entity;
-using BossWellModel.Enum;
+﻿using BossWellModel.Enum;
+using Chloe.Entity;
+
 namespace BossWellModel
 {
     /// <summary>
@@ -12,26 +13,32 @@ namespace BossWellModel
         /// 日志类型
         /// </summary>
         public LogTypeEnum LogType { get; set; }
+
         /// <summary>
         /// IP
         /// </summary>
         public string IP { get; set; }
+
         /// <summary>
         /// 来源
         /// </summary>
         public string Source { get; set; }
+
         /// <summary>
         /// 标题
         /// </summary>
         public string Title { get; set; }
+
         /// <summary>
         /// 内容简介
         /// </summary>
         public string Content { get; set; }
+
         /// <summary>
         /// 详细内容
         /// </summary>
         public string Result { get; set; }
+
         /// <summary>
         /// 备注
         /// </summary>

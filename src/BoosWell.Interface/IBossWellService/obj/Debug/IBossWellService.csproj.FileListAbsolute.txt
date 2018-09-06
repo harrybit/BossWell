@@ -83,3 +83,11 @@ D:\Project_TY\Code\纯净版\src\BoosWell.Interface\IBossWellService\bin\Debug\B
 D:\Project_TY\Code\纯净版\src\BoosWell.Interface\IBossWellService\obj\Debug\IBossWellService.csprojResolveAssemblyReference.cache
 D:\Project_TY\Code\纯净版\src\BoosWell.Interface\IBossWellService\obj\Debug\IBossWellService.dll
 D:\Project_TY\Code\纯净版\src\BoosWell.Interface\IBossWellService\obj\Debug\IBossWellService.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\BoosWell.Interface\IBossWellService\bin\Debug\IBossWellService.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\BoosWell.Interface\IBossWellService\bin\Debug\IBossWellService.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\BoosWell.Interface\IBossWellService\bin\Debug\BossWellModel.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\BoosWell.Interface\IBossWellService\bin\Debug\Chloe.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\BoosWell.Interface\IBossWellService\bin\Debug\BossWellModel.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\BoosWell.Interface\IBossWellService\obj\Debug\IBossWellService.csprojResolveAssemblyReference.cache
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\BoosWell.Interface\IBossWellService\obj\Debug\IBossWellService.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\BoosWell.Interface\IBossWellService\obj\Debug\IBossWellService.pdb

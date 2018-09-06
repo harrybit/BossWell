@@ -1,6 +1,7 @@
 ﻿using BossWellApp;
 using BossWellModel;
 using System.Web.Mvc;
+
 namespace BossWellWeb.Areas.SystemManage.Controllers
 {
     public class ModuleController : ControllerBase
@@ -13,18 +14,21 @@ namespace BossWellWeb.Areas.SystemManage.Controllers
         {
             return Content(moduleApp.GetTreeSelectJson());
         }
+
         [HttpGet]
         [HandlerAjaxOnly]
         public ActionResult GetTreeGridJson(string keyword)
         {
             return Content(moduleApp.GetTreeGridJson());
         }
+
         [HttpGet]
         [HandlerAjaxOnly]
         public ActionResult GetFormJson(string sid)
         {
             return Content(moduleApp.GetFormJson(sid));
         }
+
         [HttpPost]
         [HandlerAjaxOnly]
         [ValidateAntiForgeryToken]
@@ -33,6 +37,7 @@ namespace BossWellWeb.Areas.SystemManage.Controllers
             moduleApp.SubmitForm(moduleEntity, sid);
             return Success("保存成功。");
         }
+
         [HttpPost]
         [HandlerAjaxOnly]
         [HandlerAuthorize]

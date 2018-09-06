@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Chloe.DbExpressions
 {
@@ -11,31 +9,37 @@ namespace Chloe.DbExpressions
         {
             return new DbEqualExpression(this.MakeNewExpression(exp.Left), this.MakeNewExpression(exp.Right), exp.Method);
         }
+
         public override DbExpression Visit(DbNotEqualExpression exp)
         {
             return new DbNotEqualExpression(this.MakeNewExpression(exp.Left), this.MakeNewExpression(exp.Right), exp.Method);
         }
-        // +            
+
+        // +
         public override DbExpression Visit(DbAddExpression exp)
         {
             return new DbAddExpression(exp.Type, this.MakeNewExpression(exp.Left), this.MakeNewExpression(exp.Right), exp.Method);
         }
-        // -            
+
+        // -
         public override DbExpression Visit(DbSubtractExpression exp)
         {
             return new DbSubtractExpression(exp.Type, this.MakeNewExpression(exp.Left), this.MakeNewExpression(exp.Right), exp.Method);
         }
-        // *            
+
+        // *
         public override DbExpression Visit(DbMultiplyExpression exp)
         {
             return new DbMultiplyExpression(exp.Type, this.MakeNewExpression(exp.Left), this.MakeNewExpression(exp.Right), exp.Method);
         }
-        // /            
+
+        // /
         public override DbExpression Visit(DbDivideExpression exp)
         {
             return new DbDivideExpression(exp.Type, this.MakeNewExpression(exp.Left), this.MakeNewExpression(exp.Right), exp.Method);
         }
-        // %            
+
+        // %
         public override DbExpression Visit(DbModuloExpression exp)
         {
             return new DbModuloExpression(exp.Type, this.MakeNewExpression(exp.Left), this.MakeNewExpression(exp.Right), exp.Method);
@@ -46,67 +50,81 @@ namespace Chloe.DbExpressions
             return new DbNegateExpression(exp.Type, this.MakeNewExpression(exp.Operand));
         }
 
-        // <            
+        // <
         public override DbExpression Visit(DbLessThanExpression exp)
         {
             return new DbLessThanExpression(this.MakeNewExpression(exp.Left), this.MakeNewExpression(exp.Right), exp.Method);
         }
-        // <=           
+
+        // <=
         public override DbExpression Visit(DbLessThanOrEqualExpression exp)
         {
             return new DbLessThanOrEqualExpression(this.MakeNewExpression(exp.Left), this.MakeNewExpression(exp.Right), exp.Method);
         }
-        // >            
+
+        // >
         public override DbExpression Visit(DbGreaterThanExpression exp)
         {
             return new DbGreaterThanExpression(this.MakeNewExpression(exp.Left), this.MakeNewExpression(exp.Right), exp.Method);
         }
-        // >=           
+
+        // >=
         public override DbExpression Visit(DbGreaterThanOrEqualExpression exp)
         {
             return new DbGreaterThanOrEqualExpression(this.MakeNewExpression(exp.Left), this.MakeNewExpression(exp.Right), exp.Method);
         }
+
         public override DbExpression Visit(DbBitAndExpression exp)
         {
             return new DbBitAndExpression(exp.Type, this.MakeNewExpression(exp.Left), this.MakeNewExpression(exp.Right));
         }
+
         public override DbExpression Visit(DbAndExpression exp)
         {
             return new DbAndExpression(this.MakeNewExpression(exp.Left), this.MakeNewExpression(exp.Right), exp.Method);
         }
+
         public override DbExpression Visit(DbBitOrExpression exp)
         {
             return new DbBitOrExpression(exp.Type, this.MakeNewExpression(exp.Left), this.MakeNewExpression(exp.Right));
         }
+
         public override DbExpression Visit(DbOrExpression exp)
         {
             return new DbOrExpression(this.MakeNewExpression(exp.Left), this.MakeNewExpression(exp.Right), exp.Method);
         }
+
         public override DbExpression Visit(DbConstantExpression exp)
         {
             return exp;
         }
+
         public override DbExpression Visit(DbMemberExpression exp)
         {
             return new DbMemberExpression(exp.Member, this.MakeNewExpression(exp.Expression));
         }
+
         public override DbExpression Visit(DbNotExpression exp)
         {
             return new DbNotExpression(this.MakeNewExpression(exp.Operand));
         }
+
         public override DbExpression Visit(DbConvertExpression exp)
         {
             return new DbConvertExpression(exp.Type, this.MakeNewExpression(exp.Operand));
         }
+
         public override DbExpression Visit(DbCoalesceExpression exp)
         {
             return new DbCoalesceExpression(this.MakeNewExpression(exp.CheckExpression), this.MakeNewExpression(exp.ReplacementValue));
         }
+
         public override DbExpression Visit(DbCaseWhenExpression exp)
         {
             var whenThenPairs = exp.WhenThenPairs.Select(a => new DbCaseWhenExpression.WhenThenExpressionPair(this.MakeNewExpression(a.When), this.MakeNewExpression(a.Then))).ToList();
             return new DbCaseWhenExpression(exp.Type, whenThenPairs, this.MakeNewExpression(exp.Else));
         }
+
         public override DbExpression Visit(DbMethodCallExpression exp)
         {
             IList<DbExpression> arguments = exp.Arguments.Select(a => this.MakeNewExpression(a)).ToList();
@@ -117,6 +135,7 @@ namespace Chloe.DbExpressions
         {
             return exp;
         }
+
         public override DbExpression Visit(DbColumnAccessExpression exp)
         {
             return exp;
@@ -126,10 +145,12 @@ namespace Chloe.DbExpressions
         {
             return new DbParameterExpression(exp.Value, exp.Type) { DbType = exp.DbType };
         }
+
         public override DbExpression Visit(DbSubQueryExpression exp)
         {
             return new DbSubQueryExpression((DbSqlQueryExpression)this.MakeNewExpression(exp.SqlQuery));
         }
+
         public override DbExpression Visit(DbSqlQueryExpression exp)
         {
             DbSqlQueryExpression sqlQuery = new DbSqlQueryExpression(exp.Type)
@@ -148,6 +169,7 @@ namespace Chloe.DbExpressions
 
             return sqlQuery;
         }
+
         public override DbExpression Visit(DbFromTableExpression exp)
         {
             DbFromTableExpression ret = new DbFromTableExpression(new DbTableSegment(this.MakeNewExpression(exp.Table.Body), exp.Table.Alias));
@@ -157,6 +179,7 @@ namespace Chloe.DbExpressions
             }
             return ret;
         }
+
         public override DbExpression Visit(DbJoinTableExpression exp)
         {
             DbJoinTableExpression ret = new DbJoinTableExpression(exp.JoinType, new DbTableSegment(this.MakeNewExpression(exp.Table.Body), exp.Table.Alias), this.MakeNewExpression(exp.Condition));
@@ -166,6 +189,7 @@ namespace Chloe.DbExpressions
             }
             return ret;
         }
+
         public override DbExpression Visit(DbAggregateExpression exp)
         {
             IList<DbExpression> arguments = exp.Arguments.Select(a => this.MakeNewExpression(a)).ToList();
@@ -183,6 +207,7 @@ namespace Chloe.DbExpressions
 
             return ret;
         }
+
         public override DbExpression Visit(DbUpdateExpression exp)
         {
             DbUpdateExpression ret = new DbUpdateExpression(exp.Table, this.MakeNewExpression(exp.Condition));
@@ -194,6 +219,7 @@ namespace Chloe.DbExpressions
 
             return ret;
         }
+
         public override DbExpression Visit(DbDeleteExpression exp)
         {
             return new DbDeleteExpression(exp.Table, this.MakeNewExpression(exp.Condition));
@@ -204,7 +230,7 @@ namespace Chloe.DbExpressions
             return new DbExistsExpression((DbSqlQueryExpression)this.MakeNewExpression(exp.SqlQuery));
         }
 
-        DbExpression MakeNewExpression(DbExpression exp)
+        private DbExpression MakeNewExpression(DbExpression exp)
         {
             if (exp == null)
                 return null;

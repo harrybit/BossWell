@@ -1,4 +1,5 @@
 ﻿using BossWellApp.SMSend;
+
 namespace BossWellApp
 {
     /// <summary>
@@ -6,7 +7,7 @@ namespace BossWellApp
     /// </summary>
     public class SMSendTempAPP
     {
-        readonly static ISMS_AliSend _service = SMS_Factory.SMS_AliTempSend();
+        private static readonly ISMS_AliSend _service = SMS_Factory.SMS_AliTempSend();
 
         /// <summary>
         /// 短信验证码
@@ -17,6 +18,5 @@ namespace BossWellApp
             string tempJson = "{\"code\":\"" + code + "\"}";
             return _service.SMSTempSend(mobile, tempCode, tempJson);
         }
-
     }
 }

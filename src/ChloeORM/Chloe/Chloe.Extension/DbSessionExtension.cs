@@ -1,9 +1,5 @@
 ﻿using Chloe.Extension;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 
 namespace Chloe
 {
@@ -20,6 +16,7 @@ namespace Chloe
         {
             return ExecuteDataTable(dbSession, cmdText, Utils.BuildParams(dbSession.DbContext, parameter));
         }
+
         public static DataTable ExecuteDataTable(this IDbSession dbSession, string cmdText, params DbParam[] parameters)
         {
             using (var reader = dbSession.ExecuteReader(cmdText, parameters))
@@ -41,6 +38,7 @@ namespace Chloe
         {
             return ExecuteDataTable(dbSession, cmdText, cmdType, Utils.BuildParams(dbSession.DbContext, parameter));
         }
+
         public static DataTable ExecuteDataTable(this IDbSession dbSession, string cmdText, CommandType cmdType, params DbParam[] parameters)
         {
             using (var reader = dbSession.ExecuteReader(cmdText, cmdType, parameters))
@@ -61,6 +59,7 @@ namespace Chloe
         {
             return ExecuteDataSet(dbSession, cmdText, Utils.BuildParams(dbSession.DbContext, parameter));
         }
+
         public static DataSet ExecuteDataSet(this IDbSession dbSession, string cmdText, params DbParam[] parameters)
         {
             using (var reader = dbSession.ExecuteReader(cmdText, parameters))
@@ -82,6 +81,7 @@ namespace Chloe
         {
             return ExecuteDataSet(dbSession, cmdText, cmdType, Utils.BuildParams(dbSession.DbContext, parameter));
         }
+
         public static DataSet ExecuteDataSet(this IDbSession dbSession, string cmdText, CommandType cmdType, params DbParam[] parameters)
         {
             using (var reader = dbSession.ExecuteReader(cmdText, cmdType, parameters))
@@ -102,6 +102,7 @@ namespace Chloe
         {
             return dbSession.ExecuteNonQuery(cmdText, Utils.BuildParams(dbSession.DbContext, parameter));
         }
+
         /// <summary>
         /// dbSession.ExecuteNonQuery("update Users set Age=18 where Id=@Id", CommandType.Text, new { Id = 1 })
         /// </summary>
@@ -126,6 +127,7 @@ namespace Chloe
         {
             return dbSession.ExecuteScalar(cmdText, Utils.BuildParams(dbSession.DbContext, parameter));
         }
+
         /// <summary>
         /// dbSession.ExecuteScalar("select Age from Users where Id=@Id", CommandType.Text, new { Id = 1 })
         /// </summary>
@@ -150,6 +152,7 @@ namespace Chloe
         {
             return dbSession.ExecuteReader(cmdText, Utils.BuildParams(dbSession.DbContext, parameter));
         }
+
         /// <summary>
         /// dbSession.ExecuteReader("select Age from Users where Id=@Id", CommandType.Text, new { Id = 1 })
         /// </summary>

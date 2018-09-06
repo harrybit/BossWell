@@ -1,26 +1,24 @@
-﻿using Chloe.Core;
-using Chloe.Exceptions;
+﻿using Chloe.Exceptions;
 using Chloe.Infrastructure;
 using Chloe.Infrastructure.Interception;
 using Chloe.InternalExtensions;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Text;
 
 namespace Chloe.Core
 {
-    class InternalAdoSession : IDisposable
+    internal class InternalAdoSession : IDisposable
     {
-        IDbConnection _dbConnection;
-        IDbTransaction _dbTransaction;
-        bool _isInTransaction;
-        int _commandTimeout = 30;/* seconds */
+        private IDbConnection _dbConnection;
+        private IDbTransaction _dbTransaction;
+        private bool _isInTransaction;
+        private int _commandTimeout = 30;/* seconds */
 
-        List<IDbCommandInterceptor> _dbCommandInterceptors;
+        private List<IDbCommandInterceptor> _dbCommandInterceptors;
 
-        bool _disposed = false;
+        private bool _disposed = false;
 
         public InternalAdoSession(IDbConnection conn)
         {
@@ -28,12 +26,15 @@ namespace Chloe.Core
         }
 
         public IDbConnection DbConnection { get { return this._dbConnection; } }
+
         /// <summary>
         /// 如果未开启事务，则返回 null
         /// </summary>
         public IDbTransaction DbTransaction { get { return this._dbTransaction; } }
+
         public bool IsInTransaction { get { return this._isInTransaction; } }
         public int CommandTimeout { get { return this._commandTimeout; } set { this._commandTimeout = value; } }
+
         public List<IDbCommandInterceptor> DbCommandInterceptors
         {
             get
@@ -45,8 +46,7 @@ namespace Chloe.Core
             }
         }
 
-
-        void Activate()
+        private void Activate()
         {
             this.CheckDisposed();
 
@@ -62,6 +62,7 @@ namespace Chloe.Core
         }
 
         /* 表示一次查询完成。在事务中的话不关闭连接，交给 CommitTransaction() 或者 RollbackTransaction() 控制，否则调用 IDbConnection.Close() 关闭连接 */
+
         public void Complete()
         {
             if (!this._isInTransaction)
@@ -84,6 +85,7 @@ namespace Chloe.Core
 
             this._isInTransaction = true;
         }
+
         public void CommitTransaction()
         {
             if (!this._isInTransaction)
@@ -94,6 +96,7 @@ namespace Chloe.Core
             this.ReleaseTransaction();
             this.Complete();
         }
+
         public void RollbackTransaction()
         {
             if (!this._isInTransaction)
@@ -109,6 +112,7 @@ namespace Chloe.Core
         {
             return this.ExecuteReader(cmdText, parameters, cmdType, CommandBehavior.Default);
         }
+
         public IDataReader ExecuteReader(string cmdText, DbParam[] parameters, CommandType cmdType, CommandBehavior behavior)
         {
             this.CheckDisposed();
@@ -140,6 +144,7 @@ namespace Chloe.Core
 
             return reader;
         }
+
         public int ExecuteNonQuery(string cmdText, DbParam[] parameters, CommandType cmdType)
         {
             this.CheckDisposed();
@@ -182,6 +187,7 @@ namespace Chloe.Core
                     cmd.Dispose();
             }
         }
+
         public object ExecuteScalar(string cmdText, DbParam[] parameters, CommandType cmdType)
         {
             this.CheckDisposed();
@@ -225,7 +231,6 @@ namespace Chloe.Core
             }
         }
 
-
         public void Dispose()
         {
             if (this._disposed)
@@ -255,7 +260,7 @@ namespace Chloe.Core
             this._disposed = true;
         }
 
-        IDbCommand PrepareCommand(string cmdText, DbParam[] parameters, CommandType cmdType, out List<OutputParameter> outputParameters)
+        private IDbCommand PrepareCommand(string cmdText, DbParam[] parameters, CommandType cmdType, out List<OutputParameter> outputParameters)
         {
             outputParameters = null;
 
@@ -365,44 +370,49 @@ namespace Chloe.Core
             return cmd;
         }
 
-
         #region DbInterception
-        void OnReaderExecuting(IDbCommand cmd, DbCommandInterceptionContext<IDataReader> dbCommandInterceptionContext, IDbCommandInterceptor[] globalInterceptors)
+
+        private void OnReaderExecuting(IDbCommand cmd, DbCommandInterceptionContext<IDataReader> dbCommandInterceptionContext, IDbCommandInterceptor[] globalInterceptors)
         {
             this.ExecuteDbCommandInterceptors((dbCommandInterceptor) =>
             {
                 dbCommandInterceptor.ReaderExecuting(cmd, dbCommandInterceptionContext);
             }, globalInterceptors);
         }
-        void OnReaderExecuted(IDbCommand cmd, DbCommandInterceptionContext<IDataReader> dbCommandInterceptionContext, IDbCommandInterceptor[] globalInterceptors)
+
+        private void OnReaderExecuted(IDbCommand cmd, DbCommandInterceptionContext<IDataReader> dbCommandInterceptionContext, IDbCommandInterceptor[] globalInterceptors)
         {
             this.ExecuteDbCommandInterceptors((dbCommandInterceptor) =>
             {
                 dbCommandInterceptor.ReaderExecuted(cmd, dbCommandInterceptionContext);
             }, globalInterceptors);
         }
-        void OnNonQueryExecuting(IDbCommand cmd, DbCommandInterceptionContext<int> dbCommandInterceptionContext, IDbCommandInterceptor[] globalInterceptors)
+
+        private void OnNonQueryExecuting(IDbCommand cmd, DbCommandInterceptionContext<int> dbCommandInterceptionContext, IDbCommandInterceptor[] globalInterceptors)
         {
             this.ExecuteDbCommandInterceptors((dbCommandInterceptor) =>
             {
                 dbCommandInterceptor.NonQueryExecuting(cmd, dbCommandInterceptionContext);
             }, globalInterceptors);
         }
-        void OnNonQueryExecuted(IDbCommand cmd, DbCommandInterceptionContext<int> dbCommandInterceptionContext, IDbCommandInterceptor[] globalInterceptors)
+
+        private void OnNonQueryExecuted(IDbCommand cmd, DbCommandInterceptionContext<int> dbCommandInterceptionContext, IDbCommandInterceptor[] globalInterceptors)
         {
             this.ExecuteDbCommandInterceptors((dbCommandInterceptor) =>
             {
                 dbCommandInterceptor.NonQueryExecuted(cmd, dbCommandInterceptionContext);
             }, globalInterceptors);
         }
-        void OnScalarExecuting(IDbCommand cmd, DbCommandInterceptionContext<object> dbCommandInterceptionContext, IDbCommandInterceptor[] globalInterceptors)
+
+        private void OnScalarExecuting(IDbCommand cmd, DbCommandInterceptionContext<object> dbCommandInterceptionContext, IDbCommandInterceptor[] globalInterceptors)
         {
             this.ExecuteDbCommandInterceptors((dbCommandInterceptor) =>
             {
                 dbCommandInterceptor.ScalarExecuting(cmd, dbCommandInterceptionContext);
             }, globalInterceptors);
         }
-        void OnScalarExecuted(IDbCommand cmd, DbCommandInterceptionContext<object> dbCommandInterceptionContext, IDbCommandInterceptor[] globalInterceptors)
+
+        private void OnScalarExecuted(IDbCommand cmd, DbCommandInterceptionContext<object> dbCommandInterceptionContext, IDbCommandInterceptor[] globalInterceptors)
         {
             this.ExecuteDbCommandInterceptors((dbCommandInterceptor) =>
             {
@@ -410,7 +420,7 @@ namespace Chloe.Core
             }, globalInterceptors);
         }
 
-        void ExecuteDbCommandInterceptors(Action<IDbCommandInterceptor> act, IDbCommandInterceptor[] globalInterceptors)
+        private void ExecuteDbCommandInterceptors(Action<IDbCommandInterceptor> act, IDbCommandInterceptor[] globalInterceptors)
         {
             for (int i = 0; i < globalInterceptors.Length; i++)
             {
@@ -425,25 +435,23 @@ namespace Chloe.Core
                 }
             }
         }
-        #endregion
 
+        #endregion DbInterception
 
-        void ReleaseTransaction()
+        private void ReleaseTransaction()
         {
             this._dbTransaction.Dispose();
             this._dbTransaction = null;
             this._isInTransaction = false;
         }
 
-
-        void CheckDisposed()
+        private void CheckDisposed()
         {
             if (this._disposed)
             {
                 throw new ObjectDisposedException(this.GetType().FullName);
             }
         }
-
 
         public static string AppendDbCommandInfo(string cmdText, DbParam[] parameters)
         {
@@ -484,7 +492,8 @@ namespace Chloe.Core
 
             return sb.ToString();
         }
-        static string GetTypeName(Type type)
+
+        private static string GetTypeName(Type type)
         {
             Type underlyingType;
             if (ReflectionExtension.IsNullable(type, out underlyingType))
@@ -495,7 +504,7 @@ namespace Chloe.Core
             return type.Name;
         }
 
-        static ChloeException WrapException(Exception ex)
+        private static ChloeException WrapException(Exception ex)
         {
             return new ChloeException("An exception occurred while executing DbCommand. For details please see the inner exception.", ex);
         }

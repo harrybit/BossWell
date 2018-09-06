@@ -8,7 +8,6 @@ namespace Chloe.DbExpressions
         public DbAddExpression(Type type, DbExpression left, DbExpression right, MethodInfo method)
             : base(DbExpressionType.Add, type, left, right, method)
         {
-
         }
 
         public override T Accept<T>(DbExpressionVisitor<T> visitor)

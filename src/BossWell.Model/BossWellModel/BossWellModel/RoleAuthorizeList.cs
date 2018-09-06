@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace BossWellModel.BossWellModel
 {
     public class RoleAuthorizeList

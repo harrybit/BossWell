@@ -1,7 +1,6 @@
-﻿
-namespace Chloe.Query.QueryState
+﻿namespace Chloe.Query.QueryState
 {
-    class GeneralQueryState : QueryStateBase, IQueryState
+    internal class GeneralQueryState : QueryStateBase, IQueryState
     {
         public GeneralQueryState(ResultElement resultElement)
             : base(resultElement)
@@ -20,6 +19,5 @@ namespace Chloe.Query.QueryState
 
             return base.ToFromQueryResult();
         }
-
     }
 }

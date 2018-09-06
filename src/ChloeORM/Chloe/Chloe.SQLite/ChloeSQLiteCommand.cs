@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 
 namespace Chloe.SQLite
 {
-    class ChloeSQLiteCommand : IDbCommand, IDisposable
+    internal class ChloeSQLiteCommand : IDbCommand, IDisposable
     {
-        IDbCommand _dbCommand;
-        ChloeSQLiteConcurrentConnection _conn;
+        private IDbCommand _dbCommand;
+        private ChloeSQLiteConcurrentConnection _conn;
+
         public ChloeSQLiteCommand(IDbCommand dbCommand, ChloeSQLiteConcurrentConnection conn)
         {
             this._dbCommand = dbCommand;
@@ -29,6 +27,7 @@ namespace Chloe.SQLite
                 this._dbCommand.CommandText = value;
             }
         }
+
         public int CommandTimeout
         {
             get
@@ -40,6 +39,7 @@ namespace Chloe.SQLite
                 this._dbCommand.CommandTimeout = value;
             }
         }
+
         public CommandType CommandType
         {
             get
@@ -51,6 +51,7 @@ namespace Chloe.SQLite
                 this._dbCommand.CommandType = value;
             }
         }
+
         public IDbConnection Connection
         {
             get
@@ -62,6 +63,7 @@ namespace Chloe.SQLite
                 this._dbCommand.Connection = value;
             }
         }
+
         public IDataParameterCollection Parameters
         {
             get
@@ -69,6 +71,7 @@ namespace Chloe.SQLite
                 return this._dbCommand.Parameters;
             }
         }
+
         public IDbTransaction Transaction
         {
             get
@@ -84,6 +87,7 @@ namespace Chloe.SQLite
                     this._dbCommand.Transaction = value;
             }
         }
+
         public UpdateRowSource UpdatedRowSource
         {
             get
@@ -100,10 +104,12 @@ namespace Chloe.SQLite
         {
             this._dbCommand.Cancel();
         }
+
         public IDbDataParameter CreateParameter()
         {
             return this._dbCommand.CreateParameter();
         }
+
         public int ExecuteNonQuery()
         {
             this._conn.RWLock.BeginWrite();
@@ -116,6 +122,7 @@ namespace Chloe.SQLite
                 this._conn.RWLock.EndWrite();
             }
         }
+
         public IDataReader ExecuteReader()
         {
             this._conn.RWLock.BeginRead();
@@ -129,6 +136,7 @@ namespace Chloe.SQLite
                 throw;
             }
         }
+
         public IDataReader ExecuteReader(CommandBehavior behavior)
         {
             this._conn.RWLock.BeginRead();
@@ -144,6 +152,7 @@ namespace Chloe.SQLite
                 throw;
             }
         }
+
         public object ExecuteScalar()
         {
             this._conn.RWLock.BeginRead();
@@ -156,10 +165,12 @@ namespace Chloe.SQLite
                 this._conn.RWLock.EndRead();
             }
         }
+
         public void Prepare()
         {
             this._dbCommand.Prepare();
         }
+
         public void Dispose()
         {
             this._dbCommand.Dispose();

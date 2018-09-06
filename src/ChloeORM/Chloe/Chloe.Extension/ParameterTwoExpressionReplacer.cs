@@ -1,20 +1,16 @@
 ﻿using Chloe.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
 
 namespace Chloe.Extension
 {
-    class ParameterTwoExpressionReplacer : ExpressionVisitor
+    internal class ParameterTwoExpressionReplacer : ExpressionVisitor
     {
-        LambdaExpression _lambda;
-        object _replaceObj;
-        Expression _expToReplace = null;
+        private LambdaExpression _lambda;
+        private object _replaceObj;
+        private Expression _expToReplace = null;
 
-        ParameterTwoExpressionReplacer(LambdaExpression lambda, object replaceObj)
+        private ParameterTwoExpressionReplacer(LambdaExpression lambda, object replaceObj)
         {
             this._lambda = lambda;
             this._replaceObj = replaceObj;
@@ -26,7 +22,7 @@ namespace Chloe.Extension
             return ret;
         }
 
-        LambdaExpression Replace()
+        private LambdaExpression Replace()
         {
             Expression lambdaBody = this._lambda.Body;
             Expression newBody = this.Visit(lambdaBody);

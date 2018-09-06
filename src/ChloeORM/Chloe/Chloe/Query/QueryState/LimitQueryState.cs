@@ -1,14 +1,14 @@
 ﻿using Chloe.DbExpressions;
 using Chloe.Query.QueryExpressions;
 using System;
-using System.Linq.Expressions;
 
 namespace Chloe.Query.QueryState
 {
     internal sealed class LimitQueryState : SubQueryState
     {
-        int _skipCount;
-        int _takeCount;
+        private int _skipCount;
+        private int _takeCount;
+
         public LimitQueryState(ResultElement resultElement, int skipCount, int takeCount)
             : base(resultElement)
         {
@@ -28,6 +28,7 @@ namespace Chloe.Query.QueryState
                 this._skipCount = value;
             }
         }
+
         public int TakeCount
         {
             get
@@ -40,14 +41,14 @@ namespace Chloe.Query.QueryState
                 this._takeCount = value;
             }
         }
-        void CheckInputCount(int count, string name)
+
+        private void CheckInputCount(int count, string name)
         {
             if (count < 0)
             {
                 throw new ArgumentException(string.Format("The {0} count could not less than 0.", name));
             }
         }
-
 
         public override IQueryState Accept(TakeExpression exp)
         {
@@ -56,6 +57,7 @@ namespace Chloe.Query.QueryState
 
             return this;
         }
+
         public override IQueryState CreateQueryState(ResultElement result)
         {
             return new LimitQueryState(result, this.SkipCount, this.TakeCount);

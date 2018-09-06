@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace Chloe.InternalExtensions
 {
@@ -27,6 +26,7 @@ namespace Chloe.InternalExtensions
 
             throw new ArgumentException();
         }
+
         public static object GetMemberValue(this MemberInfo propertyOrField, object obj)
         {
             if (propertyOrField.MemberType == MemberTypes.Property)
@@ -57,16 +57,19 @@ namespace Chloe.InternalExtensions
 
             return propertyOrField;
         }
+
         public static bool IsNullable(this Type type)
         {
             Type underlyingType;
             return IsNullable(type, out underlyingType);
         }
+
         public static bool IsNullable(this Type type, out Type underlyingType)
         {
             underlyingType = Nullable.GetUnderlyingType(type);
             return underlyingType != null;
         }
+
         public static Type GetUnderlyingType(this Type type)
         {
             Type underlyingType;
@@ -75,6 +78,7 @@ namespace Chloe.InternalExtensions
 
             return underlyingType;
         }
+
         public static bool IsAnonymousType(this Type type)
         {
             const string csharpAnonPrefix = "<>f__AnonymousType";

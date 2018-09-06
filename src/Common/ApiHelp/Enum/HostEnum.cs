@@ -6,6 +6,6 @@
     public enum HostEnum
     {
         allLocation = 1,
-        hostHead =2
+        hostHead = 2
     }
 }

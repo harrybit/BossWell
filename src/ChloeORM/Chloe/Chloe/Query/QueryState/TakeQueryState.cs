@@ -6,7 +6,8 @@ namespace Chloe.Query.QueryState
 {
     internal sealed class TakeQueryState : SubQueryState
     {
-        int _count;
+        private int _count;
+
         public TakeQueryState(ResultElement resultElement, int count)
             : base(resultElement)
         {
@@ -26,7 +27,7 @@ namespace Chloe.Query.QueryState
             }
         }
 
-        void CheckInputCount(int count)
+        private void CheckInputCount(int count)
         {
             if (count < 0)
             {

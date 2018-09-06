@@ -1,12 +1,12 @@
-﻿using BossWellFactory;
-using IBossWellService;
-using BossWellModel.BossWellModel;
+﻿using ApiHelp;
+using BossWellApp.Basic;
+using BossWellFactory;
 using BossWellModel;
+using BossWellModel.Base;
+using BossWellModel.BossWellModel;
+using IBossWellService;
 using System;
 using System.Collections.Generic;
-using BossWellApp.Basic;
-using BossWellModel.Base;
-using ApiHelp;
 using System.Linq;
 
 namespace BossWellApp
@@ -16,6 +16,7 @@ namespace BossWellApp
         private readonly IModuleButtonService _service = SysAutoFactory.GetModuleButtonService();
         private readonly IModuleService _moduleService = SysAutoFactory.GetModuleService();
         private readonly ModuleApp moduleAPP = new ModuleApp();
+
         public string GetTreeSelectJson(string moduleId = "")
         {
             List<ModuleButtonEntity> allList = GetButtonListByModuleId(moduleId);
@@ -182,6 +183,5 @@ namespace BossWellApp
             request.Sort = (t => t.Sort);
             return _service.GetList(request).Items;
         }
-
     }
 }

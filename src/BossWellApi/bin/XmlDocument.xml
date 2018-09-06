@@ -316,7 +316,7 @@
         </member>
         <member name="M:BossWellApi.Areas.HelpPage.HelpPageSampleGenerator.GetSampleObject(System.Type)">
             <summary>
-            Gets the sample object that will be serialized by the formatters. 
+            Gets the sample object that will be serialized by the formatters.
             First, it will look at the <see cref="P:BossWellApi.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects"/>. If no sample object is found, it will try to create
             one using <see cref="M:BossWellApi.Areas.HelpPage.HelpPageSampleGenerator.DefaultSampleObjectFactory(BossWellApi.Areas.HelpPage.HelpPageSampleGenerator,System.Type)"/> (which wraps an <see cref="T:BossWellApi.Areas.HelpPage.ObjectGenerator"/>) and other
             factories in <see cref="P:BossWellApi.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories"/>.
@@ -532,7 +532,7 @@
             上传文件
             </summary>
         </member>
-        <member name="M:BossWellApi.Controllers.UpLoadController.GetLicense(System.String)">
+        <member name="M:BossWellApi.Controllers.UpLoadController.GetLicense">
             <summary>
             获取上传许可证
             </summary>
@@ -541,7 +541,11 @@
         <member name="M:BossWellApi.Controllers.UpLoadController.UpLoadFile">
             <summary>
             上传文件
+            Head信息体:
+            AFU_Guid：  加密签名
+            AFU_License:上传许可证
             </summary>
+            <returns></returns>
         </member>
         <member name="T:BossWellApi.AuthorizationAttribute">
             <summary>

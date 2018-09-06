@@ -1,29 +1,23 @@
-﻿using Chloe.Core;
-using Chloe.Core.Visitors;
-using Chloe.DbExpressions;
+﻿using Chloe.DbExpressions;
 using Chloe.Descriptors;
-using Chloe.Entity;
-using Chloe.Exceptions;
 using Chloe.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
 using System.Text;
 
 namespace Chloe.MySql
 {
     public class MySqlContext : DbContext
     {
-        DbContextServiceProvider _dbContextServiceProvider;
+        private DbContextServiceProvider _dbContextServiceProvider;
+
         public MySqlContext(IDbConnectionFactory dbConnectionFactory)
         {
             Utils.CheckNull(dbConnectionFactory);
 
             this._dbContextServiceProvider = new DbContextServiceProvider(dbConnectionFactory);
         }
-
 
         public override IDbContextServiceProvider DbContextServiceProvider
         {
@@ -34,7 +28,7 @@ namespace Chloe.MySql
         {
             /*
              * 将 entities 分批插入数据库
-             * 每批生成 insert into TableName(...) values(...),(...)... 
+             * 每批生成 insert into TableName(...) values(...),(...)...
              * 该方法相对循环一条一条插入，速度提升 2/3 这样
              */
 
@@ -150,7 +144,7 @@ namespace Chloe.MySql
             }
         }
 
-        static string AppendInsertRangeSqlTemplate(TypeDescriptor typeDescriptor, List<MappingMemberDescriptor> mappingMemberDescriptors)
+        private static string AppendInsertRangeSqlTemplate(TypeDescriptor typeDescriptor, List<MappingMemberDescriptor> mappingMemberDescriptors)
         {
             StringBuilder sqlBuilder = new StringBuilder();
 
@@ -172,10 +166,9 @@ namespace Chloe.MySql
             return sqlTemplate;
         }
 
-        static string AppendTableName(DbTable table)
+        private static string AppendTableName(DbTable table)
         {
             return Utils.QuoteName(table.Name);
         }
-
     }
 }

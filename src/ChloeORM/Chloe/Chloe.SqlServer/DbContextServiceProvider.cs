@@ -1,29 +1,25 @@
-﻿using Chloe.Core.Visitors;
-using Chloe.Infrastructure;
-using Chloe.Query;
+﻿using Chloe.Infrastructure;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 
 namespace Chloe.SqlServer
 {
-    class DbContextServiceProvider : IDbContextServiceProvider
+    internal class DbContextServiceProvider : IDbContextServiceProvider
     {
-        IDbConnectionFactory _dbConnectionFactory;
-        MsSqlContext _msSqlContext;
+        private IDbConnectionFactory _dbConnectionFactory;
+        private MsSqlContext _msSqlContext;
 
         public DbContextServiceProvider(IDbConnectionFactory dbConnectionFactory, MsSqlContext msSqlContext)
         {
             this._dbConnectionFactory = dbConnectionFactory;
             this._msSqlContext = msSqlContext;
         }
+
         public IDbConnection CreateConnection()
         {
             return this._dbConnectionFactory.CreateConnection();
         }
+
         public IDbExpressionTranslator CreateDbExpressionTranslator()
         {
             if (this._msSqlContext.PagingMode == PagingMode.ROW_NUMBER)

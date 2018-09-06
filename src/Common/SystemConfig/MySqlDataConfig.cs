@@ -10,7 +10,9 @@
         {
             get
             {
-                return "server=localhost;Database=pureinit;Uid=root;Pwd=Mysql123456.";
+                //106.14.8.2
+                //127.0.0.1
+                return "server=106.14.8.2;Database=pureinit;Uid=root;Pwd=0CD89613B94E98FE4A77A1195CEB7283";
             }
         }
     }

@@ -9,15 +9,16 @@ namespace Chloe.Descriptors
 {
     public class EntityConstructorDescriptor
     {
-        EntityMemberMapper _mapper = null;
-        EntityConstructor _entityConstructor = null;
-        EntityConstructorDescriptor(ConstructorInfo constructorInfo)
+        private EntityMemberMapper _mapper = null;
+        private EntityConstructor _entityConstructor = null;
+
+        private EntityConstructorDescriptor(ConstructorInfo constructorInfo)
         {
             this.ConstructorInfo = constructorInfo;
             this.Init();
         }
 
-        void Init()
+        private void Init()
         {
             ConstructorInfo constructor = this.ConstructorInfo;
             Type type = constructor.DeclaringType;
@@ -38,6 +39,7 @@ namespace Chloe.Descriptors
 
         public ConstructorInfo ConstructorInfo { get; private set; }
         public Dictionary<MemberInfo, ParameterInfo> MemberParameterMap { get; private set; }
+
         public Func<IDataReader, ReaderOrdinalEnumerator, ObjectActivatorEnumerator, object> GetInstanceCreator()
         {
             EntityConstructor entityConstructor = null;
@@ -49,6 +51,7 @@ namespace Chloe.Descriptors
             entityConstructor = this._entityConstructor;
             return entityConstructor.InstanceCreator;
         }
+
         public EntityMemberMapper GetEntityMemberMapper()
         {
             EntityMemberMapper mapper = null;
@@ -61,7 +64,7 @@ namespace Chloe.Descriptors
             return mapper;
         }
 
-        static readonly System.Collections.Concurrent.ConcurrentDictionary<ConstructorInfo, EntityConstructorDescriptor> InstanceCache = new System.Collections.Concurrent.ConcurrentDictionary<ConstructorInfo, EntityConstructorDescriptor>();
+        private static readonly System.Collections.Concurrent.ConcurrentDictionary<ConstructorInfo, EntityConstructorDescriptor> InstanceCache = new System.Collections.Concurrent.ConcurrentDictionary<ConstructorInfo, EntityConstructorDescriptor>();
 
         public static EntityConstructorDescriptor GetInstance(ConstructorInfo constructorInfo)
         {
@@ -81,5 +84,4 @@ namespace Chloe.Descriptors
             return instance;
         }
     }
-
 }

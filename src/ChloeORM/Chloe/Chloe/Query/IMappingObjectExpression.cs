@@ -1,8 +1,5 @@
-﻿using Chloe.Extensions;
-using Chloe.DbExpressions;
-using Chloe.Descriptors;
+﻿using Chloe.DbExpressions;
 using Chloe.Query.Mapping;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -13,14 +10,23 @@ namespace Chloe.Query
     public interface IMappingObjectExpression
     {
         IObjectActivatorCreator GenarateObjectActivatorCreator(DbSqlQueryExpression sqlQuery);
+
         IMappingObjectExpression ToNewObjectExpression(DbSqlQueryExpression sqlQuery, DbTable table);
+
         void AddMappingConstructorParameter(ParameterInfo p, DbExpression exp);
+
         void AddComplexConstructorParameter(ParameterInfo p, IMappingObjectExpression exp);
+
         void AddMappingMemberExpression(MemberInfo memberInfo, DbExpression exp);
+
         void AddComplexMemberExpression(MemberInfo memberInfo, IMappingObjectExpression moe);
+
         DbExpression GetMappingMemberExpression(MemberInfo memberInfo);
+
         IMappingObjectExpression GetComplexMemberExpression(MemberInfo memberInfo);
+
         DbExpression GetDbExpression(MemberExpression memberExpressionDeriveParameter);
+
         IMappingObjectExpression GetComplexMemberExpression(MemberExpression exp);
 
         void SetNullChecking(DbExpression exp);
@@ -49,6 +55,7 @@ namespace Chloe.Query
             DbColumnAccessExpression cae = new DbColumnAccessExpression(table, DbColumn.MakeColumn(columnSeg.Body, columnSeg.Alias));
             return cae;
         }
+
         public static int? TryGetOrAddColumn(DbSqlQueryExpression sqlQuery, DbExpression exp, string addDefaultAlias = UtilConstants.DefaultColumnAlias)
         {
             if (exp == null)
@@ -80,6 +87,7 @@ namespace Chloe.Query
 
             return ordinal.Value;
         }
+
         public static DbColumnAccessExpression ParseColumnAccessExpression(DbSqlQueryExpression sqlQuery, DbTable table, DbExpression exp, string defaultAlias = UtilConstants.DefaultColumnAlias)
         {
             string alias = Utils.GenerateUniqueColumnAlias(sqlQuery, defaultAlias);

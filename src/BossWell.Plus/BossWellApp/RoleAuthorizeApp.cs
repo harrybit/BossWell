@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using ApiHelp;
 using BossWellApp.Basic;
 using BossWellFactory;
-using IBossWellService;
 using BossWellModel;
+using BossWellModel.Base;
 using BossWellModel.BossWellModel;
+using BossWellModel.Enum;
 using Cache.Base;
 using Cache.Factory;
-using BossWellModel.Base;
-using BossWellModel.Enum;
-using ApiHelp;
+using IBossWellService;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace BossWellApp
 {
     public class RoleAuthorizeApp
@@ -122,7 +123,7 @@ namespace BossWellApp
         }
 
         /// <summary>
-        /// Check Role Authorize 
+        /// Check Role Authorize
         /// </summary>
         public bool ActionValidate(string roleId, string moduleId, string action)
         {
@@ -185,6 +186,5 @@ namespace BossWellApp
             request.Sort = (t => t.Sort);
             return _service.GetPageList(request).Items;
         }
-
     }
 }

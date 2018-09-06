@@ -77,3 +77,10 @@ D:\Project_TY\Code\纯净版\src\ChloeORM\Chloe\Chloe.Extension\bin\Debug\Chloe.
 D:\Project_TY\Code\纯净版\src\ChloeORM\Chloe\Chloe.Extension\obj\Debug\Chloe.Extension.csprojResolveAssemblyReference.cache
 D:\Project_TY\Code\纯净版\src\ChloeORM\Chloe\Chloe.Extension\obj\Debug\Chloe.Extension.dll
 D:\Project_TY\Code\纯净版\src\ChloeORM\Chloe\Chloe.Extension\obj\Debug\Chloe.Extension.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.Extension\bin\Debug\Chloe.Extension.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.Extension\bin\Debug\Chloe.Extension.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.Extension\bin\Debug\Chloe.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.Extension\bin\Debug\Chloe.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.Extension\obj\Debug\Chloe.Extension.csprojResolveAssemblyReference.cache
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.Extension\obj\Debug\Chloe.Extension.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.Extension\obj\Debug\Chloe.Extension.pdb

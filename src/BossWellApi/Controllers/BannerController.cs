@@ -1,6 +1,7 @@
-﻿using System.Web.Http;
-using BossWellApp;
+﻿using BossWellApp;
+using System.Web.Http;
 using WebApi.OutputCache.V2;
+
 namespace BossWellApi.Controllers
 {
     /// <summary>
@@ -8,8 +9,9 @@ namespace BossWellApi.Controllers
     /// </summary>
     public class BannerController : ApiController
     {
-        JObjectResult result = new JObjectResult();
-        BannerApp bannerApp = new BannerApp();
+        private JObjectResult result = new JObjectResult();
+        private BannerApp bannerApp = new BannerApp();
+
         public BannerController()
         {
             result.code = 200;
@@ -33,6 +35,5 @@ namespace BossWellApi.Controllers
             result.data = bannerApp.GetPageList(page, pageSize, comclassSid);
             return result;
         }
-
     }
 }

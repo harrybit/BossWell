@@ -7,15 +7,17 @@ using System.Linq.Expressions;
 
 namespace Chloe.Query.Visitors
 {
-    class QueryExpressionVisitor : QueryExpressionVisitor<IQueryState>
+    internal class QueryExpressionVisitor : QueryExpressionVisitor<IQueryState>
     {
-        ScopeParameterDictionary _scopeParameters;
-        KeyDictionary<string> _scopeTables;
-        QueryExpressionVisitor(ScopeParameterDictionary scopeParameters, KeyDictionary<string> scopeTables)
+        private ScopeParameterDictionary _scopeParameters;
+        private KeyDictionary<string> _scopeTables;
+
+        private QueryExpressionVisitor(ScopeParameterDictionary scopeParameters, KeyDictionary<string> scopeTables)
         {
             this._scopeParameters = scopeParameters;
             this._scopeTables = scopeTables;
         }
+
         public static IQueryState VisitQueryExpression(QueryExpression queryExpression, ScopeParameterDictionary scopeParameters, KeyDictionary<string> scopeTables)
         {
             QueryExpressionVisitor reducer = new QueryExpressionVisitor(scopeParameters, scopeTables);
@@ -27,42 +29,49 @@ namespace Chloe.Query.Visitors
             IQueryState queryState = new RootQueryState(exp.ElementType, exp.ExplicitTable, this._scopeParameters, this._scopeTables);
             return queryState;
         }
+
         public override IQueryState Visit(WhereExpression exp)
         {
             IQueryState prevState = exp.PrevExpression.Accept(this);
             IQueryState state = prevState.Accept(exp);
             return state;
         }
+
         public override IQueryState Visit(OrderExpression exp)
         {
             IQueryState prevState = exp.PrevExpression.Accept(this);
             IQueryState state = prevState.Accept(exp);
             return state;
         }
+
         public override IQueryState Visit(SelectExpression exp)
         {
             IQueryState prevState = exp.PrevExpression.Accept(this);
             IQueryState state = prevState.Accept(exp);
             return state;
         }
+
         public override IQueryState Visit(SkipExpression exp)
         {
             IQueryState prevState = exp.PrevExpression.Accept(this);
             IQueryState state = prevState.Accept(exp);
             return state;
         }
+
         public override IQueryState Visit(TakeExpression exp)
         {
             IQueryState prevState = exp.PrevExpression.Accept(this);
             IQueryState state = prevState.Accept(exp);
             return state;
         }
+
         public override IQueryState Visit(AggregateQueryExpression exp)
         {
             IQueryState prevState = exp.PrevExpression.Accept(this);
             IQueryState state = prevState.Accept(exp);
             return state;
         }
+
         public override IQueryState Visit(JoinQueryExpression exp)
         {
             IQueryState qs = QueryExpressionVisitor.VisitQueryExpression(exp.PrevExpression, this._scopeParameters, this._scopeTables);
@@ -121,12 +130,14 @@ namespace Chloe.Query.Visitors
             GeneralQueryState queryState = new GeneralQueryState(resultElement);
             return queryState;
         }
+
         public override IQueryState Visit(GroupingQueryExpression exp)
         {
             IQueryState prevState = exp.PrevExpression.Accept(this);
             IQueryState state = prevState.Accept(exp);
             return state;
         }
+
         public override IQueryState Visit(DistinctExpression exp)
         {
             IQueryState prevState = exp.PrevExpression.Accept(this);

@@ -1,11 +1,10 @@
-﻿
-using System;
+﻿using System;
 
 namespace Chloe.DbExpressions
 {
     public class DbSubQueryExpression : DbExpression
     {
-        DbSqlQueryExpression _sqlQuery;
+        private DbSqlQueryExpression _sqlQuery;
 
         public DbSubQueryExpression(DbSqlQueryExpression sqlQuery)
             : base(DbExpressionType.SubQuery)
@@ -20,6 +19,5 @@ namespace Chloe.DbExpressions
         {
             return visitor.Visit(this);
         }
-
     }
 }

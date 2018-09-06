@@ -1,25 +1,21 @@
-﻿using System;
+﻿using Chloe.Core.Visitors;
+using Chloe.DbExpressions;
+using Chloe.Descriptors;
+using Chloe.Exceptions;
+using Chloe.Extensions;
+using Chloe.Infrastructure;
+using Chloe.InternalExtensions;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Linq;
-using Chloe.Query;
-using Chloe.Core;
-using Chloe.Infrastructure;
-using Chloe.Descriptors;
-using Chloe.DbExpressions;
-using Chloe.Query.Internals;
-using Chloe.Core.Visitors;
-using Chloe.Exceptions;
-using System.Data;
-using Chloe.InternalExtensions;
-using Chloe.Extensions;
 
 namespace Chloe
 {
     public abstract partial class DbContext : IDbContext, IDisposable
     {
-        static Expression<Func<TEntity, bool>> BuildCondition<TEntity>(object key)
+        private static Expression<Func<TEntity, bool>> BuildCondition<TEntity>(object key)
         {
             /*
              * key:
@@ -78,30 +74,33 @@ namespace Chloe
             Expression<Func<TEntity, bool>> condition = Expression.Lambda<Func<TEntity, bool>>(conditionBody, parameter);
             return condition;
         }
-        static void EnsureEntityHasPrimaryKey(TypeDescriptor typeDescriptor)
+
+        private static void EnsureEntityHasPrimaryKey(TypeDescriptor typeDescriptor)
         {
             if (!typeDescriptor.HasPrimaryKey())
                 throw new ChloeException(string.Format("The entity type '{0}' does not define any primary key.", typeDescriptor.EntityType.FullName));
         }
-        static object ConvertIdentityType(object identity, Type conversionType)
+
+        private static object ConvertIdentityType(object identity, Type conversionType)
         {
             if (identity.GetType() != conversionType)
                 return Convert.ChangeType(identity, conversionType);
 
             return identity;
         }
-        static KeyValuePairList<JoinType, Expression> ResolveJoinInfo(LambdaExpression joinInfoExp)
+
+        private static KeyValuePairList<JoinType, Expression> ResolveJoinInfo(LambdaExpression joinInfoExp)
         {
             /*
              * Usage:
-             * var view = context.JoinQuery<User, City, Province, User, City>((user, city, province, user1, city1) => new object[] 
-             * { 
-             *     JoinType.LeftJoin, user.CityId == city.Id, 
+             * var view = context.JoinQuery<User, City, Province, User, City>((user, city, province, user1, city1) => new object[]
+             * {
+             *     JoinType.LeftJoin, user.CityId == city.Id,
              *     JoinType.RightJoin, city.ProvinceId == province.Id,
              *     JoinType.InnerJoin,user.Id==user1.Id,
              *     JoinType.FullJoin,city.Id==city1.Id
              * }).Select((user, city, province, user1, city1) => new { User = user, City = city, Province = province, User1 = user1, City1 = city1 });
-             * 
+             *
              * To resolve join infomation:
              * JoinType.LeftJoin, user.CityId == city.Id               index of joinType is 0
              * JoinType.RightJoin, city.ProvinceId == province.Id      index of joinType is 2
@@ -162,7 +161,8 @@ namespace Chloe
 
             return ret;
         }
-        static Dictionary<MappingMemberDescriptor, object> CreateKeyValueMap(TypeDescriptor typeDescriptor)
+
+        private static Dictionary<MappingMemberDescriptor, object> CreateKeyValueMap(TypeDescriptor typeDescriptor)
         {
             Dictionary<MappingMemberDescriptor, object> keyValueMap = new Dictionary<MappingMemberDescriptor, object>();
             foreach (MappingMemberDescriptor keyMemberDescriptor in typeDescriptor.PrimaryKeys)
@@ -172,7 +172,8 @@ namespace Chloe
 
             return keyValueMap;
         }
-        static DbExpression MakeCondition(Dictionary<MappingMemberDescriptor, object> keyValueMap, DbTable dbTable)
+
+        private static DbExpression MakeCondition(Dictionary<MappingMemberDescriptor, object> keyValueMap, DbTable dbTable)
         {
             DbExpression conditionExp = null;
             foreach (var kv in keyValueMap)
@@ -191,6 +192,5 @@ namespace Chloe
 
             return conditionExp;
         }
-
     }
 }

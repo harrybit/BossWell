@@ -1,7 +1,8 @@
-﻿using System;
+﻿using ApiHelp;
 using StackExchange.Redis;
-using ApiHelp;
+using System;
 using SystemConfig;
+
 namespace Cache.Redis
 {
     public class RedisCache
@@ -25,6 +26,7 @@ namespace Cache.Redis
                 return _instance;
             }
         }
+
         private static ConnectionMultiplexer GetManager(string constr = null)
         {
             constr = constr ?? Constring;
@@ -43,14 +45,14 @@ namespace Cache.Redis
             string json = ApiHelper.JsonSerial(t);
             return db.StringSet(key, json);
         }
-        
+
         public static bool Set<T>(string key, T t, TimeSpan timeSpan, int dbId = 0)
         {
             var db = GetDataBase(dbId);
             string json = ApiHelper.JsonSerial(t);
             return db.StringSet(key, json, timeSpan);
         }
-        
+
         public static bool Set<T>(string key, T t, DateTime dateTime, int dbId = 0)
         {
             var db = GetDataBase(dbId);
@@ -64,13 +66,13 @@ namespace Cache.Redis
             var value = db.StringGet(key);
             return db.StringGet(key).IsNullOrEmpty ? default(T) : ApiHelper.JsonDeserial<T>(value.ToString());
         }
-        
+
         public static bool Remove(string key, int dbId = 0)
         {
             var db = GetDataBase(dbId);
             return db.KeyDelete(key);
         }
-        
+
         public static void RemoveAll(int dbId = 0)
         {
             Instance.GetServer(RedisConfig.ReadServerList).FlushDatabase(dbId);

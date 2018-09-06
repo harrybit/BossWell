@@ -1,18 +1,14 @@
-﻿using Chloe.Query.QueryState;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
 
 namespace Chloe.Query.QueryExpressions
 {
-    class AggregateQueryExpression : QueryExpression
+    internal class AggregateQueryExpression : QueryExpression
     {
-        MethodInfo _method;
-        ReadOnlyCollection<Expression> _arguments;
+        private MethodInfo _method;
+        private ReadOnlyCollection<Expression> _arguments;
 
         public AggregateQueryExpression(QueryExpression prevExpression, MethodInfo method, IList<Expression> arguments)
             : base(QueryExpressionType.Aggregate, method.ReturnType, prevExpression)
@@ -23,7 +19,6 @@ namespace Chloe.Query.QueryExpressions
 
         public MethodInfo Method { get { return this._method; } }
         public ReadOnlyCollection<Expression> Arguments { get { return this._arguments; } }
-
 
         public override T Accept<T>(QueryExpressionVisitor<T> visitor)
         {

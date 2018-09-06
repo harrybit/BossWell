@@ -1,5 +1,5 @@
-﻿using Chloe.Mapper;
-using Chloe.Descriptors;
+﻿using Chloe.Descriptors;
+using Chloe.Mapper;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -18,6 +18,7 @@ namespace Chloe.Query.Mapping
             this.MappingMembers = new Dictionary<MemberInfo, int>();
             this.ComplexMembers = new Dictionary<MemberInfo, IObjectActivatorCreator>();
         }
+
         public int? CheckNullOrdinal { get; set; }
         public EntityConstructorDescriptor ConstructorDescriptor { get; private set; }
         public Dictionary<ParameterInfo, int> ConstructorParameters { get; private set; }
@@ -27,6 +28,7 @@ namespace Chloe.Query.Mapping
         /// 映射成员集合。以 MemberInfo 为 key，读取 DataReader 时的 Ordinal 为 value
         /// </summary>
         public Dictionary<MemberInfo, int> MappingMembers { get; private set; }
+
         /// <summary>
         /// 复杂类型成员集合。
         /// </summary>
@@ -36,6 +38,7 @@ namespace Chloe.Query.Mapping
         {
             return this.CreateObjectActivator(null);
         }
+
         public IObjectActivator CreateObjectActivator(IDbContext dbContext)
         {
             EntityMemberMapper mapper = this.ConstructorDescriptor.GetEntityMemberMapper();

@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 
 namespace Chloe.Oracle
 {
     public class ChloeOracleCommand : IDbCommand, IDisposable
     {
-        IDbCommand _dbCommand;
+        private IDbCommand _dbCommand;
+
         public ChloeOracleCommand(IDbCommand dbCommand)
         {
             Utils.CheckNull(dbCommand);
@@ -26,6 +24,7 @@ namespace Chloe.Oracle
                 this._dbCommand.CommandText = value;
             }
         }
+
         public int CommandTimeout
         {
             get
@@ -37,6 +36,7 @@ namespace Chloe.Oracle
                 this._dbCommand.CommandTimeout = value;
             }
         }
+
         public CommandType CommandType
         {
             get
@@ -48,6 +48,7 @@ namespace Chloe.Oracle
                 this._dbCommand.CommandType = value;
             }
         }
+
         public IDbConnection Connection
         {
             get
@@ -59,6 +60,7 @@ namespace Chloe.Oracle
                 this._dbCommand.Connection = value;
             }
         }
+
         public IDataParameterCollection Parameters
         {
             get
@@ -66,6 +68,7 @@ namespace Chloe.Oracle
                 return this._dbCommand.Parameters;
             }
         }
+
         public IDbTransaction Transaction
         {
             get
@@ -77,6 +80,7 @@ namespace Chloe.Oracle
                 this._dbCommand.Transaction = value;
             }
         }
+
         public UpdateRowSource UpdatedRowSource
         {
             get
@@ -93,30 +97,37 @@ namespace Chloe.Oracle
         {
             this._dbCommand.Cancel();
         }
+
         public IDbDataParameter CreateParameter()
         {
             return this._dbCommand.CreateParameter();
         }
+
         public int ExecuteNonQuery()
         {
             return this._dbCommand.ExecuteNonQuery();
         }
+
         public IDataReader ExecuteReader()
         {
             return new ChloeOracleDataReader(this._dbCommand.ExecuteReader());
         }
+
         public IDataReader ExecuteReader(CommandBehavior behavior)
         {
             return new ChloeOracleDataReader(this._dbCommand.ExecuteReader(behavior));
         }
+
         public object ExecuteScalar()
         {
             return this._dbCommand.ExecuteScalar();
         }
+
         public void Prepare()
         {
             this._dbCommand.Prepare();
         }
+
         public void Dispose()
         {
             this._dbCommand.Dispose();

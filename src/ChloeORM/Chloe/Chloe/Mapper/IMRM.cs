@@ -1,13 +1,10 @@
 ﻿using Chloe.Core;
 using Chloe.Core.Emit;
 using Chloe.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 using Chloe.InternalExtensions;
+using System;
+using System.Data;
+using System.Reflection;
 
 namespace Chloe.Mapper
 {
@@ -16,7 +13,7 @@ namespace Chloe.Mapper
         void Map(object instance, IDataReader reader, int ordinal);
     }
 
-    static class MRMHelper
+    internal static class MRMHelper
     {
         public static IMRM CreateMRM(MemberInfo member, MappingTypeInfo mappingTypeInfo)
         {
@@ -33,9 +30,10 @@ namespace Chloe.Mapper
         }
     }
 
-    class MRM : IMRM
+    internal class MRM : IMRM
     {
-        Action<object, IDataReader, int> _mapper;
+        private Action<object, IDataReader, int> _mapper;
+
         public MRM(MemberInfo member)
         {
             this._mapper = DelegateGenerator.CreateSetValueFromReaderDelegate(member);
@@ -50,10 +48,11 @@ namespace Chloe.Mapper
     /// <summary>
     /// 通过 MappingTypeSystem.Configure() 配置了数据库转换器时，会使用该 MRM。
     /// </summary>
-    class MRM2 : IMRM
+    internal class MRM2 : IMRM
     {
-        Action<object, object> _valueSetter;
-        IDbValueConverter _dbValueConverter;
+        private Action<object, object> _valueSetter;
+        private IDbValueConverter _dbValueConverter;
+
         public MRM2(MemberInfo member, IDbValueConverter dbValueConverter)
         {
             this._dbValueConverter = dbValueConverter;

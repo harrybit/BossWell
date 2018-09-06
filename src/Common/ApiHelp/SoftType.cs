@@ -1,9 +1,10 @@
 ﻿using System.Text;
+
 namespace System
 {
     /// <summary>
     /// TryParse软类型转换
-    /// 2017-06-20 15:11:04 
+    /// 2017-06-20 15:11:04
     /// harry
     /// </summary>
     public static class SoftType
@@ -65,6 +66,7 @@ namespace System
             if (!bool.TryParse(obj.ToString(), out a)) { a = defval; };
             return a;
         }
+
         /// <summary>
         /// 转为DateTime类型
         /// </summary>
@@ -138,7 +140,7 @@ namespace System
             return a;
         }
 
-        #endregion
+        #endregion 值类型软转换
 
         #region 字符串操作
 
@@ -153,7 +155,6 @@ namespace System
             return codingType.GetByteCount(textContent);
         }
 
-        #endregion
-
+        #endregion 字符串操作
     }
 }

@@ -1,9 +1,8 @@
-﻿
-namespace Chloe.DbExpressions
+﻿namespace Chloe.DbExpressions
 {
     public class DbNotExpression : DbExpression
     {
-        DbExpression _exp;
+        private DbExpression _exp;
 
         public DbNotExpression(DbExpression exp)
             : base(DbExpressionType.Not, UtilConstants.TypeOfBoolean)
@@ -18,5 +17,4 @@ namespace Chloe.DbExpressions
             return visitor.Visit(this);
         }
     }
-
 }

@@ -1,14 +1,13 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using BossWellApp;
 using BossWellModel;
-using BossWellApp;
 using BossWellModel.BossWellModel;
+using System.Web.Mvc;
 
 namespace BossWellWeb.Areas.PublicBusines.Controllers
 {
     public class BannerController : ControllerBase
     {
-        BannerApp bannerAPP = new BannerApp();
+        private BannerApp bannerAPP = new BannerApp();
 
         [HttpGet]
         [HandlerAjaxOnly]

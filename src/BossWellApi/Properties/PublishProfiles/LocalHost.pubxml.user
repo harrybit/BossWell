@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+您 Web 项目的发布/打包进程将使用此文件。您可以通过编辑此 MSBuild 文件
+来自定义该进程的行为。若要了解与此相关的详细信息，请访问 http://go.microsoft.com/fwlink/?LinkID=208121。
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>D:\Project_TY\发布\LocalHostAPI</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="App_Data/XmlDocument.xml">
+      <publishTime>09/05/2018 17:56:55</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/HelpPage.css">
+      <publishTime>08/08/2018 14:49:21</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/Help/Api.cshtml">
+      <publishTime>08/08/2018 14:49:21</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/ApiGroup.cshtml">
+      <publishTime>08/08/2018 14:49:21</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/CollectionModelDescription.cshtml">
+      <publishTime>08/08/2018 14:49:21</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/ComplexTypeModelDescription.cshtml">
+      <publishTime>08/08/2018 14:49:21</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/DictionaryModelDescription.cshtml">
+      <publishTime>08/08/2018 14:49:21</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/EnumTypeModelDescription.cshtml">
+      <publishTime>08/08/2018 14:49:21</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/HelpPageApiModel.cshtml">
+      <publishTime>08/08/2018 14:49:21</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/ImageSample.cshtml">
+      <publishTime>08/08/2018 14:49:21</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/InvalidSample.cshtml">
+      <publishTime>08/08/2018 14:49:21</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/KeyValuePairModelDescription.cshtml">
+      <publishTime>08/08/2018 14:49:21</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/ModelDescriptionLink.cshtml">
+      <publishTime>08/08/2018 14:49:21</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/Parameters.cshtml">
+      <publishTime>08/08/2018 14:49:21</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/Samples.cshtml">
+      <publishTime>08/08/2018 14:49:21</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/SimpleTypeModelDescription.cshtml">
+      <publishTime>08/08/2018 14:49:21</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/TextSample.cshtml">
+      <publishTime>08/08/2018 14:49:21</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/Help/Index.cshtml">
+      <publishTime>08/08/2018 14:49:21</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/Help/ResourceModel.cshtml">
+      <publishTime>08/08/2018 14:49:21</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/Shared/_Layout.cshtml">
+      <publishTime>08/08/2018 14:49:21</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/Web.config">
+      <publishTime>08/08/2018 14:49:21</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/_ViewStart.cshtml">
+      <publishTime>08/08/2018 14:49:21</publishTime>
+    </File>
+    <File Include="bin/aliyun-net-sdk-core.dll">
+      <publishTime>05/11/2018 16:02:32</publishTime>
+    </File>
+    <File Include="bin/aliyun-net-sdk-dysmsapi.dll">
+      <publishTime>05/11/2018 16:02:32</publishTime>
+    </File>
+    <File Include="bin/ApiHelp.dll">
+      <publishTime>09/05/2018 17:56:46</publishTime>
+    </File>
+    <File Include="bin/ApiHelp.pdb">
+      <publishTime>09/05/2018 17:56:45</publishTime>
+    </File>
+    <File Include="bin/BossWellApi.dll">
+      <publishTime>09/05/2018 17:56:55</publishTime>
+    </File>
+    <File Include="bin/BossWellApi.pdb">
+      <publishTime>09/05/2018 17:56:55</publishTime>
+    </File>
+    <File Include="bin/BossWellApp.dll">
+      <publishTime>09/05/2018 17:56:49</publishTime>
+    </File>
+    <File Include="bin/BossWellApp.pdb">
+      <publishTime>09/05/2018 17:56:49</publishTime>
+    </File>
+    <File Include="bin/BossWellFactory.dll">
+      <publishTime>09/05/2018 17:56:48</publishTime>
+    </File>
+    <File Include="bin/BossWellFactory.pdb">
+      <publishTime>09/05/2018 17:56:48</publishTime>
+    </File>
+    <File Include="bin/BossWellModel.dll">
+      <publishTime>09/05/2018 17:56:46</publishTime>
+    </File>
+    <File Include="bin/BossWellModel.pdb">
+      <publishTime>09/05/2018 17:56:46</publishTime>
+    </File>
+    <File Include="bin/BossWellORM.dll">
+      <publishTime>09/05/2018 17:56:48</publishTime>
+    </File>
+    <File Include="bin/BossWellORM.pdb">
+      <publishTime>09/05/2018 17:56:48</publishTime>
+    </File>
+    <File Include="bin/BossWellService.dll">
+      <publishTime>09/05/2018 17:56:48</publishTime>
+    </File>
+    <File Include="bin/BossWellService.pdb">
+      <publishTime>09/05/2018 17:56:48</publishTime>
+    </File>
+    <File Include="bin/Cache.Base.dll">
+      <publishTime>09/05/2018 17:56:45</publishTime>
+    </File>
+    <File Include="bin/Cache.Base.pdb">
+      <publishTime>09/05/2018 17:56:45</publishTime>
+    </File>
+    <File Include="bin/Cache.Factory.dll">
+      <publishTime>09/05/2018 17:56:47</publishTime>
+    </File>
+    <File Include="bin/Cache.Factory.pdb">
+      <publishTime>09/05/2018 17:56:47</publishTime>
+    </File>
+    <File Include="bin/Cache.Redis.dll">
+      <publishTime>09/05/2018 17:56:46</publishTime>
+    </File>
+    <File Include="bin/Cache.Redis.pdb">
+      <publishTime>09/05/2018 17:56:46</publishTime>
+    </File>
+    <File Include="bin/Chloe.dll">
+      <publishTime>09/05/2018 17:56:46</publishTime>
+    </File>
+    <File Include="bin/Chloe.MySql.dll">
+      <publishTime>09/05/2018 17:56:47</publishTime>
+    </File>
+    <File Include="bin/Chloe.MySql.pdb">
+      <publishTime>09/05/2018 17:56:47</publishTime>
+    </File>
+    <File Include="bin/Chloe.pdb">
+      <publishTime>09/05/2018 17:56:46</publishTime>
+    </File>
+    <File Include="bin/es/Hangfire.Core.resources.dll">
+      <publishTime>07/31/2018 10:28:50</publishTime>
+    </File>
+    <File Include="bin/Hangfire.Core.dll">
+      <publishTime>07/31/2018 10:28:50</publishTime>
+    </File>
+    <File Include="bin/Hangfire.Redis.StackExchange.dll">
+      <publishTime>01/04/2018 14:29:14</publishTime>
+    </File>
+    <File Include="bin/Hangfire.SqlServer.dll">
+      <publishTime>07/31/2018 10:28:52</publishTime>
+    </File>
+    <File Include="bin/IBossWellService.dll">
+      <publishTime>09/05/2018 17:56:47</publishTime>
+    </File>
+    <File Include="bin/IBossWellService.pdb">
+      <publishTime>09/05/2018 17:56:47</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.dll">
+      <publishTime>08/19/2014 14:42:24</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Host.SystemWeb.dll">
+      <publishTime>08/19/2014 14:42:30</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>07/25/2012 11:48:56</publishTime>
+    </File>
+    <File Include="bin/MySql.Data.dll">
+      <publishTime>06/17/2016 17:34:38</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>03/24/2018 17:44:14</publishTime>
+    </File>
+    <File Include="bin/Owin.dll">
+      <publishTime>11/13/2012 12:19:34</publishTime>
+    </File>
+    <File Include="bin/PlannedJob.dll">
+      <publishTime>09/05/2018 17:56:46</publishTime>
+    </File>
+    <File Include="bin/PlannedJob.pdb">
+      <publishTime>09/05/2018 17:56:46</publishTime>
+    </File>
+    <File Include="bin/Qiniu.dll">
+      <publishTime>03/08/2017 16:02:58</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
+      <publishTime>06/18/2015 20:19:44</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Collections.Immutable.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Reflection.Metadata.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe.config">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/StackExchange.Redis.dll">
+      <publishTime>08/01/2017 12:19:14</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>05/10/2018 22:38:56</publishTime>
+    </File>
+    <File Include="bin/System.Web.Cors.dll">
+      <publishTime>05/10/2018 22:37:02</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>05/10/2018 22:42:40</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.Cors.dll">
+      <publishTime>05/10/2018 22:39:40</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>05/10/2018 22:39:16</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>05/10/2018 22:41:08</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>05/10/2018 22:38:08</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>05/10/2018 22:38:32</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>05/10/2018 22:42:40</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>05/10/2018 22:42:40</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>05/10/2018 22:42:40</publishTime>
+    </File>
+    <File Include="bin/SystemConfig.dll">
+      <publishTime>09/05/2018 17:56:45</publishTime>
+    </File>
+    <File Include="bin/SystemConfig.pdb">
+      <publishTime>09/05/2018 17:56:45</publishTime>
+    </File>
+    <File Include="bin/WebApi.OutputCache.Core.dll">
+      <publishTime>04/03/2018 08:04:10</publishTime>
+    </File>
+    <File Include="bin/WebApi.OutputCache.V2.dll">
+      <publishTime>04/03/2018 08:04:10</publishTime>
+    </File>
+    <File Include="bin/XmlDocument.xml">
+      <publishTime>09/05/2018 17:56:55</publishTime>
+    </File>
+    <File Include="bin/zh-TW/Hangfire.Core.resources.dll">
+      <publishTime>07/31/2018 10:28:50</publishTime>
+    </File>
+    <File Include="bin/zh/Hangfire.Core.resources.dll">
+      <publishTime>07/31/2018 10:28:50</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>08/08/2018 12:04:27</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>08/09/2018 16:08:58</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>09/05/2018 17:57:01</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

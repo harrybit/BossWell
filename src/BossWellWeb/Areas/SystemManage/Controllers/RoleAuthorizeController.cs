@@ -1,11 +1,9 @@
 ﻿using BossWellApp;
 using BossWellApp.Basic;
 using BossWellModel;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Mvc;
-using ApiHelp;
 using BossWellModel.BossWellModel;
+using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace BossWellWeb.Areas.SystemManage.Controllers
 {
@@ -55,7 +53,7 @@ namespace BossWellWeb.Areas.SystemManage.Controllers
             return Success("删除成功");
         }
 
-        #region  Get Select
+        #region Get Select
 
         [HttpGet]
         [HandlerAjaxOnly]
@@ -83,7 +81,6 @@ namespace BossWellWeb.Areas.SystemManage.Controllers
             return Content(treeList.TreeSelectJson());
         }
 
-        #endregion
-
+        #endregion Get Select
     }
 }

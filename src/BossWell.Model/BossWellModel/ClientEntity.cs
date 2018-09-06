@@ -1,5 +1,6 @@
-﻿using System;
-using Chloe.Entity;
+﻿using Chloe.Entity;
+using System;
+
 namespace BossWellModel
 {
     /// <summary>

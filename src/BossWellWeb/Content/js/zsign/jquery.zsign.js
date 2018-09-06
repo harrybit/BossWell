@@ -4,7 +4,7 @@
     date:2012-11-08
 */
 
-;$.fn.zSign = function (options) {
+; $.fn.zSign = function (options) {
     var _s = $.extend({
         img: '',
         width: 150,
@@ -23,7 +23,6 @@
 
     var _btnPanel = $("<div class='panels'><button class='btn btn-default add ' >盖 章</button><button class='btn btn-default cancel'>关 闭</button></div>").appendTo(_parent);
     var _html = "<div class='sign' style='height:" + _s.height + "px;width:" + _s.width + "px;top:" + _s.offset + "px;left:" + _s.offset + "px'><img src='" + _s.img + "' draggable='false'/><button class='btn btn-default ok' >确定</button><button class='btn btn-default del' >删除</button></div>";
-
 
     var _add = $('.add', _btnPanel).click(function (e) {
         _add.attr('disabled', 'disabled');
@@ -62,7 +61,7 @@
         });
     });
 
-	$('.cancel', _btnPanel).click(function () {
+    $('.cancel', _btnPanel).click(function () {
         var r = true;
         if (_add.attr('disabled') == 'disabled') {
             if (!confirm("未确定的盖章将被取消，确定要关闭吗？")) {

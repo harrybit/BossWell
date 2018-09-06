@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
+
 namespace ApiHelp
 {
     /// <summary>
@@ -11,6 +12,7 @@ namespace ApiHelp
         private static string DESKey = "bosswell_adminLogininfo";
 
         #region ========加密========
+
         /// <summary>
         /// 加密
         /// </summary>
@@ -20,12 +22,13 @@ namespace ApiHelp
         {
             return Encrypt(Text, DESKey);
         }
-        /// <summary> 
-        /// 加密数据 
-        /// </summary> 
-        /// <param name="Text"></param> 
-        /// <param name="sKey"></param> 
-        /// <returns></returns> 
+
+        /// <summary>
+        /// 加密数据
+        /// </summary>
+        /// <param name="Text"></param>
+        /// <param name="sKey"></param>
+        /// <returns></returns>
         public static string Encrypt(string Text, string sKey)
         {
             DESCryptoServiceProvider des = new DESCryptoServiceProvider();
@@ -45,9 +48,10 @@ namespace ApiHelp
             return ret.ToString();
         }
 
-        #endregion
+        #endregion ========加密========
 
         #region ========解密========
+
         /// <summary>
         /// 解密
         /// </summary>
@@ -64,12 +68,13 @@ namespace ApiHelp
                 return "";
             }
         }
-        /// <summary> 
-        /// 解密数据 
-        /// </summary> 
-        /// <param name="Text"></param> 
-        /// <param name="sKey"></param> 
-        /// <returns></returns> 
+
+        /// <summary>
+        /// 解密数据
+        /// </summary>
+        /// <param name="Text"></param>
+        /// <param name="sKey"></param>
+        /// <returns></returns>
         public static string Decrypt(string Text, string sKey)
         {
             DESCryptoServiceProvider des = new DESCryptoServiceProvider();
@@ -91,6 +96,6 @@ namespace ApiHelp
             return Encoding.Default.GetString(ms.ToArray());
         }
 
-        #endregion
+        #endregion ========解密========
     }
 }

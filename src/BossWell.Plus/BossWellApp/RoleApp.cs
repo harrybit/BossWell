@@ -1,14 +1,14 @@
-﻿using BossWellFactory;
-using IBossWellService;
+﻿using ApiHelp;
+using BossWellApp.Basic;
+using BossWellFactory;
 using BossWellModel;
+using BossWellModel.Base;
+using BossWellModel.BossWellModel;
 using BossWellModel.Enum;
+using IBossWellService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System;
-using BossWellApp.Basic;
-using BossWellModel.Base;
-using ApiHelp;
-using BossWellModel.BossWellModel;
 
 namespace BossWellApp
 {
@@ -18,6 +18,7 @@ namespace BossWellApp
         private IOrganizeService _organService = SysAutoFactory.GetOrganizeService();
         private ModuleApp moduleAPP = new ModuleApp();
         private ModuleButtonApp moduleButtonAPP = new ModuleButtonApp();
+
         public string GetGridListJson(string keyWord)
         {
             return ApiHelper.JsonSerial(GetPageListByKeyWord(keyWord));
@@ -126,6 +127,5 @@ namespace BossWellApp
             request.Sort = (t => t.Sort);
             return _service.GetPageList(request).Items;
         }
-
     }
 }

@@ -1,4 +1,5 @@
 ﻿using SystemConfig;
+
 namespace BossWellORM
 {
     /// <summary>

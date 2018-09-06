@@ -1,7 +1,7 @@
 ﻿using BossWellApp;
-using System.Web.Mvc;
 using BossWellModel;
 using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace BossWellWeb.Areas.SystemManage.Controllers
 {
@@ -45,6 +45,7 @@ namespace BossWellWeb.Areas.SystemManage.Controllers
             }
             return Success("保存成功。");
         }
+
         [HttpPost]
         [HandlerAjaxOnly]
         [HandlerAuthorize]
@@ -64,7 +65,5 @@ namespace BossWellWeb.Areas.SystemManage.Controllers
             objJson.Add(new { id = 3, text = "其他角色" });
             return Content(ApiHelp.ApiHelper.JsonSerial(objJson));
         }
-
-
     }
 }

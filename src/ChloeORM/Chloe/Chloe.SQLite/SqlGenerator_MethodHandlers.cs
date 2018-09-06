@@ -1,20 +1,16 @@
-﻿using Chloe.Core;
-using Chloe.DbExpressions;
+﻿using Chloe.DbExpressions;
 using Chloe.InternalExtensions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-
 
 namespace Chloe.SQLite
 {
     partial class SqlGenerator : DbExpressionVisitor<DbExpression>
     {
-        static Dictionary<string, Action<DbMethodCallExpression, SqlGenerator>> InitMethodHandlers()
+        private static Dictionary<string, Action<DbMethodCallExpression, SqlGenerator>> InitMethodHandlers()
         {
             var methodHandlers = new Dictionary<string, Action<DbMethodCallExpression, SqlGenerator>>();
 
@@ -66,7 +62,7 @@ namespace Chloe.SQLite
             return ret;
         }
 
-        static void Method_Equals(DbMethodCallExpression exp, SqlGenerator generator)
+        private static void Method_Equals(DbMethodCallExpression exp, SqlGenerator generator)
         {
             MethodInfo method = exp.Method;
             if (method.DeclaringType == UtilConstants.TypeOfSql)
@@ -86,7 +82,8 @@ namespace Chloe.SQLite
 
             DbExpression.Equal(exp.Object, right).Accept(generator);
         }
-        static void Method_Sql_Equals(DbMethodCallExpression exp, SqlGenerator generator)
+
+        private static void Method_Sql_Equals(DbMethodCallExpression exp, SqlGenerator generator)
         {
             DbExpression left = exp.Arguments[0];
             DbExpression right = exp.Arguments[1];
@@ -118,7 +115,7 @@ namespace Chloe.SQLite
             return;
         }
 
-        static void Method_NotEquals(DbMethodCallExpression exp, SqlGenerator generator)
+        private static void Method_NotEquals(DbMethodCallExpression exp, SqlGenerator generator)
         {
             MethodInfo method = exp.Method;
             if (method.DeclaringType != UtilConstants.TypeOfSql)
@@ -156,7 +153,7 @@ namespace Chloe.SQLite
             return;
         }
 
-        static void Method_Trim(DbMethodCallExpression exp, SqlGenerator generator)
+        private static void Method_Trim(DbMethodCallExpression exp, SqlGenerator generator)
         {
             EnsureMethod(exp, UtilConstants.MethodInfo_String_Trim);
 
@@ -164,7 +161,8 @@ namespace Chloe.SQLite
             exp.Object.Accept(generator);
             generator._sqlBuilder.Append(")");
         }
-        static void Method_TrimStart(DbMethodCallExpression exp, SqlGenerator generator)
+
+        private static void Method_TrimStart(DbMethodCallExpression exp, SqlGenerator generator)
         {
             EnsureMethod(exp, UtilConstants.MethodInfo_String_TrimStart);
             EnsureTrimCharArgumentIsSpaces(exp.Arguments[0]);
@@ -173,7 +171,8 @@ namespace Chloe.SQLite
             exp.Object.Accept(generator);
             generator._sqlBuilder.Append(")");
         }
-        static void Method_TrimEnd(DbMethodCallExpression exp, SqlGenerator generator)
+
+        private static void Method_TrimEnd(DbMethodCallExpression exp, SqlGenerator generator)
         {
             EnsureMethod(exp, UtilConstants.MethodInfo_String_TrimEnd);
             EnsureTrimCharArgumentIsSpaces(exp.Arguments[0]);
@@ -182,7 +181,8 @@ namespace Chloe.SQLite
             exp.Object.Accept(generator);
             generator._sqlBuilder.Append(")");
         }
-        static void Method_StartsWith(DbMethodCallExpression exp, SqlGenerator generator)
+
+        private static void Method_StartsWith(DbMethodCallExpression exp, SqlGenerator generator)
         {
             EnsureMethod(exp, UtilConstants.MethodInfo_String_StartsWith);
 
@@ -191,7 +191,8 @@ namespace Chloe.SQLite
             exp.Arguments.First().Accept(generator);
             generator._sqlBuilder.Append(" || '%'");
         }
-        static void Method_EndsWith(DbMethodCallExpression exp, SqlGenerator generator)
+
+        private static void Method_EndsWith(DbMethodCallExpression exp, SqlGenerator generator)
         {
             EnsureMethod(exp, UtilConstants.MethodInfo_String_EndsWith);
 
@@ -199,7 +200,8 @@ namespace Chloe.SQLite
             generator._sqlBuilder.Append(" LIKE '%' || ");
             exp.Arguments.First().Accept(generator);
         }
-        static void Method_String_Contains(DbMethodCallExpression exp, SqlGenerator generator)
+
+        private static void Method_String_Contains(DbMethodCallExpression exp, SqlGenerator generator)
         {
             EnsureMethod(exp, UtilConstants.MethodInfo_String_Contains);
 
@@ -208,7 +210,8 @@ namespace Chloe.SQLite
             exp.Arguments.First().Accept(generator);
             generator._sqlBuilder.Append(" || '%'");
         }
-        static void Method_String_ToUpper(DbMethodCallExpression exp, SqlGenerator generator)
+
+        private static void Method_String_ToUpper(DbMethodCallExpression exp, SqlGenerator generator)
         {
             EnsureMethod(exp, UtilConstants.MethodInfo_String_ToUpper);
 
@@ -216,7 +219,8 @@ namespace Chloe.SQLite
             exp.Object.Accept(generator);
             generator._sqlBuilder.Append(")");
         }
-        static void Method_String_ToLower(DbMethodCallExpression exp, SqlGenerator generator)
+
+        private static void Method_String_ToLower(DbMethodCallExpression exp, SqlGenerator generator)
         {
             EnsureMethod(exp, UtilConstants.MethodInfo_String_ToLower);
 
@@ -224,7 +228,8 @@ namespace Chloe.SQLite
             exp.Object.Accept(generator);
             generator._sqlBuilder.Append(")");
         }
-        static void Method_String_Substring(DbMethodCallExpression exp, SqlGenerator generator)
+
+        private static void Method_String_Substring(DbMethodCallExpression exp, SqlGenerator generator)
         {
             generator._sqlBuilder.Append("SUBSTR(");
             exp.Object.Accept(generator);
@@ -244,7 +249,6 @@ namespace Chloe.SQLite
 
             if (exp.Method == UtilConstants.MethodInfo_String_Substring_Int32)
             {
-
             }
             else if (exp.Method == UtilConstants.MethodInfo_String_Substring_Int32_Int32)
             {
@@ -256,7 +260,8 @@ namespace Chloe.SQLite
 
             generator._sqlBuilder.Append(")");
         }
-        static void Method_String_IsNullOrEmpty(DbMethodCallExpression exp, SqlGenerator generator)
+
+        private static void Method_String_IsNullOrEmpty(DbMethodCallExpression exp, SqlGenerator generator)
         {
             EnsureMethod(exp, UtilConstants.MethodInfo_String_IsNullOrEmpty);
 
@@ -276,7 +281,8 @@ namespace Chloe.SQLite
             var eqExp = DbExpression.Equal(caseWhenExpression, DbConstantExpression.One);
             eqExp.Accept(generator);
         }
-        static void Method_String_Replace(DbMethodCallExpression exp, SqlGenerator generator)
+
+        private static void Method_String_Replace(DbMethodCallExpression exp, SqlGenerator generator)
         {
             EnsureMethod(exp, UtilConstants.MethodInfo_String_Replace);
 
@@ -289,7 +295,7 @@ namespace Chloe.SQLite
             generator._sqlBuilder.Append(")");
         }
 
-        static void Method_ToString(DbMethodCallExpression exp, SqlGenerator generator)
+        private static void Method_ToString(DbMethodCallExpression exp, SqlGenerator generator)
         {
             if (exp.Method.Name != "ToString" && exp.Arguments.Count != 0)
             {
@@ -310,7 +316,8 @@ namespace Chloe.SQLite
             DbConvertExpression c = DbExpression.Convert(exp.Object, UtilConstants.TypeOfString);
             c.Accept(generator);
         }
-        static void Method_Contains(DbMethodCallExpression exp, SqlGenerator generator)
+
+        private static void Method_Contains(DbMethodCallExpression exp, SqlGenerator generator)
         {
             MethodInfo method = exp.Method;
 
@@ -390,8 +397,7 @@ namespace Chloe.SQLite
             In(generator, exps, operand);
         }
 
-
-        static void In(SqlGenerator generator, List<DbExpression> elementExps, DbExpression operand)
+        private static void In(SqlGenerator generator, List<DbExpression> elementExps, DbExpression operand)
         {
             if (elementExps.Count == 0)
             {
@@ -414,7 +420,8 @@ namespace Chloe.SQLite
 
             return;
         }
-        static void In(SqlGenerator generator, DbSqlQueryExpression sqlQuery, DbExpression operand)
+
+        private static void In(SqlGenerator generator, DbSqlQueryExpression sqlQuery, DbExpression operand)
         {
             operand.Accept(generator);
             generator._sqlBuilder.Append(" IN (");
@@ -424,76 +431,85 @@ namespace Chloe.SQLite
             return;
         }
 
-        static void Method_Count(DbMethodCallExpression exp, SqlGenerator generator)
+        private static void Method_Count(DbMethodCallExpression exp, SqlGenerator generator)
         {
             EnsureMethodDeclaringType(exp, typeof(AggregateFunctions), UtilConstants.TypeOfSql);
             Aggregate_Count(generator);
         }
-        static void Method_LongCount(DbMethodCallExpression exp, SqlGenerator generator)
+
+        private static void Method_LongCount(DbMethodCallExpression exp, SqlGenerator generator)
         {
             EnsureMethodDeclaringType(exp, typeof(AggregateFunctions), UtilConstants.TypeOfSql);
             Aggregate_LongCount(generator);
         }
-        static void Method_Sum(DbMethodCallExpression exp, SqlGenerator generator)
+
+        private static void Method_Sum(DbMethodCallExpression exp, SqlGenerator generator)
         {
             EnsureMethodDeclaringType(exp, typeof(AggregateFunctions), UtilConstants.TypeOfSql);
             Aggregate_Sum(generator, exp.Arguments.First(), exp.Method.ReturnType);
         }
-        static void Method_Max(DbMethodCallExpression exp, SqlGenerator generator)
+
+        private static void Method_Max(DbMethodCallExpression exp, SqlGenerator generator)
         {
             EnsureMethodDeclaringType(exp, typeof(AggregateFunctions), UtilConstants.TypeOfSql);
             Aggregate_Max(generator, exp.Arguments.First(), exp.Method.ReturnType);
         }
-        static void Method_Min(DbMethodCallExpression exp, SqlGenerator generator)
+
+        private static void Method_Min(DbMethodCallExpression exp, SqlGenerator generator)
         {
             EnsureMethodDeclaringType(exp, typeof(AggregateFunctions), UtilConstants.TypeOfSql);
             Aggregate_Min(generator, exp.Arguments.First(), exp.Method.ReturnType);
         }
-        static void Method_Average(DbMethodCallExpression exp, SqlGenerator generator)
+
+        private static void Method_Average(DbMethodCallExpression exp, SqlGenerator generator)
         {
             EnsureMethodDeclaringType(exp, typeof(AggregateFunctions), UtilConstants.TypeOfSql);
             Aggregate_Average(generator, exp.Arguments.First(), exp.Method.ReturnType);
         }
 
-
-        static void Method_DateTime_AddYears(DbMethodCallExpression exp, SqlGenerator generator)
+        private static void Method_DateTime_AddYears(DbMethodCallExpression exp, SqlGenerator generator)
         {
             EnsureMethodDeclaringType(exp, UtilConstants.TypeOfDateTime);
 
             DbFunction_DATEADD(generator, "years", exp);
         }
-        static void Method_DateTime_AddMonths(DbMethodCallExpression exp, SqlGenerator generator)
+
+        private static void Method_DateTime_AddMonths(DbMethodCallExpression exp, SqlGenerator generator)
         {
             EnsureMethodDeclaringType(exp, UtilConstants.TypeOfDateTime);
 
             DbFunction_DATEADD(generator, "months", exp);
         }
-        static void Method_DateTime_AddDays(DbMethodCallExpression exp, SqlGenerator generator)
+
+        private static void Method_DateTime_AddDays(DbMethodCallExpression exp, SqlGenerator generator)
         {
             EnsureMethodDeclaringType(exp, UtilConstants.TypeOfDateTime);
 
             DbFunction_DATEADD(generator, "days", exp);
         }
-        static void Method_DateTime_AddHours(DbMethodCallExpression exp, SqlGenerator generator)
+
+        private static void Method_DateTime_AddHours(DbMethodCallExpression exp, SqlGenerator generator)
         {
             EnsureMethodDeclaringType(exp, UtilConstants.TypeOfDateTime);
 
             DbFunction_DATEADD(generator, "hours", exp);
         }
-        static void Method_DateTime_AddMinutes(DbMethodCallExpression exp, SqlGenerator generator)
+
+        private static void Method_DateTime_AddMinutes(DbMethodCallExpression exp, SqlGenerator generator)
         {
             EnsureMethodDeclaringType(exp, UtilConstants.TypeOfDateTime);
 
             DbFunction_DATEADD(generator, "minutes", exp);
         }
-        static void Method_DateTime_AddSeconds(DbMethodCallExpression exp, SqlGenerator generator)
+
+        private static void Method_DateTime_AddSeconds(DbMethodCallExpression exp, SqlGenerator generator)
         {
             EnsureMethodDeclaringType(exp, UtilConstants.TypeOfDateTime);
 
             DbFunction_DATEADD(generator, "seconds", exp);
         }
 
-        static void Method_Parse(DbMethodCallExpression exp, SqlGenerator generator)
+        private static void Method_Parse(DbMethodCallExpression exp, SqlGenerator generator)
         {
             if (exp.Arguments.Count != 1)
                 throw UtilExceptions.NotSupportedMethod(exp.Method);
@@ -516,21 +532,21 @@ namespace Chloe.SQLite
                 e.Accept(generator);
         }
 
-        static void Method_Guid_NewGuid(DbMethodCallExpression exp, SqlGenerator generator)
+        private static void Method_Guid_NewGuid(DbMethodCallExpression exp, SqlGenerator generator)
         {
             EnsureMethod(exp, UtilConstants.MethodInfo_Guid_NewGuid);
 
             throw UtilExceptions.NotSupportedMethod(exp.Method);
         }
 
-
-        static void Method_DiffYears(DbMethodCallExpression exp, SqlGenerator generator)
+        private static void Method_DiffYears(DbMethodCallExpression exp, SqlGenerator generator)
         {
             EnsureMethodDeclaringType(exp, typeof(DbFunctions), UtilConstants.TypeOfSql);
 
             Append_DiffYears(generator, exp.Arguments[0], exp.Arguments[1]);
         }
-        static void Method_DiffMonths(DbMethodCallExpression exp, SqlGenerator generator)
+
+        private static void Method_DiffMonths(DbMethodCallExpression exp, SqlGenerator generator)
         {
             EnsureMethodDeclaringType(exp, typeof(DbFunctions), UtilConstants.TypeOfSql);
 
@@ -559,44 +575,50 @@ namespace Chloe.SQLite
 
             generator._sqlBuilder.Append(")");
         }
-        static void Method_DiffDays(DbMethodCallExpression exp, SqlGenerator generator)
+
+        private static void Method_DiffDays(DbMethodCallExpression exp, SqlGenerator generator)
         {
             EnsureMethodDeclaringType(exp, typeof(DbFunctions), UtilConstants.TypeOfSql);
 
             Append_DateDiff(generator, exp.Arguments[0], exp.Arguments[1], null);
         }
-        static void Method_DiffHours(DbMethodCallExpression exp, SqlGenerator generator)
+
+        private static void Method_DiffHours(DbMethodCallExpression exp, SqlGenerator generator)
         {
             EnsureMethodDeclaringType(exp, typeof(DbFunctions), UtilConstants.TypeOfSql);
 
             Append_DateDiff(generator, exp.Arguments[0], exp.Arguments[1], 24);
         }
-        static void Method_DiffMinutes(DbMethodCallExpression exp, SqlGenerator generator)
+
+        private static void Method_DiffMinutes(DbMethodCallExpression exp, SqlGenerator generator)
         {
             EnsureMethodDeclaringType(exp, typeof(DbFunctions), UtilConstants.TypeOfSql);
 
             Append_DateDiff(generator, exp.Arguments[0], exp.Arguments[1], 24 * 60);
         }
-        static void Method_DiffSeconds(DbMethodCallExpression exp, SqlGenerator generator)
+
+        private static void Method_DiffSeconds(DbMethodCallExpression exp, SqlGenerator generator)
         {
             EnsureMethodDeclaringType(exp, typeof(DbFunctions), UtilConstants.TypeOfSql);
 
             Append_DateDiff(generator, exp.Arguments[0], exp.Arguments[1], 24 * 60 * 60);
         }
-        static void Method_DiffMilliseconds(DbMethodCallExpression exp, SqlGenerator generator)
+
+        private static void Method_DiffMilliseconds(DbMethodCallExpression exp, SqlGenerator generator)
         {
             EnsureMethodDeclaringType(exp, typeof(DbFunctions), UtilConstants.TypeOfSql);
 
             throw UtilExceptions.NotSupportedMethod(exp.Method);
         }
-        static void Method_DiffMicroseconds(DbMethodCallExpression exp, SqlGenerator generator)
+
+        private static void Method_DiffMicroseconds(DbMethodCallExpression exp, SqlGenerator generator)
         {
             EnsureMethodDeclaringType(exp, typeof(DbFunctions), UtilConstants.TypeOfSql);
 
             throw UtilExceptions.NotSupportedMethod(exp.Method);
         }
 
-        static void Append_JULIANDAY(SqlGenerator generator, DbExpression startDateTimeExp, DbExpression endDateTimeExp)
+        private static void Append_JULIANDAY(SqlGenerator generator, DbExpression startDateTimeExp, DbExpression endDateTimeExp)
         {
             /* (JULIANDAY(endDateTimeExp)- JULIANDAY(startDateTimeExp)) */
 
@@ -614,7 +636,8 @@ namespace Chloe.SQLite
 
             generator._sqlBuilder.Append(")");
         }
-        static void Append_DiffYears(SqlGenerator generator, DbExpression startDateTimeExp, DbExpression endDateTimeExp)
+
+        private static void Append_DiffYears(SqlGenerator generator, DbExpression startDateTimeExp, DbExpression endDateTimeExp)
         {
             /* (CAST(STRFTIME('%Y',endDateTimeExp) as INTEGER) - CAST(STRFTIME('%Y',startDateTimeExp) as INTEGER)) */
 
@@ -624,7 +647,8 @@ namespace Chloe.SQLite
             DbFunction_DATEPART(generator, "Y", startDateTimeExp);
             generator._sqlBuilder.Append(")");
         }
-        static void Append_DateDiff(SqlGenerator generator, DbExpression startDateTimeExp, DbExpression endDateTimeExp, int? multiplier)
+
+        private static void Append_DateDiff(SqlGenerator generator, DbExpression startDateTimeExp, DbExpression endDateTimeExp, int? multiplier)
         {
             /* CAST((JULIANDAY(endDateTimeExp)- JULIANDAY(startDateTimeExp)) AS INTEGER) */
             /* OR */

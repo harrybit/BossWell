@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Chloe.DbExpressions
+﻿namespace Chloe.DbExpressions
 {
     public class DbTableExpression : DbExpression
     {
-        DbTable _table;
+        private DbTable _table;
+
         public DbTableExpression(DbTable table)
             : base(DbExpressionType.Table, UtilConstants.TypeOfVoid)
         {

@@ -1,12 +1,8 @@
 ﻿using Chloe.DbExpressions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Chloe.Query
 {
-    static class DbExpressionEqualityComparer
+    internal static class DbExpressionEqualityComparer
     {
         public static bool EqualsCompare(DbExpression exp1, DbExpression exp2)
         {
@@ -20,18 +16,25 @@ namespace Chloe.Query
             {
                 case DbExpressionType.ColumnAccess:
                     return AreEqual((DbColumnAccessExpression)exp1, (DbColumnAccessExpression)exp2);
+
                 case DbExpressionType.Table:
                     return AreEqual((DbTableExpression)exp1, (DbTableExpression)exp2);
+
                 case DbExpressionType.Constant:
                     return AreEqual((DbConstantExpression)exp1, (DbConstantExpression)exp2);
+
                 case DbExpressionType.Convert:
                     return AreEqual((DbConvertExpression)exp1, (DbConvertExpression)exp2);
+
                 case DbExpressionType.Parameter:
                     return AreEqual((DbParameterExpression)exp1, (DbParameterExpression)exp2);
+
                 case DbExpressionType.MemberAccess:
                     return AreEqual((DbMemberExpression)exp1, (DbMemberExpression)exp2);
+
                 case DbExpressionType.Call:
                     return AreEqual((DbMethodCallExpression)exp1, (DbMethodCallExpression)exp2);
+
                 case DbExpressionType.Add:
                 case DbExpressionType.Subtract:
                 case DbExpressionType.Multiply:
@@ -45,40 +48,48 @@ namespace Chloe.Query
                 case DbExpressionType.GreaterThan:
                 case DbExpressionType.GreaterThanOrEqual:
                     return AreEqual((DbBinaryExpression)exp1, (DbBinaryExpression)exp2);
+
                 default:
                     return exp1 == exp2;
             }
         }
+
         public static bool AreEqual(DbColumnAccessExpression exp1, DbColumnAccessExpression exp2)
         {
             if (exp1.Column.Name != exp2.Column.Name)
                 return false;
             return exp1.Table.Name == exp2.Table.Name && exp1.Table.Schema == exp2.Table.Schema;
         }
+
         public static bool AreEqual(DbTableExpression exp1, DbTableExpression exp2)
         {
             return exp1.Table.Name == exp2.Table.Name && exp1.Table.Schema == exp2.Table.Schema;
         }
+
         public static bool AreEqual(DbConstantExpression exp1, DbConstantExpression exp2)
         {
             return Utils.AreEqual(exp1.Value, exp2.Value);
         }
+
         public static bool AreEqual(DbConvertExpression exp1, DbConvertExpression exp2)
         {
             if (exp1.Type != exp2.Type)
                 return false;
             return EqualsCompare(exp1.Operand, exp2.Operand);
         }
+
         public static bool AreEqual(DbParameterExpression exp1, DbParameterExpression exp2)
         {
             return Utils.AreEqual(exp1.Value, exp2.Value);
         }
+
         public static bool AreEqual(DbMemberExpression exp1, DbMemberExpression exp2)
         {
             if (exp1.Member != exp2.Member)
                 return false;
             return EqualsCompare(exp1.Expression, exp2.Expression);
         }
+
         public static bool AreEqual(DbMethodCallExpression exp1, DbMethodCallExpression exp2)
         {
             if (exp1.Method != exp2.Method)
@@ -113,6 +124,5 @@ namespace Chloe.Query
 
             return true;
         }
-
     }
 }

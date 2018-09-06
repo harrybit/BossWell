@@ -1,15 +1,16 @@
-﻿
-namespace Chloe.DbExpressions
+﻿namespace Chloe.DbExpressions
 {
     [System.Diagnostics.DebuggerDisplay("Name = {Name}")]
     public class DbTable
     {
-        string _name;
-        string _schema;
+        private string _name;
+        private string _schema;
+
         public DbTable(string name)
             : this(name, null)
         {
         }
+
         public DbTable(string name, string schema)
         {
             this._name = name;

@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Chloe.Infrastructure.Interception
 {
     public static class DbInterception
     {
-        static volatile List<IDbCommandInterceptor> _interceptors = new List<IDbCommandInterceptor>();
-        static readonly object _lockObject = new object();
+        private static volatile List<IDbCommandInterceptor> _interceptors = new List<IDbCommandInterceptor>();
+        private static readonly object _lockObject = new object();
+
         public static void Add(IDbCommandInterceptor interceptor)
         {
             Utils.CheckNull(interceptor);
@@ -21,6 +20,7 @@ namespace Chloe.Infrastructure.Interception
                 _interceptors = newList;
             }
         }
+
         public static void Remove(IDbCommandInterceptor interceptor)
         {
             Utils.CheckNull(interceptor);

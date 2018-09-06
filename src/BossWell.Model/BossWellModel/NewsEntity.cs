@@ -1,11 +1,12 @@
 ﻿using Chloe.Entity;
+
 namespace BossWellModel
 {
     /// <summary>
     /// 资讯表
     /// </summary>
     [Table("News")]
-    public class NewsEntity:BaseEntity
+    public class NewsEntity : BaseEntity
     {
         public string Title { get; set; }
         public string SubTitle { get; set; }

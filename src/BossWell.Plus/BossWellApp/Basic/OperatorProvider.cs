@@ -9,6 +9,7 @@ namespace BossWellApp.Basic
         {
             get { return new OperatorProvider(); }
         }
+
         private string LoginUserKey = "bosswell_adminLogininfo";
         private string LoginProvider = "Cookie";
 
@@ -30,6 +31,7 @@ namespace BossWellApp.Basic
             }
             return operatorModel;
         }
+
         public void AddCurrent(OperatorModel operatorModel)
         {
             if (LoginProvider == "Cookie")
@@ -43,6 +45,7 @@ namespace BossWellApp.Basic
             ApiHelper.WriteCookie("bosswell_mac", ApiHelper.MD5Encrypt(ApiHelper.JsonSerial(ApiHelper.GetMacByNetworkInterface()), "MD5"));
             ApiHelper.WriteCookie("bosswell_licence", ApiHelper.MD5Encrypt(Guid.NewGuid().ToString(), "MD5"));
         }
+
         public void RemoveCurrent()
         {
             if (LoginProvider == "Cookie")

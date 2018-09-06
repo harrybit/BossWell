@@ -1,17 +1,17 @@
-﻿using System;
+﻿using Chloe.Core;
+using Chloe.InternalExtensions;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using Chloe.Core;
-using Chloe.InternalExtensions;
 
 namespace Chloe.Infrastructure
 {
     public static class MappingTypeSystem
     {
-        static readonly object _lockObj = new object();
+        private static readonly object _lockObj = new object();
 
-        static readonly Dictionary<Type, MappingTypeInfo> _defaultTypeInfos;
-        static readonly Dictionary<Type, MappingTypeInfo> _typeInfos;
+        private static readonly Dictionary<Type, MappingTypeInfo> _defaultTypeInfos;
+        private static readonly Dictionary<Type, MappingTypeInfo> _typeInfos;
 
         static MappingTypeSystem()
         {
@@ -39,7 +39,7 @@ namespace Chloe.Infrastructure
             _defaultTypeInfos = Utils.Clone(defaultTypeInfos);
         }
 
-        static void SetItem(Dictionary<Type, MappingTypeInfo> map, Type type, DbType mapDbType, IDbValueConverter dbValueConverter = null)
+        private static void SetItem(Dictionary<Type, MappingTypeInfo> map, Type type, DbType mapDbType, IDbValueConverter dbValueConverter = null)
         {
             map[type] = new MappingTypeInfo(type, mapDbType, dbValueConverter);
         }
@@ -60,6 +60,7 @@ namespace Chloe.Infrastructure
                 SetItem(_typeInfos, type, dbTypeToMap, dbValueConverter);
             }
         }
+
         public static void Configure(Type type, DbType dbTypeToMap, Func<object, object> dbValueConverter = null)
         {
             Configure(type, dbTypeToMap, dbValueConverter == null ? null : new DbValueConverter(dbValueConverter));
@@ -80,6 +81,7 @@ namespace Chloe.Infrastructure
 
             return null;
         }
+
         public static bool IsMappingType(Type type)
         {
             Type underlyingType = type.GetUnderlyingType();
@@ -88,6 +90,7 @@ namespace Chloe.Infrastructure
 
             return _typeInfos.ContainsKey(underlyingType);
         }
+
         public static bool IsMappingType(Type type, out MappingTypeInfo mappingTypeInfo)
         {
             Type underlyingType = type.GetUnderlyingType();
@@ -106,18 +109,21 @@ namespace Chloe.Infrastructure
             this.MapDbType = mapDbType;
             this.DbValueConverter = dbValueConverter;
         }
+
         public Type Type { get; private set; }
         public DbType MapDbType { get; private set; }
         public IDbValueConverter DbValueConverter { get; private set; }
     }
 
-    class DbValueConverter : IDbValueConverter
+    internal class DbValueConverter : IDbValueConverter
     {
-        Func<object, object> _dbValueConverter;
+        private Func<object, object> _dbValueConverter;
+
         public DbValueConverter(Func<object, object> dbValueConverter)
         {
             this._dbValueConverter = dbValueConverter;
         }
+
         public object Convert(object readerValue)
         {
             return this._dbValueConverter(readerValue);

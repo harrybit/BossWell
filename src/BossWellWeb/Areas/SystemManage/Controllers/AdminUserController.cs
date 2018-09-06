@@ -1,7 +1,7 @@
 ﻿using BossWellApp;
 using BossWellModel;
-using System.Web.Mvc;
 using BossWellModel.BossWellModel;
+using System.Web.Mvc;
 
 namespace BossWellWeb.Areas.SystemManage.Controllers
 {
@@ -31,6 +31,7 @@ namespace BossWellWeb.Areas.SystemManage.Controllers
             adminUserAPP.SubmitForm(entity, sid);
             return Success("保存成功。");
         }
+
         [HttpPost]
         [HandlerAuthorize]
         [HandlerAjaxOnly]
@@ -76,6 +77,5 @@ namespace BossWellWeb.Areas.SystemManage.Controllers
             adminUserAPP.DisEnableAccount(true, sid);
             return Success("账户启用成功。");
         }
-
     }
 }

@@ -15,8 +15,8 @@ namespace Chloe.Query.Internals
       : System.Dynamic.IDynamicMetaObjectProvider
       , IDictionary<string, object>
     {
-        readonly DapperTable table;
-        object[] values;
+        private readonly DapperTable table;
+        private object[] values;
 
         public DapperRow(DapperTable table, object[] values)
         {
@@ -25,11 +25,16 @@ namespace Chloe.Query.Internals
             this.table = table;
             this.values = values;
         }
+
         private sealed class DeadValue
         {
             public static readonly DeadValue Default = new DeadValue();
-            private DeadValue() { }
+
+            private DeadValue()
+            {
+            }
         }
+
         int ICollection<KeyValuePair<string, object>>.Count
         {
             get
@@ -151,7 +156,7 @@ namespace Chloe.Query.Internals
             get { return false; }
         }
 
-        #endregion
+        #endregion Implementation of ICollection<KeyValuePair<string,object>>
 
         #region Implementation of IDictionary<string,object>
 
@@ -185,6 +190,7 @@ namespace Chloe.Query.Internals
         {
             return SetValue(key, value, false);
         }
+
         private object SetValue(string key, object value, bool isAdd)
         {
             if (key == null) throw new ArgumentNullException("key");
@@ -222,6 +228,6 @@ namespace Chloe.Query.Internals
             get { return this.Select(kv => kv.Value).ToArray(); }
         }
 
-        #endregion
+        #endregion Implementation of IDictionary<string,object>
     }
 }

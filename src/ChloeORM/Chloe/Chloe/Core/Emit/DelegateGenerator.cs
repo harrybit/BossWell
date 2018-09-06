@@ -5,11 +5,9 @@ using Chloe.Mapper;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Text;
 
 namespace Chloe.Core.Emit
 {
@@ -35,6 +33,7 @@ namespace Chloe.Core.Emit
 
             return del;
         }
+
         public static Action<object, IDataReader, int> CreateSetValueFromReaderDelegate1(MemberInfo member)
         {
             Action<object, IDataReader, int> del = null;
@@ -102,6 +101,7 @@ namespace Chloe.Core.Emit
 
             return ret;
         }
+
         public static Func<IDataReader, int, object> CreateMappingTypeGenerator(Type type)
         {
             var pExp_reader = Expression.Parameter(typeof(IDataReader), "reader");
@@ -128,6 +128,7 @@ namespace Chloe.Core.Emit
 
             throw new ArgumentException();
         }
+
         public static Action<object, object> CreateValueSetter(PropertyInfo propertyInfo)
         {
             var p = Expression.Parameter(typeof(object), "instance");
@@ -145,6 +146,7 @@ namespace Chloe.Core.Emit
 
             return ret;
         }
+
         public static Action<object, object> CreateValueSetter(FieldInfo fieldInfo)
         {
             var p = Expression.Parameter(typeof(object), "instance");
@@ -162,6 +164,7 @@ namespace Chloe.Core.Emit
 
             return ret;
         }
+
         public static Func<object, object> CreateValueGetter(MemberInfo propertyOrField)
         {
             var p = Expression.Parameter(typeof(object), "a");

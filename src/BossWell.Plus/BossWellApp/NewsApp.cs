@@ -1,17 +1,19 @@
-﻿using BossWellModel;
-using BossWellModel.Base;
-using IBossWellService;
-using BossWellFactory;
-using BossWellModel.BossWellModel;
-using System.Collections.Generic;
-using ApiHelp;
+﻿using ApiHelp;
 using BossWellApp.Basic;
+using BossWellFactory;
+using BossWellModel;
+using BossWellModel.Base;
+using BossWellModel.BossWellModel;
+using IBossWellService;
+using System.Collections.Generic;
+
 namespace BossWellApp
 {
     public class NewsApp
     {
-        INewsService _service = PublicFactory.GetNewsService();
-        IComClassService _comService = SysAutoFactory.GetComClassService();
+        private INewsService _service = PublicFactory.GetNewsService();
+        private IComClassService _comService = SysAutoFactory.GetComClassService();
+
         public string GetGridJson(Pagination pagination, string keyword)
         {
             List<NewsEntity> list = GetPageList(pagination, keyword).Items;

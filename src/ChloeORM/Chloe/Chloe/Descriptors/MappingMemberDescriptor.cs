@@ -1,26 +1,26 @@
-﻿using Chloe.Core;
+﻿using Chloe.Core.Emit;
 using Chloe.DbExpressions;
 using Chloe.Entity;
-using System;
-using System.Data;
-using System.Reflection;
-using System.Linq;
-using System.Threading;
-using Chloe.Core.Emit;
 using Chloe.InternalExtensions;
+using System;
+using System.Linq;
+using System.Reflection;
+using System.Threading;
 
 namespace Chloe.Descriptors
 {
     public class MappingMemberDescriptor : MemberDescriptor
     {
-        Func<object, object> _valueGetter;
-        Action<object, object> _valueSetter;
+        private Func<object, object> _valueGetter;
+        private Action<object, object> _valueSetter;
+
         public MappingMemberDescriptor(MemberInfo memberInfo, TypeDescriptor declaringTypeDescriptor)
             : base(memberInfo, declaringTypeDescriptor)
         {
             this.Initialize();
         }
-        void Initialize()
+
+        private void Initialize()
         {
             ColumnAttribute columnFlag = (ColumnAttribute)this.MemberInfo.GetCustomAttributes(typeof(ColumnAttribute), true).FirstOrDefault();
             if (columnFlag == null)
@@ -60,6 +60,7 @@ namespace Chloe.Descriptors
 
             return this._valueGetter(instance);
         }
+
         public void SetValue(object instance, object value)
         {
             if (null == this._valueSetter)

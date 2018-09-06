@@ -6,8 +6,9 @@ namespace Chloe.DbExpressions
 {
     public class DbCaseWhenExpression : DbExpression
     {
-        ReadOnlyCollection<WhenThenExpressionPair> _whenThenPairs;
-        DbExpression _else;
+        private ReadOnlyCollection<WhenThenExpressionPair> _whenThenPairs;
+        private DbExpression _else;
+
         public DbCaseWhenExpression(Type type, IList<WhenThenExpressionPair> whenThenPairs, DbExpression @else)
             : base(DbExpressionType.CaseWhen, type)
         {
@@ -25,8 +26,9 @@ namespace Chloe.DbExpressions
 
         public struct WhenThenExpressionPair
         {
-            DbExpression _when;
-            DbExpression _then;
+            private DbExpression _when;
+            private DbExpression _then;
+
             public WhenThenExpressionPair(DbExpression when, DbExpression then)
             {
                 this._when = when;

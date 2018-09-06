@@ -1,17 +1,18 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Mail;
+using System.Net.NetworkInformation;
 using System.Runtime.Serialization.Json;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Security;
-using Newtonsoft.Json.Linq;
-using System.Web;
 using System.Xml.Serialization;
-using System.Net.NetworkInformation;
+
 namespace ApiHelp
 {
     /// <summary>
@@ -84,7 +85,7 @@ namespace ApiHelp
             return defaultValue;
         }
 
-        #endregion
+        #endregion Json序列化操作
 
         #region XML序列化操作
 
@@ -102,7 +103,6 @@ namespace ApiHelp
             {
                 //序列化对象
                 xmlSerial.Serialize(Stream, obj);
-
             }
             catch (InvalidOperationException)
             {
@@ -136,7 +136,6 @@ namespace ApiHelp
             }
             catch (Exception e)
             {
-
                 return null;
             }
         }
@@ -153,11 +152,12 @@ namespace ApiHelp
             return xmlSerial.Deserialize(stream);
         }
 
-        #endregion
+        #endregion XML序列化操作
 
         #region 加密算法
 
         #region 不可逆加密
+
         /// <summary>
         /// 加密字符串
         /// </summary>
@@ -203,9 +203,10 @@ namespace ApiHelp
             return output;
         }
 
-        #endregion
+        #endregion 不可逆加密
 
         #region 可逆加密
+
         /// <summary>
         /// 加密
         /// </summary>
@@ -229,6 +230,7 @@ namespace ApiHelp
             sw.Flush();
             return Convert.ToBase64String(ms.GetBuffer(), 0, (int)ms.Length);
         }
+
         /// <summary>
         /// 解密
         /// </summary>
@@ -257,10 +259,9 @@ namespace ApiHelp
             return sr.ReadToEnd();
         }
 
+        #endregion 可逆加密
 
-        #endregion
-
-        #endregion
+        #endregion 加密算法
 
         #region 字符串操作
 
@@ -287,6 +288,27 @@ namespace ApiHelp
                 newRandom.Append(constant[rd.Next(charLength)]);
             }
             return newRandom.ToString();
+        }
+
+        /// <summary>
+        /// 生成随机数(最大32位)
+        /// </summary>
+        public static string CreateRandomString(int count, string firstStr = "")
+        {
+            StringBuilder textBuilder = new StringBuilder();
+            string guidStr = Guid.NewGuid().ToString("N");
+
+            if (count < 32)
+            {
+                guidStr = guidStr.Substring(0, count);
+            }
+
+            if (!string.IsNullOrEmpty(firstStr))
+            {
+                textBuilder.Append(firstStr);
+            }
+            textBuilder.Append(guidStr);
+            return textBuilder.ToString();
         }
 
         /// <summary>
@@ -342,7 +364,7 @@ namespace ApiHelp
             return strOutput;
         }
 
-        #endregion
+        #endregion 字符串操作
 
         #region 经纬度计算
 
@@ -365,12 +387,12 @@ namespace ApiHelp
 
             if (way)
             {
-                if (radLat1 < 0) radLat1 = Math.PI / 2 + Math.Abs(radLat1);// south   
-                if (radLat1 > 0) radLat1 = Math.PI / 2 - Math.Abs(radLat1);// north  
-                if (radLon1 < 0) radLon1 = Math.PI * 2 - Math.Abs(radLon1);// west  
-                if (radLat2 < 0) radLat2 = Math.PI / 2 + Math.Abs(radLat2);// south  
-                if (radLat2 > 0) radLat2 = Math.PI / 2 - Math.Abs(radLat2);// north  
-                if (radLon2 < 0) radLon2 = Math.PI * 2 - Math.Abs(radLon2);// west  
+                if (radLat1 < 0) radLat1 = Math.PI / 2 + Math.Abs(radLat1);// south
+                if (radLat1 > 0) radLat1 = Math.PI / 2 - Math.Abs(radLat1);// north
+                if (radLon1 < 0) radLon1 = Math.PI * 2 - Math.Abs(radLon1);// west
+                if (radLat2 < 0) radLat2 = Math.PI / 2 + Math.Abs(radLat2);// south
+                if (radLat2 > 0) radLat2 = Math.PI / 2 - Math.Abs(radLat2);// north
+                if (radLon2 < 0) radLon2 = Math.PI * 2 - Math.Abs(radLon2);// west
                 double x1 = EARTH_RADIUS * Math.Cos(radLon1) * Math.Sin(radLat1);
                 double y1 = EARTH_RADIUS * Math.Sin(radLon1) * Math.Sin(radLat1);
                 double z1 = EARTH_RADIUS * Math.Cos(radLat1);
@@ -378,7 +400,7 @@ namespace ApiHelp
                 double y2 = EARTH_RADIUS * Math.Sin(radLon2) * Math.Sin(radLat2);
                 double z2 = EARTH_RADIUS * Math.Cos(radLat2);
                 double d = Math.Sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2) + (z1 - z2) * (z1 - z2));
-                //余弦定理求夹角  
+                //余弦定理求夹角
                 double theta = Math.Acos((EARTH_RADIUS * EARTH_RADIUS + EARTH_RADIUS * EARTH_RADIUS - d * d) / (2 * EARTH_RADIUS * EARTH_RADIUS));
                 double dist = theta * EARTH_RADIUS;
                 return dist;
@@ -402,7 +424,7 @@ namespace ApiHelp
         /// <returns></returns>
         public static double Rad(double d) { return d * Math.PI / 180.0; }
 
-        #endregion
+        #endregion 经纬度计算
 
         #region 邮件发送代理
 
@@ -420,7 +442,7 @@ namespace ApiHelp
             {
                 SmtpClient sc = new SmtpClient();
                 sc.Host = "smtp.qq.com";//smtp服务器地址
-                sc.Port = 25;//默认端口为25 
+                sc.Port = 25;//默认端口为25
                 sc.UseDefaultCredentials = true;
                 sc.EnableSsl = true;
                 //发送人账号、授权密码
@@ -430,8 +452,8 @@ namespace ApiHelp
                 message.From = mf;
                 message.Subject = Subject;//标题
                 message.Body = Body;//内容
-                message.IsBodyHtml = true;           //是否为html格式 
-                message.Priority = MailPriority.High;  //发送邮件的优先等级 
+                message.IsBodyHtml = true;           //是否为html格式
+                message.Priority = MailPriority.High;  //发送邮件的优先等级
                 //多个发送人
                 for (int i = 0; i < MTo.Length; i++)
                 {
@@ -456,7 +478,7 @@ namespace ApiHelp
             return true;
         }
 
-        #endregion
+        #endregion 邮件发送代理
 
         #region 时间操作
 
@@ -472,7 +494,7 @@ namespace ApiHelp
             return timeStamp.ToString();
         }
 
-        #endregion
+        #endregion 时间操作
 
         #region 基础功能
 
@@ -573,9 +595,10 @@ namespace ApiHelp
             }
         }
 
-        #endregion
+        #endregion 基础功能
 
         #region Cookie操作
+
         /// <summary>
         /// 写cookie值
         /// </summary>
@@ -591,6 +614,7 @@ namespace ApiHelp
             cookie.Value = strValue;
             HttpContext.Current.Response.AppendCookie(cookie);
         }
+
         /// <summary>
         /// 写cookie值
         /// </summary>
@@ -608,6 +632,7 @@ namespace ApiHelp
             cookie.Expires = DateTime.Now.AddMinutes(expires);
             HttpContext.Current.Response.AppendCookie(cookie);
         }
+
         /// <summary>
         /// 读cookie值
         /// </summary>
@@ -626,6 +651,7 @@ namespace ApiHelp
 
             return "";
         }
+
         /// <summary>
         /// 删除Cookie对象
         /// </summary>
@@ -636,9 +662,11 @@ namespace ApiHelp
             objCookie.Expires = DateTime.Now.AddYears(-5);
             HttpContext.Current.Response.Cookies.Add(objCookie);
         }
-        #endregion
+
+        #endregion Cookie操作
 
         #region Session操作
+
         /// <summary>
         /// 写Session
         /// </summary>
@@ -665,13 +693,14 @@ namespace ApiHelp
         /// <summary>
         /// 读取Session的值
         /// </summary>
-        /// <param name="key">Session的键名</param>        
+        /// <param name="key">Session的键名</param>
         public static string GetSession(string key)
         {
             if (string.IsNullOrEmpty(key))
                 return string.Empty;
             return HttpContext.Current.Session[key] as string;
         }
+
         /// <summary>
         /// 删除指定Session
         /// </summary>
@@ -683,7 +712,6 @@ namespace ApiHelp
             HttpContext.Current.Session.Contents.Remove(key);
         }
 
-        #endregion
-
+        #endregion Session操作
     }
 }

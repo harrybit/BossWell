@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Chloe.DbExpressions
+﻿namespace Chloe.DbExpressions
 {
     public class DbExistsExpression : DbExpression
     {
-        DbSqlQueryExpression _sqlQuery;
+        private DbSqlQueryExpression _sqlQuery;
 
         public DbExistsExpression(DbSqlQueryExpression sqlQuery)
             : base(DbExpressionType.Exists, UtilConstants.TypeOfBoolean)

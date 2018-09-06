@@ -1,12 +1,11 @@
-﻿
-using BossWellORM;
-using IBossWellService;
-using BossWellModel;
+﻿using BossWellModel;
 using BossWellModel.Base;
-using System.Collections.Generic;
-using Chloe;
 using BossWellModel.Enum;
+using BossWellORM;
+using Chloe;
+using IBossWellService;
 using System;
+using System.Collections.Generic;
 
 namespace BossWellService
 {
@@ -16,22 +15,27 @@ namespace BossWellService
         {
             return Query(request);
         }
+
         public ModuleEntity GetFormData(string sid)
         {
             return context.Query<ModuleEntity>().Where(t => t.Sid.Equals(sid)).FirstOrDefault();
         }
+
         public int GetChildCount(string parentId)
         {
             return context.Query<ModuleEntity>().Where(t => t.ParentId.Equals(parentId)).Count();
         }
+
         public List<string> GetChildNodeList(string parentId)
         {
             return context.Query<ModuleEntity>().Where(t => t.ParentId.Equals(parentId)).Select(t => t.Sid).ToList();
         }
+
         public ModuleEntity SaveModel(ModuleEntity saveEntity)
         {
             return Save<ModuleEntity>(saveEntity, "module_");
         }
+
         public int DeleteForm(List<string> idList)
         {
             int dltCount = 0;
@@ -42,6 +46,7 @@ namespace BossWellService
             context.Session.CommitTransaction();
             return dltCount;
         }
+
         public List<ModuleEntity> GetModuleMenuByRole(string roleId)
         {
             List<ModuleEntity> list = new List<ModuleEntity>();
@@ -51,14 +56,13 @@ namespace BossWellService
                     JoinType.InnerJoin,auth.ModuleId.Equals(module.Sid)
                 }).Where((auth, module) => auth.ModulType == RoleAuthorizeModuleEnum.模块 && auth.RoleId.Equals(roleId))
                 .Select((auth, module) => module).OrderBy(t => t.Sort).ToList();
-
             }
             catch (Exception ex)
             {
-
             }
             return list;
         }
+
         public List<ModuleButtonEntity> GetModuleButtonByRole(string roleId)
         {
             List<ModuleButtonEntity> list = new List<ModuleButtonEntity>();
@@ -68,14 +72,11 @@ namespace BossWellService
                     JoinType.InnerJoin,auth.ModuleId.Equals(module.Sid)
                 }).Where((auth, module) => auth.ModulType == RoleAuthorizeModuleEnum.按钮 && auth.RoleId.Equals(roleId))
                 .Select((auth, module) => module).OrderBy(t => t.Sort).ToList();
-
             }
             catch (Exception ex)
             {
-
             }
             return list;
         }
-
     }
 }

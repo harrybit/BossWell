@@ -1,9 +1,5 @@
-﻿using Chloe.Core;
-using Chloe.Core.Visitors;
-using Chloe.DbExpressions;
+﻿using Chloe.DbExpressions;
 using Chloe.Descriptors;
-using Chloe.Entity;
-using Chloe.Exceptions;
 using Chloe.Infrastructure;
 using Chloe.InternalExtensions;
 using System;
@@ -11,7 +7,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 
@@ -19,7 +14,8 @@ namespace Chloe.SqlServer
 {
     public class MsSqlContext : DbContext
     {
-        DbContextServiceProvider _dbContextServiceProvider;
+        private DbContextServiceProvider _dbContextServiceProvider;
+
         public MsSqlContext(string connString)
             : this(new DefaultDbConnectionFactory(connString))
         {
@@ -33,7 +29,7 @@ namespace Chloe.SqlServer
             this._dbContextServiceProvider = new DbContextServiceProvider(dbConnectionFactory, this);
         }
 
-        static Dictionary<string, SysType> SysTypes;
+        private static Dictionary<string, SysType> SysTypes;
 
         static MsSqlContext()
         {
@@ -80,17 +76,17 @@ namespace Chloe.SqlServer
         /// 分页模式。
         /// </summary>
         public PagingMode PagingMode { get; set; }
+
         public override IDbContextServiceProvider DbContextServiceProvider
         {
             get { return this._dbContextServiceProvider; }
         }
 
-
         public override void InsertRange<TEntity>(List<TEntity> entities, bool keepIdentity = false)
         {
             /*
              * 将 entities 分批插入数据库
-             * 每批生成 insert into TableName(...) values(...),(...)... 
+             * 每批生成 insert into TableName(...) values(...),(...)...
              * 该方法相对循环一条一条插入，速度提升 2/3 这样
              */
 
@@ -282,7 +278,7 @@ namespace Chloe.SqlServer
             }
         }
 
-        DataTable ToSqlBulkCopyDataTable<TModel>(List<TModel> modelList, TypeDescriptor typeDescriptor)
+        private DataTable ToSqlBulkCopyDataTable<TModel>(List<TModel> modelList, TypeDescriptor typeDescriptor)
         {
             DataTable dt = new DataTable();
 
@@ -351,7 +347,8 @@ namespace Chloe.SqlServer
 
             return dt;
         }
-        List<SysColumn> GetTableColumns(string tableName)
+
+        private List<SysColumn> GetTableColumns(string tableName)
         {
             string sql = "select syscolumns.name,syscolumns.colorder,syscolumns.isnullable,systypes.xusertype,systypes.name as typename from syscolumns inner join systypes on syscolumns.xusertype=systypes.xusertype inner join sysobjects on syscolumns.id = sysobjects.id where sysobjects.xtype = 'U' and sysobjects.name = @TableName order by syscolumns.colid asc";
 
@@ -377,7 +374,7 @@ namespace Chloe.SqlServer
             return columns;
         }
 
-        static SysType GetSysTypeByTypeName(string typeName)
+        private static SysType GetSysTypeByTypeName(string typeName)
         {
             SysType sysType;
             if (SysTypes.TryGetValue(typeName, out sysType))
@@ -387,7 +384,8 @@ namespace Chloe.SqlServer
 
             throw new NotSupportedException(string.Format("Does not Support systype '{0}'", typeName));
         }
-        static T GetValue<T>(IDataReader reader, string name)
+
+        private static T GetValue<T>(IDataReader reader, string name)
         {
             object val = reader.GetValue(reader.GetOrdinal(name));
             if (val == DBNull.Value)
@@ -398,7 +396,8 @@ namespace Chloe.SqlServer
 
             return (T)Convert.ChangeType(val, typeof(T).GetUnderlyingType());
         }
-        static string AppendInsertRangeSqlTemplate(TypeDescriptor typeDescriptor, List<MappingMemberDescriptor> mappingMemberDescriptors)
+
+        private static string AppendInsertRangeSqlTemplate(TypeDescriptor typeDescriptor, List<MappingMemberDescriptor> mappingMemberDescriptors)
         {
             StringBuilder sqlBuilder = new StringBuilder();
 
@@ -419,7 +418,8 @@ namespace Chloe.SqlServer
             string sqlTemplate = sqlBuilder.ToString();
             return sqlTemplate;
         }
-        static string AppendTableName(DbTable table)
+
+        private static string AppendTableName(DbTable table)
         {
             if (string.IsNullOrEmpty(table.Schema))
                 return Utils.QuoteName(table.Name);
@@ -427,7 +427,7 @@ namespace Chloe.SqlServer
             return string.Format("{0}.{1}", Utils.QuoteName(table.Schema), Utils.QuoteName(table.Name));
         }
 
-        class SysType<TCSharpType> : SysType
+        private class SysType<TCSharpType> : SysType
         {
             public SysType(string typeName)
             {
@@ -436,30 +436,35 @@ namespace Chloe.SqlServer
                 this.DefaultValue = default(TCSharpType);
             }
         }
-        class SysType
+
+        private class SysType
         {
             public string TypeName { get; set; }
             public Type CSharpType { get; set; }
             public object DefaultValue { get; set; }
         }
-        class SysColumn
+
+        private class SysColumn
         {
             public string Name { get; set; }
             public int ColOrder { get; set; }
             public int XUserType { get; set; }
             public string TypeName { get; set; }
             public bool IsNullable { get; set; }
+
             public override string ToString()
             {
                 return this.Name;
             }
         }
-        class ColumnMapping
+
+        private class ColumnMapping
         {
             public ColumnMapping(SysColumn column)
             {
                 this.Column = column;
             }
+
             public SysColumn Column { get; set; }
             public MemberInfo MapMember { get; set; }
             public object DefaultValue { get; set; }

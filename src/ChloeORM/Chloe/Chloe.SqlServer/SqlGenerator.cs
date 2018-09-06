@@ -1,30 +1,26 @@
-﻿using Chloe.Core;
-using Chloe.DbExpressions;
+﻿using Chloe.DbExpressions;
 using Chloe.InternalExtensions;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace Chloe.SqlServer
 {
     partial class SqlGenerator : DbExpressionVisitor<DbExpression>
     {
         internal ISqlBuilder _sqlBuilder = new SqlBuilder();
-        DbParamCollection _parameters = new DbParamCollection();
+        private DbParamCollection _parameters = new DbParamCollection();
 
-        DbValueExpressionVisitor _valueExpressionVisitor;
+        private DbValueExpressionVisitor _valueExpressionVisitor;
 
-        static readonly Dictionary<string, Action<DbMethodCallExpression, SqlGenerator>> MethodHandlers = InitMethodHandlers();
-        static readonly Dictionary<string, Action<DbAggregateExpression, SqlGenerator>> AggregateHandlers = InitAggregateHandlers();
-        static readonly Dictionary<MethodInfo, Action<DbBinaryExpression, SqlGenerator>> BinaryWithMethodHandlers = InitBinaryWithMethodHandlers();
-        static readonly Dictionary<Type, string> CastTypeMap;
-        static readonly Dictionary<Type, Type> NumericTypes;
-        static readonly List<string> CacheParameterNames;
+        private static readonly Dictionary<string, Action<DbMethodCallExpression, SqlGenerator>> MethodHandlers = InitMethodHandlers();
+        private static readonly Dictionary<string, Action<DbAggregateExpression, SqlGenerator>> AggregateHandlers = InitAggregateHandlers();
+        private static readonly Dictionary<MethodInfo, Action<DbBinaryExpression, SqlGenerator>> BinaryWithMethodHandlers = InitBinaryWithMethodHandlers();
+        private static readonly Dictionary<Type, string> CastTypeMap;
+        private static readonly Dictionary<Type, Type> NumericTypes;
+        private static readonly List<string> CacheParameterNames;
 
         public static readonly ReadOnlyCollection<DbExpressionType> SafeDbExpressionTypes;
 
@@ -37,7 +33,6 @@ namespace Chloe.SqlServer
             safeDbExpressionTypes.Add(DbExpressionType.Parameter);
             safeDbExpressionTypes.Add(DbExpressionType.Convert);
             SafeDbExpressionTypes = safeDbExpressionTypes.AsReadOnly();
-
 
             Dictionary<Type, string> castTypeMap = new Dictionary<Type, string>();
             castTypeMap.Add(typeof(string), "NVARCHAR(MAX)");
@@ -53,7 +48,6 @@ namespace Chloe.SqlServer
             castTypeMap.Add(typeof(Guid), "UNIQUEIDENTIFIER");
             CastTypeMap = Utils.Clone(castTypeMap);
 
-
             Dictionary<Type, Type> numericTypes = new Dictionary<Type, Type>();
             numericTypes.Add(typeof(byte), typeof(byte));
             numericTypes.Add(typeof(sbyte), typeof(sbyte));
@@ -68,7 +62,6 @@ namespace Chloe.SqlServer
             numericTypes.Add(typeof(decimal), typeof(decimal));
             NumericTypes = Utils.Clone(numericTypes);
 
-
             int cacheParameterNameCount = 2 * 12;
             List<string> cacheParameterNames = new List<string>(cacheParameterNameCount);
             for (int i = 0; i < cacheParameterNameCount; i++)
@@ -82,7 +75,7 @@ namespace Chloe.SqlServer
         public ISqlBuilder SqlBuilder { get { return this._sqlBuilder; } }
         public List<DbParam> Parameters { get { return this._parameters.ToParameterList(); } }
 
-        DbValueExpressionVisitor ValueExpressionVisitor
+        private DbValueExpressionVisitor ValueExpressionVisitor
         {
             get
             {
@@ -121,7 +114,6 @@ namespace Chloe.SqlServer
                 return exp;
             }
 
-
             /*
              * a.Name == a.XName --> a.Name == a.XName or (a.Name is null and a.XName is null)
              */
@@ -142,6 +134,7 @@ namespace Chloe.SqlServer
 
             return exp;
         }
+
         public override DbExpression Visit(DbNotEqualExpression exp)
         {
             DbExpression left = exp.Left;
@@ -206,7 +199,6 @@ namespace Chloe.SqlServer
                 return exp;
             }
 
-
             /*
              * a.Name != a.XName --> a.Name <> a.XName or (a.Name is null and a.XName is not null) or (a.Name is not null and a.XName is null)
              * ## a.Name != a.XName 不能翻译成：not (a.Name == a.XName or (a.Name is null and a.XName is null))，因为数据库里的 not 有时候并非真正意义上的“取反”！
@@ -259,6 +251,7 @@ namespace Chloe.SqlServer
 
             return exp;
         }
+
         public override DbExpression Visit(DbAndExpression exp)
         {
             Stack<DbExpression> operands = GatherBinaryExpressionOperand(exp);
@@ -266,6 +259,7 @@ namespace Chloe.SqlServer
 
             return exp;
         }
+
         public override DbExpression Visit(DbBitOrExpression exp)
         {
             Stack<DbExpression> operands = GatherBinaryExpressionOperand(exp);
@@ -273,6 +267,7 @@ namespace Chloe.SqlServer
 
             return exp;
         }
+
         public override DbExpression Visit(DbOrExpression exp)
         {
             Stack<DbExpression> operands = GatherBinaryExpressionOperand(exp);
@@ -300,6 +295,7 @@ namespace Chloe.SqlServer
 
             return exp;
         }
+
         // -
         public override DbExpression Visit(DbSubtractExpression exp)
         {
@@ -308,6 +304,7 @@ namespace Chloe.SqlServer
 
             return exp;
         }
+
         // *
         public override DbExpression Visit(DbMultiplyExpression exp)
         {
@@ -316,6 +313,7 @@ namespace Chloe.SqlServer
 
             return exp;
         }
+
         // /
         public override DbExpression Visit(DbDivideExpression exp)
         {
@@ -324,6 +322,7 @@ namespace Chloe.SqlServer
 
             return exp;
         }
+
         // %
         public override DbExpression Visit(DbModuloExpression exp)
         {
@@ -332,6 +331,7 @@ namespace Chloe.SqlServer
 
             return exp;
         }
+
         public override DbExpression Visit(DbNegateExpression exp)
         {
             this._sqlBuilder.Append("(");
@@ -342,6 +342,7 @@ namespace Chloe.SqlServer
             this._sqlBuilder.Append(")");
             return exp;
         }
+
         // <
         public override DbExpression Visit(DbLessThanExpression exp)
         {
@@ -351,6 +352,7 @@ namespace Chloe.SqlServer
 
             return exp;
         }
+
         // <=
         public override DbExpression Visit(DbLessThanOrEqualExpression exp)
         {
@@ -360,6 +362,7 @@ namespace Chloe.SqlServer
 
             return exp;
         }
+
         // >
         public override DbExpression Visit(DbGreaterThanExpression exp)
         {
@@ -369,6 +372,7 @@ namespace Chloe.SqlServer
 
             return exp;
         }
+
         // >=
         public override DbExpression Visit(DbGreaterThanOrEqualExpression exp)
         {
@@ -378,7 +382,6 @@ namespace Chloe.SqlServer
 
             return exp;
         }
-
 
         public override DbExpression Visit(DbAggregateExpression exp)
         {
@@ -392,7 +395,6 @@ namespace Chloe.SqlServer
             return exp;
         }
 
-
         public override DbExpression Visit(DbTableExpression exp)
         {
             if (exp.Table.Schema != null)
@@ -405,6 +407,7 @@ namespace Chloe.SqlServer
 
             return exp;
         }
+
         public override DbExpression Visit(DbColumnAccessExpression exp)
         {
             this.QuoteName(exp.Table.Name);
@@ -413,6 +416,7 @@ namespace Chloe.SqlServer
 
             return exp;
         }
+
         public override DbExpression Visit(DbFromTableExpression exp)
         {
             this.AppendTableSegment(exp.Table);
@@ -420,6 +424,7 @@ namespace Chloe.SqlServer
 
             return exp;
         }
+
         public override DbExpression Visit(DbJoinTableExpression exp)
         {
             DbJoinTableExpression joinTablePart = exp;
@@ -453,7 +458,6 @@ namespace Chloe.SqlServer
             return exp;
         }
 
-
         public override DbExpression Visit(DbSubQueryExpression exp)
         {
             this._sqlBuilder.Append("(");
@@ -462,6 +466,7 @@ namespace Chloe.SqlServer
 
             return exp;
         }
+
         public override DbExpression Visit(DbSqlQueryExpression exp)
         {
             if (exp.SkipCount != null)
@@ -478,6 +483,7 @@ namespace Chloe.SqlServer
 
             throw new NotImplementedException();
         }
+
         public override DbExpression Visit(DbInsertExpression exp)
         {
             this._sqlBuilder.Append("INSERT INTO ");
@@ -519,6 +525,7 @@ namespace Chloe.SqlServer
 
             return exp;
         }
+
         public override DbExpression Visit(DbUpdateExpression exp)
         {
             this._sqlBuilder.Append("UPDATE ");
@@ -545,6 +552,7 @@ namespace Chloe.SqlServer
 
             return exp;
         }
+
         public override DbExpression Visit(DbDeleteExpression exp)
         {
             this._sqlBuilder.Append("DELETE ");
@@ -587,13 +595,14 @@ namespace Chloe.SqlServer
 
             return exp;
         }
-        // then 部分必须返回 C# type，所以得判断是否是诸如 a>1,a=b,in,like 等等的情况，如果是则将其构建成一个 case when 
+
+        // then 部分必须返回 C# type，所以得判断是否是诸如 a>1,a=b,in,like 等等的情况，如果是则将其构建成一个 case when
         public override DbExpression Visit(DbCaseWhenExpression exp)
         {
             this._sqlBuilder.Append("CASE");
             foreach (var whenThen in exp.WhenThenPairs)
             {
-                // then 部分得判断是否是诸如 a>1,a=b,in,like 等等的情况，如果是则将其构建成一个 case when 
+                // then 部分得判断是否是诸如 a>1,a=b,in,like 等等的情况，如果是则将其构建成一个 case when
                 this._sqlBuilder.Append(" WHEN ");
                 whenThen.When.Accept(this);
                 this._sqlBuilder.Append(" THEN ");
@@ -606,6 +615,7 @@ namespace Chloe.SqlServer
 
             return exp;
         }
+
         public override DbExpression Visit(DbConvertExpression exp)
         {
             DbExpression stripedExp = DbExpressionExtension.StripInvalidConvert(exp);
@@ -629,7 +639,6 @@ namespace Chloe.SqlServer
             return exp;
         }
 
-
         public override DbExpression Visit(DbMethodCallExpression exp)
         {
             Action<DbMethodCallExpression, SqlGenerator> methodHandler;
@@ -641,6 +650,7 @@ namespace Chloe.SqlServer
             methodHandler(exp, this);
             return exp;
         }
+
         public override DbExpression Visit(DbMemberExpression exp)
         {
             MemberInfo member = exp.Member;
@@ -677,7 +687,6 @@ namespace Chloe.SqlServer
                 }
             }
 
-
             DbParameterExpression newExp;
             if (DbExpressionExtension.TryConvertToParameterExpression(exp, out newExp))
             {
@@ -700,6 +709,7 @@ namespace Chloe.SqlServer
 
             throw new NotSupportedException(string.Format("'{0}.{1}' is not supported.", member.DeclaringType.FullName, member.Name));
         }
+
         public override DbExpression Visit(DbConstantExpression exp)
         {
             if (exp.Value == null || exp.Value == DBNull.Value)
@@ -735,6 +745,7 @@ namespace Chloe.SqlServer
 
             return exp;
         }
+
         public override DbExpression Visit(DbParameterExpression exp)
         {
             object paramValue = exp.Value;
@@ -777,20 +788,21 @@ namespace Chloe.SqlServer
             return exp;
         }
 
-
-        void AppendTableSegment(DbTableSegment seg)
+        private void AppendTableSegment(DbTableSegment seg)
         {
             seg.Body.Accept(this);
             this._sqlBuilder.Append(" AS ");
             this.QuoteName(seg.Alias);
         }
+
         internal void AppendColumnSegment(DbColumnSegment seg)
         {
             seg.Body.Accept(this.ValueExpressionVisitor);
             this._sqlBuilder.Append(" AS ");
             this.QuoteName(seg.Alias);
         }
-        void AppendOrdering(DbOrdering ordering)
+
+        private void AppendOrdering(DbOrdering ordering)
         {
             if (ordering.OrderType == DbOrderType.Asc)
             {
@@ -808,14 +820,15 @@ namespace Chloe.SqlServer
             throw new NotSupportedException("OrderType: " + ordering.OrderType);
         }
 
-        void VisitDbJoinTableExpressions(List<DbJoinTableExpression> tables)
+        private void VisitDbJoinTableExpressions(List<DbJoinTableExpression> tables)
         {
             foreach (var table in tables)
             {
                 table.Accept(this);
             }
         }
-        void BuildGeneralSql(DbSqlQueryExpression exp)
+
+        private void BuildGeneralSql(DbSqlQueryExpression exp)
         {
             this._sqlBuilder.Append("SELECT ");
 
@@ -840,6 +853,7 @@ namespace Chloe.SqlServer
             this.BuildGroupState(exp);
             this.BuildOrderState(exp.Orderings);
         }
+
         protected virtual void BuildLimitSql(DbSqlQueryExpression exp)
         {
             this._sqlBuilder.Append("SELECT ");
@@ -910,12 +924,12 @@ namespace Chloe.SqlServer
             this._sqlBuilder.Append(" > ");
             this._sqlBuilder.Append(exp.SkipCount.ToString());
         }
+
         protected void AppendDistinct(bool isDistinct)
         {
             if (isDistinct)
                 this._sqlBuilder.Append("DISTINCT ");
         }
-
 
         internal void BuildWhereState(DbExpression whereExpression)
         {
@@ -925,6 +939,7 @@ namespace Chloe.SqlServer
                 whereExpression.Accept(this);
             }
         }
+
         internal void BuildOrderState(List<DbOrdering> orderings)
         {
             if (orderings.Count > 0)
@@ -933,7 +948,8 @@ namespace Chloe.SqlServer
                 this.ConcatOrderings(orderings);
             }
         }
-        void ConcatOrderings(List<DbOrdering> orderings)
+
+        private void ConcatOrderings(List<DbOrdering> orderings)
         {
             for (int i = 0; i < orderings.Count; i++)
             {
@@ -945,6 +961,7 @@ namespace Chloe.SqlServer
                 this.AppendOrdering(orderings[i]);
             }
         }
+
         internal void BuildGroupState(DbSqlQueryExpression exp)
         {
             var groupSegments = exp.GroupSegments;
@@ -967,7 +984,7 @@ namespace Chloe.SqlServer
             }
         }
 
-        void ConcatOperands(IEnumerable<DbExpression> operands, string connector)
+        private void ConcatOperands(IEnumerable<DbExpression> operands, string connector)
         {
             this._sqlBuilder.Append("(");
 
@@ -986,7 +1003,7 @@ namespace Chloe.SqlServer
             return;
         }
 
-        void QuoteName(string name)
+        private void QuoteName(string name)
         {
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentException("name");
@@ -994,18 +1011,19 @@ namespace Chloe.SqlServer
             this._sqlBuilder.Append("[", name, "]");
         }
 
-        void BuildCastState(DbExpression castExp, string targetDbTypeString)
+        private void BuildCastState(DbExpression castExp, string targetDbTypeString)
         {
             this._sqlBuilder.Append("CAST(");
             castExp.Accept(this);
             this._sqlBuilder.Append(" AS ", targetDbTypeString, ")");
         }
-        void BuildCastState(object castObject, string targetDbTypeString)
+
+        private void BuildCastState(object castObject, string targetDbTypeString)
         {
             this._sqlBuilder.Append("CAST(", castObject, " AS ", targetDbTypeString, ")");
         }
 
-        bool IsDatePart(DbMemberExpression exp)
+        private bool IsDatePart(DbMemberExpression exp)
         {
             MemberInfo member = exp.Member;
 

@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Chloe.DbExpressions
+﻿namespace Chloe.DbExpressions
 {
     public class DbDeleteExpression : DbExpression
     {
-        DbTable _table;
-        DbExpression _condition;
+        private DbTable _table;
+        private DbExpression _condition;
+
         public DbDeleteExpression(DbTable table)
             : this(table, null)
         {
         }
+
         public DbDeleteExpression(DbTable table, DbExpression condition)
             : base(DbExpressionType.Delete, UtilConstants.TypeOfVoid)
         {

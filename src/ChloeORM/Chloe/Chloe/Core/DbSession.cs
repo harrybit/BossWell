@@ -1,15 +1,12 @@
 ﻿using Chloe.Infrastructure.Interception;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 
 namespace Chloe.Core
 {
-    class DbSession : IDbSession
+    internal class DbSession : IDbSession
     {
-        DbContext _dbContext;
+        private DbContext _dbContext;
+
         internal DbSession(DbContext dbContext)
         {
             this._dbContext = dbContext;
@@ -17,10 +14,12 @@ namespace Chloe.Core
 
         public IDbContext DbContext { get { return this._dbContext; } }
         public IDbConnection CurrentConnection { get { return this._dbContext.AdoSession.DbConnection; } }
+
         /// <summary>
         /// 如果未开启事务，则返回 null
         /// </summary>
         public IDbTransaction CurrentTransaction { get { return this._dbContext.AdoSession.DbTransaction; } }
+
         public bool IsInTransaction { get { return this._dbContext.AdoSession.IsInTransaction; } }
         public int CommandTimeout { get { return this._dbContext.AdoSession.CommandTimeout; } set { this._dbContext.AdoSession.CommandTimeout = value; } }
 
@@ -28,6 +27,7 @@ namespace Chloe.Core
         {
             return this.ExecuteNonQuery(cmdText, CommandType.Text, parameters);
         }
+
         public int ExecuteNonQuery(string cmdText, CommandType cmdType, params DbParam[] parameters)
         {
             Utils.CheckNull(cmdText, "cmdText");
@@ -38,6 +38,7 @@ namespace Chloe.Core
         {
             return this.ExecuteScalar(cmdText, CommandType.Text, parameters);
         }
+
         public object ExecuteScalar(string cmdText, CommandType cmdType, params DbParam[] parameters)
         {
             Utils.CheckNull(cmdText, "cmdText");
@@ -48,6 +49,7 @@ namespace Chloe.Core
         {
             return this.ExecuteReader(cmdText, CommandType.Text, parameters);
         }
+
         public IDataReader ExecuteReader(string cmdText, CommandType cmdType, params DbParam[] parameters)
         {
             Utils.CheckNull(cmdText, "cmdText");
@@ -58,14 +60,17 @@ namespace Chloe.Core
         {
             this._dbContext.AdoSession.BeginTransaction(null);
         }
+
         public void BeginTransaction(IsolationLevel il)
         {
             this._dbContext.AdoSession.BeginTransaction(il);
         }
+
         public void CommitTransaction()
         {
             this._dbContext.AdoSession.CommitTransaction();
         }
+
         public void RollbackTransaction()
         {
             this._dbContext.AdoSession.RollbackTransaction();
@@ -76,6 +81,7 @@ namespace Chloe.Core
             Utils.CheckNull(interceptor, "interceptor");
             this._dbContext.AdoSession.DbCommandInterceptors.Add(interceptor);
         }
+
         public void RemoveInterceptor(IDbCommandInterceptor interceptor)
         {
             Utils.CheckNull(interceptor, "interceptor");

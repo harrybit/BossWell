@@ -1,8 +1,9 @@
-﻿using BossWellApp;
+﻿using ApiHelp;
+using BossWellApp;
+using BossWellModel;
 using BossWellModel.BossWellModel;
 using System.Web.Http;
-using ApiHelp;
-using BossWellModel;
+
 namespace BossWellApi.Controllers
 {
     /// <summary>
@@ -10,8 +11,9 @@ namespace BossWellApi.Controllers
     /// </summary>
     public class ClientController : ApiController
     {
-        ClientApp cltAPP = new ClientApp();
-        JObjectResult result = new JObjectResult();
+        private ClientApp cltAPP = new ClientApp();
+        private JObjectResult result = new JObjectResult();
+
         public ClientController()
         {
             result.code = 200;
@@ -96,6 +98,5 @@ namespace BossWellApi.Controllers
             result.data = cltEntity;
             return result;
         }
-
     }
 }

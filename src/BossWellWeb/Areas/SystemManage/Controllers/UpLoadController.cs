@@ -2,10 +2,10 @@
 using BossWellApp.QiNiu;
 using BossWellModel;
 using BossWellModel.BossWellModel;
-using System;
 using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
+
 namespace BossWellWeb.Areas.SystemManage.Controllers
 {
     /// <summary>

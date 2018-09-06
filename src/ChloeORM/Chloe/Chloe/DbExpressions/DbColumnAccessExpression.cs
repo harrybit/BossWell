@@ -1,14 +1,12 @@
-﻿using System;
-
-namespace Chloe.DbExpressions
+﻿namespace Chloe.DbExpressions
 {
     /// <summary>
     /// T.Id
     /// </summary>
     public class DbColumnAccessExpression : DbExpression
     {
-        DbTable _table;
-        DbColumn _column;
+        private DbTable _table;
+        private DbColumn _column;
 
         public DbColumnAccessExpression(DbTable table, DbColumn column)
             : base(DbExpressionType.ColumnAccess, column.Type)
@@ -26,5 +24,4 @@ namespace Chloe.DbExpressions
             return visitor.Visit(this);
         }
     }
-
 }

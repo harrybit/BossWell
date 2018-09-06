@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Text;
 
 namespace Chloe.SQLite
 {
-    static class UtilExceptions
+    internal static class UtilExceptions
     {
         public static NotSupportedException NotSupportedMethod(MethodInfo method)
         {

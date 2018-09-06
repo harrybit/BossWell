@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using Qiniu;
-using Qiniu.Util;
-using ApiHelp;
-using Qiniu.IO.Model;
-using System.Text;
-using Qiniu.IO;
-using Qiniu.Http;
-using System.IO;
+﻿using ApiHelp;
 using BossWellModel;
-using Qiniu.Common;
-using SystemConfig;
 using BossWellModel.Plus;
+using Qiniu.Common;
+using Qiniu.Http;
+using Qiniu.IO;
+using Qiniu.IO.Model;
+using Qiniu.Util;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using SystemConfig;
+
 namespace BossWellApp.QiNiu
 {
     public class QiNiuMac
@@ -38,7 +38,7 @@ namespace BossWellApp.QiNiu
             //返回上传文件详细信息
             entity = new FileStorageEntity()
             {
-                Sid = ApiHelper.CreateRandom(32, 36, "filestorage_"),
+                Sid = ApiHelper.CreateRandomString(32, "filestorage_"),
                 CreateDate = DateTime.Now,
                 CreateUser = "APP",
                 FileSize = fileSize,
@@ -68,7 +68,7 @@ namespace BossWellApp.QiNiu
             //返回上传文件详细信息
             entity = new FileStorageEntity()
             {
-                Sid = ApiHelper.CreateRandom(32, 36, "filestorage_"),
+                Sid = ApiHelper.CreateRandomString(32, "filestorage_"),
                 CreateDate = DateTime.Now,
                 CreateUser = "APP",
                 FileSize = fileSize,
@@ -122,7 +122,7 @@ namespace BossWellApp.QiNiu
         private static string GetFileName(string fileFix)
         {
             StringBuilder textBuilder = new StringBuilder();
-            textBuilder.Append(ApiHelper.CreateRandom(16, 36, string.Empty));
+            textBuilder.Append(ApiHelper.CreateRandomString(32, string.Empty));
             textBuilder.Append("." + fileFix.ToLower());
             return textBuilder.ToString();
         }
@@ -151,6 +151,5 @@ namespace BossWellApp.QiNiu
             }
             return 200;
         }
-
     }
 }

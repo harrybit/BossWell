@@ -1,6 +1,7 @@
 ﻿using BossWellApp;
 using BossWellModel;
 using System.Web.Mvc;
+
 namespace BossWellWeb.Areas.PublicBusines.Controllers
 {
     public class SystemConfigController : ControllerBase

@@ -1,6 +1,7 @@
-﻿using System.Web.Http;
-using BossWellApp;
+﻿using BossWellApp;
+using System.Web.Http;
 using WebApi.OutputCache.V2;
+
 namespace BossWellApi.Controllers
 {
     /// <summary>
@@ -8,8 +9,9 @@ namespace BossWellApi.Controllers
     /// </summary>
     public class NewsController : ApiController
     {
-        JObjectResult result = new JObjectResult();
-        NewsApp newsAPP = new NewsApp();
+        private JObjectResult result = new JObjectResult();
+        private NewsApp newsAPP = new NewsApp();
+
         public NewsController()
         {
             result.code = 200;
@@ -33,6 +35,5 @@ namespace BossWellApi.Controllers
             result.data = newsAPP.GetPageList(page, pageSize, comclassSid);
             return result;
         }
-
     }
 }

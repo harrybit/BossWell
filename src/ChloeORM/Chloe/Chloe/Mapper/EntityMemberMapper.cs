@@ -1,29 +1,24 @@
-﻿using Chloe.Core;
-using Chloe.Core.Emit;
-using Chloe.Query.Mapping;
+﻿using Chloe.Core.Emit;
+using Chloe.Infrastructure;
 using Chloe.InternalExtensions;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using Chloe.Infrastructure;
 
 namespace Chloe.Mapper
 {
     public class EntityMemberMapper
     {
-        Dictionary<MemberInfo, IMRM> _mappingMemberMappers;
-        Dictionary<MemberInfo, Action<object, object>> _complexMemberSetters;
+        private Dictionary<MemberInfo, IMRM> _mappingMemberMappers;
+        private Dictionary<MemberInfo, Action<object, object>> _complexMemberSetters;
 
-        EntityMemberMapper(Type t)
+        private EntityMemberMapper(Type t)
         {
             this.Type = t;
             this.Init();
         }
 
-        void Init()
+        private void Init()
         {
             Type t = this.Type;
             var members = t.GetMembers(BindingFlags.Public | BindingFlags.Instance);
@@ -88,6 +83,7 @@ namespace Chloe.Mapper
             this._mappingMemberMappers.TryGetValue(memberInfo, out mapper);
             return mapper;
         }
+
         public Action<object, object> TryGetComplexMemberSetter(MemberInfo memberInfo)
         {
             memberInfo = memberInfo.AsReflectedMemberOf(this.Type);
@@ -96,7 +92,7 @@ namespace Chloe.Mapper
             return valueSetter;
         }
 
-        static readonly System.Collections.Concurrent.ConcurrentDictionary<Type, EntityMemberMapper> InstanceCache = new System.Collections.Concurrent.ConcurrentDictionary<Type, EntityMemberMapper>();
+        private static readonly System.Collections.Concurrent.ConcurrentDictionary<Type, EntityMemberMapper> InstanceCache = new System.Collections.Concurrent.ConcurrentDictionary<Type, EntityMemberMapper>();
 
         public static EntityMemberMapper GetInstance(Type type)
         {

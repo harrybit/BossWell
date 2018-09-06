@@ -11,7 +11,6 @@
 /*global Highcharts, document, window, Math, setTimeout */
 
 (function (Highcharts) { // encapsulate
-
 // create shortcuts
 var Chart = Highcharts.Chart,
 	addEvent = Highcharts.addEvent,
@@ -89,8 +88,6 @@ defaultOptions.navigation = {
 	}
 };
 
-
-
 // Add the export related options
 defaultOptions.exporting = {
 	//enabled: true,
@@ -142,7 +139,6 @@ defaultOptions.exporting = {
 			// Enable this block to add "View SVG" to the dropdown menu
 			/*
 			,{
-
 				text: 'View SVG',
 				onclick: function () {
 					var svg = this.getSVG()
@@ -188,7 +184,6 @@ Highcharts.post = function (url, data, formAttributes) {
 };
 
 extend(Chart.prototype, {
-
 	/**
 	 * Return an SVG representation of the chart
 	 *
@@ -357,14 +352,12 @@ extend(Chart.prototype, {
 			scale: options.scale || 2,
 			svg: svg
 		}, options.formAttributes);
-
 	},
 
 	/**
 	 * Print the chart
 	 */
 	print: function () {
-
 		var chart = this,
 			container = chart.container,
 			origDisplay = [],
@@ -395,7 +388,6 @@ extend(Chart.prototype, {
 
 		// allow the browser to prepare before reverting
 		setTimeout(function () {
-
 			// put the chart back in
 			origParent.appendChild(container);
 
@@ -407,9 +399,7 @@ extend(Chart.prototype, {
 			});
 
 			chart.isPrinting = false;
-
 		}, 200);
-
 	},
 
 	/**
@@ -444,7 +434,6 @@ extend(Chart.prototype, {
 
 		// create the menu only the first time
 		if (!menu) {
-
 			// create a HTML element above the SVG
 			chart[cacheName] = menu = createElement(DIV, {
 				className: className
@@ -478,13 +467,11 @@ extend(Chart.prototype, {
 				clearTimeout(hideTimer);
 			});
 
-
 			// Hide it on clicking or touching outside the menu (#2258, #2335, #2407)
 			addEvent(document, 'mouseup', docMouseUpHandler);
 			addEvent(chart, 'destroy', function () {
 				removeEvent(document, 'mouseup', docMouseUpHandler);
 			});
-
 
 			// create the items
 			each(items, function (item) {
@@ -506,7 +493,6 @@ extend(Chart.prototype, {
 						}, extend({
 							cursor: 'pointer'
 						}, menuItemStyle), innerMenu);
-
 
 					// Keep references to menu divs to be able to destroy them
 					chart.exportDivElements.push(element);
@@ -569,7 +555,6 @@ extend(Chart.prototype, {
 			return;
 		}
 
-
 		var attr = btnOptions.theme,
 			states = attr.states,
 			hover = states && states.hover,
@@ -582,7 +567,6 @@ extend(Chart.prototype, {
 			callback = function () {
 				onclick.apply(chart, arguments);
 			};
-
 		} else if (menuItems) {
 			callback = function () {
 				chart.contextMenu(
@@ -598,10 +582,8 @@ extend(Chart.prototype, {
 			};
 		}
 
-
 		if (btnOptions.text && btnOptions.symbol) {
 			attr.paddingLeft = Highcharts.pick(attr.paddingLeft, 25);
-
 		} else if (!btnOptions.text) {
 			extend(attr, {
 				width: btnOptions.width,
@@ -640,7 +622,6 @@ extend(Chart.prototype, {
 		buttonOffset += (button.width + btnOptions.buttonSpacing) * (btnOptions.align === 'right' ? -1 : 1);
 
 		chart.exportSVGElements.push(button, symbol);
-
 	},
 
 	/**
@@ -678,7 +659,6 @@ extend(Chart.prototype, {
 	}
 });
 
-
 symbols.menu = function (x, y, width, height) {
 	var arr = [
 		M, x, y + 2.5,
@@ -700,7 +680,6 @@ Chart.prototype.callbacks.push(function (chart) {
 	buttonOffset = 0;
 
 	if (exportingOptions.enabled !== false) {
-
 		for (n in buttons) {
 			chart.addButton(buttons[n]);
 		}
@@ -708,8 +687,5 @@ Chart.prototype.callbacks.push(function (chart) {
 		// Destroy the export elements at chart destroy
 		addEvent(chart, 'destroy', chart.destroyExport);
 	}
-
 });
-
-
 }(Highcharts));

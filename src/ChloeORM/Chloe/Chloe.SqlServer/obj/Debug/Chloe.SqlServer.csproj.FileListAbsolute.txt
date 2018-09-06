@@ -75,3 +75,9 @@ D:\Project_TY\Code\纯净版\src\ChloeORM\Chloe\Chloe.SqlServer\bin\Debug\Chloe.
 D:\Project_TY\Code\纯净版\src\ChloeORM\Chloe\Chloe.SqlServer\bin\Debug\Chloe.pdb
 D:\Project_TY\Code\纯净版\src\ChloeORM\Chloe\Chloe.SqlServer\obj\Debug\Chloe.SqlServer.dll
 D:\Project_TY\Code\纯净版\src\ChloeORM\Chloe\Chloe.SqlServer\obj\Debug\Chloe.SqlServer.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.SqlServer\bin\Debug\Chloe.SqlServer.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.SqlServer\bin\Debug\Chloe.SqlServer.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.SqlServer\bin\Debug\Chloe.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.SqlServer\bin\Debug\Chloe.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.SqlServer\obj\Debug\Chloe.SqlServer.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.SqlServer\obj\Debug\Chloe.SqlServer.pdb

@@ -1,7 +1,6 @@
-﻿
-namespace Chloe.Query.QueryExpressions
+﻿namespace Chloe.Query.QueryExpressions
 {
-    enum QueryExpressionType
+    internal enum QueryExpressionType
     {
         Root = 1,
         Where,

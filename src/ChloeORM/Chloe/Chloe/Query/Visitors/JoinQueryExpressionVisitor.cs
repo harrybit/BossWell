@@ -3,24 +3,20 @@ using Chloe.Descriptors;
 using Chloe.Query.QueryExpressions;
 using Chloe.Query.QueryState;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Reflection;
-using Chloe.InternalExtensions;
 
 namespace Chloe.Query.Visitors
 {
-    class JoinQueryExpressionVisitor : QueryExpressionVisitor<JoinQueryResult>
+    internal class JoinQueryExpressionVisitor : QueryExpressionVisitor<JoinQueryResult>
     {
-        ResultElement _resultElement;
-        JoinType _joinType;
+        private ResultElement _resultElement;
+        private JoinType _joinType;
 
-        LambdaExpression _conditionExpression;
-        ScopeParameterDictionary _scopeParameters;
+        private LambdaExpression _conditionExpression;
+        private ScopeParameterDictionary _scopeParameters;
 
-        JoinQueryExpressionVisitor(ResultElement resultElement, JoinType joinType, LambdaExpression conditionExpression, ScopeParameterDictionary scopeParameters)
+        private JoinQueryExpressionVisitor(ResultElement resultElement, JoinType joinType, LambdaExpression conditionExpression, ScopeParameterDictionary scopeParameters)
         {
             this._resultElement = resultElement;
             this._joinType = joinType;
@@ -70,59 +66,69 @@ namespace Chloe.Query.Visitors
 
             return result;
         }
+
         public override JoinQueryResult Visit(WhereExpression exp)
         {
             JoinQueryResult ret = this.Visit(exp);
             return ret;
         }
+
         public override JoinQueryResult Visit(OrderExpression exp)
         {
             JoinQueryResult ret = this.Visit(exp);
             return ret;
         }
+
         public override JoinQueryResult Visit(SelectExpression exp)
         {
             JoinQueryResult ret = this.Visit(exp);
             return ret;
         }
+
         public override JoinQueryResult Visit(SkipExpression exp)
         {
             JoinQueryResult ret = this.Visit(exp);
             return ret;
         }
+
         public override JoinQueryResult Visit(TakeExpression exp)
         {
             JoinQueryResult ret = this.Visit(exp);
             return ret;
         }
+
         public override JoinQueryResult Visit(AggregateQueryExpression exp)
         {
             JoinQueryResult ret = this.Visit(exp);
             return ret;
         }
+
         public override JoinQueryResult Visit(JoinQueryExpression exp)
         {
             JoinQueryResult ret = this.Visit(exp);
             return ret;
         }
+
         public override JoinQueryResult Visit(GroupingQueryExpression exp)
         {
             JoinQueryResult ret = this.Visit(exp);
             return ret;
         }
+
         public override JoinQueryResult Visit(DistinctExpression exp)
         {
             JoinQueryResult ret = this.Visit(exp);
             return ret;
         }
 
-        JoinQueryResult Visit(QueryExpression exp)
+        private JoinQueryResult Visit(QueryExpression exp)
         {
             IQueryState state = QueryExpressionVisitor.VisitQueryExpression(exp, this._scopeParameters, this._resultElement.ScopeTables);
             JoinQueryResult ret = state.ToJoinQueryResult(this._joinType, this._conditionExpression, this._scopeParameters, this._resultElement.ScopeTables, this._resultElement.GenerateUniqueTableAlias());
             return ret;
         }
-        static DbTableSegment CreateTableExpression(DbTable table, string alias)
+
+        private static DbTableSegment CreateTableExpression(DbTable table, string alias)
         {
             DbTableExpression tableExp = new DbTableExpression(table);
             DbTableSegment tableSeg = new DbTableSegment(tableExp, alias);

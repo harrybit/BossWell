@@ -1,26 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Chloe.Utility
 {
-    class KeyDictionary<TKey> : Dictionary<TKey, object>
+    internal class KeyDictionary<TKey> : Dictionary<TKey, object>
     {
         public KeyDictionary()
         {
         }
+
         public KeyDictionary(int capacity) : base(capacity)
         {
         }
+
         public void Add(TKey key)
         {
             this.Add(key, null);
         }
+
         public void Set(TKey key)
         {
             this[key] = null;
         }
+
         public bool Exists(TKey key)
         {
             return this.ContainsKey(key);

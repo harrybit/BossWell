@@ -115,3 +115,12 @@ D:\Project_TY\Code\纯净版\src\Common\ApiHelp\bin\Debug\Newtonsoft.Json.xml
 D:\Project_TY\Code\纯净版\src\Common\ApiHelp\obj\Debug\ApiHelp.csprojResolveAssemblyReference.cache
 D:\Project_TY\Code\纯净版\src\Common\ApiHelp\obj\Debug\ApiHelp.dll
 D:\Project_TY\Code\纯净版\src\Common\ApiHelp\obj\Debug\ApiHelp.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\Common\ApiHelp\bin\Debug\ApiHelp.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\Common\ApiHelp\bin\Debug\ApiHelp.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\Common\ApiHelp\bin\Debug\Newtonsoft.Json.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\Common\ApiHelp\bin\Debug\SystemConfig.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\Common\ApiHelp\bin\Debug\SystemConfig.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\Common\ApiHelp\bin\Debug\Newtonsoft.Json.xml
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\Common\ApiHelp\obj\Debug\ApiHelp.csprojResolveAssemblyReference.cache
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\Common\ApiHelp\obj\Debug\ApiHelp.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\Common\ApiHelp\obj\Debug\ApiHelp.pdb

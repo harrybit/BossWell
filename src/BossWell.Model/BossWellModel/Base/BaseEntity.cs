@@ -1,5 +1,6 @@
 ﻿using Chloe.Entity;
 using System;
+
 namespace BossWellModel
 {
     /// <summary>
@@ -17,6 +18,5 @@ namespace BossWellModel
         /// 创建时间
         /// </summary>
         public DateTime CreateDate { get; set; }
-        
     }
 }

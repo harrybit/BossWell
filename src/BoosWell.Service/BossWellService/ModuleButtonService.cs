@@ -1,7 +1,7 @@
-﻿using BossWellORM;
-using IBossWellService;
-using BossWellModel;
+﻿using BossWellModel;
 using BossWellModel.Base;
+using BossWellORM;
+using IBossWellService;
 using System.Collections.Generic;
 using System.Threading;
 
@@ -13,14 +13,17 @@ namespace BossWellService
         {
             return Query(request);
         }
+
         public ModuleButtonEntity GetFormData(string sid)
         {
             return context.Query<ModuleButtonEntity>().Where(t => t.Sid.Equals(sid)).FirstOrDefault();
         }
+
         public ModuleButtonEntity SubmitForm(ModuleButtonEntity saveEntity)
         {
             return Save<ModuleButtonEntity>(saveEntity, "modulebutton_");
         }
+
         public int SubmitBatchForm(List<ModuleButtonEntity> saveList)
         {
             context.Session.BeginTransaction();
@@ -32,6 +35,7 @@ namespace BossWellService
             context.Session.CommitTransaction();
             return saveList.Count;
         }
+
         public int DeleteForm(string sid)
         {
             return context.Delete<ModuleButtonEntity>(t => t.Sid.Equals(sid));

@@ -9,14 +9,17 @@
         /// 账号
         /// </summary>
         public string Account { get; set; }
+
         /// <summary>
         /// 密码
         /// </summary>
         public string PassWord { get; set; }
+
         /// <summary>
         /// 验证码
         /// </summary>
         public string Code { get; set; }
+
         /// <summary>
         /// 推荐码-可选
         /// </summary>

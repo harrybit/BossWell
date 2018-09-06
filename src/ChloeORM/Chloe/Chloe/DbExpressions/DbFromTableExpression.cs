@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Chloe.DbExpressions
+﻿namespace Chloe.DbExpressions
 {
     public class DbFromTableExpression : DbMainTableExpression
     {
@@ -8,6 +6,7 @@ namespace Chloe.DbExpressions
             : base(DbExpressionType.FromTable, table)
         {
         }
+
         public override T Accept<T>(DbExpressionVisitor<T> visitor)
         {
             return visitor.Visit(this);

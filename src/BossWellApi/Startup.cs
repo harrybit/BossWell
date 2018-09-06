@@ -1,9 +1,9 @@
-﻿using Microsoft.Owin;
-using Owin;
-using System.Web.Http;
-using Hangfire;
-using PlannedJob;
+﻿using Hangfire;
 using Hangfire.Redis;
+using Microsoft.Owin;
+using Owin;
+using PlannedJob;
+using System.Web.Http;
 using SystemConfig;
 
 [assembly: OwinStartup(typeof(BossWellApi.Startup))]
@@ -13,6 +13,7 @@ namespace BossWellApi
     public partial class Startup
     {
         public static HttpConfiguration HttpConfiguration { get; private set; }
+
         public void Configuration(IAppBuilder app)
         {
             //Hangfire配置
@@ -26,8 +27,8 @@ namespace BossWellApi
             //Redis数据库配置
             RedisStorageOptions options = new RedisStorageOptions();
             options.Db = 14;
-            options.Prefix = HangfireConfig.Prefix;//前缀
-            RedisStorage storage = new RedisStorage(HangfireConfig.RedisStorage, options);
+            options.Prefix = "Hangfire_";//前缀
+            RedisStorage storage = new RedisStorage(RedisConfig.WriteServerList, options);
 
             //仪表盘服务
             app.UseHangfireDashboard("/hangfire", doptions, storage);

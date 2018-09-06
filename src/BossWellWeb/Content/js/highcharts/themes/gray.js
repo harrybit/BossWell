@@ -99,7 +99,6 @@ Highcharts.theme = {
 		}
 	},
 
-
 	plotOptions: {
 		series: {
 			nullColor: '#444444'

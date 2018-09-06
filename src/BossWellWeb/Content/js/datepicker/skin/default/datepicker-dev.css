@@ -1,9 +1,9 @@
-/* 
- * My97 DatePicker 4.8 
+/*
+ * My97 DatePicker 4.8
  * auther : zhangkun , hejianting(design)
  * email : zhangkun_net@hotmail.com
  * date : 2012-05-25
- */ 
+ */
 .WdateDiv
 {
 	position:relative;
@@ -21,7 +21,7 @@
 	width:360px;
 }
 
-.WdateDiv .NavImg a,.WdateDiv .yminput,.WdateDiv .yminputfocus,.WdateDiv #dpQS 
+.WdateDiv .NavImg a,.WdateDiv .yminput,.WdateDiv .yminputfocus,.WdateDiv #dpQS
 {
 	background:url(img.gif) no-repeat;
 }
@@ -154,7 +154,7 @@
 }
 
 .WdateDiv .WdayTable{
-	line-height:20px;	
+	line-height:20px;
 	color:#13777e;
 	background-color:#edfbfb;
 }
@@ -170,7 +170,7 @@
 .WdateDiv .WdayOn
 {
 	color:#fff;
-	background-color:#65A2F3;	
+	background-color:#65A2F3;
 }
 
 .WdateDiv .Wwday
@@ -181,7 +181,7 @@
 .WdateDiv .WwdayOn
 {
 	color:#fff;
-	background-color:#65A2F3;	
+	background-color:#65A2F3;
 }
 .WdateDiv .Wtoday
 {
@@ -191,20 +191,20 @@
 .WdateDiv .Wselday
 {
 	color:#fff;
-	background-color:#65A2F3;	
+	background-color:#65A2F3;
 }
 .WdateDiv .WspecialDay{
 	background-color:#66F4DF;
 }
 
 .WdateDiv .WotherDay
-{ 
-	color:#D4D4D4;	
+{
+	color:#D4D4D4;
 }
 .WdateDiv .WotherDayOn
 {
 	color:#fff;
-	background-color:#65A2F3;	
+	background-color:#65A2F3;
 }
 
 .WdateDiv .WinvalidDay{
@@ -234,7 +234,7 @@
 	line-height:20px;
 	text-align:center;
 	color:#333;
-	border:#D9D9D9 1px solid;	
+	border:#D9D9D9 1px solid;
 }
 
 .WdateDiv #dpTime .tm
@@ -254,7 +254,7 @@
 	display:none;
 }
 
-.WdateDiv #dpQS 
+.WdateDiv #dpQS
  {
  	float:left;
 	margin-right:3px;
@@ -265,13 +265,13 @@
 	cursor:pointer;
 	background-position:0px -90px;
  }
-.WdateDiv #dpControl 
+.WdateDiv #dpControl
 {
 	text-align:right;
 	margin-top:3px;
 }
 .WdateDiv .dpButton
-{ 
+{
 	margin-left:2px;
 	line-height:18px;
 	*line-height:16px;
@@ -283,7 +283,7 @@
 	cursor: pointer;
 }
 .WdateDiv .dpButton:hover
-{ 
+{
 	background-color:#64A3F3;
 }
 

@@ -6,15 +6,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Chloe.Query.Internals
 {
     sealed partial class DapperTable
     {
-        string[] fieldNames;
-        readonly Dictionary<string, int> fieldNameLookup;
+        private string[] fieldNames;
+        private readonly Dictionary<string, int> fieldNameLookup;
 
         internal string[] FieldNames { get { return fieldNames; } }
 
@@ -37,6 +35,7 @@ namespace Chloe.Query.Internals
             int result;
             return (name != null && fieldNameLookup.TryGetValue(name, out result)) ? result : -1;
         }
+
         internal int AddField(string name)
         {
             if (name == null) throw new ArgumentNullException("name");
@@ -47,7 +46,6 @@ namespace Chloe.Query.Internals
             fieldNameLookup[name] = oldLen;
             return oldLen;
         }
-
 
         internal bool FieldExists(string key)
         {

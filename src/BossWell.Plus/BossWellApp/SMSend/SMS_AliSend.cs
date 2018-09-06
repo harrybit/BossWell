@@ -3,9 +3,10 @@ using Aliyun.Acs.Core.Exceptions;
 using Aliyun.Acs.Core.Profile;
 using Aliyun.Acs.Dysmsapi.Model.V20170525;
 using SystemConfig;
+
 namespace BossWellApp.SMSend
 {
-    public class SMS_AliSend: ISMS_AliSend
+    public class SMS_AliSend : ISMS_AliSend
     {
         /// <summary>
         /// 短信模板发送

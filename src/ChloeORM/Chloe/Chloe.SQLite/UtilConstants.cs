@@ -1,13 +1,11 @@
 ﻿using Chloe.DbExpressions;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace Chloe.SQLite
 {
-    static class UtilConstants
+    internal static class UtilConstants
     {
         public const string DbParameterNamePrefix = "@";
         public static readonly string ParameterNamePrefix = DbParameterNamePrefix + "P_";
@@ -36,7 +34,7 @@ namespace Chloe.SQLite
         public static readonly DbParameterExpression DbParameter_1 = DbExpression.Parameter(1);
         public static readonly DbConstantExpression DbConstant_Null_String = DbExpression.Constant(null, typeof(string));
 
-        #endregion
+        #endregion DbExpression constants
 
         #region MemberInfo constants
 
@@ -55,7 +53,6 @@ namespace Chloe.SQLite
         public static readonly PropertyInfo PropertyInfo_DateTime_Second = typeof(DateTime).GetProperty("Second");
         public static readonly PropertyInfo PropertyInfo_DateTime_Millisecond = typeof(DateTime).GetProperty("Millisecond");
         public static readonly PropertyInfo PropertyInfo_DateTime_DayOfWeek = typeof(DateTime).GetProperty("DayOfWeek");
-
 
         /* String */
         public static readonly MethodInfo MethodInfo_String_Concat_String_String = typeof(string).GetMethod("Concat", new Type[] { typeof(string), typeof(string) });
@@ -88,7 +85,7 @@ namespace Chloe.SQLite
         /* Sql */
         public static readonly MethodInfo MethodInfo_Sql_Equals = typeof(Sql).GetMethods().Where(a => a.Name == "Equals" && a.IsStatic && a.IsGenericMethod).First();
         public static readonly MethodInfo MethodInfo_Sql_NotEquals = typeof(Sql).GetMethod("NotEquals");
-        #endregion
 
+        #endregion MemberInfo constants
     }
 }

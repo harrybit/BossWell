@@ -1,16 +1,14 @@
-﻿using Chloe.Query.QueryState;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Chloe.Query.QueryExpressions
 {
-    class JoinQueryExpression : QueryExpression
+    internal class JoinQueryExpression : QueryExpression
     {
-        List<JoiningQueryInfo> _joinedQueries;
-        LambdaExpression _selector;
+        private List<JoiningQueryInfo> _joinedQueries;
+        private LambdaExpression _selector;
+
         public JoinQueryExpression(Type elementType, QueryExpression prevExpression, List<JoiningQueryInfo> joinedQueries, LambdaExpression selector)
             : base(QueryExpressionType.JoinQuery, elementType, prevExpression)
         {

@@ -1,14 +1,11 @@
 ﻿using Chloe.Descriptors;
-using Chloe.Exceptions;
 using Chloe.Extension;
-using Chloe.InternalExtensions;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
 
 namespace Chloe
 {
@@ -18,6 +15,7 @@ namespace Chloe
         {
             return dbContext.Query<T>().Where(predicate);
         }
+
         /// <summary>
         /// dbContext.SqlQuery&lt;User&gt;("select * from Users where Id>@Id", new { Id = 1 }).ToList();
         /// </summary>
@@ -35,6 +33,7 @@ namespace Chloe
 
             return dbContext.SqlQuery<T>(sql, Utils.BuildParams(dbContext, parameter));
         }
+
         public static IEnumerable<T> SqlQuery<T>(this IDbContext dbContext, string sql, CommandType cmdType, object parameter)
         {
             /*
@@ -60,6 +59,7 @@ namespace Chloe
             List<string> fieldList = FieldsResolver.Resolve(fields);
             return dbContext.UpdateOnly(entity, fieldList.ToArray());
         }
+
         /// <summary>
         /// dbContext.UpdateOnly&lt;User&gt;(user, "Name,Age", "NickName")
         /// </summary>
@@ -114,7 +114,8 @@ namespace Chloe
 
             return UpdateOnly(dbContext, condition, bindings);
         }
-        static int UpdateOnly<TEntity>(this IDbContext dbContext, Expression<Func<TEntity, bool>> condition, List<MemberBinding> bindings)
+
+        private static int UpdateOnly<TEntity>(this IDbContext dbContext, Expression<Func<TEntity, bool>> condition, List<MemberBinding> bindings)
         {
             Type entityType = typeof(TEntity);
             NewExpression newExp = Expression.New(entityType);
@@ -131,18 +132,22 @@ namespace Chloe
         {
             dbContext.Session.BeginTransaction();
         }
+
         public static void BeginTransaction(this IDbContext dbContext, IsolationLevel il)
         {
             dbContext.Session.BeginTransaction(il);
         }
+
         public static void CommitTransaction(this IDbContext dbContext)
         {
             dbContext.Session.CommitTransaction();
         }
+
         public static void RollbackTransaction(this IDbContext dbContext)
         {
             dbContext.Session.RollbackTransaction();
         }
+
         public static void DoWithTransaction(this IDbContext dbContext, Action action)
         {
             /*
@@ -157,24 +162,26 @@ namespace Chloe
             dbContext.Session.BeginTransaction();
             ExecuteAction(dbContext, action);
         }
+
         public static void DoWithTransaction(this IDbContext dbContext, Action action, IsolationLevel il)
         {
             dbContext.Session.BeginTransaction(il);
             ExecuteAction(dbContext, action);
         }
+
         public static T DoWithTransaction<T>(this IDbContext dbContext, Func<T> action)
         {
             dbContext.Session.BeginTransaction();
             return ExecuteAction(dbContext, action);
         }
+
         public static T DoWithTransaction<T>(this IDbContext dbContext, Func<T> action, IsolationLevel il)
         {
             dbContext.Session.BeginTransaction(il);
             return ExecuteAction(dbContext, action);
         }
 
-
-        static void ExecuteAction(IDbContext dbContext, Action action)
+        private static void ExecuteAction(IDbContext dbContext, Action action)
         {
             try
             {
@@ -188,7 +195,8 @@ namespace Chloe
                 throw;
             }
         }
-        static T ExecuteAction<T>(IDbContext dbContext, Func<T> action)
+
+        private static T ExecuteAction<T>(IDbContext dbContext, Func<T> action)
         {
             try
             {
@@ -209,7 +217,5 @@ namespace Chloe
             DbActionBag bag = new DbActionBag(dbContext);
             return bag;
         }
-
-
     }
 }

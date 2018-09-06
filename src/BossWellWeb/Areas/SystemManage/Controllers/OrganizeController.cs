@@ -1,11 +1,9 @@
-﻿using BossWellApp;
-using BossWellApp.Basic;
+﻿using ApiHelp;
+using BossWellApp;
 using BossWellModel;
-using BossWellModel.BossWellModel;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
-using ApiHelp;
+
 namespace BossWellWeb.Areas.SystemManage.Controllers
 {
     public class OrganizeController : ControllerBase

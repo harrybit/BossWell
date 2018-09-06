@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 
 namespace Chloe.MySql
 {
     public class ChloeMySqlConnection : IDbConnection, IDisposable
     {
-        IDbConnection _dbConnection;
+        private IDbConnection _dbConnection;
+
         public ChloeMySqlConnection(IDbConnection dbConnection)
         {
             Utils.CheckNull(dbConnection);
@@ -22,14 +20,17 @@ namespace Chloe.MySql
             get { return this._dbConnection.ConnectionString; }
             set { this._dbConnection.ConnectionString = value; }
         }
+
         public int ConnectionTimeout
         {
             get { return this._dbConnection.ConnectionTimeout; }
         }
+
         public string Database
         {
             get { return this._dbConnection.Database; }
         }
+
         public ConnectionState State
         {
             get { return this._dbConnection.State; }
@@ -39,22 +40,27 @@ namespace Chloe.MySql
         {
             return this._dbConnection.BeginTransaction();
         }
+
         public IDbTransaction BeginTransaction(IsolationLevel il)
         {
             return this._dbConnection.BeginTransaction(il);
         }
+
         public void ChangeDatabase(string databaseName)
         {
             this._dbConnection.ChangeDatabase(databaseName);
         }
+
         public void Close()
         {
             this._dbConnection.Close();
         }
+
         public IDbCommand CreateCommand()
         {
             return new ChloeMySqlCommand(this._dbConnection.CreateCommand());
         }
+
         public void Open()
         {
             this._dbConnection.Open();

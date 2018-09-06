@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
 
 namespace Chloe
 {
@@ -45,6 +44,7 @@ namespace Chloe
 
             return source;
         }
+
         public static IQuery<TSource> WhereIfNotNullOrEmpty<TSource>(this IQuery<TSource> source, string val, Expression<Func<TSource, string, bool>> predicate)
         {
             return source.WhereIfNotNull(val == string.Empty ? null : val, predicate);
@@ -52,7 +52,7 @@ namespace Chloe
 
         /// <summary>
         /// dbContext.Query&lt;User&gt;().ToList&lt;UserModel&gt;()
-        /// <para>该方法调用者的 IQuery.ElementType 必须是实体类型</para> 
+        /// <para>该方法调用者的 IQuery.ElementType 必须是实体类型</para>
         /// </summary>
         /// <typeparam name="TModel"></typeparam>
         /// <param name="source"></param>
@@ -61,9 +61,10 @@ namespace Chloe
         {
             return source.MapTo<TModel>().ToList();
         }
+
         /// <summary>
         /// dbContext.Query&lt;User&gt;().MapTo&lt;UserModel&gt;()
-        /// <para>该方法调用者的 IQuery.ElementType 必须是实体类型</para> 
+        /// <para>该方法调用者的 IQuery.ElementType 必须是实体类型</para>
         /// </summary>
         /// <typeparam name="TModel"></typeparam>
         /// <param name="source"></param>
@@ -134,6 +135,7 @@ namespace Chloe
             List<string> fieldList = FieldsResolver.Resolve(fields);
             return source.Ignore(fieldList.ToArray());
         }
+
         /// <summary>
         /// dbContext.Query&lt;User&gt;().Ignore&lt;User&gt;("Name,Age", "NickName")
         /// </summary>
@@ -211,8 +213,9 @@ namespace Chloe
 
             return orderedQuery;
         }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="q"></param>
@@ -237,7 +240,7 @@ namespace Chloe
             return orderedQuery;
         }
 
-        static IOrderedQuery<T> InnerOrderBy<T>(this IQuery<T> q, Ordering ordering)
+        private static IOrderedQuery<T> InnerOrderBy<T>(this IQuery<T> q, Ordering ordering)
         {
             LambdaExpression keySelector = ConvertToLambda<T>(ordering.MemberChain);
 
@@ -250,7 +253,8 @@ namespace Chloe
             IOrderedQuery<T> orderedQuery = Invoke<T>(q, orderMethod, keySelector);
             return orderedQuery;
         }
-        static IOrderedQuery<T> InnerThenBy<T>(this IOrderedQuery<T> q, Ordering ordering)
+
+        private static IOrderedQuery<T> InnerThenBy<T>(this IOrderedQuery<T> q, Ordering ordering)
         {
             LambdaExpression keySelector = ConvertToLambda<T>(ordering.MemberChain);
 
@@ -263,13 +267,15 @@ namespace Chloe
             IOrderedQuery<T> orderedQuery = Invoke<T>(q, orderMethod, keySelector);
             return orderedQuery;
         }
-        static IOrderedQuery<T> Invoke<T>(object q, MethodInfo orderMethod, LambdaExpression keySelector)
+
+        private static IOrderedQuery<T> Invoke<T>(object q, MethodInfo orderMethod, LambdaExpression keySelector)
         {
             orderMethod = orderMethod.MakeGenericMethod(new Type[] { keySelector.Body.Type });
             IOrderedQuery<T> orderedQuery = (IOrderedQuery<T>)orderMethod.Invoke(q, new object[] { keySelector });
             return orderedQuery;
         }
-        static List<Ordering> SplitOrderingString(string orderString)
+
+        private static List<Ordering> SplitOrderingString(string orderString)
         {
             string[] orderings = SplitWithRemoveEmptyEntries(orderString, ',');
             List<Ordering> orderingList = new List<Ordering>(orderings.Length);
@@ -281,7 +287,8 @@ namespace Chloe
 
             return orderingList;
         }
-        static LambdaExpression ConvertToLambda<T>(string memberChain)
+
+        private static LambdaExpression ConvertToLambda<T>(string memberChain)
         {
             Type entityType = typeof(T);
 
@@ -329,13 +336,13 @@ namespace Chloe
             return lambda;
         }
 
-        static string[] SplitWithRemoveEmptyEntries(string str, char c)
+        private static string[] SplitWithRemoveEmptyEntries(string str, char c)
         {
             string[] arr = str.Split(new char[] { c }, StringSplitOptions.RemoveEmptyEntries);
             return arr;
         }
 
-        class Ordering
+        private class Ordering
         {
             public string MemberChain { get; set; }
             public OrderType OrderType { get; set; }
@@ -369,7 +376,8 @@ namespace Chloe
                 return ordering;
             }
         }
-        enum OrderType
+
+        private enum OrderType
         {
             Asc,
             Desc

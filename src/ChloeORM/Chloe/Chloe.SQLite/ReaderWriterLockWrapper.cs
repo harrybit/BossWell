@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 
 namespace Chloe.SQLite
 {
-    class ReaderWriterLockWrapper
+    internal class ReaderWriterLockWrapper
     {
-        ReaderWriterLockSlim _rwLock;
-        bool _isInTransaction = false;
+        private ReaderWriterLockSlim _rwLock;
+        private bool _isInTransaction = false;
+
         public ReaderWriterLockWrapper(ReaderWriterLockSlim rwLock)
         {
             this._rwLock = rwLock;
@@ -17,6 +15,7 @@ namespace Chloe.SQLite
 
         public bool IsInTransaction { get { return this._isInTransaction; } }
         public bool IsLockHeld { get { return this._rwLock.IsReadLockHeld || this._rwLock.IsWriteLockHeld || this._rwLock.IsUpgradeableReadLockHeld; } }
+
         public void BeginTransaction()
         {
             if (this._isInTransaction)
@@ -25,6 +24,7 @@ namespace Chloe.SQLite
             this._rwLock.EnterWriteLock();
             this._isInTransaction = true;
         }
+
         public void EndTransaction()
         {
             if (this._isInTransaction)
@@ -40,6 +40,7 @@ namespace Chloe.SQLite
             if (!this._isInTransaction)
                 this._rwLock.EnterReadLock();
         }
+
         public void EndRead()
         {
             if (!this._isInTransaction)
@@ -52,6 +53,7 @@ namespace Chloe.SQLite
             if (!this._isInTransaction)
                 this._rwLock.EnterWriteLock();
         }
+
         public void EndWrite()
         {
             if (!this._isInTransaction)

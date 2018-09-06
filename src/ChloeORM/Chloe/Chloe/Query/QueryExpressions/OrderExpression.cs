@@ -1,17 +1,18 @@
-﻿using Chloe.Query.QueryState;
-using System;
+﻿using System;
 using System.Linq.Expressions;
 
 namespace Chloe.Query.QueryExpressions
 {
-    class OrderExpression : QueryExpression
+    internal class OrderExpression : QueryExpression
     {
-        LambdaExpression _keySelector;
+        private LambdaExpression _keySelector;
+
         public OrderExpression(Type elementType, QueryExpression prevExpression, QueryExpressionType expressionType, LambdaExpression keySelector)
             : base(expressionType, elementType, prevExpression)
         {
             this._keySelector = keySelector;
         }
+
         public LambdaExpression KeySelector
         {
             get { return this._keySelector; }
@@ -22,5 +23,4 @@ namespace Chloe.Query.QueryExpressions
             return visitor.Visit(this);
         }
     }
-
 }

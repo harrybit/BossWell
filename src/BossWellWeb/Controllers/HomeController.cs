@@ -1,7 +1,4 @@
-﻿
-using System.Collections.Generic;
-using System.Text;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace BossWellWeb.Controllers
 {
@@ -11,14 +8,15 @@ namespace BossWellWeb.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-
             return View();
         }
+
         [HttpGet]
         public ActionResult Default()
         {
             return View();
         }
+
         [HttpGet]
         public ActionResult About()
         {

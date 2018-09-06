@@ -12,8 +12,8 @@ namespace Chloe.Core.Emit
 {
     public static class ClassGenerator
     {
-        static readonly Dictionary<Assembly, ModuleBuilder> _moduleBuilders = new Dictionary<Assembly, ModuleBuilder>();
-        static int _sequenceNumber = 0;
+        private static readonly Dictionary<Assembly, ModuleBuilder> _moduleBuilders = new Dictionary<Assembly, ModuleBuilder>();
+        private static int _sequenceNumber = 0;
 
         public static Type CreateMRMType(MemberInfo propertyOrField)
         {

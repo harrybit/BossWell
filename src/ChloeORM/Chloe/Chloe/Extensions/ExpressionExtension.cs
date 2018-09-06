@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
 
 namespace Chloe.Extensions
 {
@@ -35,6 +33,7 @@ namespace Chloe.Extensions
             ParameterExpression p;
             return IsDerivedFromParameter(exp, out p);
         }
+
         internal static bool IsDerivedFromParameter(this MemberExpression exp, out ParameterExpression p)
         {
             p = null;
@@ -121,7 +120,7 @@ namespace Chloe.Extensions
             return ret;
         }
 
-        static object WrapValue(object value)
+        private static object WrapValue(object value)
         {
             Type valueType = value.GetType();
 

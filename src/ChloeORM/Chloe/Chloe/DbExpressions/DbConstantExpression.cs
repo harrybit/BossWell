@@ -4,8 +4,8 @@ namespace Chloe.DbExpressions
 {
     public class DbConstantExpression : DbExpression
     {
-        object _value;
-        Type _type;
+        private object _value;
+        private Type _type;
 
         public static readonly DbConstantExpression Null = new DbConstantExpression(null);
         public static readonly DbConstantExpression StringEmpty = new DbConstantExpression(string.Empty);

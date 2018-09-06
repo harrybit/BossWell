@@ -77,3 +77,10 @@ D:\Project_TY\Code\纯净版\src\ChloeORM\Chloe\Chloe.SQLite\bin\Debug\Chloe.pdb
 D:\Project_TY\Code\纯净版\src\ChloeORM\Chloe\Chloe.SQLite\obj\Debug\Chloe.SQLite.csprojResolveAssemblyReference.cache
 D:\Project_TY\Code\纯净版\src\ChloeORM\Chloe\Chloe.SQLite\obj\Debug\Chloe.SQLite.dll
 D:\Project_TY\Code\纯净版\src\ChloeORM\Chloe\Chloe.SQLite\obj\Debug\Chloe.SQLite.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.SQLite\bin\Debug\Chloe.SQLite.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.SQLite\bin\Debug\Chloe.SQLite.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.SQLite\bin\Debug\Chloe.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.SQLite\bin\Debug\Chloe.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.SQLite\obj\Debug\Chloe.SQLite.csprojResolveAssemblyReference.cache
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.SQLite\obj\Debug\Chloe.SQLite.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.SQLite\obj\Debug\Chloe.SQLite.pdb

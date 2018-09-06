@@ -1,21 +1,18 @@
 ﻿using Chloe.InternalExtensions;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Chloe.Extension
 {
-    static class Utils
+    internal static class Utils
     {
         public static void CheckNull(object obj, string paramName = null)
         {
             if (obj == null)
                 throw new ArgumentNullException(paramName);
         }
+
         public static Task<T> MakeTask<T>(Func<T> func)
         {
             var task = new Task<T>(func);
@@ -37,10 +34,13 @@ namespace Chloe.Extension
                     case "MsSqlContext":
                     case "SQLiteContext":
                         return "@";
+
                     case "MySqlContext":
                         return "?";
+
                     case "OracleContext":
                         return ":";
+
                     default:
                         dbContextType = dbContextType.BaseType;
                         break;
@@ -49,6 +49,7 @@ namespace Chloe.Extension
 
             throw new NotSupportedException(dbContext.GetType().FullName);
         }
+
         public static DbParam[] BuildParams(IDbContext dbContext, object parameter)
         {
             List<DbParam> parameters = new List<DbParam>();

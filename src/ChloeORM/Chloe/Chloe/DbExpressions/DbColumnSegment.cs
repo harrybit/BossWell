@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Chloe.DbExpressions
+﻿namespace Chloe.DbExpressions
 {
     /// <summary>
     /// T.Name as Alias
@@ -8,8 +6,8 @@ namespace Chloe.DbExpressions
     [System.Diagnostics.DebuggerDisplay("Alias = {Alias}")]
     public class DbColumnSegment
     {
-        DbExpression _body;
-        string _alias;
+        private DbExpression _body;
+        private string _alias;
 
         public DbColumnSegment(DbExpression body, string alias)
         {
@@ -21,6 +19,7 @@ namespace Chloe.DbExpressions
         /// T.Name 部分
         /// </summary>
         public DbExpression Body { get { return this._body; } }
+
         public string Alias { get { return this._alias; } }
     }
 }

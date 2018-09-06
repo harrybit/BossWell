@@ -1,10 +1,10 @@
-﻿using Chloe;
-using BossWellORM;
-using IBossWellService;
-using BossWellModel;
+﻿using BossWellModel;
 using BossWellModel.Base;
 using BossWellModel.BossWellModel;
 using BossWellModel.Enum;
+using BossWellORM;
+using Chloe;
+using IBossWellService;
 
 namespace BossWellService
 {
@@ -14,6 +14,7 @@ namespace BossWellService
         {
             return Query(request);
         }
+
         public QueryResponse<RoleAuthorizeList> GetRoleList(int page, int pageSize)
         {
             QueryResponse<RoleAuthorizeList> response = new QueryResponse<RoleAuthorizeList>();
@@ -35,22 +36,25 @@ namespace BossWellService
             response.Items = query.Skip(page * (page - 1)).Take(pageSize).ToList();
             return response;
         }
+
         public RoleAuthorizeEntity GetSingle(string sid)
         {
             return context.Query<RoleAuthorizeEntity>().Where(t => t.Sid.Equals(sid)).FirstOrDefault();
         }
+
         public int GetCountByRoleId(string roleId, RoleAuthorizeModuleEnum moduleType)
         {
             return context.Query<RoleAuthorizeEntity>().Where(t => t.RoleId.Equals(roleId) && t.ModulType == moduleType).Count();
         }
+
         public RoleAuthorizeEntity SaveForm(RoleAuthorizeEntity saveModel)
         {
             return Save(saveModel, "roleauthorize_");
         }
+
         public void Delete(string sid)
         {
             context.Delete<RoleAuthorizeEntity>(t => t.Sid.Equals(sid));
         }
-
     }
 }

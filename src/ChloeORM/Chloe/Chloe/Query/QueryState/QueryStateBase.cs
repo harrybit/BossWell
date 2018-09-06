@@ -2,18 +2,17 @@
 using Chloe.Query.Mapping;
 using Chloe.Query.QueryExpressions;
 using Chloe.Query.Visitors;
+using Chloe.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Linq;
-using Chloe.Core.Visitors;
-using Chloe.Utility;
 
 namespace Chloe.Query.QueryState
 {
-    abstract class QueryStateBase : IQueryState
+    internal abstract class QueryStateBase : IQueryState
     {
-        ResultElement _resultElement;
+        private ResultElement _resultElement;
+
         protected QueryStateBase(ResultElement resultElement)
         {
             this._resultElement = resultElement;
@@ -30,6 +29,7 @@ namespace Chloe.Query.QueryState
 
             return this;
         }
+
         public virtual IQueryState Accept(OrderExpression exp)
         {
             if (exp.NodeType == QueryExpressionType.OrderBy || exp.NodeType == QueryExpressionType.OrderByDesc)
@@ -47,21 +47,25 @@ namespace Chloe.Query.QueryState
 
             return this;
         }
+
         public virtual IQueryState Accept(SelectExpression exp)
         {
             ResultElement result = this.CreateNewResult(exp.Selector);
             return this.CreateQueryState(result);
         }
+
         public virtual IQueryState Accept(SkipExpression exp)
         {
             SkipQueryState state = new SkipQueryState(this.Result, exp.Count);
             return state;
         }
+
         public virtual IQueryState Accept(TakeExpression exp)
         {
             TakeQueryState state = new TakeQueryState(this.Result, exp.Count);
             return state;
         }
+
         public virtual IQueryState Accept(AggregateQueryExpression exp)
         {
             List<DbExpression> dbArguments = new List<DbExpression>(exp.Arguments.Count);
@@ -86,6 +90,7 @@ namespace Chloe.Query.QueryState
             AggregateQueryState state = new AggregateQueryState(result);
             return state;
         }
+
         public virtual IQueryState Accept(GroupingQueryExpression exp)
         {
             foreach (LambdaExpression item in exp.GroupKeySelectors)
@@ -126,6 +131,7 @@ namespace Chloe.Query.QueryState
             var newResult = this.CreateNewResult(exp.Selector);
             return new GroupingQueryState(newResult);
         }
+
         public virtual IQueryState Accept(DistinctExpression exp)
         {
             DistinctQueryState state = new DistinctQueryState(this.Result);
@@ -149,6 +155,7 @@ namespace Chloe.Query.QueryState
 
             return result;
         }
+
         public virtual IQueryState CreateQueryState(ResultElement result)
         {
             return new GeneralQueryState(result);
@@ -221,6 +228,7 @@ namespace Chloe.Query.QueryState
             GeneralQueryState queryState = new GeneralQueryState(result);
             return queryState;
         }
+
         public virtual DbSqlQueryExpression CreateSqlQuery()
         {
             DbSqlQueryExpression sqlQuery = new DbSqlQueryExpression();

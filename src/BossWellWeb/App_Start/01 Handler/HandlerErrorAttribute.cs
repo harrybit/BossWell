@@ -13,9 +13,9 @@ namespace BossWellWeb
             context.HttpContext.Response.StatusCode = 200;
             AjaxResult result = new AjaxResult { state = ResultType.error.ToString(), message = context.Exception.Message };
 
-
             context.Result = new ContentResult { Content = ApiHelp.ApiHelper.JsonSerial(result) };
         }
+
         private void WriteLog(ExceptionContext context)
         {
             //if (context == null)

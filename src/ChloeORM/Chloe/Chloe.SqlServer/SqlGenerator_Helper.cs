@@ -1,19 +1,15 @@
-﻿using Chloe.Core;
-using Chloe.DbExpressions;
+﻿using Chloe.DbExpressions;
 using Chloe.InternalExtensions;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace Chloe.SqlServer
 {
     partial class SqlGenerator : DbExpressionVisitor<DbExpression>
     {
-        static string GenParameterName(int ordinal)
+        private static string GenParameterName(int ordinal)
         {
             if (ordinal < CacheParameterNames.Count)
             {
@@ -22,7 +18,8 @@ namespace Chloe.SqlServer
 
             return UtilConstants.ParameterNamePrefix + ordinal.ToString();
         }
-        static string GenRowNumberName(List<DbColumnSegment> columns)
+
+        private static string GenRowNumberName(List<DbColumnSegment> columns)
         {
             int ROW_NUMBER_INDEX = 1;
             string row_numberName = "ROW_NUMBER_0";
@@ -34,7 +31,8 @@ namespace Chloe.SqlServer
 
             return row_numberName;
         }
-        static void AmendDbInfo(DbExpression exp1, DbExpression exp2)
+
+        private static void AmendDbInfo(DbExpression exp1, DbExpression exp2)
         {
             DbColumnAccessExpression datumPointExp = null;
             DbParameterExpression expToAmend = null;
@@ -59,7 +57,8 @@ namespace Chloe.SqlServer
                     expToAmend.DbType = datumPointExp.Column.DbType;
             }
         }
-        static void AmendDbInfo(DbColumn column, DbExpression exp)
+
+        private static void AmendDbInfo(DbColumn column, DbExpression exp)
         {
             if (column.DbType == null || exp.NodeType != DbExpressionType.Parameter)
                 return;
@@ -69,7 +68,8 @@ namespace Chloe.SqlServer
             if (expToAmend.DbType == null)
                 expToAmend.DbType = column.DbType;
         }
-        static DbExpression Trim_Nullable_Value(DbExpression exp)
+
+        private static DbExpression Trim_Nullable_Value(DbExpression exp)
         {
             DbMemberExpression memberExp = exp as DbMemberExpression;
             if (memberExp == null)
@@ -81,8 +81,7 @@ namespace Chloe.SqlServer
             return exp;
         }
 
-
-        static DbExpression EnsureDbExpressionReturnCSharpBoolean(DbExpression exp)
+        private static DbExpression EnsureDbExpressionReturnCSharpBoolean(DbExpression exp)
         {
             if (exp.Type != UtilConstants.TypeOfBoolean && exp.Type != UtilConstants.TypeOfBoolean_Nullable)
                 return exp;
@@ -93,9 +92,10 @@ namespace Chloe.SqlServer
             }
 
             //将且认为不符合上述条件的都是诸如 a.Id>1,a.Name=="name" 等不能作为 bool 返回值的表达式
-            //构建 case when 
+            //构建 case when
             return ConstructReturnCSharpBooleanCaseWhenExpression(exp);
         }
+
         public static DbCaseWhenExpression ConstructReturnCSharpBooleanCaseWhenExpression(DbExpression exp)
         {
             // case when 1>0 then 1 when not (1>0) then 0 else Null end
@@ -109,7 +109,7 @@ namespace Chloe.SqlServer
             return caseWhenExpression;
         }
 
-        static Stack<DbExpression> GatherBinaryExpressionOperand(DbBinaryExpression exp)
+        private static Stack<DbExpression> GatherBinaryExpressionOperand(DbBinaryExpression exp)
         {
             DbExpressionType nodeType = exp.NodeType;
 
@@ -127,12 +127,14 @@ namespace Chloe.SqlServer
             items.Push(left);
             return items;
         }
-        static void EnsureMethodDeclaringType(DbMethodCallExpression exp, Type ensureType)
+
+        private static void EnsureMethodDeclaringType(DbMethodCallExpression exp, Type ensureType)
         {
             if (exp.Method.DeclaringType != ensureType)
                 throw UtilExceptions.NotSupportedMethod(exp.Method);
         }
-        static void EnsureMethodDeclaringType(DbMethodCallExpression exp, params Type[] ensureTypes)
+
+        private static void EnsureMethodDeclaringType(DbMethodCallExpression exp, params Type[] ensureTypes)
         {
             foreach (var type in ensureTypes)
             {
@@ -142,14 +144,14 @@ namespace Chloe.SqlServer
 
             throw UtilExceptions.NotSupportedMethod(exp.Method);
         }
-        static void EnsureMethod(DbMethodCallExpression exp, MethodInfo methodInfo)
+
+        private static void EnsureMethod(DbMethodCallExpression exp, MethodInfo methodInfo)
         {
             if (exp.Method != methodInfo)
                 throw UtilExceptions.NotSupportedMethod(exp.Method);
         }
 
-
-        static void EnsureTrimCharArgumentIsSpaces(DbExpression exp)
+        private static void EnsureTrimCharArgumentIsSpaces(DbExpression exp)
         {
             var m = exp as DbMemberExpression;
             if (m == null)
@@ -172,7 +174,8 @@ namespace Chloe.SqlServer
                 throw new NotSupportedException();
             }
         }
-        static bool TryGetCastTargetDbTypeString(Type sourceType, Type targetType, out string dbTypeString, bool throwNotSupportedException = true)
+
+        private static bool TryGetCastTargetDbTypeString(Type sourceType, Type targetType, out string dbTypeString, bool throwNotSupportedException = true)
         {
             dbTypeString = null;
 
@@ -204,12 +207,13 @@ namespace Chloe.SqlServer
             else
                 return false;
         }
-        static string AppendNotSupportedCastErrorMsg(Type sourceType, Type targetType)
+
+        private static string AppendNotSupportedCastErrorMsg(Type sourceType, Type targetType)
         {
             return string.Format("Does not support the type '{0}' converted to type '{1}'.", sourceType.FullName, targetType.FullName);
         }
 
-        static void DbFunction_DATEADD(SqlGenerator generator, string interval, DbMethodCallExpression exp)
+        private static void DbFunction_DATEADD(SqlGenerator generator, string interval, DbMethodCallExpression exp)
         {
             generator._sqlBuilder.Append("DATEADD(");
             generator._sqlBuilder.Append(interval);
@@ -219,7 +223,8 @@ namespace Chloe.SqlServer
             exp.Object.Accept(generator);
             generator._sqlBuilder.Append(")");
         }
-        static void DbFunction_DATEPART(SqlGenerator generator, string interval, DbExpression exp)
+
+        private static void DbFunction_DATEPART(SqlGenerator generator, string interval, DbExpression exp)
         {
             generator._sqlBuilder.Append("DATEPART(");
             generator._sqlBuilder.Append(interval);
@@ -227,7 +232,8 @@ namespace Chloe.SqlServer
             exp.Accept(generator);
             generator._sqlBuilder.Append(")");
         }
-        static void DbFunction_DATEDIFF(SqlGenerator generator, string interval, DbExpression startDateTimeExp, DbExpression endDateTimeExp)
+
+        private static void DbFunction_DATEDIFF(SqlGenerator generator, string interval, DbExpression startDateTimeExp, DbExpression endDateTimeExp)
         {
             generator._sqlBuilder.Append("DATEDIFF(");
             generator._sqlBuilder.Append(interval);
@@ -239,23 +245,28 @@ namespace Chloe.SqlServer
         }
 
         #region AggregateFunction
-        static void Aggregate_Count(SqlGenerator generator)
+
+        private static void Aggregate_Count(SqlGenerator generator)
         {
             generator._sqlBuilder.Append("COUNT(1)");
         }
-        static void Aggregate_LongCount(SqlGenerator generator)
+
+        private static void Aggregate_LongCount(SqlGenerator generator)
         {
             generator._sqlBuilder.Append("COUNT_BIG(1)");
         }
-        static void Aggregate_Max(SqlGenerator generator, DbExpression exp, Type retType)
+
+        private static void Aggregate_Max(SqlGenerator generator, DbExpression exp, Type retType)
         {
             AppendAggregateFunction(generator, exp, retType, "MAX", false);
         }
-        static void Aggregate_Min(SqlGenerator generator, DbExpression exp, Type retType)
+
+        private static void Aggregate_Min(SqlGenerator generator, DbExpression exp, Type retType)
         {
             AppendAggregateFunction(generator, exp, retType, "MIN", false);
         }
-        static void Aggregate_Sum(SqlGenerator generator, DbExpression exp, Type retType)
+
+        private static void Aggregate_Sum(SqlGenerator generator, DbExpression exp, Type retType)
         {
             if (retType.IsNullable())
             {
@@ -270,12 +281,13 @@ namespace Chloe.SqlServer
                 generator._sqlBuilder.Append(")");
             }
         }
-        static void Aggregate_Average(SqlGenerator generator, DbExpression exp, Type retType)
+
+        private static void Aggregate_Average(SqlGenerator generator, DbExpression exp, Type retType)
         {
             AppendAggregateFunction(generator, exp, retType, "AVG", true);
         }
 
-        static void AppendAggregateFunction(SqlGenerator generator, DbExpression exp, Type retType, string functionName, bool withCast)
+        private static void AppendAggregateFunction(SqlGenerator generator, DbExpression exp, Type retType, string functionName, bool withCast)
         {
             string dbTypeString = null;
             if (withCast == true)
@@ -296,7 +308,7 @@ namespace Chloe.SqlServer
                 generator._sqlBuilder.Append(" AS ", dbTypeString, ")");
             }
         }
-        #endregion
 
+        #endregion AggregateFunction
     }
 }

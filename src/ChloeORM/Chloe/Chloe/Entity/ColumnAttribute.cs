@@ -6,19 +6,26 @@ namespace Chloe.Entity
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
     public class ColumnAttribute : Attribute
     {
-        DbType _dbType = (DbType)(-1);/* -1=Unspecified */
-        int _length = -1;/* -1=Unspecified */
-        public ColumnAttribute() { }
+        private DbType _dbType = (DbType)(-1);/* -1=Unspecified */
+        private int _length = -1;/* -1=Unspecified */
+
+        public ColumnAttribute()
+        {
+        }
+
         public ColumnAttribute(string name)
         {
             this.Name = name;
         }
+
         public string Name { get; set; }
         public bool IsPrimaryKey { get; set; }
+
         /// <summary>
         /// -1 表示未指定确切的值，用该属性的时候务必做 -1 判断。
         /// </summary>
         public DbType DbType { get { return this._dbType; } set { this._dbType = value; } }
+
         /// <summary>
         /// -1 表示未指定确切的值，用该属性的时候务必做 -1 判断。
         /// </summary>
@@ -28,6 +35,7 @@ namespace Chloe.Entity
         {
             return (int)this._dbType != -1;
         }
+
         public DbType? GetDbType()
         {
             if (this.HasDbType())
@@ -40,6 +48,7 @@ namespace Chloe.Entity
         {
             return this._length != -1;
         }
+
         public int? GetLength()
         {
             if (this.HasLength())

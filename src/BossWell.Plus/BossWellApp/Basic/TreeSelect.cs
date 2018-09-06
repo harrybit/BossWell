@@ -1,8 +1,8 @@
-﻿using BossWellModel.BossWellModel;
+﻿using ApiHelp;
+using BossWellModel.BossWellModel;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using ApiHelp;
+
 namespace BossWellApp.Basic
 {
     public static class TreeSelect
@@ -15,6 +15,7 @@ namespace BossWellApp.Basic
             sb.Append("]");
             return sb.ToString();
         }
+
         private static string TreeSelectJson(List<TreeSelectModel> data, string parentId, string blank)
         {
             StringBuilder textBuilder = new StringBuilder();

@@ -1,14 +1,11 @@
-﻿using Chloe.Core;
-using Chloe.Query.QueryExpressions;
+﻿using Chloe.Query.QueryExpressions;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Chloe.Query
 {
-    class GroupingQuery<T> : IGroupingQuery<T>
+    internal class GroupingQuery<T> : IGroupingQuery<T>
     {
         protected Query<T> _fromQuery;
         protected List<LambdaExpression> _groupKeySelectors;
@@ -22,6 +19,7 @@ namespace Chloe.Query
             this._havingPredicates = new List<LambdaExpression>();
             this._orderings = new List<GroupingQueryOrdering>();
         }
+
         public GroupingQuery(Query<T> fromQuery, List<LambdaExpression> groupKeySelectors, List<LambdaExpression> havingPredicates, List<GroupingQueryOrdering> orderings)
         {
             this._fromQuery = fromQuery;
@@ -39,6 +37,7 @@ namespace Chloe.Query
 
             return new GroupingQuery<T>(this._fromQuery, groupKeySelectors, havingPredicates, orderings);
         }
+
         public IGroupingQuery<T> Having(Expression<Func<T, bool>> predicate)
         {
             List<LambdaExpression> groupKeySelectors = Utils.Clone(this._groupKeySelectors);
@@ -49,14 +48,17 @@ namespace Chloe.Query
 
             return new GroupingQuery<T>(this._fromQuery, groupKeySelectors, havingPredicates, orderings);
         }
+
         public IOrderedGroupingQuery<T> OrderBy<K>(Expression<Func<T, K>> keySelector)
         {
             return this.CreateOrderedGroupingQuery(keySelector, DbExpressions.DbOrderType.Asc, false);
         }
+
         public IOrderedGroupingQuery<T> OrderByDesc<K>(Expression<Func<T, K>> keySelector)
         {
             return this.CreateOrderedGroupingQuery(keySelector, DbExpressions.DbOrderType.Desc, false);
         }
+
         public IQuery<TResult> Select<TResult>(Expression<Func<T, TResult>> selector)
         {
             var e = new GroupingQueryExpression(typeof(TResult), this._fromQuery.QueryExpression, selector);
@@ -80,7 +82,7 @@ namespace Chloe.Query
         }
     }
 
-    class OrderedGroupingQuery<T> : GroupingQuery<T>, IOrderedGroupingQuery<T>
+    internal class OrderedGroupingQuery<T> : GroupingQuery<T>, IOrderedGroupingQuery<T>
     {
         public OrderedGroupingQuery(Query<T> fromQuery, List<LambdaExpression> groupKeySelectors, List<LambdaExpression> havingPredicates, List<GroupingQueryOrdering> orderings)
             : base(fromQuery, groupKeySelectors, havingPredicates, orderings)
@@ -91,6 +93,7 @@ namespace Chloe.Query
         {
             return this.CreateOrderedGroupingQuery(keySelector, DbExpressions.DbOrderType.Asc, true);
         }
+
         public IOrderedGroupingQuery<T> ThenByDesc<K>(Expression<Func<T, K>> keySelector)
         {
             return this.CreateOrderedGroupingQuery(keySelector, DbExpressions.DbOrderType.Desc, true);

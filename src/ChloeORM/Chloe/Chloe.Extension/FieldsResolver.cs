@@ -4,16 +4,14 @@ using Chloe.InternalExtensions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Chloe.Extension
 {
-    class FieldsResolver
+    internal class FieldsResolver
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="fieldsLambdaExpression">a => new { a.Name, a.Age } or a => new object[] { a.Name, a.Age }</param>
         /// <returns></returns>

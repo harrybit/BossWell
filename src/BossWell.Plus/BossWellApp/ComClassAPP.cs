@@ -1,18 +1,18 @@
-﻿using BossWellFactory;
-using IBossWellService;
+﻿using ApiHelp;
+using BossWellApp.Basic;
+using BossWellFactory;
 using BossWellModel;
 using BossWellModel.Base;
-using System;
-using System.Collections.Generic;
-using BossWellApp.Basic;
 using BossWellModel.BossWellModel;
+using IBossWellService;
+using System.Collections.Generic;
 using System.Linq;
-using ApiHelp;
+
 namespace BossWellApp
 {
     public class ComClassAPP
     {
-        IComClassService _service = SysAutoFactory.GetComClassService();
+        private IComClassService _service = SysAutoFactory.GetComClassService();
 
         /// <summary>
         /// Get TreeSelect By Parent
@@ -184,6 +184,5 @@ namespace BossWellApp
             QueryResponse<ComClassEntity> response = _service.GetPageList(request);
             return response.Items;
         }
-
     }
 }

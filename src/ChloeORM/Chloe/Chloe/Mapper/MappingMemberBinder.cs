@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
+﻿using System.Data;
 
 namespace Chloe.Mapper
 {
     public class MappingMemberBinder : IValueSetter
     {
-        IMRM _mMapper;
-        int _ordinal;
+        private IMRM _mMapper;
+        private int _ordinal;
+
         public MappingMemberBinder(IMRM mMapper, int ordinal)
         {
             this._mMapper = mMapper;

@@ -5,13 +5,14 @@ using System.Linq;
 
 namespace Chloe
 {
-    static class Utils
+    internal static class Utils
     {
         public static void CheckNull(object obj, string paramName = null)
         {
             if (obj == null)
                 throw new ArgumentNullException(paramName);
         }
+
         public static bool AreEqual(object obj1, object obj2)
         {
             if (obj1 == null && obj2 == null)
@@ -29,6 +30,7 @@ namespace Chloe
 
             return object.Equals(obj1, obj2);
         }
+
         public static string GenerateUniqueColumnAlias(DbSqlQueryExpression sqlQuery, string defaultAlias = UtilConstants.DefaultColumnAlias)
         {
             string alias = defaultAlias;
@@ -47,6 +49,7 @@ namespace Chloe
             Dictionary<TKey, TValue> ret = Clone<TKey, TValue>(source, source.Count);
             return ret;
         }
+
         public static Dictionary<TKey, TValue> Clone<TKey, TValue>(Dictionary<TKey, TValue> source, int capacity)
         {
             Dictionary<TKey, TValue> ret = new Dictionary<TKey, TValue>(capacity);
@@ -65,6 +68,7 @@ namespace Chloe
             ret.AddRange(source);
             return ret;
         }
+
         public static List<T> CloneAndAppendOne<T>(List<T> source, T t)
         {
             List<T> ret = new List<T>(source.Count + 1);
@@ -79,12 +83,16 @@ namespace Chloe
             {
                 case JoinType.InnerJoin:
                     return DbJoinType.InnerJoin;
+
                 case JoinType.LeftJoin:
                     return DbJoinType.LeftJoin;
+
                 case JoinType.RightJoin:
                     return DbJoinType.RightJoin;
+
                 case JoinType.FullJoin:
                     return DbJoinType.FullJoin;
+
                 default:
                     throw new NotSupportedException();
             }
@@ -99,15 +107,19 @@ namespace Chloe
                 case 3:
                     funcType = typeof(Func<,,>);
                     break;
+
                 case 4:
                     funcType = typeof(Func<,,,>);
                     break;
+
                 case 5:
                     funcType = typeof(Func<,,,,>);
                     break;
+
                 case 6:
                     funcType = typeof(Func<,,,,,>);
                     break;
+
                 default:
                     throw new NotSupportedException();
             }

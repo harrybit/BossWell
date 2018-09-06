@@ -1,14 +1,15 @@
-﻿using System;
-using System.Reflection;
-using Chloe.InternalExtensions;
+﻿using Chloe.InternalExtensions;
+using System;
 using System.Data;
+using System.Reflection;
 
 namespace Chloe.DbExpressions
 {
     public class DbMemberExpression : DbExpression
     {
-        MemberInfo _member;
-        DbExpression _exp;
+        private MemberInfo _member;
+        private DbExpression _exp;
+
         public DbMemberExpression(MemberInfo member, DbExpression exp)
             : base(DbExpressionType.MemberAccess)
         {
@@ -31,6 +32,7 @@ namespace Chloe.DbExpressions
         {
             get { return this._member; }
         }
+
         public DbType? DbType
         {
             get;

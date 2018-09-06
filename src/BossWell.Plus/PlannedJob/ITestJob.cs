@@ -1,5 +1,4 @@
-﻿using System;
-namespace PlannedJob
+﻿namespace PlannedJob
 {
     public interface ITestJob
     {

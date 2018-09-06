@@ -1,18 +1,21 @@
-﻿using BossWellApp;
+﻿using ApiHelp;
+using BossWellApp;
 using BossWellApp.Basic;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
-using ApiHelp;
+
 namespace BossWellWeb
 {
     public class HandlerAuthorizeAttribute : ActionFilterAttribute
     {
         public bool Ignore { get; set; }
+
         public HandlerAuthorizeAttribute(bool ignore = true)
         {
             Ignore = ignore;
         }
+
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             if (OperatorProvider.Provider.GetCurrent().IsSystem)
@@ -33,6 +36,7 @@ namespace BossWellWeb
                 return;
             }
         }
+
         private bool ActionAuthorize(ActionExecutingContext filterContext)
         {
             var operatorProvider = OperatorProvider.Provider.GetCurrent();

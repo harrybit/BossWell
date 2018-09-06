@@ -1,22 +1,15 @@
-﻿using Chloe.Core;
-using Chloe.Core.Visitors;
-using Chloe.DbExpressions;
+﻿using Chloe.DbExpressions;
 using Chloe.Descriptors;
 using Chloe.Entity;
 using Chloe.Exceptions;
-using Chloe.Infrastructure;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
 
 namespace Chloe.Oracle
 {
     public partial class OracleContext : DbContext
     {
-        static MappingMemberDescriptor GetDefineSequenceMemberDescriptor(TypeDescriptor typeDescriptor, out string sequenceName)
+        private static MappingMemberDescriptor GetDefineSequenceMemberDescriptor(TypeDescriptor typeDescriptor, out string sequenceName)
         {
             sequenceName = null;
             MappingMemberDescriptor defineSequenceMemberDescriptor = null;
@@ -41,7 +34,8 @@ namespace Chloe.Oracle
 
             return defineSequenceMemberDescriptor;
         }
-        static bool HasSequenceAttribute(MappingMemberDescriptor memberDescriptor, out string sequenceName)
+
+        private static bool HasSequenceAttribute(MappingMemberDescriptor memberDescriptor, out string sequenceName)
         {
             sequenceName = null;
 
@@ -57,26 +51,30 @@ namespace Chloe.Oracle
 
             return false;
         }
-        static void EnsureDefineSequenceMemberType(MappingMemberDescriptor defineSequenceMemberDescriptor)
+
+        private static void EnsureDefineSequenceMemberType(MappingMemberDescriptor defineSequenceMemberDescriptor)
         {
             if (defineSequenceMemberDescriptor.MemberInfoType != UtilConstants.TypeOfInt16 && defineSequenceMemberDescriptor.MemberInfoType != UtilConstants.TypeOfInt32 && defineSequenceMemberDescriptor.MemberInfoType != UtilConstants.TypeOfInt64)
             {
                 throw new ChloeException("Identity type must be Int16,Int32 or Int64.");
             }
         }
-        static void EnsureMappingTypeHasPrimaryKey(TypeDescriptor typeDescriptor)
+
+        private static void EnsureMappingTypeHasPrimaryKey(TypeDescriptor typeDescriptor)
         {
             if (!typeDescriptor.HasPrimaryKey())
                 throw new ChloeException(string.Format("Mapping type '{0}' does not define a primary key.", typeDescriptor.EntityType.FullName));
         }
-        static object ConvertIdentityType(object identity, Type conversionType)
+
+        private static object ConvertIdentityType(object identity, Type conversionType)
         {
             if (identity.GetType() != conversionType)
                 return Convert.ChangeType(identity, conversionType);
 
             return identity;
         }
-        static Dictionary<MappingMemberDescriptor, object> CreateKeyValueMap(TypeDescriptor typeDescriptor)
+
+        private static Dictionary<MappingMemberDescriptor, object> CreateKeyValueMap(TypeDescriptor typeDescriptor)
         {
             Dictionary<MappingMemberDescriptor, object> keyValueMap = new Dictionary<MappingMemberDescriptor, object>();
             foreach (MappingMemberDescriptor keyMemberDescriptor in typeDescriptor.PrimaryKeys)
@@ -86,7 +84,8 @@ namespace Chloe.Oracle
 
             return keyValueMap;
         }
-        static DbExpression MakeCondition(Dictionary<MappingMemberDescriptor, object> keyValueMap, DbTable dbTable)
+
+        private static DbExpression MakeCondition(Dictionary<MappingMemberDescriptor, object> keyValueMap, DbTable dbTable)
         {
             DbExpression conditionExp = null;
             foreach (var kv in keyValueMap)
@@ -105,6 +104,5 @@ namespace Chloe.Oracle
 
             return conditionExp;
         }
-
     }
 }

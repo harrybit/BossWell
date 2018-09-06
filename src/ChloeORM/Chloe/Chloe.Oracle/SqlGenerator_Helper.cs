@@ -1,28 +1,25 @@
-﻿using Chloe.Core;
-using Chloe.DbExpressions;
+﻿using Chloe.DbExpressions;
 using Chloe.InternalExtensions;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace Chloe.Oracle
 {
     partial class SqlGenerator : DbExpressionVisitor<DbExpression>
     {
-        void LeftBracket()
+        private void LeftBracket()
         {
             this._sqlBuilder.Append("(");
         }
-        void RightBracket()
+
+        private void RightBracket()
         {
             this._sqlBuilder.Append(")");
         }
 
-        static string GenParameterName(int ordinal)
+        private static string GenParameterName(int ordinal)
         {
             if (ordinal < CacheParameterNames.Count)
             {
@@ -31,7 +28,8 @@ namespace Chloe.Oracle
 
             return UtilConstants.ParameterNamePrefix + ordinal.ToString();
         }
-        static string GenRowNumberName(List<DbColumnSegment> columns)
+
+        private static string GenRowNumberName(List<DbColumnSegment> columns)
         {
             int ROW_NUMBER_INDEX = 1;
             string row_numberName = "ROW_NUMBER_0";
@@ -43,7 +41,8 @@ namespace Chloe.Oracle
 
             return row_numberName;
         }
-        static void AmendDbInfo(DbExpression exp1, DbExpression exp2)
+
+        private static void AmendDbInfo(DbExpression exp1, DbExpression exp2)
         {
             DbColumnAccessExpression datumPointExp = null;
             DbParameterExpression expToAmend = null;
@@ -68,7 +67,8 @@ namespace Chloe.Oracle
                     expToAmend.DbType = datumPointExp.Column.DbType;
             }
         }
-        static void AmendDbInfo(DbColumn column, DbExpression exp)
+
+        private static void AmendDbInfo(DbColumn column, DbExpression exp)
         {
             if (column.DbType == null || exp.NodeType != DbExpressionType.Parameter)
                 return;
@@ -78,7 +78,8 @@ namespace Chloe.Oracle
             if (expToAmend.DbType == null)
                 expToAmend.DbType = column.DbType;
         }
-        static DbExpression Trim_Nullable_Value(DbExpression exp)
+
+        private static DbExpression Trim_Nullable_Value(DbExpression exp)
         {
             DbMemberExpression memberExp = exp as DbMemberExpression;
             if (memberExp == null)
@@ -90,8 +91,7 @@ namespace Chloe.Oracle
             return exp;
         }
 
-
-        static DbExpression EnsureDbExpressionReturnCSharpBoolean(DbExpression exp)
+        private static DbExpression EnsureDbExpressionReturnCSharpBoolean(DbExpression exp)
         {
             if (exp.Type != UtilConstants.TypeOfBoolean && exp.Type != UtilConstants.TypeOfBoolean_Nullable)
                 return exp;
@@ -102,9 +102,10 @@ namespace Chloe.Oracle
             }
 
             //将且认为不符合上述条件的都是诸如 a.Id>1,a.Name=="name" 等不能作为 bool 返回值的表达式
-            //构建 case when 
+            //构建 case when
             return ConstructReturnCSharpBooleanCaseWhenExpression(exp);
         }
+
         public static DbCaseWhenExpression ConstructReturnCSharpBooleanCaseWhenExpression(DbExpression exp)
         {
             // case when 1>0 then 1 when not (1>0) then 0 else Null end
@@ -118,7 +119,7 @@ namespace Chloe.Oracle
             return caseWhenExpression;
         }
 
-        static Stack<DbExpression> GatherBinaryExpressionOperand(DbBinaryExpression exp)
+        private static Stack<DbExpression> GatherBinaryExpressionOperand(DbBinaryExpression exp)
         {
             DbExpressionType nodeType = exp.NodeType;
 
@@ -136,12 +137,14 @@ namespace Chloe.Oracle
             items.Push(left);
             return items;
         }
-        static void EnsureMethodDeclaringType(DbMethodCallExpression exp, Type ensureType)
+
+        private static void EnsureMethodDeclaringType(DbMethodCallExpression exp, Type ensureType)
         {
             if (exp.Method.DeclaringType != ensureType)
                 throw UtilExceptions.NotSupportedMethod(exp.Method);
         }
-        static void EnsureMethodDeclaringType(DbMethodCallExpression exp, params Type[] ensureTypes)
+
+        private static void EnsureMethodDeclaringType(DbMethodCallExpression exp, params Type[] ensureTypes)
         {
             foreach (var type in ensureTypes)
             {
@@ -151,14 +154,14 @@ namespace Chloe.Oracle
 
             throw UtilExceptions.NotSupportedMethod(exp.Method);
         }
-        static void EnsureMethod(DbMethodCallExpression exp, MethodInfo methodInfo)
+
+        private static void EnsureMethod(DbMethodCallExpression exp, MethodInfo methodInfo)
         {
             if (exp.Method != methodInfo)
                 throw UtilExceptions.NotSupportedMethod(exp.Method);
         }
 
-
-        static void EnsureTrimCharArgumentIsSpaces(DbExpression exp)
+        private static void EnsureTrimCharArgumentIsSpaces(DbExpression exp)
         {
             var m = exp as DbMemberExpression;
             if (m == null)
@@ -181,7 +184,8 @@ namespace Chloe.Oracle
                 throw new NotSupportedException();
             }
         }
-        static bool TryGetCastTargetDbTypeString(Type sourceType, Type targetType, out string dbTypeString, bool throwNotSupportedException = true)
+
+        private static bool TryGetCastTargetDbTypeString(Type sourceType, Type targetType, out string dbTypeString, bool throwNotSupportedException = true)
         {
             dbTypeString = null;
 
@@ -201,12 +205,13 @@ namespace Chloe.Oracle
             else
                 return false;
         }
-        static string AppendNotSupportedCastErrorMsg(Type sourceType, Type targetType)
+
+        private static string AppendNotSupportedCastErrorMsg(Type sourceType, Type targetType)
         {
             return string.Format("Does not support the type '{0}' converted to type '{1}'.", sourceType.FullName, targetType.FullName);
         }
 
-        static void DbFunction_DATEADD(SqlGenerator generator, string interval, DbMethodCallExpression exp)
+        private static void DbFunction_DATEADD(SqlGenerator generator, string interval, DbMethodCallExpression exp)
         {
             /*
              * Just support hour/minute/second
@@ -224,7 +229,8 @@ namespace Chloe.Oracle
             generator._sqlBuilder.Append("')");
             generator._sqlBuilder.Append(")");
         }
-        static void DbFunction_DATEPART(SqlGenerator generator, string interval, DbExpression exp, bool castToTimestamp = false)
+
+        private static void DbFunction_DATEPART(SqlGenerator generator, string interval, DbExpression exp, bool castToTimestamp = false)
         {
             /* cast(to_char(sysdate,'yyyy') as number) */
             generator._sqlBuilder.Append("CAST(TO_CHAR(");
@@ -238,29 +244,35 @@ namespace Chloe.Oracle
             generator._sqlBuilder.Append(interval);
             generator._sqlBuilder.Append("') AS NUMBER)");
         }
-        static void DbFunction_DATEDIFF(SqlGenerator generator, string interval, DbExpression startDateTimeExp, DbExpression endDateTimeExp)
+
+        private static void DbFunction_DATEDIFF(SqlGenerator generator, string interval, DbExpression startDateTimeExp, DbExpression endDateTimeExp)
         {
             throw new NotSupportedException("DATEDIFF is not supported.");
         }
 
         #region AggregateFunction
-        static void Aggregate_Count(SqlGenerator generator)
+
+        private static void Aggregate_Count(SqlGenerator generator)
         {
             generator._sqlBuilder.Append("COUNT(1)");
         }
-        static void Aggregate_LongCount(SqlGenerator generator)
+
+        private static void Aggregate_LongCount(SqlGenerator generator)
         {
             generator._sqlBuilder.Append("COUNT(1)");
         }
-        static void Aggregate_Max(SqlGenerator generator, DbExpression exp, Type retType)
+
+        private static void Aggregate_Max(SqlGenerator generator, DbExpression exp, Type retType)
         {
             AppendAggregateFunction(generator, exp, retType, "MAX", false);
         }
-        static void Aggregate_Min(SqlGenerator generator, DbExpression exp, Type retType)
+
+        private static void Aggregate_Min(SqlGenerator generator, DbExpression exp, Type retType)
         {
             AppendAggregateFunction(generator, exp, retType, "MIN", false);
         }
-        static void Aggregate_Sum(SqlGenerator generator, DbExpression exp, Type retType)
+
+        private static void Aggregate_Sum(SqlGenerator generator, DbExpression exp, Type retType)
         {
             if (retType.IsNullable())
             {
@@ -275,12 +287,13 @@ namespace Chloe.Oracle
                 generator._sqlBuilder.Append(")");
             }
         }
-        static void Aggregate_Average(SqlGenerator generator, DbExpression exp, Type retType)
+
+        private static void Aggregate_Average(SqlGenerator generator, DbExpression exp, Type retType)
         {
             AppendAggregateFunction(generator, exp, retType, "AVG", false);
         }
 
-        static void AppendAggregateFunction(SqlGenerator generator, DbExpression exp, Type retType, string functionName, bool withCast)
+        private static void AppendAggregateFunction(SqlGenerator generator, DbExpression exp, Type retType, string functionName, bool withCast)
         {
             string dbTypeString = null;
             if (withCast == true)
@@ -301,10 +314,10 @@ namespace Chloe.Oracle
                 generator._sqlBuilder.Append(" AS ", dbTypeString, ")");
             }
         }
-        #endregion
 
+        #endregion AggregateFunction
 
-        static void CopyColumnSegments(List<DbColumnSegment> sourceList, List<DbColumnSegment> destinationList, DbTable newTable)
+        private static void CopyColumnSegments(List<DbColumnSegment> sourceList, List<DbColumnSegment> destinationList, DbTable newTable)
         {
             for (int i = 0; i < sourceList.Count; i++)
             {
@@ -312,14 +325,16 @@ namespace Chloe.Oracle
                 destinationList.Add(newColumnSeg);
             }
         }
-        static DbColumnSegment CloneColumnSegment(DbColumnSegment rawColumnSeg, DbTable newBelongTable)
+
+        private static DbColumnSegment CloneColumnSegment(DbColumnSegment rawColumnSeg, DbTable newBelongTable)
         {
             DbColumnAccessExpression columnAccessExp = new DbColumnAccessExpression(newBelongTable, DbColumn.MakeColumn(rawColumnSeg.Body, rawColumnSeg.Alias));
             DbColumnSegment newColumnSeg = new DbColumnSegment(columnAccessExp, rawColumnSeg.Alias);
 
             return newColumnSeg;
         }
-        static void AppendLimitCondition(DbSqlQueryExpression sqlQuery, int limitCount)
+
+        private static void AppendLimitCondition(DbSqlQueryExpression sqlQuery, int limitCount)
         {
             DbLessThanExpression lessThanExp = DbExpression.LessThan(OracleSemantics.DbMemberExpression_ROWNUM, DbExpression.Constant(limitCount + 1));
 
@@ -329,7 +344,8 @@ namespace Chloe.Oracle
 
             sqlQuery.Condition = condition;
         }
-        static DbSqlQueryExpression WrapSqlQuery(DbSqlQueryExpression sqlQuery, DbTable table, List<DbColumnSegment> columnSegments = null)
+
+        private static DbSqlQueryExpression WrapSqlQuery(DbSqlQueryExpression sqlQuery, DbTable table, List<DbColumnSegment> columnSegments = null)
         {
             DbSubQueryExpression subQuery = new DbSubQueryExpression(sqlQuery);
 
@@ -344,7 +360,8 @@ namespace Chloe.Oracle
 
             return newSqlQuery;
         }
-        static DbSqlQueryExpression CloneWithoutLimitInfo(DbSqlQueryExpression sqlQuery, string wraperTableName = "T")
+
+        private static DbSqlQueryExpression CloneWithoutLimitInfo(DbSqlQueryExpression sqlQuery, string wraperTableName = "T")
         {
             DbSqlQueryExpression newSqlQuery = new DbSqlQueryExpression();
             newSqlQuery.Table = sqlQuery.Table;

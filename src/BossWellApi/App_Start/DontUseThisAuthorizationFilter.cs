@@ -1,5 +1,6 @@
 ﻿using Hangfire.Dashboard;
 using System.Collections.Generic;
+
 namespace BossWellApi
 {
     public class DontUseThisAuthorizationFilter : IAuthorizationFilter

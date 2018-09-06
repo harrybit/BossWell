@@ -1,18 +1,19 @@
-﻿using BossWellModel;
-using BossWellModel.Base;
+﻿using ApiHelp;
+using BossWellApp.Basic;
 using BossWellFactory;
-using System.Collections.Generic;
+using BossWellModel;
+using BossWellModel.Base;
 using BossWellModel.BossWellModel;
 using IBossWellService;
-using BossWellApp.Basic;
+using System.Collections.Generic;
 using System.Linq;
-using ApiHelp;
 
 namespace BossWellApp
 {
     public class SystemConfigApp
     {
-        ISystemConfigService _service = SysAutoFactory.GetSysConfig();
+        private ISystemConfigService _service = SysAutoFactory.GetSysConfig();
+
         public string GetTreeSelectJson()
         {
             List<TreeSelectModel> treeList = new List<TreeSelectModel>();
@@ -28,6 +29,7 @@ namespace BossWellApp
             });
             return treeList.TreeSelectJson();
         }
+
         public string GetTreeGridJson(string keyWord)
         {
             List<TreeGridModel> treeList = new List<TreeGridModel>();
@@ -46,10 +48,12 @@ namespace BossWellApp
             });
             return treeList.TreeGridJson();
         }
+
         public string GetFormJson(string sid)
         {
             return ApiHelper.JsonSerial(_service.GetForm(sid));
         }
+
         public SystemConfigEntity SaveForm(SystemConfigEntity sysModel, string sid)
         {
             if (!string.IsNullOrEmpty(sid))
@@ -63,6 +67,7 @@ namespace BossWellApp
             }
             return _service.SaveForm(sysModel);
         }
+
         public int DeleteForm(string sid)
         {
             List<string> allList = new List<string>();
@@ -75,6 +80,7 @@ namespace BossWellApp
             }
             return _service.DeleteForm(allList);
         }
+
         private List<string> GetAllChild(List<string> nodeList, List<string> allList)
         {
             if (nodeList.Count < 1)
@@ -90,6 +96,7 @@ namespace BossWellApp
             }
             return allList;
         }
+
         private List<SystemConfigEntity> GetList(string keyWord)
         {
             QueryRequest<SystemConfigEntity> request = new QueryRequest<SystemConfigEntity>();
@@ -100,6 +107,5 @@ namespace BossWellApp
             QueryResponse<SystemConfigEntity> response = _service.GetPageList(request);
             return response.Items;
         }
-
     }
 }

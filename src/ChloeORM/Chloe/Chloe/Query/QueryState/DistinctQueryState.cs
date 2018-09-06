@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Chloe.DbExpressions;
+﻿using Chloe.DbExpressions;
 
 namespace Chloe.Query.QueryState
 {
-    class DistinctQueryState : SubQueryState
+    internal class DistinctQueryState : SubQueryState
     {
         public DistinctQueryState(ResultElement resultElement)
             : base(resultElement)
@@ -17,7 +13,7 @@ namespace Chloe.Query.QueryState
         {
             DbSqlQueryExpression sqlQuery = base.CreateSqlQuery();
             sqlQuery.IsDistinct = true;
-            
+
             return sqlQuery;
         }
     }

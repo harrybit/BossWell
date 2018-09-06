@@ -1,4 +1,5 @@
 ﻿using Chloe.Entity;
+
 namespace BossWellModel
 {
     /// <summary>
@@ -31,6 +32,5 @@ namespace BossWellModel
         /// 备注
         /// </summary>
         public string Remark { get; set; }
-
     }
 }

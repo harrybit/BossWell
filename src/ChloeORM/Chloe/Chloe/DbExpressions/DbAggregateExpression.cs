@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace Chloe.DbExpressions
 {
     public class DbAggregateExpression : DbExpression
     {
-        MethodInfo _method;
-        ReadOnlyCollection<DbExpression> _arguments;
+        private MethodInfo _method;
+        private ReadOnlyCollection<DbExpression> _arguments;
+
         public DbAggregateExpression(Type type, MethodInfo method, IList<DbExpression> arguments)
             : base(DbExpressionType.Aggregate, type)
         {

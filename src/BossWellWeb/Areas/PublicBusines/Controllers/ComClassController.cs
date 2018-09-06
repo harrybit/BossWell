@@ -1,6 +1,7 @@
 ﻿using BossWellApp;
 using BossWellModel;
 using System.Web.Mvc;
+
 namespace BossWellWeb.Areas.PublicBusines.Controllers
 {
     public class ComClassController : ControllerBase
@@ -75,8 +76,7 @@ namespace BossWellWeb.Areas.PublicBusines.Controllers
             return Content(comclassAPP.GetTreeSelectJson(parentId));
         }
 
-
-        #endregion
+        #endregion Get Select
 
         #region InIt
 
@@ -87,7 +87,6 @@ namespace BossWellWeb.Areas.PublicBusines.Controllers
             return View();
         }
 
-        #endregion
-
+        #endregion InIt
     }
 }

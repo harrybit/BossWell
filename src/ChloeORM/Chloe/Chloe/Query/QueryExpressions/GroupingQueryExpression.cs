@@ -1,18 +1,17 @@
 ﻿using Chloe.DbExpressions;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Chloe.Query.QueryExpressions
 {
-    class GroupingQueryExpression : QueryExpression
+    internal class GroupingQueryExpression : QueryExpression
     {
-        List<LambdaExpression> _groupKeySelectors = new List<LambdaExpression>();
-        List<LambdaExpression> _havingPredicates = new List<LambdaExpression>();
-        List<GroupingQueryOrdering> _orderings = new List<GroupingQueryOrdering>();
-        LambdaExpression _selector;
+        private List<LambdaExpression> _groupKeySelectors = new List<LambdaExpression>();
+        private List<LambdaExpression> _havingPredicates = new List<LambdaExpression>();
+        private List<GroupingQueryOrdering> _orderings = new List<GroupingQueryOrdering>();
+        private LambdaExpression _selector;
+
         public GroupingQueryExpression(Type elementType, QueryExpression prevExpression, LambdaExpression selector)
             : base(QueryExpressionType.GroupingQuery, elementType, prevExpression)
         {
@@ -30,15 +29,17 @@ namespace Chloe.Query.QueryExpressions
         }
     }
 
-    class GroupingQueryOrdering
+    internal class GroupingQueryOrdering
     {
-        LambdaExpression _keySelector;
-        DbOrderType _orderType;
+        private LambdaExpression _keySelector;
+        private DbOrderType _orderType;
+
         public GroupingQueryOrdering(LambdaExpression keySelector, DbOrderType orderType)
         {
             this._keySelector = keySelector;
             this._orderType = orderType;
         }
+
         public LambdaExpression KeySelector { get { return this._keySelector; } }
         public DbOrderType OrderType { get { return this._orderType; } }
     }

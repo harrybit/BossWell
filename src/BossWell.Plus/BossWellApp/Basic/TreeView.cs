@@ -50,6 +50,5 @@ namespace BossWellApp.Basic
             strJson.Append("]");
             return strJson.ToString();
         }
-
     }
 }

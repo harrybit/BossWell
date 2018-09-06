@@ -1,5 +1,4 @@
-﻿using Chloe.Core;
-using Chloe.Descriptors;
+﻿using Chloe.Descriptors;
 using Chloe.Infrastructure;
 using Chloe.Mapper;
 using Chloe.Query.Mapping;
@@ -7,20 +6,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading;
 
 namespace Chloe.Query.Internals
 {
-    class InternalSqlQuery<T> : IEnumerable<T>, IEnumerable
+    internal class InternalSqlQuery<T> : IEnumerable<T>, IEnumerable
     {
-        DbContext _dbContext;
-        string _sql;
-        CommandType _cmdType;
-        DbParam[] _parameters;
+        private DbContext _dbContext;
+        private string _sql;
+        private CommandType _cmdType;
+        private DbParam[] _parameters;
 
         public InternalSqlQuery(DbContext dbContext, string sql, CommandType cmdType, DbParam[] parameters)
         {
@@ -34,22 +30,23 @@ namespace Chloe.Query.Internals
         {
             return new QueryEnumerator(this);
         }
+
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
 
-
-        struct QueryEnumerator : IEnumerator<T>
+        private struct QueryEnumerator : IEnumerator<T>
         {
-            InternalSqlQuery<T> _internalSqlQuery;
+            private InternalSqlQuery<T> _internalSqlQuery;
 
-            IDataReader _reader;
-            IObjectActivator _objectActivator;
+            private IDataReader _reader;
+            private IObjectActivator _objectActivator;
 
-            T _current;
-            bool _hasFinished;
-            bool _disposed;
+            private T _current;
+            private bool _hasFinished;
+            private bool _disposed;
+
             public QueryEnumerator(InternalSqlQuery<T> internalSqlQuery)
             {
                 this._internalSqlQuery = internalSqlQuery;
@@ -116,7 +113,7 @@ namespace Chloe.Query.Internals
                 throw new NotSupportedException();
             }
 
-            void Prepare()
+            private void Prepare()
             {
                 Type type = typeof(T);
 
@@ -131,13 +128,14 @@ namespace Chloe.Query.Internals
                 this._reader = this.ExecuteReader();
                 this._objectActivator = GetObjectActivator(type, this._reader);
             }
-            IDataReader ExecuteReader()
+
+            private IDataReader ExecuteReader()
             {
                 IDataReader reader = this._internalSqlQuery._dbContext.AdoSession.ExecuteReader(this._internalSqlQuery._sql, this._internalSqlQuery._parameters, this._internalSqlQuery._cmdType);
                 return reader;
             }
 
-            static IObjectActivator GetObjectActivator(Type type, IDataReader reader)
+            private static IObjectActivator GetObjectActivator(Type type, IDataReader reader)
             {
                 if (type == UtilConstants.TypeOfObject || type == typeof(DapperRow))
                 {
@@ -180,7 +178,8 @@ namespace Chloe.Query.Internals
 
                 return cache.ObjectActivator;
             }
-            static ObjectActivator CreateObjectActivator(Type type, IDataReader reader)
+
+            private static ObjectActivator CreateObjectActivator(Type type, IDataReader reader)
             {
                 ConstructorInfo constructor = type.GetConstructor(Type.EmptyTypes);
                 if (constructor == null)
@@ -192,7 +191,8 @@ namespace Chloe.Query.Internals
                 List<IValueSetter> memberSetters = PrepareValueSetters(type, reader, mapper);
                 return new ObjectActivator(instanceCreator, null, null, memberSetters, null);
             }
-            static List<IValueSetter> PrepareValueSetters(Type type, IDataReader reader, EntityMemberMapper mapper)
+
+            private static List<IValueSetter> PrepareValueSetters(Type type, IDataReader reader, EntityMemberMapper mapper)
             {
                 List<IValueSetter> memberSetters = new List<IValueSetter>(reader.FieldCount);
 
@@ -223,7 +223,8 @@ namespace Chloe.Query.Internals
 
                 return memberSetters;
             }
-            static CacheInfo TryGetCacheInfoFromList(List<CacheInfo> caches, IDataReader reader)
+
+            private static CacheInfo TryGetCacheInfoFromList(List<CacheInfo> caches, IDataReader reader)
             {
                 CacheInfo cache = null;
                 for (int i = 0; i < caches.Count; i++)
@@ -239,13 +240,14 @@ namespace Chloe.Query.Internals
                 return cache;
             }
 
-            static readonly System.Collections.Concurrent.ConcurrentDictionary<Type, List<CacheInfo>> ObjectActivatorCache = new System.Collections.Concurrent.ConcurrentDictionary<Type, List<CacheInfo>>();
+            private static readonly System.Collections.Concurrent.ConcurrentDictionary<Type, List<CacheInfo>> ObjectActivatorCache = new System.Collections.Concurrent.ConcurrentDictionary<Type, List<CacheInfo>>();
         }
 
         public class CacheInfo
         {
-            ReaderFieldInfo[] _readerFields;
-            ObjectActivator _objectActivator;
+            private ReaderFieldInfo[] _readerFields;
+            private ObjectActivator _objectActivator;
+
             public CacheInfo(ObjectActivator activator, IDataReader reader)
             {
                 int fieldCount = reader.FieldCount;
@@ -282,10 +284,11 @@ namespace Chloe.Query.Internals
                 return true;
             }
 
-            class ReaderFieldInfo
+            private class ReaderFieldInfo
             {
-                string _name;
-                Type _type;
+                private string _name;
+                private Type _type;
+
                 public ReaderFieldInfo(string name, Type type)
                 {
                     this._name = name;
@@ -296,7 +299,5 @@ namespace Chloe.Query.Internals
                 public Type Type { get { return this._type; } }
             }
         }
-
     }
-
 }

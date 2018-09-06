@@ -1,9 +1,6 @@
 ﻿using Chloe.DbExpressions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace Chloe.InternalExtensions
 {
@@ -18,6 +15,7 @@ namespace Chloe.InternalExtensions
 
             return exp;
         }
+
         public static DbExpression StripInvalidConvert(this DbExpression exp)
         {
             if (exp.NodeType != DbExpressionType.Convert)
@@ -79,7 +77,6 @@ namespace Chloe.InternalExtensions
             return convertExpression;
         }
 
-
         /// <summary>
         /// 尝试将 exp 转换成 DbParameterExpression。
         /// </summary>
@@ -115,7 +112,6 @@ namespace Chloe.InternalExtensions
                     return false;
                 else
                     memberExpression = memberExp;
-
             } while (true);
         }
 
@@ -158,6 +154,7 @@ namespace Chloe.InternalExtensions
 
             return false;
         }
+
         /// <summary>
         /// 判定 exp 返回值肯定不是 null
         /// </summary>
@@ -197,6 +194,7 @@ namespace Chloe.InternalExtensions
 
             throw new NotSupportedException();
         }
+
         public static object Evaluate(this DbExpression exp)
         {
             if (exp.NodeType == DbExpressionType.Constant)

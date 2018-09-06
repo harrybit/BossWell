@@ -1,8 +1,8 @@
-﻿using System;
+﻿using BossWellModel;
+using BossWellModel.Base;
 using Chloe;
 using Chloe.MySql;
-using BossWellModel;
-using BossWellModel.Base;
+using System;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -11,6 +11,7 @@ namespace BossWellORM
     public class ChloeClient : IDisposable
     {
         public readonly MySqlContext context;
+
         public ChloeClient()
         {
             lock (this)
@@ -25,7 +26,7 @@ namespace BossWellORM
         public virtual QueryResponse<T> Query<T>(QueryRequest<T> request)
         {
             QueryResponse<T> response = new QueryResponse<T>();
-            
+
             var query = context.Query<T>().Where(request.expression);
             query = string.IsNullOrEmpty(request.SortTp) ? query.OrderBy(request.Sort) : query.OrderByDesc(request.Sort);
             response.TotalCount = query.Count();//总页码
@@ -58,7 +59,7 @@ namespace BossWellORM
             T model;
             if (string.IsNullOrEmpty(saveModel.Sid) || saveModel.Sid.Length < 16)
             {
-                saveModel.Sid = ApiHelp.ApiHelper.CreateRandom(32, 62, tit);
+                saveModel.Sid = ApiHelp.ApiHelper.CreateRandomString(32, tit);
                 saveModel.CreateDate = DateTime.Now;
                 model = context.Insert<T>(saveModel);
             }
@@ -69,7 +70,7 @@ namespace BossWellORM
             }
             return model;
         }
-        
+
         public void Dispose()
         {
             this.context.Dispose();

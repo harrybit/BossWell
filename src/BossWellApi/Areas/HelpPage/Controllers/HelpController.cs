@@ -1,8 +1,8 @@
+using BossWellApi.Areas.HelpPage.ModelDescriptions;
+using BossWellApi.Areas.HelpPage.Models;
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using BossWellApi.Areas.HelpPage.ModelDescriptions;
-using BossWellApi.Areas.HelpPage.Models;
 
 namespace BossWellApi.Areas.HelpPage.Controllers
 {

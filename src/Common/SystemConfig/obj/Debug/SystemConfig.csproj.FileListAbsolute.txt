@@ -12,3 +12,8 @@ D:\Project_TY\Code\纯净版\src\Common\SystemConfig\bin\Debug\SystemConfig.dll
 D:\Project_TY\Code\纯净版\src\Common\SystemConfig\bin\Debug\SystemConfig.pdb
 D:\Project_TY\Code\纯净版\src\Common\SystemConfig\obj\Debug\SystemConfig.dll
 D:\Project_TY\Code\纯净版\src\Common\SystemConfig\obj\Debug\SystemConfig.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\Common\SystemConfig\bin\Debug\SystemConfig.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\Common\SystemConfig\bin\Debug\SystemConfig.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\Common\SystemConfig\obj\Debug\SystemConfig.csprojResolveAssemblyReference.cache
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\Common\SystemConfig\obj\Debug\SystemConfig.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\Common\SystemConfig\obj\Debug\SystemConfig.pdb

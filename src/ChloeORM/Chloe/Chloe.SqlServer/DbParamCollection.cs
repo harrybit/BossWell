@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 
 namespace Chloe.SqlServer
 {
-    class DbParamCollection
+    internal class DbParamCollection
     {
         /* 以参数值为 key，DbParam 或 List<DbParam> 为 value */
-        Dictionary<object, object> _dbParams = new Dictionary<object, object>();
+        private Dictionary<object, object> _dbParams = new Dictionary<object, object>();
 
         public int Count { get; private set; }
+
         public DbParam Find(object value, Type paramType, DbType? dbType)
         {
             object dicVal;
@@ -33,7 +32,6 @@ namespace Chloe.SqlServer
 
                 return null;
             }
-
 
             List<DbParam> dbParamList = dicVal as List<DbParam>;
             if (value == DBNull.Value)
@@ -72,7 +70,6 @@ namespace Chloe.SqlServer
                 this.Count++;
             }
         }
-
 
         public List<DbParam> ToParameterList()
         {

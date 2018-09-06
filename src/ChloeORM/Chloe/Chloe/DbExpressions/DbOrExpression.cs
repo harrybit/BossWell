@@ -8,6 +8,7 @@ namespace Chloe.DbExpressions
             : this(left, right, null)
         {
         }
+
         public DbOrExpression(DbExpression left, DbExpression right, MethodInfo method)
             : base(DbExpressionType.Or, UtilConstants.TypeOfBoolean, left, right, method)
         {
@@ -18,5 +19,4 @@ namespace Chloe.DbExpressions
             return visitor.Visit(this);
         }
     }
-
 }

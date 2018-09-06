@@ -1,22 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 
 namespace Chloe.DbExpressions
 {
     [System.Diagnostics.DebuggerDisplay("Name = {Name}")]
     public class DbColumn
     {
-        string _name;
-        Type _type;
-        DbType? _dbType;
-        int? _size;
+        private string _name;
+        private Type _type;
+        private DbType? _dbType;
+        private int? _size;
+
         public DbColumn(string name, Type type)
             : this(name, type, null, null)
         {
         }
+
         public DbColumn(string name, Type type, DbType? dbType, int? size)
         {
             this._name = name;
@@ -42,5 +41,4 @@ namespace Chloe.DbExpressions
             return column;
         }
     }
-
 }

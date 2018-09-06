@@ -1,17 +1,18 @@
-﻿using System;
+﻿using ApiHelp;
+using BossWellFactory;
 using BossWellModel;
 using BossWellModel.Base;
-using IBossWellService;
-using BossWellFactory;
 using BossWellModel.BossWellModel;
+using IBossWellService;
+using System;
 using System.Collections.Generic;
-using ApiHelp;
+
 namespace BossWellApp
 {
     public class ClientApp
     {
-        IClientService _service = PublicFactory.GetClientService();
-        IComClassService _comService = SysAutoFactory.GetComClassService();
+        private IClientService _service = PublicFactory.GetClientService();
+        private IComClassService _comService = SysAutoFactory.GetComClassService();
 
         #region 后台管理
 
@@ -58,7 +59,7 @@ namespace BossWellApp
                 cltEntity.AccountNo = ApiHelper.CreateRandom(16, 10, string.Empty);
                 cltEntity.Token = ApiHelper.SHA256(cltEntity.AccountNo + "-" + ApiHelper.GetTimgLongUnix(DateTime.Now, 1));
                 cltEntity.PassWord = ApiHelper.MD5Encrypt(cltEntity.PassWord);
-                cltEntity.SpreadCode = ApiHelper.CreateRandom(6, 36, string.Empty);
+                cltEntity.SpreadCode = ApiHelper.CreateRandomString(6);
             }
             return _service.SaveFormJson(cltEntity);
         }
@@ -81,7 +82,7 @@ namespace BossWellApp
             return response.Items;
         }
 
-        #endregion
+        #endregion 后台管理
 
         #region API
 
@@ -134,7 +135,6 @@ namespace BossWellApp
             return cltModel;
         }
 
-        #endregion
-
+        #endregion API
     }
 }

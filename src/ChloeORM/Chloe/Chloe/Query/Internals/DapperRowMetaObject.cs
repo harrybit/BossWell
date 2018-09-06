@@ -6,16 +6,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace Chloe.Query.Internals
 {
     sealed partial class DapperRowMetaObject : System.Dynamic.DynamicMetaObject
     {
-        static readonly MethodInfo getValueMethod = typeof(IDictionary<string, object>).GetProperty("Item").GetGetMethod();
-        static readonly MethodInfo setValueMethod = typeof(DapperRow).GetMethod("SetValue", new Type[] { typeof(string), typeof(object) });
+        private static readonly MethodInfo getValueMethod = typeof(IDictionary<string, object>).GetProperty("Item").GetGetMethod();
+        private static readonly MethodInfo setValueMethod = typeof(DapperRow).GetMethod("SetValue", new Type[] { typeof(string), typeof(object) });
 
         public DapperRowMetaObject(
             System.Linq.Expressions.Expression expression,
@@ -34,7 +32,7 @@ namespace Chloe.Query.Internals
         {
         }
 
-        System.Dynamic.DynamicMetaObject CallMethod(
+        private System.Dynamic.DynamicMetaObject CallMethod(
             MethodInfo method,
             System.Linq.Expressions.Expression[] parameters
             )

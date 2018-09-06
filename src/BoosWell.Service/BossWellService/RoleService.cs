@@ -1,7 +1,7 @@
-﻿using BossWellORM;
-using IBossWellService;
-using BossWellModel;
+﻿using BossWellModel;
 using BossWellModel.Base;
+using BossWellORM;
+using IBossWellService;
 using System.Collections.Generic;
 using System.Threading;
 
@@ -13,18 +13,20 @@ namespace BossWellService
         {
             return Query<RoleEntity>(request);
         }
+
         public RoleEntity GetFormData(string Sid)
         {
             return context.Query<RoleEntity>().Where(t => t.Sid.Equals(Sid)).FirstOrDefault();
         }
+
         public void SubmitForm(RoleEntity roleEntity, List<RoleAuthorizeEntity> authorList)
         {
             context.Session.BeginTransaction();
 
-            RoleEntity saveEntity = Save(roleEntity,"role_");//Save Role
+            RoleEntity saveEntity = Save(roleEntity, "role_");//Save Role
             context.Delete<RoleAuthorizeEntity>(t => t.RoleId.Equals(saveEntity.Sid));//Delete Author
-            
-            for (int i=0;i<authorList.Count;i++)
+
+            for (int i = 0; i < authorList.Count; i++)
             {
                 Thread.Sleep(100);
                 RoleAuthorizeEntity authorItem = authorList[i];
@@ -35,6 +37,7 @@ namespace BossWellService
 
             context.Session.CommitTransaction();
         }
+
         public int Delete(string sid)
         {
             context.Session.BeginTransaction();
@@ -46,6 +49,5 @@ namespace BossWellService
             context.Session.CommitTransaction();
             return deltCount;
         }
-
     }
 }

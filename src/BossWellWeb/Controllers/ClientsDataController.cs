@@ -1,17 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using ApiHelp;
+using BossWellApp;
+using BossWellApp.Basic;
+using BossWellModel;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
-using ApiHelp;
-using BossWellApp;
-using BossWellModel;
-using BossWellApp.Basic;
+
 namespace BossWellWeb.Controllers
 {
     [HandlerLogin]
     public class ClientsDataController : Controller
     {
-        ModuleApp moduleAPP = new ModuleApp();
+        private ModuleApp moduleAPP = new ModuleApp();
+
         [HttpGet]
         [HandlerAjaxOnly]
         public ActionResult GetClientsDataJson()
@@ -28,28 +30,33 @@ namespace BossWellWeb.Controllers
             };
             return Content(ApiHelper.JsonSerial(data));
         }
+
         private object GetDataItemList()
         {
             return null;
         }
+
         private object GetOrganizeList()
         {
             return null;
         }
+
         private object GetRoleList()
         {
             return null;
         }
+
         private object GetDutyList()
         {
             return null;
         }
+
         private object GetMenuList()
         {
-
             string roleId = OperatorProvider.Provider.GetCurrent().RoleId;
             return ToMenuJson(moduleAPP.GetModuleMenuByRole(roleId), "0");
         }
+
         private string ToMenuJson(List<ModuleEntity> data, string parentId)
         {
             StringBuilder sbJson = new StringBuilder();
@@ -68,6 +75,7 @@ namespace BossWellWeb.Controllers
             sbJson.Append("]");
             return sbJson.ToString();
         }
+
         private object GetMenuButtonList()
         {
             var roleId = OperatorProvider.Provider.GetCurrent().RoleId;
@@ -75,7 +83,7 @@ namespace BossWellWeb.Controllers
 
             var moduleList = moduleAPP.GetModuleButtonByRole(roleId);
             var moduleIDList = moduleList.Distinct(new ExtList<ModuleButtonEntity>("ModuleSid"));
-            
+
             foreach (ModuleButtonEntity item in moduleIDList)
             {
                 var buttonList = moduleList.Where(t => t.ModuleSid.Equals(item.ModuleSid));

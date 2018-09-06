@@ -1,19 +1,18 @@
 ﻿using Chloe.DbExpressions;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace Chloe.SqlServer
 {
-    class JoinConditionExpressionParser : DbExpressionVisitor
+    internal class JoinConditionExpressionParser : DbExpressionVisitor
     {
-        static readonly JoinConditionExpressionParser _joinConditionExpressionParser = new JoinConditionExpressionParser();
+        private static readonly JoinConditionExpressionParser _joinConditionExpressionParser = new JoinConditionExpressionParser();
+
         public static DbExpression Parse(DbExpression exp)
         {
             return exp.Accept(_joinConditionExpressionParser);
         }
+
         public override DbExpression Visit(DbEqualExpression exp)
         {
             /*
@@ -30,6 +29,7 @@ namespace Chloe.SqlServer
 
             return left_equals_right;
         }
+
         public override DbExpression Visit(DbNotEqualExpression exp)
         {
             /*

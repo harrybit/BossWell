@@ -1,5 +1,4 @@
-﻿
-namespace Chloe
+﻿namespace Chloe
 {
     public enum JoinType
     {

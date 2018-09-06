@@ -1,28 +1,23 @@
-﻿using Chloe.Core;
-using Chloe.DbExpressions;
+﻿using Chloe.DbExpressions;
 using Chloe.InternalExtensions;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Data;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace Chloe.SQLite
 {
     partial class SqlGenerator : DbExpressionVisitor<DbExpression>
     {
         internal ISqlBuilder _sqlBuilder = new SqlBuilder();
-        DbParamCollection _parameters = new DbParamCollection();
+        private DbParamCollection _parameters = new DbParamCollection();
 
-        static readonly Dictionary<string, Action<DbMethodCallExpression, SqlGenerator>> MethodHandlers = InitMethodHandlers();
-        static readonly Dictionary<string, Action<DbAggregateExpression, SqlGenerator>> AggregateHandlers = InitAggregateHandlers();
-        static readonly Dictionary<MethodInfo, Action<DbBinaryExpression, SqlGenerator>> BinaryWithMethodHandlers = InitBinaryWithMethodHandlers();
-        static readonly Dictionary<Type, string> CastTypeMap;
-        static readonly Dictionary<Type, Type> NumericTypes;
-        static readonly List<string> CacheParameterNames;
+        private static readonly Dictionary<string, Action<DbMethodCallExpression, SqlGenerator>> MethodHandlers = InitMethodHandlers();
+        private static readonly Dictionary<string, Action<DbAggregateExpression, SqlGenerator>> AggregateHandlers = InitAggregateHandlers();
+        private static readonly Dictionary<MethodInfo, Action<DbBinaryExpression, SqlGenerator>> BinaryWithMethodHandlers = InitBinaryWithMethodHandlers();
+        private static readonly Dictionary<Type, string> CastTypeMap;
+        private static readonly Dictionary<Type, Type> NumericTypes;
+        private static readonly List<string> CacheParameterNames;
 
         static SqlGenerator()
         {
@@ -38,7 +33,6 @@ namespace Chloe.SQLite
             castTypeMap.Add(typeof(bool), "INTEGER");
             CastTypeMap = Utils.Clone(castTypeMap);
 
-
             Dictionary<Type, Type> numericTypes = new Dictionary<Type, Type>();
             numericTypes.Add(typeof(byte), typeof(byte));
             numericTypes.Add(typeof(sbyte), typeof(sbyte));
@@ -52,7 +46,6 @@ namespace Chloe.SQLite
             numericTypes.Add(typeof(double), typeof(double));
             numericTypes.Add(typeof(decimal), typeof(decimal));
             NumericTypes = Utils.Clone(numericTypes);
-
 
             int cacheParameterNameCount = 2 * 12;
             List<string> cacheParameterNames = new List<string>(cacheParameterNameCount);
@@ -95,7 +88,6 @@ namespace Chloe.SQLite
                 return exp;
             }
 
-
             /*
              * a.Name == a.XName --> a.Name == a.XName or (a.Name is null and a.XName is null)
              */
@@ -116,6 +108,7 @@ namespace Chloe.SQLite
 
             return exp;
         }
+
         public override DbExpression Visit(DbNotEqualExpression exp)
         {
             DbExpression left = exp.Left;
@@ -180,7 +173,6 @@ namespace Chloe.SQLite
                 return exp;
             }
 
-
             /*
              * a.Name != a.XName --> a.Name <> a.XName or (a.Name is null and a.XName is not null) or (a.Name is not null and a.XName is null)
              * ## a.Name != a.XName 不能翻译成：not (a.Name == a.XName or (a.Name is null and a.XName is null))，因为数据库里的 not 有时候并非真正意义上的“取反”！
@@ -233,6 +225,7 @@ namespace Chloe.SQLite
 
             return exp;
         }
+
         public override DbExpression Visit(DbAndExpression exp)
         {
             Stack<DbExpression> operands = GatherBinaryExpressionOperand(exp);
@@ -240,6 +233,7 @@ namespace Chloe.SQLite
 
             return exp;
         }
+
         public override DbExpression Visit(DbBitOrExpression exp)
         {
             Stack<DbExpression> operands = GatherBinaryExpressionOperand(exp);
@@ -247,6 +241,7 @@ namespace Chloe.SQLite
 
             return exp;
         }
+
         public override DbExpression Visit(DbOrExpression exp)
         {
             Stack<DbExpression> operands = GatherBinaryExpressionOperand(exp);
@@ -274,6 +269,7 @@ namespace Chloe.SQLite
 
             return exp;
         }
+
         // -
         public override DbExpression Visit(DbSubtractExpression exp)
         {
@@ -282,6 +278,7 @@ namespace Chloe.SQLite
 
             return exp;
         }
+
         // *
         public override DbExpression Visit(DbMultiplyExpression exp)
         {
@@ -290,6 +287,7 @@ namespace Chloe.SQLite
 
             return exp;
         }
+
         // /
         public override DbExpression Visit(DbDivideExpression exp)
         {
@@ -298,6 +296,7 @@ namespace Chloe.SQLite
 
             return exp;
         }
+
         // %
         public override DbExpression Visit(DbModuloExpression exp)
         {
@@ -306,6 +305,7 @@ namespace Chloe.SQLite
 
             return exp;
         }
+
         public override DbExpression Visit(DbNegateExpression exp)
         {
             this._sqlBuilder.Append("(");
@@ -316,6 +316,7 @@ namespace Chloe.SQLite
             this._sqlBuilder.Append(")");
             return exp;
         }
+
         // <
         public override DbExpression Visit(DbLessThanExpression exp)
         {
@@ -325,6 +326,7 @@ namespace Chloe.SQLite
 
             return exp;
         }
+
         // <=
         public override DbExpression Visit(DbLessThanOrEqualExpression exp)
         {
@@ -334,6 +336,7 @@ namespace Chloe.SQLite
 
             return exp;
         }
+
         // >
         public override DbExpression Visit(DbGreaterThanExpression exp)
         {
@@ -343,6 +346,7 @@ namespace Chloe.SQLite
 
             return exp;
         }
+
         // >=
         public override DbExpression Visit(DbGreaterThanOrEqualExpression exp)
         {
@@ -352,7 +356,6 @@ namespace Chloe.SQLite
 
             return exp;
         }
-
 
         public override DbExpression Visit(DbAggregateExpression exp)
         {
@@ -366,13 +369,13 @@ namespace Chloe.SQLite
             return exp;
         }
 
-
         public override DbExpression Visit(DbTableExpression exp)
         {
             this.QuoteName(exp.Table.Name);
 
             return exp;
         }
+
         public override DbExpression Visit(DbColumnAccessExpression exp)
         {
             this.QuoteName(exp.Table.Name);
@@ -381,6 +384,7 @@ namespace Chloe.SQLite
 
             return exp;
         }
+
         public override DbExpression Visit(DbFromTableExpression exp)
         {
             this.AppendTableSegment(exp.Table);
@@ -388,6 +392,7 @@ namespace Chloe.SQLite
 
             return exp;
         }
+
         public override DbExpression Visit(DbJoinTableExpression exp)
         {
             DbJoinTableExpression joinTablePart = exp;
@@ -413,7 +418,6 @@ namespace Chloe.SQLite
             return exp;
         }
 
-
         public override DbExpression Visit(DbSubQueryExpression exp)
         {
             this._sqlBuilder.Append("(");
@@ -422,11 +426,13 @@ namespace Chloe.SQLite
 
             return exp;
         }
+
         public override DbExpression Visit(DbSqlQueryExpression exp)
         {
             this.BuildGeneralSql(exp);
             return exp;
         }
+
         public override DbExpression Visit(DbInsertExpression exp)
         {
             this._sqlBuilder.Append("INSERT INTO ");
@@ -468,6 +474,7 @@ namespace Chloe.SQLite
 
             return exp;
         }
+
         public override DbExpression Visit(DbUpdateExpression exp)
         {
             this._sqlBuilder.Append("UPDATE ");
@@ -494,6 +501,7 @@ namespace Chloe.SQLite
 
             return exp;
         }
+
         public override DbExpression Visit(DbDeleteExpression exp)
         {
             this._sqlBuilder.Append("DELETE FROM ");
@@ -536,6 +544,7 @@ namespace Chloe.SQLite
 
             return exp;
         }
+
         public override DbExpression Visit(DbCaseWhenExpression exp)
         {
             this._sqlBuilder.Append("CASE");
@@ -553,6 +562,7 @@ namespace Chloe.SQLite
 
             return exp;
         }
+
         public override DbExpression Visit(DbConvertExpression exp)
         {
             DbExpression stripedExp = DbExpressionExtension.StripInvalidConvert(exp);
@@ -587,7 +597,6 @@ namespace Chloe.SQLite
             return exp;
         }
 
-
         public override DbExpression Visit(DbMethodCallExpression exp)
         {
             Action<DbMethodCallExpression, SqlGenerator> methodHandler;
@@ -599,6 +608,7 @@ namespace Chloe.SQLite
             methodHandler(exp, this);
             return exp;
         }
+
         public override DbExpression Visit(DbMemberExpression exp)
         {
             MemberInfo member = exp.Member;
@@ -637,7 +647,6 @@ namespace Chloe.SQLite
                 }
             }
 
-
             DbParameterExpression newExp;
             if (DbExpressionExtension.TryConvertToParameterExpression(exp, out newExp))
             {
@@ -660,6 +669,7 @@ namespace Chloe.SQLite
 
             throw new NotSupportedException(string.Format("'{0}.{1}' is not supported.", member.DeclaringType.FullName, member.Name));
         }
+
         public override DbExpression Visit(DbConstantExpression exp)
         {
             if (exp.Value == null || exp.Value == DBNull.Value)
@@ -695,6 +705,7 @@ namespace Chloe.SQLite
 
             return exp;
         }
+
         public override DbExpression Visit(DbParameterExpression exp)
         {
             object paramValue = exp.Value;
@@ -737,20 +748,21 @@ namespace Chloe.SQLite
             return exp;
         }
 
-
-        void AppendTableSegment(DbTableSegment seg)
+        private void AppendTableSegment(DbTableSegment seg)
         {
             seg.Body.Accept(this);
             this._sqlBuilder.Append(" AS ");
             this.QuoteName(seg.Alias);
         }
+
         internal void AppendColumnSegment(DbColumnSegment seg)
         {
             seg.Body.Accept(this);
             this._sqlBuilder.Append(" AS ");
             this.QuoteName(seg.Alias);
         }
-        void AppendOrdering(DbOrdering ordering)
+
+        private void AppendOrdering(DbOrdering ordering)
         {
             if (ordering.OrderType == DbOrderType.Asc)
             {
@@ -768,14 +780,15 @@ namespace Chloe.SQLite
             throw new NotSupportedException("OrderType: " + ordering.OrderType);
         }
 
-        void VisitDbJoinTableExpressions(List<DbJoinTableExpression> tables)
+        private void VisitDbJoinTableExpressions(List<DbJoinTableExpression> tables)
         {
             foreach (var table in tables)
             {
                 table.Accept(this);
             }
         }
-        void BuildGeneralSql(DbSqlQueryExpression exp)
+
+        private void BuildGeneralSql(DbSqlQueryExpression exp)
         {
             this._sqlBuilder.Append("SELECT ");
 
@@ -809,7 +822,7 @@ namespace Chloe.SQLite
             this._sqlBuilder.Append(" LIMIT ", takeCount.ToString(), " OFFSET ", skipCount.ToString());
         }
 
-        void BuildWhereState(DbExpression whereExpression)
+        private void BuildWhereState(DbExpression whereExpression)
         {
             if (whereExpression != null)
             {
@@ -817,7 +830,8 @@ namespace Chloe.SQLite
                 whereExpression.Accept(this);
             }
         }
-        void BuildOrderState(List<DbOrdering> orderings)
+
+        private void BuildOrderState(List<DbOrdering> orderings)
         {
             if (orderings.Count > 0)
             {
@@ -825,7 +839,8 @@ namespace Chloe.SQLite
                 this.ConcatOrderings(orderings);
             }
         }
-        void ConcatOrderings(List<DbOrdering> orderings)
+
+        private void ConcatOrderings(List<DbOrdering> orderings)
         {
             for (int i = 0; i < orderings.Count; i++)
             {
@@ -837,7 +852,8 @@ namespace Chloe.SQLite
                 this.AppendOrdering(orderings[i]);
             }
         }
-        void BuildGroupState(DbSqlQueryExpression exp)
+
+        private void BuildGroupState(DbSqlQueryExpression exp)
         {
             var groupSegments = exp.GroupSegments;
             if (groupSegments.Count == 0)
@@ -859,7 +875,7 @@ namespace Chloe.SQLite
             }
         }
 
-        void ConcatOperands(IEnumerable<DbExpression> operands, string connector)
+        private void ConcatOperands(IEnumerable<DbExpression> operands, string connector)
         {
             this._sqlBuilder.Append("(");
 
@@ -878,7 +894,7 @@ namespace Chloe.SQLite
             return;
         }
 
-        void QuoteName(string name)
+        private void QuoteName(string name)
         {
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentException("name");
@@ -886,14 +902,14 @@ namespace Chloe.SQLite
             this._sqlBuilder.Append("[", name, "]");
         }
 
-        void BuildCastState(DbExpression castExp, string targetDbTypeString)
+        private void BuildCastState(DbExpression castExp, string targetDbTypeString)
         {
             this._sqlBuilder.Append("CAST(");
             castExp.Accept(this);
             this._sqlBuilder.Append(" AS ", targetDbTypeString, ")");
         }
 
-        bool IsDatePart(DbMemberExpression exp)
+        private bool IsDatePart(DbMemberExpression exp)
         {
             MemberInfo member = exp.Member;
 
@@ -934,7 +950,6 @@ namespace Chloe.SQLite
             }
 
             /* SQLite is not supports MILLISECOND */
-
 
             if (member == UtilConstants.PropertyInfo_DateTime_DayOfWeek)
             {

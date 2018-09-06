@@ -1,19 +1,16 @@
 ﻿using Chloe;
 using Chloe.Entity;
-using Chloe.MySql;
-using BossWellORM;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
 
 namespace BossWellORM
 {
-    
-    class MySqlDemo: ChloeClient
+    internal class MySqlDemo : ChloeClient
     {
         /* WARNING: DbContext 是非线程安全的，正式使用不能设置为 static，并且用完务必要调用 Dispose 方法销毁对象 */
+
         public void Run()
         {
             BasicQuery();
@@ -28,9 +25,7 @@ namespace BossWellORM
             ExecuteCommandText();
             DoWithTransaction();
             DoWithTransactionEx();
-            
         }
-
 
         public void BasicQuery()
         {
@@ -41,13 +36,11 @@ namespace BossWellORM
              * SELECT `Users`.`Id` AS `Id`,`Users`.`Name` AS `Name`,`Users`.`Gender` AS `Gender`,`Users`.`Age` AS `Age`,`Users`.`CityId` AS `CityId`,`Users`.`OpTime` AS `OpTime` FROM `Users` AS `Users` WHERE `Users`.`Id` = 1 LIMIT 0,1
              */
 
-
             //可以选取指定的字段
             q.Where(a => a.Id == 1).Select(a => new { a.Id, a.Name }).FirstOrDefault();
             /*
              * SELECT `Users`.`Id` AS `Id`,`Users`.`Name` AS `Name` FROM `Users` AS `Users` WHERE `Users`.`Id` = 1 LIMIT 0,1
              */
-
 
             //分页
             q.Where(a => a.Id > 0).OrderBy(a => a.Age).Skip(20).Take(10).ToList();
@@ -55,46 +48,42 @@ namespace BossWellORM
              * SELECT `Users`.`Id` AS `Id`,`Users`.`Name` AS `Name`,`Users`.`Gender` AS `Gender`,`Users`.`Age` AS `Age`,`Users`.`CityId` AS `CityId`,`Users`.`OpTime` AS `OpTime` FROM `Users` AS `Users` WHERE `Users`.`Id` > 0 ORDER BY `Users`.`Age` ASC LIMIT 20,10
              */
 
-
             /* like 查询 */
             q.Where(a => a.Name.Contains("so") || a.Name.StartsWith("s") || a.Name.EndsWith("o")).ToList();
             /*
-             * SELECT 
-             *      `Users`.`Gender` AS `Gender`,`Users`.`Age` AS `Age`,`Users`.`CityId` AS `CityId`,`Users`.`OpTime` AS `OpTime`,`Users`.`Id` AS `Id`,`Users`.`Name` AS `Name` 
-             * FROM `Users` AS `Users` 
+             * SELECT
+             *      `Users`.`Gender` AS `Gender`,`Users`.`Age` AS `Age`,`Users`.`CityId` AS `CityId`,`Users`.`OpTime` AS `OpTime`,`Users`.`Id` AS `Id`,`Users`.`Name` AS `Name`
+             * FROM `Users` AS `Users`
              * WHERE (`Users`.`Name` LIKE CONCAT('%',N'so','%') OR `Users`.`Name` LIKE CONCAT(N's','%') OR `Users`.`Name` LIKE CONCAT('%',N'o'))
              */
-
 
             /* in 一个数组 */
             List<User> users = null;
             List<int> userIds = new List<int>() { 1, 2, 3 };
             users = q.Where(a => userIds.Contains(a.Id)).ToList(); /* list.Contains() 方法组合就会生成 in一个数组 sql 语句 */
             /*
-             * SELECT 
-             *      `Users`.`Gender` AS `Gender`,`Users`.`Age` AS `Age`,`Users`.`CityId` AS `CityId`,`Users`.`OpTime` AS `OpTime`,`Users`.`Id` AS `Id`,`Users`.`Name` AS `Name` 
-             * FROM `Users` AS `Users` 
+             * SELECT
+             *      `Users`.`Gender` AS `Gender`,`Users`.`Age` AS `Age`,`Users`.`CityId` AS `CityId`,`Users`.`OpTime` AS `OpTime`,`Users`.`Id` AS `Id`,`Users`.`Name` AS `Name`
+             * FROM `Users` AS `Users`
              * WHERE `Users`.`Id` IN (1,2,3)
              */
-
 
             /* in 子查询 */
             users = q.Where(a => context.Query<City>().Select(c => c.Id).ToList().Contains((int)a.CityId)).ToList(); /* IQuery<T>.ToList().Contains() 方法组合就会生成 in 子查询 sql 语句 */
             /*
-             * SELECT 
-             *      `Users`.`Gender` AS `Gender`,`Users`.`Age` AS `Age`,`Users`.`CityId` AS `CityId`,`Users`.`OpTime` AS `OpTime`,`Users`.`Id` AS `Id`,`Users`.`Name` AS `Name` 
-             * FROM `Users` AS `Users` 
+             * SELECT
+             *      `Users`.`Gender` AS `Gender`,`Users`.`Age` AS `Age`,`Users`.`CityId` AS `CityId`,`Users`.`OpTime` AS `OpTime`,`Users`.`Id` AS `Id`,`Users`.`Name` AS `Name`
+             * FROM `Users` AS `Users`
              * WHERE `Users`.`CityId` IN (SELECT `City`.`Id` AS `C` FROM `City` AS `City`)
              */
-
 
             /* distinct 查询 */
             q.Select(a => new { a.Name }).Distinct().ToList();
             /*
              * SELECT DISTINCT `Users`.`Name` AS `Name` FROM `Users` AS `Users`
              */
-             
         }
+
         public void JoinQuery()
         {
             var user_city_province = context.Query<User>()
@@ -112,7 +101,6 @@ namespace BossWellORM
             /*
              * SELECT `Users`.`Id` AS `UserId`,`Users`.`Name` AS `UserName`,`City`.`Name` AS `CityName`,`Province`.`Name` AS `ProvinceName` FROM `Users` AS `Users` INNER JOIN `City` AS `City` ON `Users`.`CityId` = `City`.`Id` INNER JOIN `Province` AS `Province` ON `City`.`ProvinceId` = `Province`.`Id` WHERE `Users`.`Id` > 1
              */
-
 
             /* quick join and paging. */
             context.JoinQuery<User, City>((user, city) => new object[]
@@ -135,8 +123,8 @@ namespace BossWellORM
             .OrderByDesc(a => a.User.Age)   /* 排序 */
             .TakePage(1, 20)                /* 分页 */
             .ToList();
-            
         }
+
         public void AggregateQuery()
         {
             IQuery<User> q = context.Query<User>();
@@ -181,6 +169,7 @@ namespace BossWellORM
              * SELECT AVG(`Users`.`Age`) AS `C` FROM `Users` AS `Users`
              */
         }
+
         public void GroupQuery()
         {
             IQuery<User> q = context.Query<User>();
@@ -196,6 +185,7 @@ namespace BossWellORM
         }
 
         /*复杂查询*/
+
         public void ComplexQuery()
         {
             /*
@@ -203,7 +193,7 @@ namespace BossWellORM
              * 支持 select * from Users where CityId in (select Id from City)    --in子查询
              * 支持 select * from Users exists (select 1 from City where City.Id=Users.CityId)    --exists查询
              * 支持 select (select top 1 CityName from City where Users.CityId==City.Id) as CityName, Users.Id, Users.Name from Users    --select子查询
-             * 支持 select 
+             * 支持 select
              *            (select count(*) from Users where Users.CityId=City.Id) as UserCount,     --总数
              *            (select max(Users.Age) from Users where Users.CityId=City.Id) as MaxAge,  --最大年龄
              *            (select avg(Users.Age) from Users where Users.CityId=City.Id) as AvgAge   --平均年龄
@@ -220,32 +210,29 @@ namespace BossWellORM
             List<int> userIds = new List<int>() { 1, 2, 3 };
             users = userQuery.Where(a => userIds.Contains(a.Id)).ToList();  /* list.Contains() 方法组合就会生成 in一个数组 sql 语句 */
             /*
-             * SELECT 
-             *      `Users`.`Gender` AS `Gender`,`Users`.`Age` AS `Age`,`Users`.`CityId` AS `CityId`,`Users`.`OpTime` AS `OpTime`,`Users`.`Id` AS `Id`,`Users`.`Name` AS `Name` 
-             * FROM `Users` AS `Users` 
+             * SELECT
+             *      `Users`.`Gender` AS `Gender`,`Users`.`Age` AS `Age`,`Users`.`CityId` AS `CityId`,`Users`.`OpTime` AS `OpTime`,`Users`.`Id` AS `Id`,`Users`.`Name` AS `Name`
+             * FROM `Users` AS `Users`
              * WHERE `Users`.`Id` IN (1,2,3)
              */
-
 
             /* in 子查询 */
             users = userQuery.Where(a => cityQuery.Select(c => c.Id).ToList().Contains((int)a.CityId)).ToList();  /* IQuery<T>.ToList().Contains() 方法组合就会生成 in 子查询 sql 语句 */
             /*
-             * SELECT 
-             *      `Users`.`Gender` AS `Gender`,`Users`.`Age` AS `Age`,`Users`.`CityId` AS `CityId`,`Users`.`OpTime` AS `OpTime`,`Users`.`Id` AS `Id`,`Users`.`Name` AS `Name` 
-             * FROM `Users` AS `Users` 
+             * SELECT
+             *      `Users`.`Gender` AS `Gender`,`Users`.`Age` AS `Age`,`Users`.`CityId` AS `CityId`,`Users`.`OpTime` AS `OpTime`,`Users`.`Id` AS `Id`,`Users`.`Name` AS `Name`
+             * FROM `Users` AS `Users`
              * WHERE `Users`.`CityId` IN (SELECT `City`.`Id` AS `C` FROM `City` AS `City`)
              */
-
 
             /* IQuery<T>.Any() 方法组合就会生成 exists 子查询 sql 语句 */
             users = userQuery.Where(a => cityQuery.Where(c => c.Id == a.CityId).Any()).ToList();
             /*
-             * SELECT 
-             *      `Users`.`Gender` AS `Gender`,`Users`.`Age` AS `Age`,`Users`.`CityId` AS `CityId`,`Users`.`OpTime` AS `OpTime`,`Users`.`Id` AS `Id`,`Users`.`Name` AS `Name` 
-             * FROM `Users` AS `Users` 
+             * SELECT
+             *      `Users`.`Gender` AS `Gender`,`Users`.`Age` AS `Age`,`Users`.`CityId` AS `CityId`,`Users`.`OpTime` AS `OpTime`,`Users`.`Id` AS `Id`,`Users`.`Name` AS `Name`
+             * FROM `Users` AS `Users`
              * WHERE Exists (SELECT N'1' AS `C` FROM `City` AS `City` WHERE `City`.`Id` = `Users`.`CityId`)
              */
-
 
             /* select 子查询 */
             var result = userQuery.Select(a => new
@@ -254,12 +241,11 @@ namespace BossWellORM
                 User = a
             }).ToList();
             /*
-             * SELECT 
+             * SELECT
              *      (SELECT `City`.`Name` AS `C` FROM `City` AS `City` WHERE `City`.`Id` = `Users`.`CityId` LIMIT 0,1) AS `CityName`,
-             *      `Users`.`Gender` AS `Gender`,`Users`.`Age` AS `Age`,`Users`.`CityId` AS `CityId`,`Users`.`OpTime` AS `OpTime`,`Users`.`Id` AS `Id`,`Users`.`Name` AS `Name` 
+             *      `Users`.`Gender` AS `Gender`,`Users`.`Age` AS `Age`,`Users`.`CityId` AS `CityId`,`Users`.`OpTime` AS `OpTime`,`Users`.`Id` AS `Id`,`Users`.`Name` AS `Name`
              * FROM `Users` AS `Users`
              */
-
 
             /* 统计 */
             var statisticsResult = cityQuery.Select(a => new
@@ -269,10 +255,10 @@ namespace BossWellORM
                 AvgAge = userQuery.Where(u => u.CityId == a.Id).Average(c => c.Age),
             }).ToList();
             /*
-             * SELECT 
+             * SELECT
              *      (SELECT COUNT(1) AS `C` FROM `Users` AS `Users` WHERE `Users`.`CityId` = `City`.`Id`) AS `UserCount`,
              *      (SELECT MAX(`Users`.`Age`) AS `C` FROM `Users` AS `Users` WHERE `Users`.`CityId` = `City`.`Id`) AS `MaxAge`,
-             *      (SELECT AVG(`Users`.`Age`) AS `C` FROM `Users` AS `Users` WHERE `Users`.`CityId` = `City`.`Id`) AS `AvgAge` 
+             *      (SELECT AVG(`Users`.`Age`) AS `C` FROM `Users` AS `Users` WHERE `Users`.`CityId` = `City`.`Id`) AS `AvgAge`
              * FROM `City` AS `City`
              */
         }
@@ -302,8 +288,8 @@ namespace BossWellORM
                DateTime ?P_4 = '2016/8/26 18:11:26';
                INSERT INTO `Users`(`Name`,`Gender`,`Age`,`CityId`,`OpTime`) VALUES(?P_0,?P_1,?P_2,?P_3,?P_4);SELECT @@IDENTITY
              */
-             
         }
+
         public void Update()
         {
             context.Update<User>(a => a.Id == 1, a => new User() { Name = a.Name, Age = a.Age + 1, Gender = Gender.Man, OpTime = DateTime.Now });
@@ -336,7 +322,6 @@ namespace BossWellORM
                UPDATE `Users` SET `Name`=?P_0,`Gender`=?P_1,`Age`=?P_2,`CityId`=?P_3,`OpTime`=?P_4 WHERE `Users`.`Id` = ?P_5
              */
 
-
             /*
              * 支持只更新属性值已变的属性
              */
@@ -350,6 +335,7 @@ namespace BossWellORM
                UPDATE `Users` SET `Name`=?P_0 WHERE `Users`.`Id` = ?P_1
              */
         }
+
         public void Delete()
         {
             context.Delete<User>(a => a.Id == 1);
@@ -435,7 +421,6 @@ namespace BossWellORM
                 Bool_Parse = bool.Parse("1"),//CAST(N'1' AS SIGNED)
                 DateTime_Parse = DateTime.Parse("2014-1-1"),//CAST(N'2014-1-1' AS DATETIME)
             }).ToList();
-            
         }
 
         public void ExecuteCommandText()
@@ -444,7 +429,7 @@ namespace BossWellORM
 
             int rowsAffected = context.Session.ExecuteNonQuery("update Users set name=?name where Id = 1", DbParam.Create("?name", "Chloe"));
 
-            /* 
+            /*
              * 执行存储过程:
              * User user = context.SqlQuery<User>("Proc_GetUser", CommandType.StoredProcedure, DbParam.Create("?id", 1)).FirstOrDefault();
              * rowsAffected = context.Session.ExecuteNonQuery("Proc_UpdateUserName", CommandType.StoredProcedure, DbParam.Create("?name", "Chloe"));
@@ -458,8 +443,8 @@ namespace BossWellORM
             //    context.Update<User>(a => a.Id == 1, a => new User() { Name = a.Name, Age = a.Age + 1, Gender = Gender.Man, OpTime = DateTime.Now });
             //    context.Delete<User>(a => a.Id == 1024);
             //});
-            
         }
+
         public void DoWithTransaction()
         {
             try
@@ -491,6 +476,7 @@ namespace BossWellORM
     {
         int Id { get; set; }
     }
+
     [TableAttribute("Users")]
     public class UserLite : IEntity
     {
@@ -498,16 +484,17 @@ namespace BossWellORM
         [AutoIncrement]
         [Sequence("USERS_AUTOID")]//For oracle
         public virtual int Id { get; set; }
+
         [Column(DbType = DbType.String)]
         public string Name { get; set; }
     }
-
 
     [TableAttribute("Users")]
     public class User : UserLite
     {
         [Column(DbType = DbType.Int32)]
         public Gender? Gender { get; set; }
+
         public int? Age { get; set; }
         public int? CityId { get; set; }
         public DateTime? OpTime { get; set; }

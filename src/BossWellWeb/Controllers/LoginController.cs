@@ -1,13 +1,13 @@
-﻿using BossWellApp;
+﻿using ApiHelp;
+using BossWellApp;
 using BossWellApp.Basic;
 using BossWellModel;
+using BossWellModel.BossWellModel;
 using BossWellModel.Enum;
-using System;
-using System.Web.Mvc;
-using ApiHelp;
 using Cache.Base;
 using Cache.Factory;
-using BossWellModel.BossWellModel;
+using System;
+using System.Web.Mvc;
 using SystemConfig;
 
 namespace BossWellWeb.Controllers
@@ -17,6 +17,7 @@ namespace BossWellWeb.Controllers
         private readonly LogApp logAPP = new LogApp();
         private readonly AdminUserApp adminUserAPP = new AdminUserApp();
         private readonly AjaxResult result = new AjaxResult();
+
         public LoginController()
         {
             result.state = ResultTypeEnum.success;
@@ -29,11 +30,13 @@ namespace BossWellWeb.Controllers
             var test = string.Format("{0:E2}", 1);
             return View();
         }
+
         [HttpGet]
         public ActionResult GetAuthCode()
         {
             return File(new VerifyCode().GetVerifyCode(), @"image/Gif");
         }
+
         [HttpGet]
         public ActionResult OutLogin()
         {
@@ -45,6 +48,7 @@ namespace BossWellWeb.Controllers
             OperatorProvider.Provider.RemoveCurrent();
             return RedirectToAction("Index", "Login");
         }
+
         [HttpPost]
         [HandlerAjaxOnly]
         public ActionResult CheckLogin(string username, string password, string code)
@@ -87,7 +91,7 @@ namespace BossWellWeb.Controllers
             operatorModel.LoginIPAddress = ApiHelper.GetClientIP();
             operatorModel.LoginIPAddressName = string.Empty;
             operatorModel.LoginTime = DateTime.Now;
-            operatorModel.LoginToken = ApiHelper.MD5Encrypt(ApiHelper.CreateRandom(64, 62, string.Empty));
+            operatorModel.LoginToken = ApiHelper.SHA256(ApiHelper.CreateRandomString(32));
             operatorModel.IsSystem = adminUserEntity.Account.Equals(PlatPublicConfig.AdminName) ? true : false;
             OperatorProvider.Provider.AddCurrent(operatorModel);
             //清除验证码缓存
@@ -95,7 +99,6 @@ namespace BossWellWeb.Controllers
             logAPP.AddSysLog("Login", "后台系统", "登录成功");
             result = new AjaxResult { state = ResultTypeEnum.success, message = "登录成功。" };
             return Content(ApiHelper.JsonSerial(result));
-
         }
     }
 }

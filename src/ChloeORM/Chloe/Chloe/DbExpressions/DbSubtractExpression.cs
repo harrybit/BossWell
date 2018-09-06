@@ -8,12 +8,11 @@ namespace Chloe.DbExpressions
         public DbSubtractExpression(Type type, DbExpression left, DbExpression right)
             : this(type, left, right, null)
         {
-
         }
+
         public DbSubtractExpression(Type type, DbExpression left, DbExpression right, MethodInfo method)
             : base(DbExpressionType.Subtract, type, left, right, method)
         {
-
         }
 
         public override T Accept<T>(DbExpressionVisitor<T> visitor)
@@ -21,5 +20,4 @@ namespace Chloe.DbExpressions
             return visitor.Visit(this);
         }
     }
-
 }

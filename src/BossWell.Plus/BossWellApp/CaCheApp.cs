@@ -1,6 +1,5 @@
-﻿using Cache;
+﻿using Cache.Base;
 using Cache.Factory;
-using Cache.Base;
 using System;
 
 namespace BossWellApp
@@ -10,7 +9,7 @@ namespace BossWellApp
     /// </summary>
     public class CaCheApp
     {
-        readonly static ICache _service = CacheFactory.CaChe();
+        private static readonly ICache _service = CacheFactory.CaChe();
 
         /// <summary>
         /// 写入缓存

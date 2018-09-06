@@ -1,12 +1,9 @@
-﻿using BossWellFactory;
-using IBossWellService;
-using System;
-using System.Collections.Generic;
+﻿using ApiHelp;
+using BossWellFactory;
 using BossWellModel;
 using BossWellModel.Base;
-using BossWellApp.Basic;
-using ApiHelp;
 using BossWellModel.BossWellModel;
+using IBossWellService;
 
 namespace BossWellApp
 {
@@ -28,7 +25,7 @@ namespace BossWellApp
             {
                 request.expression = (t => t.Account.Contains(keyWord) || t.NickName.Contains(keyWord) || t.TelPhone.Contains(keyWord));
             }
-            
+
             QueryResponse<AdminUserEntity> response = _service.GetList(request);
 
             pagination.records = response.TotalCount;
@@ -41,10 +38,12 @@ namespace BossWellApp
             };
             return ApiHelper.JsonSerial(JObject);
         }
+
         public string GetFormJsonData(string sid)
         {
             return ApiHelper.JsonSerial(_service.GetFromData(sid));
         }
+
         public void SubmitForm(AdminUserEntity saveEntity, string sid)
         {
             //组织架构
@@ -72,18 +71,22 @@ namespace BossWellApp
             }
             _service.SubmitForm(saveEntity);
         }
+
         public int ResetPwd(string passWord, string sid)
         {
             return _service.ResetPwd(ApiHelper.MD5Encrypt(passWord), sid);
         }
+
         public int DeleteForm(string sid)
         {
             return _service.DeleteForm(sid);
         }
+
         public int DisEnableAccount(bool isEnable, string sid)
         {
             return _service.DisEnableAccount(isEnable, sid);
         }
+
         public AdminUserEntity CheckLogin(string AccountNo, string PassWord, ref int code)
         {
             AdminUserEntity entity = _service.GetFormByAccount(AccountNo, PassWord);
@@ -98,6 +101,7 @@ namespace BossWellApp
         }
 
         #region Get Other
+
         /// <summary>
         /// 组织结构名称
         /// </summary>
@@ -106,6 +110,7 @@ namespace BossWellApp
             OrganizeEntity organizeEntity = _organizeService.GetFormData(organizeSid);
             return organizeEntity == null ? string.Empty : organizeEntity.FullName;
         }
+
         /// <summary>
         /// 角色名称
         /// </summary>
@@ -114,7 +119,7 @@ namespace BossWellApp
             RoleEntity roleEntity = _roleService.GetFormData(roleSid);
             return roleEntity == null ? string.Empty : roleEntity.FullName;
         }
-        #endregion
 
+        #endregion Get Other
     }
 }

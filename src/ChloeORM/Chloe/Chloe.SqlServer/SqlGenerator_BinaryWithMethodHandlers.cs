@@ -1,14 +1,13 @@
 ﻿using Chloe.DbExpressions;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 
 namespace Chloe.SqlServer
 {
     partial class SqlGenerator : DbExpressionVisitor<DbExpression>
     {
-        static Dictionary<MethodInfo, Action<DbBinaryExpression, SqlGenerator>> InitBinaryWithMethodHandlers()
+        private static Dictionary<MethodInfo, Action<DbBinaryExpression, SqlGenerator>> InitBinaryWithMethodHandlers()
         {
             var binaryWithMethodHandlers = new Dictionary<MethodInfo, Action<DbBinaryExpression, SqlGenerator>>();
             binaryWithMethodHandlers.Add(UtilConstants.MethodInfo_String_Concat_String_String, StringConcat);
@@ -18,7 +17,7 @@ namespace Chloe.SqlServer
             return ret;
         }
 
-        static void StringConcat(DbBinaryExpression exp, SqlGenerator generator)
+        private static void StringConcat(DbBinaryExpression exp, SqlGenerator generator)
         {
             List<DbExpression> operands = new List<DbExpression>();
             operands.Add(exp.Right);

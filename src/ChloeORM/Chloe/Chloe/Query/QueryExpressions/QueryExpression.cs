@@ -1,13 +1,13 @@
-﻿using Chloe.Query.QueryState;
-using System;
+﻿using System;
 
 namespace Chloe.Query.QueryExpressions
 {
-    abstract class QueryExpression
+    internal abstract class QueryExpression
     {
-        QueryExpression _prevExpression;
-        QueryExpressionType _nodeType;
-        Type _elementType;
+        private QueryExpression _prevExpression;
+        private QueryExpressionType _nodeType;
+        private Type _elementType;
+
         protected QueryExpression(QueryExpressionType nodeType, Type elementType, QueryExpression prevExpression)
             : base()
         {
@@ -31,6 +31,7 @@ namespace Chloe.Query.QueryExpressions
                 return this._nodeType;
             }
         }
+
         public virtual Type ElementType
         {
             get

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 
 namespace Chloe.Extensions
 {
@@ -12,6 +9,7 @@ namespace Chloe.Extensions
         {
             return reader.GetInt16(ordinal);
         }
+
         public static short? GetInt16_Nullable(this IDataReader reader, int ordinal)
         {
             if (reader.IsDBNull(ordinal))
@@ -26,6 +24,7 @@ namespace Chloe.Extensions
         {
             return reader.GetInt32(ordinal);
         }
+
         public static int? GetInt32_Nullable(this IDataReader reader, int ordinal)
         {
             if (reader.IsDBNull(ordinal))
@@ -40,6 +39,7 @@ namespace Chloe.Extensions
         {
             return reader.GetInt64(ordinal);
         }
+
         public static long? GetInt64_Nullable(this IDataReader reader, int ordinal)
         {
             if (reader.IsDBNull(ordinal))
@@ -54,6 +54,7 @@ namespace Chloe.Extensions
         {
             return reader.GetDecimal(ordinal);
         }
+
         public static decimal? GetDecimal_Nullable(this IDataReader reader, int ordinal)
         {
             if (reader.IsDBNull(ordinal))
@@ -68,6 +69,7 @@ namespace Chloe.Extensions
         {
             return reader.GetDouble(ordinal);
         }
+
         public static double? GetDouble_Nullable(this IDataReader reader, int ordinal)
         {
             if (reader.IsDBNull(ordinal))
@@ -82,6 +84,7 @@ namespace Chloe.Extensions
         {
             return reader.GetFloat(ordinal);
         }
+
         public static float? GetFloat_Nullable(this IDataReader reader, int ordinal)
         {
             if (reader.IsDBNull(ordinal))
@@ -96,6 +99,7 @@ namespace Chloe.Extensions
         {
             return reader.GetBoolean(ordinal);
         }
+
         public static bool? GetBoolean_Nullable(this IDataReader reader, int ordinal)
         {
             if (reader.IsDBNull(ordinal))
@@ -110,6 +114,7 @@ namespace Chloe.Extensions
         {
             return reader.GetDateTime(ordinal);
         }
+
         public static DateTime? GetDateTime_Nullable(this IDataReader reader, int ordinal)
         {
             if (reader.IsDBNull(ordinal))
@@ -124,6 +129,7 @@ namespace Chloe.Extensions
         {
             return reader.GetGuid(ordinal);
         }
+
         public static Guid? GetGuid_Nullable(this IDataReader reader, int ordinal)
         {
             if (reader.IsDBNull(ordinal))
@@ -138,6 +144,7 @@ namespace Chloe.Extensions
         {
             return reader.GetByte(ordinal);
         }
+
         public static byte? GetByte_Nullable(this IDataReader reader, int ordinal)
         {
             if (reader.IsDBNull(ordinal))
@@ -152,6 +159,7 @@ namespace Chloe.Extensions
         {
             return reader.GetChar(ordinal);
         }
+
         public static char? GetChar_Nullable(this IDataReader reader, int ordinal)
         {
             if (reader.IsDBNull(ordinal))
@@ -199,6 +207,7 @@ namespace Chloe.Extensions
 
             return (TEnum)Enum.ToObject(typeof(TEnum), value);
         }
+
         public static TEnum? GetEnum_Nullable<TEnum>(this IDataReader reader, int ordinal) where TEnum : struct
         {
             if (reader.IsDBNull(ordinal))
@@ -222,6 +231,7 @@ namespace Chloe.Extensions
                 throw new InvalidCastException("The column value could not be null.");
             }
         }
+
         public static T? GetTValue_Nullable<T>(this IDataReader reader, int ordinal) where T : struct
         {
             object val = reader.GetValue(ordinal);
@@ -232,6 +242,5 @@ namespace Chloe.Extensions
 
             return new Nullable<T>((T)val);
         }
-
     }
 }

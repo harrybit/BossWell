@@ -1,10 +1,6 @@
 ﻿using Chloe.Descriptors;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Chloe.Core
 {
@@ -12,15 +8,17 @@ namespace Chloe.Core
     {
         object Entity { get; }
         TypeDescriptor TypeDescriptor { get; }
+
         bool HasChanged(MappingMemberDescriptor memberDescriptor, object val);
+
         void Refresh();
     }
 
-    class EntityState : IEntityState
+    internal class EntityState : IEntityState
     {
-        Dictionary<MemberInfo, object> _fakes;
-        object _entity;
-        TypeDescriptor _typeDescriptor;
+        private Dictionary<MemberInfo, object> _fakes;
+        private object _entity;
+        private TypeDescriptor _typeDescriptor;
 
         public EntityState(TypeDescriptor typeDescriptor, object entity)
         {
@@ -48,6 +46,7 @@ namespace Chloe.Core
 
             return !Utils.AreEqual(oldVal, val);
         }
+
         public void Refresh()
         {
             Dictionary<MemberInfo, MappingMemberDescriptor> mappingMemberDescriptors = this.TypeDescriptor.MappingMemberDescriptors;
@@ -79,7 +78,7 @@ namespace Chloe.Core
             }
         }
 
-        static byte[] Clone(byte[] arr)
+        private static byte[] Clone(byte[] arr)
         {
             if (arr == null)
                 return null;
@@ -92,7 +91,8 @@ namespace Chloe.Core
 
             return ret;
         }
-        static bool AreEqual(byte[] obj1, byte[] obj2)
+
+        private static bool AreEqual(byte[] obj1, byte[] obj2)
         {
             if (obj1 == obj2)
                 return true;

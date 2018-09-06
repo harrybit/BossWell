@@ -14,6 +14,7 @@ namespace BossWellApp.Basic
             jsonBuilder.Append("]}");
             return jsonBuilder.ToString();
         }
+
         private static string TreeGridJson(List<TreeGridModel> data, int index, string parentId)
         {
             StringBuilder textBuilder = new StringBuilder();

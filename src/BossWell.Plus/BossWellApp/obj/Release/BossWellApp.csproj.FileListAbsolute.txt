@@ -23,3 +23,4 @@ D:\C#\框架\Wx_PublicSign\02缓存接口\BossWellApp\obj\Release\BossWellApp.pd
 D:\Project_TY\20180502Rest\Job\flyinit\Flying\src\02缓存接口\BossWellApp\obj\Release\BossWellApp.csprojResolveAssemblyReference.cache
 D:\Project_TY\20180502Rest\Job\flyinit\Flying\src\02缓存接口\BossWellApp\obj\Release\BossWellApp.dll
 D:\Project_TY\20180502Rest\Job\flyinit\Flying\src\02缓存接口\BossWellApp\obj\Release\BossWellApp.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\BossWell.Plus\BossWellApp\obj\Release\BossWellApp.csprojResolveAssemblyReference.cache

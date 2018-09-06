@@ -17,3 +17,10 @@ D:\Project_TY\Code\纯净版\src\BossWell.Model\BossWellModel\bin\Debug\SystemCo
 D:\Project_TY\Code\纯净版\src\BossWell.Model\BossWellModel\obj\Debug\BossWellModel.csprojResolveAssemblyReference.cache
 D:\Project_TY\Code\纯净版\src\BossWell.Model\BossWellModel\obj\Debug\BossWellModel.dll
 D:\Project_TY\Code\纯净版\src\BossWell.Model\BossWellModel\obj\Debug\BossWellModel.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\BossWell.Model\BossWellModel\bin\Debug\BossWellModel.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\BossWell.Model\BossWellModel\bin\Debug\BossWellModel.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\BossWell.Model\BossWellModel\bin\Debug\SystemConfig.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\BossWell.Model\BossWellModel\bin\Debug\SystemConfig.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\BossWell.Model\BossWellModel\obj\Debug\BossWellModel.csprojResolveAssemblyReference.cache
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\BossWell.Model\BossWellModel\obj\Debug\BossWellModel.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\BossWell.Model\BossWellModel\obj\Debug\BossWellModel.pdb

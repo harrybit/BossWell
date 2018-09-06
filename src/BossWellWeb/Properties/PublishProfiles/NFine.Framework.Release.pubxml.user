@@ -8,7 +8,7 @@
     <LastUsedBuildConfiguration>Release</LastUsedBuildConfiguration>
     <LastUsedPlatform>Any CPU</LastUsedPlatform>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>D:\Project_TY\发布\web</_PublishTargetUrl>
+    <_PublishTargetUrl>D:\Project_TY\发布\LocalHostAdmin</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="Areas/ExampleManage/Views/BarCode/Index.cshtml">
@@ -84,16 +84,16 @@
       <publishTime>07/11/2018 17:08:51</publishTime>
     </File>
     <File Include="Areas/PublicBusines/Views/Banner/Form.cshtml">
-      <publishTime>05/28/2018 10:25:13</publishTime>
+      <publishTime>08/08/2018 17:29:06</publishTime>
     </File>
     <File Include="Areas/PublicBusines/Views/Banner/Index.cshtml">
-      <publishTime>07/11/2018 17:08:51</publishTime>
+      <publishTime>08/08/2018 17:34:45</publishTime>
     </File>
     <File Include="Areas/PublicBusines/Views/Client/Form.cshtml">
-      <publishTime>06/21/2018 10:47:55</publishTime>
+      <publishTime>08/08/2018 17:56:52</publishTime>
     </File>
     <File Include="Areas/PublicBusines/Views/Client/Index.cshtml">
-      <publishTime>07/12/2018 11:00:58</publishTime>
+      <publishTime>08/08/2018 18:00:37</publishTime>
     </File>
     <File Include="Areas/PublicBusines/Views/Client/JDetails.cshtml">
       <publishTime>06/05/2018 15:09:33</publishTime>
@@ -105,28 +105,34 @@
       <publishTime>05/17/2018 16:14:50</publishTime>
     </File>
     <File Include="Areas/PublicBusines/Views/ComClass/Form.cshtml">
-      <publishTime>05/23/2018 10:23:45</publishTime>
+      <publishTime>08/07/2018 15:50:23</publishTime>
     </File>
     <File Include="Areas/PublicBusines/Views/ComClass/Index.cshtml">
-      <publishTime>07/11/2018 17:08:51</publishTime>
+      <publishTime>08/07/2018 15:55:54</publishTime>
     </File>
     <File Include="Areas/PublicBusines/Views/ComClass/TabType.cshtml">
-      <publishTime>07/11/2018 17:08:51</publishTime>
+      <publishTime>08/07/2018 15:55:53</publishTime>
+    </File>
+    <File Include="Areas/PublicBusines/Views/DeviceVersion/Form.cshtml">
+      <publishTime>08/08/2018 17:30:00</publishTime>
+    </File>
+    <File Include="Areas/PublicBusines/Views/DeviceVersion/Index.cshtml">
+      <publishTime>08/08/2018 11:02:42</publishTime>
     </File>
     <File Include="Areas/PublicBusines/Views/News/Form.cshtml">
-      <publishTime>05/25/2018 12:02:38</publishTime>
+      <publishTime>08/08/2018 18:02:41</publishTime>
     </File>
     <File Include="Areas/PublicBusines/Views/News/Index.cshtml">
-      <publishTime>07/11/2018 17:08:51</publishTime>
+      <publishTime>08/08/2018 17:37:11</publishTime>
     </File>
     <File Include="Areas/PublicBusines/Views/Shared/_Layout.cshtml">
       <publishTime>05/17/2018 15:22:26</publishTime>
     </File>
     <File Include="Areas/PublicBusines/Views/SystemConfig/Form.cshtml">
-      <publishTime>05/21/2018 17:04:26</publishTime>
+      <publishTime>08/07/2018 15:36:15</publishTime>
     </File>
     <File Include="Areas/PublicBusines/Views/SystemConfig/Index.cshtml">
-      <publishTime>07/12/2018 10:37:10</publishTime>
+      <publishTime>08/07/2018 15:36:16</publishTime>
     </File>
     <File Include="Areas/PublicBusines/Views/Web.config">
       <publishTime>10/23/2017 09:38:02</publishTime>
@@ -185,11 +191,20 @@
     <File Include="Areas/ReportManage/Views/Web.config">
       <publishTime>10/23/2017 09:38:08</publishTime>
     </File>
+    <File Include="Areas/SystemManage/Views/AdminUser/Form.cshtml">
+      <publishTime>08/07/2018 15:19:22</publishTime>
+    </File>
+    <File Include="Areas/SystemManage/Views/AdminUser/Index.cshtml">
+      <publishTime>08/08/2018 17:58:54</publishTime>
+    </File>
+    <File Include="Areas/SystemManage/Views/AdminUser/ResetPwd.cshtml">
+      <publishTime>07/19/2018 14:59:48</publishTime>
+    </File>
     <File Include="Areas/SystemManage/Views/Area/Form.cshtml">
-      <publishTime>08/01/2016 20:01:18</publishTime>
+      <publishTime>08/07/2018 15:35:03</publishTime>
     </File>
     <File Include="Areas/SystemManage/Views/Area/Index.cshtml">
-      <publishTime>08/07/2016 14:30:10</publishTime>
+      <publishTime>08/07/2018 15:35:05</publishTime>
     </File>
     <File Include="Areas/SystemManage/Views/Duty/Details.cshtml">
       <publishTime>07/28/2016 15:32:56</publishTime>
@@ -218,44 +233,50 @@
     <File Include="Areas/SystemManage/Views/ItemsType/Index.cshtml">
       <publishTime>05/22/2018 18:33:52</publishTime>
     </File>
+    <File Include="Areas/SystemManage/Views/Log/Index.cshtml">
+      <publishTime>08/07/2018 15:10:48</publishTime>
+    </File>
+    <File Include="Areas/SystemManage/Views/Log/RemoveLog.cshtml">
+      <publishTime>08/07/2018 15:58:49</publishTime>
+    </File>
     <File Include="Areas/SystemManage/Views/Module/Details.cshtml">
       <publishTime>07/14/2016 15:43:24</publishTime>
     </File>
     <File Include="Areas/SystemManage/Views/Module/Form.cshtml">
-      <publishTime>07/15/2016 23:29:30</publishTime>
+      <publishTime>08/07/2018 11:32:13</publishTime>
     </File>
     <File Include="Areas/SystemManage/Views/Module/Index.cshtml">
-      <publishTime>08/01/2016 16:37:16</publishTime>
+      <publishTime>08/07/2018 14:51:52</publishTime>
     </File>
     <File Include="Areas/SystemManage/Views/ModuleButton/CloneButton.cshtml">
-      <publishTime>07/25/2016 14:14:56</publishTime>
+      <publishTime>08/07/2018 11:13:50</publishTime>
     </File>
     <File Include="Areas/SystemManage/Views/ModuleButton/Details.cshtml">
       <publishTime>07/14/2016 15:44:28</publishTime>
     </File>
     <File Include="Areas/SystemManage/Views/ModuleButton/Form.cshtml">
-      <publishTime>07/25/2016 15:36:58</publishTime>
+      <publishTime>08/07/2018 11:32:05</publishTime>
     </File>
     <File Include="Areas/SystemManage/Views/ModuleButton/Index.cshtml">
-      <publishTime>07/28/2016 15:18:50</publishTime>
+      <publishTime>08/07/2018 14:51:53</publishTime>
     </File>
     <File Include="Areas/SystemManage/Views/Organize/Details.cshtml">
       <publishTime>08/19/2016 22:20:38</publishTime>
     </File>
     <File Include="Areas/SystemManage/Views/Organize/Form.cshtml">
-      <publishTime>08/19/2016 22:20:44</publishTime>
+      <publishTime>08/07/2018 15:20:24</publishTime>
     </File>
     <File Include="Areas/SystemManage/Views/Organize/Index.cshtml">
-      <publishTime>08/01/2016 11:39:42</publishTime>
+      <publishTime>08/08/2018 17:57:36</publishTime>
     </File>
     <File Include="Areas/SystemManage/Views/Role/Details.cshtml">
       <publishTime>10/16/2017 15:20:44</publishTime>
     </File>
     <File Include="Areas/SystemManage/Views/Role/Form.cshtml">
-      <publishTime>05/09/2018 11:54:36</publishTime>
+      <publishTime>08/07/2018 11:31:35</publishTime>
     </File>
     <File Include="Areas/SystemManage/Views/Role/Index.cshtml">
-      <publishTime>08/10/2016 10:21:28</publishTime>
+      <publishTime>08/08/2018 17:58:19</publishTime>
     </File>
     <File Include="Areas/SystemManage/Views/RoleAuthorize/Details.cshtml">
       <publishTime>10/13/2017 17:33:30</publishTime>
@@ -318,10 +339,10 @@
       <publishTime>05/11/2018 16:02:32</publishTime>
     </File>
     <File Include="bin/ApiHelp.dll">
-      <publishTime>07/16/2018 11:45:28</publishTime>
+      <publishTime>09/05/2018 17:37:15</publishTime>
     </File>
     <File Include="bin/ApiHelp.pdb">
-      <publishTime>07/16/2018 11:45:27</publishTime>
+      <publishTime>09/05/2018 17:37:15</publishTime>
     </File>
     <File Include="bin/BestSignService.dll">
       <publishTime>07/16/2018 11:45:29</publishTime>
@@ -330,49 +351,73 @@
       <publishTime>07/16/2018 11:45:29</publishTime>
     </File>
     <File Include="bin/BossWellApp.dll">
-      <publishTime>07/16/2018 11:45:30</publishTime>
+      <publishTime>09/05/2018 17:37:19</publishTime>
     </File>
     <File Include="bin/BossWellApp.pdb">
-      <publishTime>07/16/2018 11:45:30</publishTime>
+      <publishTime>09/05/2018 17:37:19</publishTime>
+    </File>
+    <File Include="bin/BossWellFactory.dll">
+      <publishTime>09/05/2018 17:37:18</publishTime>
+    </File>
+    <File Include="bin/BossWellFactory.pdb">
+      <publishTime>09/05/2018 17:37:18</publishTime>
+    </File>
+    <File Include="bin/BossWellModel.dll">
+      <publishTime>09/05/2018 17:37:16</publishTime>
+    </File>
+    <File Include="bin/BossWellModel.pdb">
+      <publishTime>09/05/2018 17:37:16</publishTime>
+    </File>
+    <File Include="bin/BossWellORM.dll">
+      <publishTime>09/05/2018 17:37:17</publishTime>
+    </File>
+    <File Include="bin/BossWellORM.pdb">
+      <publishTime>09/05/2018 17:37:17</publishTime>
     </File>
     <File Include="bin/BossWellService.dll">
-      <publishTime>07/16/2018 11:45:29</publishTime>
+      <publishTime>09/05/2018 17:37:18</publishTime>
     </File>
     <File Include="bin/BossWellService.pdb">
-      <publishTime>07/16/2018 11:45:29</publishTime>
+      <publishTime>09/05/2018 17:37:18</publishTime>
+    </File>
+    <File Include="bin/BossWellWeb.dll">
+      <publishTime>09/05/2018 17:37:19</publishTime>
+    </File>
+    <File Include="bin/BossWellWeb.pdb">
+      <publishTime>09/05/2018 17:37:19</publishTime>
     </File>
     <File Include="bin/BouncyCastle.Crypto.dll">
       <publishTime>04/08/2018 20:30:24</publishTime>
     </File>
     <File Include="bin/Cache.Base.dll">
-      <publishTime>07/16/2018 11:45:26</publishTime>
+      <publishTime>09/05/2018 17:37:15</publishTime>
     </File>
     <File Include="bin/Cache.Base.pdb">
-      <publishTime>07/16/2018 11:45:26</publishTime>
+      <publishTime>09/05/2018 17:37:15</publishTime>
     </File>
     <File Include="bin/Cache.Factory.dll">
-      <publishTime>07/16/2018 11:45:29</publishTime>
+      <publishTime>09/05/2018 17:37:17</publishTime>
     </File>
     <File Include="bin/Cache.Factory.pdb">
-      <publishTime>07/16/2018 11:45:29</publishTime>
+      <publishTime>09/05/2018 17:37:17</publishTime>
     </File>
     <File Include="bin/Cache.Redis.dll">
-      <publishTime>07/16/2018 11:45:28</publishTime>
+      <publishTime>09/05/2018 17:37:17</publishTime>
     </File>
     <File Include="bin/Cache.Redis.pdb">
-      <publishTime>07/16/2018 11:45:28</publishTime>
+      <publishTime>09/05/2018 17:37:17</publishTime>
     </File>
     <File Include="bin/Chloe.dll">
-      <publishTime>07/16/2018 11:45:26</publishTime>
+      <publishTime>09/05/2018 17:37:15</publishTime>
     </File>
     <File Include="bin/Chloe.MySql.dll">
-      <publishTime>07/16/2018 11:45:27</publishTime>
+      <publishTime>09/05/2018 17:37:16</publishTime>
     </File>
     <File Include="bin/Chloe.MySql.pdb">
-      <publishTime>07/16/2018 11:45:27</publishTime>
+      <publishTime>09/05/2018 17:37:16</publishTime>
     </File>
     <File Include="bin/Chloe.pdb">
-      <publishTime>07/16/2018 11:45:26</publishTime>
+      <publishTime>09/05/2018 17:37:15</publishTime>
     </File>
     <File Include="bin/ChloeORM.dll">
       <publishTime>07/16/2018 11:45:28</publishTime>
@@ -393,10 +438,10 @@
       <publishTime>05/29/2016 20:39:26</publishTime>
     </File>
     <File Include="bin/IBossWellService.dll">
-      <publishTime>07/16/2018 11:45:28</publishTime>
+      <publishTime>09/05/2018 17:37:16</publishTime>
     </File>
     <File Include="bin/IBossWellService.pdb">
-      <publishTime>07/16/2018 11:45:28</publishTime>
+      <publishTime>09/05/2018 17:37:16</publishTime>
     </File>
     <File Include="bin/ICSharpCode.SharpZipLib.dll">
       <publishTime>05/30/2016 15:01:59</publishTime>
@@ -414,7 +459,7 @@
       <publishTime>01/14/2016 11:27:46</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
-      <publishTime>05/28/2016 23:26:32</publishTime>
+      <publishTime>07/25/2012 11:48:56</publishTime>
     </File>
     <File Include="bin/MySql.Data.dll">
       <publishTime>06/17/2016 17:34:38</publishTime>
@@ -449,6 +494,9 @@
     <File Include="bin/NPOI.dll">
       <publishTime>05/30/2016 15:02:00</publishTime>
     </File>
+    <File Include="bin/Owin.dll">
+      <publishTime>11/13/2012 12:19:34</publishTime>
+    </File>
     <File Include="bin/Qiniu.dll">
       <publishTime>03/08/2017 16:02:58</publishTime>
     </File>
@@ -471,7 +519,7 @@
       <publishTime>05/28/2016 23:26:34</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
-      <publishTime>01/28/2015 04:04:30</publishTime>
+      <publishTime>05/10/2018 22:42:40</publishTime>
     </File>
     <File Include="bin/System.Web.Http.dll">
       <publishTime>05/28/2016 23:26:34</publishTime>
@@ -480,19 +528,25 @@
       <publishTime>05/28/2016 23:26:36</publishTime>
     </File>
     <File Include="bin/System.Web.Mvc.dll">
-      <publishTime>08/26/2014 04:33:20</publishTime>
+      <publishTime>05/10/2018 22:38:08</publishTime>
     </File>
     <File Include="bin/System.Web.Razor.dll">
-      <publishTime>01/28/2015 04:02:32</publishTime>
+      <publishTime>05/10/2018 22:38:32</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Deployment.dll">
-      <publishTime>01/28/2015 04:04:30</publishTime>
+      <publishTime>05/10/2018 22:42:40</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.dll">
-      <publishTime>01/28/2015 04:04:30</publishTime>
+      <publishTime>05/10/2018 22:42:40</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Razor.dll">
-      <publishTime>01/28/2015 04:04:30</publishTime>
+      <publishTime>05/10/2018 22:42:40</publishTime>
+    </File>
+    <File Include="bin/SystemConfig.dll">
+      <publishTime>09/05/2018 17:37:15</publishTime>
+    </File>
+    <File Include="bin/SystemConfig.pdb">
+      <publishTime>09/05/2018 17:37:15</publishTime>
     </File>
     <File Include="bin/ThoughtWorks.QRCode.dll">
       <publishTime>06/29/2015 16:49:52</publishTime>
@@ -840,10 +894,10 @@
       <publishTime>07/20/2016 15:09:28</publishTime>
     </File>
     <File Include="Content/js/framework-clientdata.js">
-      <publishTime>08/10/2016 10:21:22</publishTime>
+      <publishTime>08/06/2018 18:22:16</publishTime>
     </File>
     <File Include="Content/js/framework-ui.js">
-      <publishTime>08/16/2016 09:42:44</publishTime>
+      <publishTime>08/06/2018 18:57:11</publishTime>
     </File>
     <File Include="Content/js/highcharts/adapters/mootools-adapter.js">
       <publishTime>07/20/2016 17:02:24</publishTime>
@@ -930,10 +984,10 @@
       <publishTime>07/20/2016 17:02:26</publishTime>
     </File>
     <File Include="Content/js/index.js">
-      <publishTime>10/13/2017 13:52:02</publishTime>
+      <publishTime>08/06/2018 18:59:36</publishTime>
     </File>
     <File Include="Content/js/indextab.js">
-      <publishTime>07/13/2018 15:22:51</publishTime>
+      <publishTime>08/06/2018 11:46:54</publishTime>
     </File>
     <File Include="Content/js/jqgrid/grid.locale-cn.js">
       <publishTime>05/29/2016 22:07:04</publishTime>
@@ -1341,7 +1395,7 @@
       <publishTime>05/17/2018 15:22:28</publishTime>
     </File>
     <File Include="Global.asax">
-      <publishTime>05/28/2016 23:26:28</publishTime>
+      <publishTime>07/17/2018 17:20:16</publishTime>
     </File>
     <File Include="Index.htm">
       <publishTime>08/02/2016 22:38:50</publishTime>
@@ -1389,10 +1443,10 @@
       <publishTime>10/16/2017 15:30:16</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>06/11/2018 09:23:18</publishTime>
+      <publishTime>08/07/2018 14:57:44</publishTime>
     </File>
     <File Include="Views/Login/Index.cshtml">
-      <publishTime>05/09/2018 17:18:23</publishTime>
+      <publishTime>08/06/2018 17:37:10</publishTime>
     </File>
     <File Include="Views/Shared/_Form.cshtml">
       <publishTime>07/21/2016 15:06:12</publishTime>
@@ -1407,7 +1461,7 @@
       <publishTime>10/23/2017 09:37:44</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/16/2018 11:45:38</publishTime>
+      <publishTime>09/05/2018 17:37:28</publishTime>
     </File>
   </ItemGroup>
 </Project>

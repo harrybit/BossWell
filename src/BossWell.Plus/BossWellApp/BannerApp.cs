@@ -1,18 +1,19 @@
-﻿using BossWellModel;
+﻿using ApiHelp;
+using BossWellApp.Basic;
+using BossWellFactory;
+using BossWellModel;
 using BossWellModel.Base;
 using BossWellModel.BossWellModel;
-using BossWellFactory;
 using IBossWellService;
 using System.Collections.Generic;
-using ApiHelp;
-using BossWellApp.Basic;
 
 namespace BossWellApp
 {
     public class BannerApp
     {
-        IBannerService _service = PublicFactory.GetBannerService();
-        IComClassService _comService = SysAutoFactory.GetComClassService();
+        private IBannerService _service = PublicFactory.GetBannerService();
+        private IComClassService _comService = SysAutoFactory.GetComClassService();
+
         public string GetGridJson(Pagination pagination, string keyword)
         {
             List<BannerEntity> list = GetPageList(pagination, keyword).Items;

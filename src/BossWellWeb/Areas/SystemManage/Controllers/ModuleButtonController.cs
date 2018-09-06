@@ -1,7 +1,6 @@
 ﻿using BossWellApp;
-using System.Web.Mvc;
-using ApiHelp;
 using BossWellModel;
+using System.Web.Mvc;
 
 namespace BossWellWeb.Areas.SystemManage.Controllers
 {
@@ -53,12 +52,14 @@ namespace BossWellWeb.Areas.SystemManage.Controllers
         {
             return View();
         }
+
         [HttpGet]
         [HandlerAjaxOnly]
         public ActionResult GetCloneButtonTreeJson()
         {
             return Content(moduleButtonApp.GetTreeCloneButtonJson());
         }
+
         [HttpPost]
         [HandlerAjaxOnly]
         public ActionResult SubmitCloneButton(string moduleId, string buttonIDS)

@@ -1,15 +1,13 @@
-﻿using Chloe.DbExpressions;
-using Chloe.InternalExtensions;
+﻿using Chloe.InternalExtensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Chloe.MySql
 {
     internal static class Utils
     {
-        static readonly Dictionary<Type, Type> ToStringableNumericTypes;
+        private static readonly Dictionary<Type, Type> ToStringableNumericTypes;
 
         static Utils()
         {
@@ -29,6 +27,7 @@ namespace Chloe.MySql
         {
             return string.Concat("`", name, "`");
         }
+
         public static void CheckNull(object obj, string paramName = null)
         {
             if (obj == null)

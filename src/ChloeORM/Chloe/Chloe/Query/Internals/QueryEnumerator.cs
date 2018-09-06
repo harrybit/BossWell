@@ -4,28 +4,28 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 
 namespace Chloe.Query.Internals
 {
-    static class QueryEnumeratorCreator
+    internal static class QueryEnumeratorCreator
     {
         public static IEnumerator<T> CreateEnumerator<T>(InternalAdoSession adoSession, DbCommandFactor commandFactor)
         {
             return new QueryEnumerator<T>(adoSession, commandFactor);
         }
+
         internal struct QueryEnumerator<T> : IEnumerator<T>
         {
-            InternalAdoSession _adoSession;
-            DbCommandFactor _commandFactor;
-            IObjectActivator _objectActivator;
+            private InternalAdoSession _adoSession;
+            private DbCommandFactor _commandFactor;
+            private IObjectActivator _objectActivator;
 
-            IDataReader _reader;
+            private IDataReader _reader;
 
-            T _current;
-            bool _hasFinished;
-            bool _disposed;
+            private T _current;
+            private bool _hasFinished;
+            private bool _disposed;
+
             public QueryEnumerator(InternalAdoSession adoSession, DbCommandFactor commandFactor)
             {
                 this._adoSession = adoSession;

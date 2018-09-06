@@ -6,6 +6,7 @@
     public static class CacheId
     {
         #region 0号库
+
         /// <summary>
         /// 系统配置
         /// </summary>
@@ -15,7 +16,8 @@
         /// 后台验证码
         /// </summary>
         public static int BossWell_Verifycode { get { return 0; } }
-        #endregion
+
+        #endregion 0号库
 
         #region 1号库
 
@@ -24,15 +26,16 @@
         /// </summary>
         public static int RoleAuthorize { get { return 1; } }
 
-        #endregion
+        #endregion 1号库
 
         #region 2号库
+
         /// <summary>
         /// 文件上传许可证
         /// </summary>
         public static int AFU_FileLicense { get { return 2; } }
 
-        #endregion
+        #endregion 2号库
 
         #region 3号库
 
@@ -41,7 +44,7 @@
         /// </summary>
         public static int SMSTempCode { get { return 3; } }
 
-        #endregion
+        #endregion 3号库
 
         #region 14号库-不限时
 
@@ -49,14 +52,13 @@
         /// 后台线程池环境，不限时
         /// </summary>
         public static int Hangfire { get { return 14; } }
-        #endregion
+
+        #endregion 14号库-不限时
 
         #region 15号库
 
         public static int ListId { get { return 15; } }
 
-        #endregion
-
-
+        #endregion 15号库
     }
 }

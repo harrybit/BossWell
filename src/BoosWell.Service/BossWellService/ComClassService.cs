@@ -1,11 +1,11 @@
-﻿using BossWellORM;
-using IBossWellService;
-using BossWellModel;
+﻿using BossWellModel;
 using BossWellModel.Base;
-using System.Collections.Generic;
-using System.Text;
+using BossWellORM;
 using Chloe;
+using IBossWellService;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace BossWellService
 {
@@ -15,22 +15,27 @@ namespace BossWellService
         {
             return Query(request);
         }
+
         public ComClassEntity GetFormData(string sid)
         {
             return context.Query<ComClassEntity>().Where(t => t.Sid.Equals(sid)).FirstOrDefault();
         }
+
         public List<string> GetChildNodeList(string parentId)
         {
             return context.Query<ComClassEntity>().Where(t => t.ParentId.Equals(parentId)).Select(t => t.Sid).ToList();
         }
+
         public ComClassEntity SaveForm(ComClassEntity saveModel)
         {
             return Save<ComClassEntity>(saveModel, "comclass_");
         }
+
         public int DeleteForm(List<string> sidList)
         {
             return context.Delete<ComClassEntity>(t => sidList.Contains(t.Sid));
         }
+
         public List<ComClassEntity> GetAllChildByParentId(string parentId)
         {
             StringBuilder sqlBuilder = new StringBuilder();
@@ -41,7 +46,5 @@ namespace BossWellService
             DbParam paramPid = new DbParam("@Pid", parentId);
             return context.SqlQuery<ComClassEntity>(sqlBuilder.ToString(), new DbParam[] { paramPid }).ToList();
         }
-
-
     }
 }

@@ -1,11 +1,12 @@
 ﻿using Chloe.Entity;
+
 namespace BossWellModel
 {
     /// <summary>
     /// 轮播图表
     /// </summary>
     [Table("Banner")]
-    public class BannerEntity:BaseEntity
+    public class BannerEntity : BaseEntity
     {
         public string Title { get; set; }
         public int Sort { get; set; }

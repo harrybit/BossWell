@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Chloe.Query.QueryExpressions;
-using Chloe.Query.QueryState;
-using Chloe.Query.Visitors;
 
 namespace Chloe.Query.QueryExpressions
 {
-    class TakeExpression : QueryExpression
+    internal class TakeExpression : QueryExpression
     {
-        int _count;
+        private int _count;
+
         public TakeExpression(Type elementType, QueryExpression prevExpression, int count)
             : base(QueryExpressionType.Take, elementType, prevExpression)
         {
@@ -22,7 +17,8 @@ namespace Chloe.Query.QueryExpressions
         {
             get { return this._count; }
         }
-        void CheckInputCount(int count)
+
+        private void CheckInputCount(int count)
         {
             if (count < 0)
             {

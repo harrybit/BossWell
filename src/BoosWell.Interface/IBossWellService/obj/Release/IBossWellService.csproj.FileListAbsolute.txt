@@ -16,3 +16,11 @@ D:\Project_TY\20180502Rest\Job\flyinit\Flying\src\02缓存接口\IBossWellServic
 D:\Project_TY\20180502Rest\Job\flyinit\Flying\src\02缓存接口\IBossWellService\obj\Release\IBossWellService.csprojResolveAssemblyReference.cache
 D:\Project_TY\20180502Rest\Job\flyinit\Flying\src\02缓存接口\IBossWellService\obj\Release\IBossWellService.dll
 D:\Project_TY\20180502Rest\Job\flyinit\Flying\src\02缓存接口\IBossWellService\obj\Release\IBossWellService.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\BoosWell.Interface\IBossWellService\bin\Release\IBossWellService.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\BoosWell.Interface\IBossWellService\bin\Release\IBossWellService.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\BoosWell.Interface\IBossWellService\bin\Release\BossWellModel.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\BoosWell.Interface\IBossWellService\bin\Release\Chloe.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\BoosWell.Interface\IBossWellService\bin\Release\BossWellModel.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\BoosWell.Interface\IBossWellService\obj\Release\IBossWellService.csprojResolveAssemblyReference.cache
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\BoosWell.Interface\IBossWellService\obj\Release\IBossWellService.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\BoosWell.Interface\IBossWellService\obj\Release\IBossWellService.pdb

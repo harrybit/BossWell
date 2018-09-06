@@ -1,5 +1,4 @@
 ﻿using Chloe.Core;
-using Chloe.Core.Visitors;
 using Chloe.Infrastructure;
 using Chloe.Mapper;
 using Chloe.Query.Mapping;
@@ -8,21 +7,19 @@ using Chloe.Query.Visitors;
 using Chloe.Utility;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
 
 namespace Chloe.Query.Internals
 {
-    class InternalQuery<T> : IEnumerable<T>, IEnumerable
+    internal class InternalQuery<T> : IEnumerable<T>, IEnumerable
     {
-        Query<T> _query;
+        private Query<T> _query;
 
         internal InternalQuery(Query<T> query)
         {
             this._query = query;
         }
 
-        DbCommandFactor GenerateCommandFactor()
+        private DbCommandFactor GenerateCommandFactor()
         {
             IQueryState qs = QueryExpressionVisitor.VisitQueryExpression(this._query.QueryExpression, new ScopeParameterDictionary(), new KeyDictionary<string>());
             MappingData data = qs.GenerateMappingData();
@@ -47,6 +44,7 @@ namespace Chloe.Query.Internals
             var enumerator = QueryEnumeratorCreator.CreateEnumerator<T>(this._query.DbContext.AdoSession, commandFactor);
             return enumerator;
         }
+
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();

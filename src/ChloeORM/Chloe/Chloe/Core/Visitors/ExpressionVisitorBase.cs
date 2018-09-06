@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Linq;
-using Chloe.DbExpressions;
+﻿using Chloe.DbExpressions;
 using Chloe.Extensions;
 using Chloe.InternalExtensions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace Chloe.Core.Visitors
 {
     public class ExpressionVisitorBase : ExpressionVisitor<DbExpression>
     {
         //Bad name!!! Help,help!!!
-        static List<ExpressionType> LL = new List<ExpressionType>();
+        private static List<ExpressionType> LL = new List<ExpressionType>();
 
         static ExpressionVisitorBase()
         {
@@ -33,6 +33,7 @@ namespace Chloe.Core.Visitors
 
             return lambda;
         }
+
         public static Expression ConvertBoolExpression(Expression boolExp)
         {
             if (boolExp.Type != UtilConstants.TypeOfBoolean)
@@ -54,21 +55,25 @@ namespace Chloe.Core.Visitors
         {
             return DbExpression.Add(this.Visit(exp.Left), this.Visit(exp.Right), exp.Type, exp.Method);
         }
+
         // -
         protected override DbExpression VisitBinary_Subtract(BinaryExpression exp)
         {
             return DbExpression.Subtract(this.Visit(exp.Left), this.Visit(exp.Right), exp.Type);
         }
+
         // *
         protected override DbExpression VisitBinary_Multiply(BinaryExpression exp)
         {
             return DbExpression.Multiply(this.Visit(exp.Left), this.Visit(exp.Right), exp.Type);
         }
+
         // /
         protected override DbExpression VisitBinary_Divide(BinaryExpression exp)
         {
             return DbExpression.Divide(this.Visit(exp.Left), this.Visit(exp.Right), exp.Type);
         }
+
         // %
         protected override DbExpression VisitBinary_Modulo(BinaryExpression exp)
         {
@@ -85,22 +90,26 @@ namespace Chloe.Core.Visitors
         {
             return DbExpression.LessThan(this.Visit(exp.Left), this.Visit(exp.Right));
         }
+
         // <=
         protected override DbExpression VisitBinary_LessThanOrEqual(BinaryExpression exp)
         {
             return DbExpression.LessThanOrEqual(this.Visit(exp.Left), this.Visit(exp.Right));
         }
+
         // >
         protected override DbExpression VisitBinary_GreaterThan(BinaryExpression exp)
         {
             return DbExpression.GreaterThan(this.Visit(exp.Left), this.Visit(exp.Right));
         }
+
         // >=
         protected override DbExpression VisitBinary_GreaterThanOrEqual(BinaryExpression exp)
         {
             return DbExpression.GreaterThanOrEqual(this.Visit(exp.Left), this.Visit(exp.Right));
         }
-        // & 
+
+        // &
         protected override DbExpression VisitBinary_And(BinaryExpression exp)
         {
             if (exp.Type == UtilConstants.TypeOfBoolean)
@@ -108,6 +117,7 @@ namespace Chloe.Core.Visitors
             else
                 return DbExpression.BitAnd(exp.Type, this.Visit(exp.Left), this.Visit(exp.Right));
         }
+
         protected override DbExpression VisitBinary_AndAlso(BinaryExpression exp)
         {
             // true && a.ID == 1 或者 a.ID == 1 && true
@@ -133,7 +143,7 @@ namespace Chloe.Core.Visitors
             }
 
             c = left as ConstantExpression;
-            // true && a.ID == 1  
+            // true && a.ID == 1
             if (c != null)
             {
                 if ((bool)c.Value == true)
@@ -160,6 +170,7 @@ namespace Chloe.Core.Visitors
             dbExp = DbExpression.And(this.Visit(newLeft), this.Visit(newRight));
             return dbExp;
         }
+
         // |
         protected override DbExpression VisitBinary_Or(BinaryExpression exp)
         {
@@ -168,6 +179,7 @@ namespace Chloe.Core.Visitors
             else
                 return DbExpression.BitOr(exp.Type, this.Visit(exp.Left), this.Visit(exp.Right));
         }
+
         protected override DbExpression VisitBinary_OrElse(BinaryExpression exp)
         {
             // true && a.ID == 1 或者 a.ID == 1 && true
@@ -191,7 +203,7 @@ namespace Chloe.Core.Visitors
             }
 
             c = left as ConstantExpression;
-            // true || a.ID == 1  
+            // true || a.ID == 1
             if (c != null)
             {
                 if ((bool)c.Value == false)
@@ -253,9 +265,9 @@ namespace Chloe.Core.Visitors
         //假如 case when 的 then 部分又是返回 bool 类型 并且诸如 a>1 a=2 等 dbbool 的情况的(因为 a>1 等只能数据库识别)，则继续再够建 case when ...也就是必须确保 then 部分不能有 诸如 a>1，a=2 等的表达式
         protected override DbExpression VisitConditional(ConditionalExpression exp)
         {
-            // a.B>0 ? <Expression1> : <Expression2>    a.B ? <Expression1> : <Expression2> 
+            // a.B>0 ? <Expression1> : <Expression2>    a.B ? <Expression1> : <Expression2>
             // 统一转成 (a.B>0)==true ? <Expression1> : <Expression2>
-            // 然后翻译成 case when (a.B>0)==true then <Expression1> when (a.B>0)==false then <Expression2> else null end   
+            // 然后翻译成 case when (a.B>0)==true then <Expression1> when (a.B>0)==false then <Expression2> else null end
             // case when a.B==true then <Expression1> when a.B==false then <Expression2> else 1=0 end
 
             Expression test = exp.Test, ifTrue = exp.IfTrue, ifFalse = exp.IfFalse;
@@ -269,7 +281,6 @@ namespace Chloe.Core.Visitors
             thenIfTrue = ifTrue;
             // ifFalse==true
             thenfFalse = ifFalse;
-
 
             List<DbCaseWhenExpression.WhenThenExpressionPair> whenThenExps = new List<DbCaseWhenExpression.WhenThenExpressionPair>(2);
 
@@ -340,7 +351,7 @@ namespace Chloe.Core.Visitors
         }
 
         // 处理 a.XX==XXX 其中 a.XX.Type 为 bool
-        DbExpression VisitBinary_Equal_Boolean(BinaryExpression exp)
+        private DbExpression VisitBinary_Equal_Boolean(BinaryExpression exp)
         {
             var left = exp.Left;
             var right = exp.Right;
@@ -349,27 +360,24 @@ namespace Chloe.Core.Visitors
             {
                 return VisitBinary_Specific(left, (bool)c.Value);
             }
-
             else if ((c = left as ConstantExpression) != null)  //只处理 true==XXX 或 false==XXX   其中XXX.Type 为 Bool
             {
                 return VisitBinary_Specific(left, (bool)c.Value);
             }
-
             else if (((ExpressionExtension.StripConvert(left)).NodeType == ExpressionType.MemberAccess && (ExpressionExtension.StripConvert(right)).NodeType == ExpressionType.MemberAccess))
             {
                 //left right 都为 MemberExpression
                 return DbExpression.Equal(this.Visit(left), this.Visit(right));
             }
-
             else
             {
-                // 将 left == right 转 (left==true && right==true) || (left==false && right==false) 
+                // 将 left == right 转 (left==true && right==true) || (left==false && right==false)
                 return BuildExpForWhenBooleanEqual(left, right, false);
             }
         }
 
         //处理 a.XX==XXX 其中 a.XX.Type 为 Nullable<bool>
-        DbExpression VisitBinary_Equal_NullableBoolean(BinaryExpression exp)
+        private DbExpression VisitBinary_Equal_NullableBoolean(BinaryExpression exp)
         {
             var left = exp.Left;
             var right = exp.Right;
@@ -395,7 +403,6 @@ namespace Chloe.Core.Visitors
                 return DbExpression.Equal(this.Visit(left), this.Visit(right));
             }
 
-
             if (right.NodeType == ExpressionType.Convert)//只处理隐士转换情况 XXX==Convert(true) 或 XXX==Convert(false) XXX.Type 为 Nullable
             {
                 c = ((UnaryExpression)right).Operand as ConstantExpression;
@@ -415,17 +422,17 @@ namespace Chloe.Core.Visitors
             }
 
             // a.BoolField == (a.ID > 0) 类写法
-            // 将 left == right 转 (left==true && right==true) || (left==false && right==false) 
+            // 将 left == right 转 (left==true && right==true) || (left==false && right==false)
             // 如有需要将转成 (left==true && right==true) || (left==false && right==false) || (left is null && right is null)
             return BuildExpForWhenBooleanEqual(left, right, true);
         }
 
-        DbExpression VisitBinary_Specific(Expression exp, bool trueOrFalse)
+        private DbExpression VisitBinary_Specific(Expression exp, bool trueOrFalse)
         {
             // a.B == true      a.B=1
             // !a.B==true        not (a.b=1)
             // !(a.x>0)==true    not (case when a.x>0 then 1 else 0 end = 1)
-            // Convert(true)==true  
+            // Convert(true)==true
 
             if (exp.NodeType == ExpressionType.Not)
             {
@@ -437,12 +444,10 @@ namespace Chloe.Core.Visitors
                 // !(a==true)
                 return DbExpression.Not(this.Visit(newOperand));
             }
-
             else if (exp.NodeType == ExpressionType.Convert || exp.NodeType == ExpressionType.ConvertChecked)
             {
                 return VisitBinary_Specific(ExpressionExtension.StripConvert(exp), trueOrFalse);
             }
-
             else
             {
                 // 如果是 MemberAccess 则转成 case <MemberExpression> when 1 then 1 else 0 end = 1 ==>  等价于 a.B=1 ?
@@ -470,7 +475,6 @@ namespace Chloe.Core.Visitors
                     return DbExpression.Equal(this.Visit(exp), DbExpression.Constant(trueOrFalse));
                 }
 
-
                 // 如果是类似 a.XX>XXX 的表达式则转成 case when <Expression> then 1 else 0 end = 1  ==>  直接 Visit a.XX>XXX
                 // a.XX>XXX == true  a.XX>XXX == false
                 if (!trueOrFalse)
@@ -482,11 +486,11 @@ namespace Chloe.Core.Visitors
             }
         }
 
-        // 将 left == right 转 (left==true && right==true) || (left==false && right==false)  
+        // 将 left == right 转 (left==true && right==true) || (left==false && right==false)
         // 如有必要(Nullable)将转成 (left==true && right==true) || (left==false && right==false) || (left is null && right is null)
         // left 和 right 的 Type 必须为 bool 或者 Nullable<bool>
-        // isNullable 
-        DbExpression BuildExpForWhenBooleanEqual(Expression left, Expression right, bool isNullable)
+        // isNullable
+        private DbExpression BuildExpForWhenBooleanEqual(Expression left, Expression right, bool isNullable)
         {
             Expression resultExp = null;
 
@@ -508,11 +512,12 @@ namespace Chloe.Core.Visitors
 
             return this.Visit(resultExp);
         }
-        // 将 left != right 转 (left==true && right==false) || (left==false && right==true)  
+
+        // 将 left != right 转 (left==true && right==false) || (left==false && right==true)
         // 如有必要(Nullable)将转成 (left==true && right==false) || (left==false && right==true) || (left is null && right is not null)|| (left is not null && right is null)
         // left 和 right 的 Type 必须为 bool 或者 Nullable<bool>
-        // isNullable 
-        DbExpression BuildExpForWhenBooleanNotEqual(Expression left, Expression right, bool isNullable)
+        // isNullable
+        private DbExpression BuildExpForWhenBooleanNotEqual(Expression left, Expression right, bool isNullable)
         {
             Expression resultExp = null;
 
@@ -536,8 +541,7 @@ namespace Chloe.Core.Visitors
             return this.Visit(resultExp);
         }
 
-
-        static Expression BuildBoolEqual(Expression left, bool trueOrFalse)
+        private static Expression BuildBoolEqual(Expression left, bool trueOrFalse)
         {
             if (left.Type == UtilConstants.TypeOfBoolean)
             {

@@ -1,14 +1,13 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using BossWellApp;
 using BossWellModel;
-using BossWellApp;
 using BossWellModel.BossWellModel;
+using System.Web.Mvc;
 
 namespace BossWellWeb.Areas.PublicBusines.Controllers
 {
     public class ClientController : ControllerBase
     {
-        ClientApp cltAPP = new ClientApp();
+        private ClientApp cltAPP = new ClientApp();
 
         [HttpGet]
         [HandlerAjaxOnly]
@@ -42,6 +41,5 @@ namespace BossWellWeb.Areas.PublicBusines.Controllers
             cltAPP.DeleteForm(keyValue);
             return Success("删除成功。");
         }
-
     }
 }

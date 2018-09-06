@@ -9,6 +9,18 @@
             如果未开启事务，则返回 null
             </summary>
         </member>
+        <member name="T:Chloe.Core.IDbValueConverter">
+            <summary>
+            转换从 DataReader 读出来的数据库原始值
+            </summary>
+        </member>
+        <member name="M:Chloe.Core.IDbValueConverter.Convert(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="readerValue">调用 IDataReader.GetValue() 方法读出来的原始值，有可能为 DBNull.Value。</param>
+            <returns>与实体属性类型相同的值。如果 readerValue 为 DBNull.Value，可返回 null。</returns>
+        </member>
         <member name="P:Chloe.Core.InternalAdoSession.DbTransaction">
             <summary>
             如果未开启事务，则返回 null
@@ -48,6 +60,11 @@
         <member name="P:Chloe.DbExpressions.DbTableSegment.Body">
             <summary>
             User、(select * from User)
+            </summary>
+        </member>
+        <member name="P:Chloe.DbParam.ExplicitParameter">
+            <summary>
+            如果设置了该自定义参数，框架内部就会忽视 DbParam 类的其他属性，使用该属性值
             </summary>
         </member>
         <member name="P:Chloe.Entity.ColumnAttribute.DbType">
@@ -172,12 +189,34 @@
             如果未开启事务，则返回 null
             </summary>
         </member>
-        <member name="M:Chloe.Infrastructure.MappingTypeSystem.Register(System.Type,System.Data.DbType)">
+        <member name="M:Chloe.Infrastructure.MappingTypeSystem.Configure(System.Type,System.Data.DbType,Chloe.Core.IDbValueConverter)">
             <summary>
-            注册一个需要映射的类型。
+            配置映射的类型。
             </summary>
-            <param name="type">新增的映射类型</param>
-            <param name="dbTypeToMap">映射的 DbType。如果是扩展的 DbType，务必对原生的 System.Data.IDataParameter 进行包装，拦截 IDataParameter.DbType 属性的 setter 以对 dbTypeToMap 处理。</param>
+            <param name="type"></param>
+            <param name="dbTypeToMap">类型 type 对应的 DbType。如果是扩展的 DbType，务必对原生的 System.Data.IDataParameter 进行包装，拦截 IDataParameter.DbType 属性的 setter 以对 dbTypeToMap 处理。</param>
+            <param name="dbValueConverter">指定一个转换器。可为 null。</param>
+        </member>
+        <member name="M:Chloe.IQuery`1.Max``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            求最大值。考虑到满足条件的数据个数为零的情况，为避免报错，可在 lambda 中将相应字段强转成可空类型，如 query.Max(a => (double?)a.Price)。
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="selector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chloe.IQuery`1.Min``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            求最小值。考虑到满足条件的数据个数为零的情况，为避免报错，可在 lambda 中将相应字段强转成可空类型，如 query.Min(a => (double?)a.Price)。
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="selector"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Chloe.Mapper.MRM2">
+            <summary>
+            通过 MappingTypeSystem.Configure() 配置了数据库转换器时，会使用该 MRM。
+            </summary>
         </member>
         <member name="P:Chloe.Query.MappingObjectExpression.ConstructorDescriptor">
             <summary>
@@ -250,6 +289,22 @@
             <typeparam name="T"></typeparam>
             <param name="value1"></param>
             <param name="value2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chloe.Sql.Max``1(``0)">
+            <summary>
+            求最大值。考虑到满足条件的数据个数为零的情况，为避免报错，可在 lambda 中将相应字段强转成可空类型，如 query.Select(a => Sql.Max((double?)a.Price))。
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="p"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chloe.Sql.Min``1(``0)">
+            <summary>
+            求最小值。考虑到满足条件的数据个数为零的情况，为避免报错，可在 lambda 中将相应字段强转成可空类型，如 query.Select(a => Sql.Min((double?)a.Price))。
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="p"></param>
             <returns></returns>
         </member>
     </members>

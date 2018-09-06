@@ -1,14 +1,13 @@
-﻿using BossWellFactory;
-using BossWellModel;
-using IBossWellService;
-using System;
-using System.Collections.Generic;
-using BossWellModel.BossWellModel;
-using ApiHelp;
+﻿using ApiHelp;
 using BossWellApp.Basic;
-using BossWellModel.Enum;
+using BossWellFactory;
+using BossWellModel;
 using BossWellModel.Base;
+using BossWellModel.BossWellModel;
+using BossWellModel.Enum;
+using IBossWellService;
 using Newtonsoft.Json.Linq;
+using System;
 
 namespace BossWellApp
 {
@@ -45,16 +44,19 @@ namespace BossWellApp
                             beginDate = DateTime.Now.ToString("yyyy-MM-dd")._DateTime();
                             request.expression = request.expression.And(t => t.CreateDate >= beginDate);
                             break;
+
                         case 2:
                             //近七天
                             beginDate = DateTime.Now.AddDays(-7).ToString("yyyy-MM-dd")._DateTime();
                             request.expression = request.expression.And(t => t.CreateDate >= beginDate);
                             break;
+
                         case 3:
                             //近一月
                             beginDate = DateTime.Now.AddMonths(-1).ToString("yyyy-MM-dd")._DateTime();
                             request.expression = request.expression.And(t => t.CreateDate >= beginDate);
                             break;
+
                         case 4:
                             //近三月
                             beginDate = DateTime.Now.AddMonths(-3).ToString("yyyy-MM-dd")._DateTime();
@@ -111,6 +113,5 @@ namespace BossWellApp
             logEntity.Title = title;
             return _service.SaveForm(logEntity);
         }
-
     }
 }

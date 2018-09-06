@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 
 namespace Chloe.SQLite
 {
-    class ChloeSQLiteTransaction : IDbTransaction
+    internal class ChloeSQLiteTransaction : IDbTransaction
     {
-        IDbTransaction _transaction;
-        ChloeSQLiteConcurrentConnection _conn;
-        bool _hasFinished = false;
+        private IDbTransaction _transaction;
+        private ChloeSQLiteConcurrentConnection _conn;
+        private bool _hasFinished = false;
+
         public ChloeSQLiteTransaction(IDbTransaction transaction, ChloeSQLiteConcurrentConnection conn)
         {
             this._transaction = transaction;
@@ -26,7 +24,7 @@ namespace Chloe.SQLite
 
         public IDbTransaction InnerTransaction { get { return this._transaction; } }
 
-        void EndTransaction()
+        private void EndTransaction()
         {
             if (this._hasFinished == false)
             {
@@ -35,9 +33,9 @@ namespace Chloe.SQLite
             }
         }
 
-
         public IDbConnection Connection { get { return this._transaction.Connection; } }
         public IsolationLevel IsolationLevel { get { return this._transaction.IsolationLevel; } }
+
         public void Commit()
         {
             try
@@ -49,6 +47,7 @@ namespace Chloe.SQLite
                 this.EndTransaction();
             }
         }
+
         public void Rollback()
         {
             try

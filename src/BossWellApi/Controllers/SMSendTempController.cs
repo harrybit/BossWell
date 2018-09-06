@@ -1,8 +1,8 @@
-﻿using System.Web.Http;
+﻿using ApiHelp;
 using BossWellApp;
-using ApiHelp;
-using SystemConfig;
 using BossWellModel;
+using System.Web.Http;
+using SystemConfig;
 
 namespace BossWellApi.Controllers
 {
@@ -11,8 +11,9 @@ namespace BossWellApi.Controllers
     /// </summary>
     public class SMSendTempController : ApiController
     {
-        ClientApp cltAPP = new ClientApp();
-        JObjectResult result = new JObjectResult();
+        private ClientApp cltAPP = new ClientApp();
+        private JObjectResult result = new JObjectResult();
+
         public SMSendTempController()
         {
             result.code = 200;
@@ -53,6 +54,5 @@ namespace BossWellApi.Controllers
             result.data = isSend;
             return result;
         }
-
     }
 }

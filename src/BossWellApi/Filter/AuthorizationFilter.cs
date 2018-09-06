@@ -1,5 +1,6 @@
-﻿using System.Web.Http.Filters;
-using System.Net.Http;
+﻿using System.Net.Http;
+using System.Web.Http.Filters;
+
 namespace BossWellApi
 {
     /// <summary>
@@ -11,15 +12,14 @@ namespace BossWellApi
         {
             HttpRequestMessage request = actionContext.Request;
             JObjectResult result = new JObjectResult();
-            
+
             actionContext.Response = HttpResponseExtension.ReturnError(result);
             base.OnActionExecuting(actionContext);
-
         }
+
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
             base.OnActionExecuted(actionExecutedContext);
         }
-
     }
 }

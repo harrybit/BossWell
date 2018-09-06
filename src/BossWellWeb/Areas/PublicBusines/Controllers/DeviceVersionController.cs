@@ -1,14 +1,13 @@
-﻿using System;
-using System.Web.Mvc;
-using BossWellApp;
+﻿using BossWellApp;
 using BossWellModel;
 using BossWellModel.BossWellModel;
+using System.Web.Mvc;
 
 namespace BossWellWeb.Areas.PublicBusines.Controllers
 {
     public class DeviceVersionController : ControllerBase
     {
-        DeviceVersionApp deviceAPP = new DeviceVersionApp();
+        private DeviceVersionApp deviceAPP = new DeviceVersionApp();
 
         [HttpGet]
         [HandlerAjaxOnly]

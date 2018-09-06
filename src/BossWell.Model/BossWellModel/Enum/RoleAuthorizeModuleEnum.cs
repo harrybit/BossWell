@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BossWellModel.Enum
+﻿namespace BossWellModel.Enum
 {
     /// <summary>
     /// 用户权限模块分类

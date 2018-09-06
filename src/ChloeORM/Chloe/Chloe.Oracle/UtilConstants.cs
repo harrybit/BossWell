@@ -1,13 +1,11 @@
 ﻿using Chloe.DbExpressions;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace Chloe.Oracle
 {
-    static class UtilConstants
+    internal static class UtilConstants
     {
         public const string DbParameterNamePrefix = ":";
         public static readonly string ParameterNamePrefix = DbParameterNamePrefix + "P_";
@@ -37,7 +35,7 @@ namespace Chloe.Oracle
         public static readonly DbParameterExpression DbParameter_1 = DbExpression.Parameter(1);
         public static readonly DbConstantExpression DbConstant_Null_String = DbExpression.Constant(null, typeof(string));
 
-        #endregion
+        #endregion DbExpression constants
 
         #region MemberInfo constants
 
@@ -96,7 +94,7 @@ namespace Chloe.Oracle
         /* Sql */
         public static readonly MethodInfo MethodInfo_Sql_Equals = typeof(Sql).GetMethods().Where(a => a.Name == "Equals" && a.IsStatic && a.IsGenericMethod).First();
         public static readonly MethodInfo MethodInfo_Sql_NotEquals = typeof(Sql).GetMethod("NotEquals");
-        #endregion
 
+        #endregion MemberInfo constants
     }
 }

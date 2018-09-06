@@ -48,3 +48,8 @@ D:\Project_TY\Code\纯净版\src\ChloeORM\Chloe\Chloe\bin\Debug\Chloe.pdb
 D:\Project_TY\Code\纯净版\src\ChloeORM\Chloe\Chloe\obj\Debug\Chloe.csprojResolveAssemblyReference.cache
 D:\Project_TY\Code\纯净版\src\ChloeORM\Chloe\Chloe\obj\Debug\Chloe.dll
 D:\Project_TY\Code\纯净版\src\ChloeORM\Chloe\Chloe\obj\Debug\Chloe.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe\bin\Debug\Chloe.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe\bin\Debug\Chloe.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe\obj\Debug\Chloe.csprojResolveAssemblyReference.cache
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe\obj\Debug\Chloe.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe\obj\Debug\Chloe.pdb

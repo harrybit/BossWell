@@ -1,8 +1,6 @@
 ﻿using BossWellApp;
-using BossWellModel;
-using System.Web.Mvc;
-using ApiHelp;
 using BossWellModel.BossWellModel;
+using System.Web.Mvc;
 
 namespace BossWellWeb.Areas.SystemManage.Controllers
 {

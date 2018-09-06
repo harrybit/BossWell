@@ -16,3 +16,12 @@ D:\Project_TY\20180502Rest\Job\flyinit\Flying\src\01数据访问\Chloe\Chloe.SQL
 D:\Project_TY\20180502Rest\Job\flyinit\Flying\src\01数据访问\Chloe\Chloe.SQLite\obj\Release\Chloe.SQLite.csprojResolveAssemblyReference.cache
 D:\Project_TY\20180502Rest\Job\flyinit\Flying\src\01数据访问\Chloe\Chloe.SQLite\obj\Release\Chloe.SQLite.dll
 D:\Project_TY\20180502Rest\Job\flyinit\Flying\src\01数据访问\Chloe\Chloe.SQLite\obj\Release\Chloe.SQLite.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.SQLite\bin\Release\Chloe.SQLite.XML
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.SQLite\bin\Release\Chloe.SQLite.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.SQLite\bin\Release\Chloe.SQLite.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.SQLite\bin\Release\Chloe.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.SQLite\bin\Release\Chloe.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.SQLite\bin\Release\Chloe.xml
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.SQLite\obj\Release\Chloe.SQLite.csprojResolveAssemblyReference.cache
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.SQLite\obj\Release\Chloe.SQLite.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\ChloeORM\Chloe\Chloe.SQLite\obj\Release\Chloe.SQLite.pdb

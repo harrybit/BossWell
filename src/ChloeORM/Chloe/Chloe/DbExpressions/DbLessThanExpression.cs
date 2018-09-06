@@ -7,12 +7,11 @@ namespace Chloe.DbExpressions
         public DbLessThanExpression(DbExpression left, DbExpression right)
             : this(left, right, null)
         {
-
         }
+
         public DbLessThanExpression(DbExpression left, DbExpression right, MethodInfo method)
             : base(DbExpressionType.LessThan, UtilConstants.TypeOfBoolean, left, right, method)
         {
-
         }
 
         public override T Accept<T>(DbExpressionVisitor<T> visitor)
@@ -20,5 +19,4 @@ namespace Chloe.DbExpressions
             return visitor.Visit(this);
         }
     }
-
 }

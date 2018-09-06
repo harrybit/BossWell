@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Chloe.InternalExtensions;
+using System;
 using System.Reflection;
-using System.Text;
-using Chloe.InternalExtensions;
 
 namespace Chloe.Extensions
 {
-    static class DataReaderConstant
+    internal static class DataReaderConstant
     {
         #region
+
         internal static MethodInfo GetReaderMethod(Type type)
         {
             MethodInfo result;
@@ -34,36 +32,47 @@ namespace Chloe.Extensions
                 case TypeCode.Int16:
                     result = isNullable ? Reader_GetInt16_Nullable : Reader_GetInt16;
                     break;
+
                 case TypeCode.Int32:
                     result = isNullable ? Reader_GetInt32_Nullable : Reader_GetInt32;
                     break;
+
                 case TypeCode.Int64:
                     result = isNullable ? Reader_GetInt64_Nullable : Reader_GetInt64;
                     break;
+
                 case TypeCode.Decimal:
                     result = isNullable ? Reader_GetDecimal_Nullable : Reader_GetDecimal;
                     break;
+
                 case TypeCode.Double:
                     result = isNullable ? Reader_GetDouble_Nullable : Reader_GetDouble;
                     break;
+
                 case TypeCode.Single:
                     result = isNullable ? Reader_GetFloat_Nullable : Reader_GetFloat;
                     break;
+
                 case TypeCode.Boolean:
                     result = isNullable ? Reader_GetBoolean_Nullable : Reader_GetBoolean;
                     break;
+
                 case TypeCode.DateTime:
                     result = isNullable ? Reader_GetDateTime_Nullable : Reader_GetDateTime;
                     break;
+
                 case TypeCode.Byte:
                     result = isNullable ? Reader_GetByte_Nullable : Reader_GetByte;
                     break;
+
                 case TypeCode.Char:
                     result = isNullable ? Reader_GetChar_Nullable : Reader_GetChar;
                     break;
+
                 case TypeCode.String:
                     result = Reader_GetString;
                     break;
+
                 default:
                     if (type == UtilConstants.TypeOfGuid)
                     {
@@ -116,6 +125,5 @@ namespace Chloe.Extensions
         #endregion
 
         #endregion
-
     }
 }

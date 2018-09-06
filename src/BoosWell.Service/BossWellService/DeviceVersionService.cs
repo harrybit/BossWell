@@ -1,7 +1,8 @@
-﻿using BossWellORM;
-using BossWellModel;
+﻿using BossWellModel;
 using BossWellModel.Base;
+using BossWellORM;
 using IBossWellService;
+
 namespace BossWellService
 {
     public class DeviceVersionService : ChloeClient, IDeviceVersionService
@@ -25,6 +26,5 @@ namespace BossWellService
         {
             return context.Delete<DeviceVersionEntity>(t => t.Sid.Equals(sid));
         }
-
     }
 }

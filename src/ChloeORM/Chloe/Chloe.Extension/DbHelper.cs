@@ -2,7 +2,7 @@
 
 namespace Chloe.Extension
 {
-    static class DbHelper
+    internal static class DbHelper
     {
         public static DataTable FillDataTable(IDataReader reader)
         {
@@ -24,6 +24,7 @@ namespace Chloe.Extension
             }
             return dt;
         }
+
         public static DataSet FillDataSet(IDataReader reader)
         {
             DataSet ds = new DataSet();

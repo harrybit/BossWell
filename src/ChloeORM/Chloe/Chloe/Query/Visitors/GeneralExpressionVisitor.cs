@@ -10,17 +10,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
 
 namespace Chloe.Query.Visitors
 {
     internal class GeneralExpressionVisitor : ExpressionVisitorBase
     {
-        static List<string> AggregateMethods;
+        private static List<string> AggregateMethods;
 
-        LambdaExpression _lambda;
-        ScopeParameterDictionary _scopeParameters;
-        KeyDictionary<string> _scopeTables;
+        private LambdaExpression _lambda;
+        private ScopeParameterDictionary _scopeParameters;
+        private KeyDictionary<string> _scopeTables;
 
         static GeneralExpressionVisitor()
         {
@@ -39,18 +38,20 @@ namespace Chloe.Query.Visitors
         {
             this._lambda = lambda;
         }
-        GeneralExpressionVisitor(ScopeParameterDictionary scopeParameters, KeyDictionary<string> scopeTables)
+
+        private GeneralExpressionVisitor(ScopeParameterDictionary scopeParameters, KeyDictionary<string> scopeTables)
         {
             this._scopeParameters = scopeParameters;
             this._scopeTables = scopeTables;
         }
+
         public static DbExpression ParseLambda(LambdaExpression lambda, ScopeParameterDictionary scopeParameters, KeyDictionary<string> scopeTables)
         {
             GeneralExpressionVisitor visitor = new GeneralExpressionVisitor(scopeParameters, scopeTables);
             return visitor.Visit(lambda);
         }
 
-        IMappingObjectExpression FindMoe(ParameterExpression exp)
+        private IMappingObjectExpression FindMoe(ParameterExpression exp)
         {
             IMappingObjectExpression moe = this._scopeParameters.Get(exp);
             return moe;
@@ -132,7 +133,7 @@ namespace Chloe.Query.Visitors
             return base.VisitMethodCall(exp);
         }
 
-        DbExpression Process_MethodCall_First_Or_FirstOrDefault(MethodCallExpression exp)
+        private DbExpression Process_MethodCall_First_Or_FirstOrDefault(MethodCallExpression exp)
         {
             /*
              * query.First() || query.First(a=> a.Id==1) || query.FirstOrDefault() || query.FirstOrDefault(a=> a.Id==1)
@@ -147,14 +148,15 @@ namespace Chloe.Query.Visitors
 
             return this.ConvertToDbSubQueryExpression(takeMethodExp, exp.Type);
         }
-        DbExpression Process_MethodCall_Aggregate(MethodCallExpression exp)
+
+        private DbExpression Process_MethodCall_Aggregate(MethodCallExpression exp)
         {
             MethodInfo calledAggregateMethod = exp.Method;
             List<Expression> arguments = exp.Arguments.Select(a => a.StripQuotes()).ToList();
 
-            /* 
+            /*
              * query.Sum(a=> a.Price) --> query.CreateAggregateQuery(calledAggregateMethod, arguments)
-             * exp.Object 为 Query<T> 对象，获取 Query<T>.CreateAggregateQuery<TResult>(MethodInfo method, List<Expression> arguments) 
+             * exp.Object 为 Query<T> 对象，获取 Query<T>.CreateAggregateQuery<TResult>(MethodInfo method, List<Expression> arguments)
              */
 
             var query = ExpressionEvaluator.Evaluate(exp.Object);
@@ -166,9 +168,10 @@ namespace Chloe.Query.Visitors
             var e = Expression.Call(Expression.Constant(query), method_Query_CreateAggregateQuery, Expression.Constant(calledAggregateMethod), Expression.Constant(arguments));
             return this.ConvertToDbSubQueryExpression(e, calledAggregateMethod.ReturnType);
         }
-        DbExpression Process_MemberAccess_Which_Link_First_Or_FirstOrDefault(MemberExpression exp)
+
+        private DbExpression Process_MemberAccess_Which_Link_First_Or_FirstOrDefault(MemberExpression exp)
         {
-            /* 
+            /*
                 * 判断是不是 First().xx，FirstOrDefault().xx 之类的
                 * First().Name： 泛型参数如果不是复杂类型，则转成 Select(a=> a.Name).First()
                 * First().xx.Name：  如果 xx 是复杂类型，则转成 Select(a=> a.xx.Name).First()
@@ -229,13 +232,14 @@ namespace Chloe.Query.Visitors
             return dbExpression;
         }
 
-        DbSubQueryExpression ConvertToDbSubQueryExpression(Expression exp, Type resultType)
+        private DbSubQueryExpression ConvertToDbSubQueryExpression(Expression exp, Type resultType)
         {
             DbSqlQueryExpression sqlQueryExpression = ConvertToDbSqlQueryExpression(exp, resultType);
             DbSubQueryExpression subQueryExpression = new DbSubQueryExpression(sqlQueryExpression);
             return subQueryExpression;
         }
-        DbSqlQueryExpression ConvertToDbSqlQueryExpression(Expression exp, Type resultType)
+
+        private DbSqlQueryExpression ConvertToDbSqlQueryExpression(Expression exp, Type resultType)
         {
             if (!IsIQueryType(exp.Type))
             {
@@ -250,11 +254,11 @@ namespace Chloe.Query.Visitors
             return sqlQueryExpression;
         }
 
-        static MethodCallExpression OptimizeCondition(MethodCallExpression exp)
+        private static MethodCallExpression OptimizeCondition(MethodCallExpression exp)
         {
             if (exp.Arguments.Count == 1)
             {
-                /* 
+                /*
                  * query.First(a=> a.Id==1) --> query.Where(a=> a.Id==1).First()
                  * query.Any(a=> a.Id==1) --> query.Where(a=> a.Id==1).Any()
                  */
@@ -268,12 +272,13 @@ namespace Chloe.Query.Visitors
             return exp;
         }
 
-        static void EnsureIsMappingType(Type type, MethodCallExpression exp)
+        private static void EnsureIsMappingType(Type type, MethodCallExpression exp)
         {
             if (!MappingTypeSystem.IsMappingType(type))
                 throw new NotSupportedException(string.Format("The generic parameter type of method {0} must be mapping type.", exp.Method.Name));
         }
-        static bool IsIQueryType(Type type)
+
+        private static bool IsIQueryType(Type type)
         {
             if (type.IsGenericType == false)
                 return false;
@@ -289,7 +294,7 @@ namespace Chloe.Query.Visitors
             return queryType == implementedInterface;
         }
 
-        static bool IsComeFrom_First_Or_FirstOrDefault(MemberExpression exp)
+        private static bool IsComeFrom_First_Or_FirstOrDefault(MemberExpression exp)
         {
             Expression e = exp;
             while (e.NodeType == ExpressionType.MemberAccess)
@@ -310,7 +315,8 @@ namespace Chloe.Query.Visitors
 
             return IsIQueryType(methodCall.Object.Type);
         }
-        static bool IsInQuery(MethodCallExpression exp)
+
+        private static bool IsInQuery(MethodCallExpression exp)
         {
             /* query.ToList().Contains(a.Id) */
 

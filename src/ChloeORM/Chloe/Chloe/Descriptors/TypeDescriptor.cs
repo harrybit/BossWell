@@ -4,38 +4,37 @@ using Chloe.Entity;
 using Chloe.Exceptions;
 using Chloe.Infrastructure;
 using Chloe.InternalExtensions;
-using Chloe.Query.Visitors;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
 
 namespace Chloe.Descriptors
 {
     public class TypeDescriptor
     {
-        Dictionary<MemberInfo, MappingMemberDescriptor> _mappingMemberDescriptors;
-        Dictionary<MemberInfo, DbColumnAccessExpression> _memberColumnMap;
-        ReadOnlyCollection<MappingMemberDescriptor> _primaryKeys;
-        MappingMemberDescriptor _autoIncrement = null;
+        private Dictionary<MemberInfo, MappingMemberDescriptor> _mappingMemberDescriptors;
+        private Dictionary<MemberInfo, DbColumnAccessExpression> _memberColumnMap;
+        private ReadOnlyCollection<MappingMemberDescriptor> _primaryKeys;
+        private MappingMemberDescriptor _autoIncrement = null;
 
-        DefaultExpressionParser _expressionParser = null;
+        private DefaultExpressionParser _expressionParser = null;
 
-        TypeDescriptor(Type t)
+        private TypeDescriptor(Type t)
         {
             this.EntityType = t;
             this.Init();
         }
 
-        void Init()
+        private void Init()
         {
             this.InitTableInfo();
             this.InitMemberInfo();
             this.InitMemberColumnMap();
         }
-        void InitTableInfo()
+
+        private void InitTableInfo()
         {
             Type entityType = this.EntityType;
             TableAttribute tableFlag = entityType.GetCustomAttributes<TableAttribute>(false).FirstOrDefault();
@@ -49,7 +48,8 @@ namespace Chloe.Descriptors
 
             this.Table = new DbTable(tableFlag.Name, tableFlag.Schema);
         }
-        void InitMemberInfo()
+
+        private void InitMemberInfo()
         {
             List<MappingMemberDescriptor> mappingMemberDescriptors = this.ExtractMappingMemberDescriptors();
 
@@ -113,7 +113,8 @@ namespace Chloe.Descriptors
                 this._mappingMemberDescriptors.Add(mappingMemberDescriptor.MemberInfo, mappingMemberDescriptor);
             }
         }
-        void InitMemberColumnMap()
+
+        private void InitMemberColumnMap()
         {
             Dictionary<MemberInfo, DbColumnAccessExpression> memberColumnMap = new Dictionary<MemberInfo, DbColumnAccessExpression>(this._mappingMemberDescriptors.Count);
             foreach (var kv in this._mappingMemberDescriptors)
@@ -124,7 +125,7 @@ namespace Chloe.Descriptors
             this._memberColumnMap = memberColumnMap;
         }
 
-        List<MappingMemberDescriptor> ExtractMappingMemberDescriptors()
+        private List<MappingMemberDescriptor> ExtractMappingMemberDescriptors()
         {
             var members = this.EntityType.GetMembers(BindingFlags.Public | BindingFlags.Instance);
 
@@ -144,11 +145,12 @@ namespace Chloe.Descriptors
             return mappingMemberDescriptors;
         }
 
-        static bool IsAutoIncrementType(Type t)
+        private static bool IsAutoIncrementType(Type t)
         {
             return t == UtilConstants.TypeOfInt16 || t == UtilConstants.TypeOfInt32 || t == UtilConstants.TypeOfInt64;
         }
-        static bool ShouldMap(MemberInfo member)
+
+        private static bool ShouldMap(MemberInfo member)
         {
             var ignoreFlags = member.GetCustomAttributes(typeof(NotMappedAttribute), false);
             if (ignoreFlags.Count() > 0)
@@ -193,6 +195,7 @@ namespace Chloe.Descriptors
         {
             return this._primaryKeys.Count > 0;
         }
+
         public MappingMemberDescriptor TryGetMappingMemberDescriptor(MemberInfo memberInfo)
         {
             memberInfo = memberInfo.AsReflectedMemberOf(this.EntityType);
@@ -200,6 +203,7 @@ namespace Chloe.Descriptors
             this._mappingMemberDescriptors.TryGetValue(memberInfo, out memberDescriptor);
             return memberDescriptor;
         }
+
         public DbColumnAccessExpression TryGetColumnAccessExpression(MemberInfo memberInfo)
         {
             memberInfo = memberInfo.AsReflectedMemberOf(this.EntityType);
@@ -208,7 +212,7 @@ namespace Chloe.Descriptors
             return dbColumnAccessExpression;
         }
 
-        static readonly System.Collections.Concurrent.ConcurrentDictionary<Type, TypeDescriptor> InstanceCache = new System.Collections.Concurrent.ConcurrentDictionary<Type, TypeDescriptor>();
+        private static readonly System.Collections.Concurrent.ConcurrentDictionary<Type, TypeDescriptor> InstanceCache = new System.Collections.Concurrent.ConcurrentDictionary<Type, TypeDescriptor>();
 
         public static TypeDescriptor GetDescriptor(Type type)
         {

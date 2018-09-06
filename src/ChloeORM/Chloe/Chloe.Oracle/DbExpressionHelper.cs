@@ -2,12 +2,10 @@
 using Chloe.InternalExtensions;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Chloe.Oracle
 {
-    static class DbExpressionHelper
+    internal static class DbExpressionHelper
     {
         /// <summary>
         /// 尝试将 exp 转换成 DbParameterExpression。
@@ -105,7 +103,7 @@ namespace Chloe.Oracle
             return false;
         }
 
-        static bool IsNullOrEmpty(object obj)
+        private static bool IsNullOrEmpty(object obj)
         {
             if (obj == null || obj == DBNull.Value)
                 return true;

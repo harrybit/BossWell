@@ -6,8 +6,8 @@ namespace Chloe.DbExpressions
     [System.Diagnostics.DebuggerDisplay("Value = {Value}")]
     public class DbParameterExpression : DbExpression
     {
-        object _value;
-        Type _type;
+        private object _value;
+        private Type _type;
 
         public DbParameterExpression(object value)
             : base(DbExpressionType.Parameter)

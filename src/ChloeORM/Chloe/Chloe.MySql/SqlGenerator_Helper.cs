@@ -1,19 +1,14 @@
-﻿using Chloe.Core;
-using Chloe.DbExpressions;
+﻿using Chloe.DbExpressions;
 using Chloe.InternalExtensions;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace Chloe.MySql
 {
     partial class SqlGenerator : DbExpressionVisitor<DbExpression>
     {
-        static string GenParameterName(int ordinal)
+        private static string GenParameterName(int ordinal)
         {
             if (ordinal < CacheParameterNames.Count)
             {
@@ -22,7 +17,8 @@ namespace Chloe.MySql
 
             return UtilConstants.ParameterNamePrefix + ordinal.ToString();
         }
-        static void AmendDbInfo(DbExpression exp1, DbExpression exp2)
+
+        private static void AmendDbInfo(DbExpression exp1, DbExpression exp2)
         {
             DbColumnAccessExpression datumPointExp = null;
             DbParameterExpression expToAmend = null;
@@ -47,7 +43,8 @@ namespace Chloe.MySql
                     expToAmend.DbType = datumPointExp.Column.DbType;
             }
         }
-        static void AmendDbInfo(DbColumn column, DbExpression exp)
+
+        private static void AmendDbInfo(DbColumn column, DbExpression exp)
         {
             if (column.DbType == null || exp.NodeType != DbExpressionType.Parameter)
                 return;
@@ -57,7 +54,8 @@ namespace Chloe.MySql
             if (expToAmend.DbType == null)
                 expToAmend.DbType = column.DbType;
         }
-        static DbExpression Trim_Nullable_Value(DbExpression exp)
+
+        private static DbExpression Trim_Nullable_Value(DbExpression exp)
         {
             DbMemberExpression memberExp = exp as DbMemberExpression;
             if (memberExp == null)
@@ -69,8 +67,7 @@ namespace Chloe.MySql
             return exp;
         }
 
-
-        static Stack<DbExpression> GatherBinaryExpressionOperand(DbBinaryExpression exp)
+        private static Stack<DbExpression> GatherBinaryExpressionOperand(DbBinaryExpression exp)
         {
             DbExpressionType nodeType = exp.NodeType;
 
@@ -88,12 +85,14 @@ namespace Chloe.MySql
             items.Push(left);
             return items;
         }
-        static void EnsureMethodDeclaringType(DbMethodCallExpression exp, Type ensureType)
+
+        private static void EnsureMethodDeclaringType(DbMethodCallExpression exp, Type ensureType)
         {
             if (exp.Method.DeclaringType != ensureType)
                 throw UtilExceptions.NotSupportedMethod(exp.Method);
         }
-        static void EnsureMethodDeclaringType(DbMethodCallExpression exp, params Type[] ensureTypes)
+
+        private static void EnsureMethodDeclaringType(DbMethodCallExpression exp, params Type[] ensureTypes)
         {
             foreach (var type in ensureTypes)
             {
@@ -103,14 +102,14 @@ namespace Chloe.MySql
 
             throw UtilExceptions.NotSupportedMethod(exp.Method);
         }
-        static void EnsureMethod(DbMethodCallExpression exp, MethodInfo methodInfo)
+
+        private static void EnsureMethod(DbMethodCallExpression exp, MethodInfo methodInfo)
         {
             if (exp.Method != methodInfo)
                 throw UtilExceptions.NotSupportedMethod(exp.Method);
         }
 
-
-        static void EnsureTrimCharArgumentIsSpaces(DbExpression exp)
+        private static void EnsureTrimCharArgumentIsSpaces(DbExpression exp)
         {
             var m = exp as DbMemberExpression;
             if (m == null)
@@ -133,7 +132,8 @@ namespace Chloe.MySql
                 throw new NotSupportedException();
             }
         }
-        static bool TryGetCastTargetDbTypeString(Type sourceType, Type targetType, out string dbTypeString, bool throwNotSupportedException = true)
+
+        private static bool TryGetCastTargetDbTypeString(Type sourceType, Type targetType, out string dbTypeString, bool throwNotSupportedException = true)
         {
             dbTypeString = null;
 
@@ -153,12 +153,13 @@ namespace Chloe.MySql
             else
                 return false;
         }
-        static string AppendNotSupportedCastErrorMsg(Type sourceType, Type targetType)
+
+        private static string AppendNotSupportedCastErrorMsg(Type sourceType, Type targetType)
         {
             return string.Format("Does not support the type '{0}' converted to type '{1}'.", sourceType.FullName, targetType.FullName);
         }
 
-        static void DbFunction_DATEADD(SqlGenerator generator, string interval, DbMethodCallExpression exp)
+        private static void DbFunction_DATEADD(SqlGenerator generator, string interval, DbMethodCallExpression exp)
         {
             //DATE_ADD(now(),INTERVAL 1 day),DATE_ADD(now(),INTERVAL 10 MINUTE)
             generator._sqlBuilder.Append("DATE_ADD(");
@@ -168,14 +169,16 @@ namespace Chloe.MySql
             generator._sqlBuilder.Append(" ", interval);
             generator._sqlBuilder.Append(")");
         }
-        static void DbFunction_DATEPART(SqlGenerator generator, string functionName, DbExpression exp)
+
+        private static void DbFunction_DATEPART(SqlGenerator generator, string functionName, DbExpression exp)
         {
             generator._sqlBuilder.Append(functionName);
             generator._sqlBuilder.Append("(");
             exp.Accept(generator);
             generator._sqlBuilder.Append(")");
         }
-        static void DbFunction_DATEDIFF(SqlGenerator generator, string interval, DbExpression startDateTimeExp, DbExpression endDateTimeExp)
+
+        private static void DbFunction_DATEDIFF(SqlGenerator generator, string interval, DbExpression startDateTimeExp, DbExpression endDateTimeExp)
         {
             //TIMESTAMPDIFF(HOUR,'2003-02-01 11:00','2003-02-01 12:00');
             generator._sqlBuilder.Append("TIMESTAMPDIFF(");
@@ -188,23 +191,28 @@ namespace Chloe.MySql
         }
 
         #region AggregateFunction
-        static void Aggregate_Count(SqlGenerator generator)
+
+        private static void Aggregate_Count(SqlGenerator generator)
         {
             generator._sqlBuilder.Append("COUNT(1)");
         }
-        static void Aggregate_LongCount(SqlGenerator generator)
+
+        private static void Aggregate_LongCount(SqlGenerator generator)
         {
             generator._sqlBuilder.Append("COUNT(1)");
         }
-        static void Aggregate_Max(SqlGenerator generator, DbExpression exp, Type retType)
+
+        private static void Aggregate_Max(SqlGenerator generator, DbExpression exp, Type retType)
         {
             AppendAggregateFunction(generator, exp, retType, "MAX", false);
         }
-        static void Aggregate_Min(SqlGenerator generator, DbExpression exp, Type retType)
+
+        private static void Aggregate_Min(SqlGenerator generator, DbExpression exp, Type retType)
         {
             AppendAggregateFunction(generator, exp, retType, "MIN", false);
         }
-        static void Aggregate_Sum(SqlGenerator generator, DbExpression exp, Type retType)
+
+        private static void Aggregate_Sum(SqlGenerator generator, DbExpression exp, Type retType)
         {
             if (retType.IsNullable())
             {
@@ -219,12 +227,13 @@ namespace Chloe.MySql
                 generator._sqlBuilder.Append(")");
             }
         }
-        static void Aggregate_Average(SqlGenerator generator, DbExpression exp, Type retType)
+
+        private static void Aggregate_Average(SqlGenerator generator, DbExpression exp, Type retType)
         {
             AppendAggregateFunction(generator, exp, retType, "AVG", true);
         }
 
-        static void AppendAggregateFunction(SqlGenerator generator, DbExpression exp, Type retType, string functionName, bool withCast)
+        private static void AppendAggregateFunction(SqlGenerator generator, DbExpression exp, Type retType, string functionName, bool withCast)
         {
             string dbTypeString = null;
             if (withCast == true)
@@ -245,7 +254,7 @@ namespace Chloe.MySql
                 generator._sqlBuilder.Append(" AS ", dbTypeString, ")");
             }
         }
-        #endregion
 
+        #endregion AggregateFunction
     }
 }

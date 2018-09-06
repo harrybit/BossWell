@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 
 namespace Chloe.Core
 {
-    class OutputParameter
+    internal class OutputParameter
     {
-        DbParam _param;
-        IDbDataParameter _parameter;
+        private DbParam _param;
+        private IDbDataParameter _parameter;
 
         public OutputParameter(DbParam param, IDbDataParameter parameter)
         {
@@ -27,6 +25,7 @@ namespace Chloe.Core
         }
 
         /* 只有在 DataReader.Close() 后（有些驱动还需要DataReader.Dispose()后）才能取得 output 的值 */
+
         public static void CallMapValue(List<OutputParameter> outputParameters)
         {
             if (outputParameters != null)

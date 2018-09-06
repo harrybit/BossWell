@@ -1,9 +1,9 @@
-﻿using System.Net.Http;
-using System.Web.Http;
+﻿using ApiHelp;
 using BossWellApp;
-using System.Web;
-using BossWellModel;
+using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
+using System.Web.Http;
 using WebApi.OutputCache.V2;
 
 namespace BossWellApi.Controllers
@@ -14,9 +14,10 @@ namespace BossWellApi.Controllers
     [AllowAnonymous]
     public class UpLoadController : ApiController
     {
-        ClientApp cltAPP = new ClientApp();
-        UpLoadFileApp fileAPP = new UpLoadFileApp();
-        JObjectResult result = new JObjectResult();
+        private ClientApp cltAPP = new ClientApp();
+        private UpLoadFileApp fileAPP = new UpLoadFileApp();
+        private JObjectResult result = new JObjectResult();
+
         public UpLoadController()
         {
             result.code = 200;
@@ -29,30 +30,27 @@ namespace BossWellApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("api/upload/getlicense")]
-        [CacheOutput(ClientTimeSpan = 3, ServerTimeSpan = 3)]
-        public JObjectResult GetLicense(string token)
+        [CacheOutput(ServerTimeSpan = 1, ClientTimeSpan = 1)]
+        public JObjectResult GetLicense()
         {
-            if (string.IsNullOrEmpty(token))
-            {
-                result.code = 500;
-                result.msg = "Token Is Null";
-                return result;
-            }
-            ClientEntity cltModel = cltAPP.GetCltEntityByToken(token);
-            if (cltModel == null)
-            {
-                result.code = 501;
-                result.msg = "Token失效";
-                return result;
-            }
+            //许可证
+            string GuId = ApiHelper.CreateRandomString(32, "AFU_");
+            string licenseKey = ApiHelper.SHA256(GuId);
 
-            result.data = fileAPP.GetLicenseID(cltModel.AccountNo);
+            //写入缓存
+            fileAPP.WriteLicenseKey(GuId, licenseKey);
+
+            result.data = new { GUID = GuId, AFU_License = licenseKey };
             return result;
         }
 
         /// <summary>
         /// 上传文件
+        /// Head信息体:
+        /// AFU_Guid：  加密签名
+        /// AFU_License:上传许可证
         /// </summary>
+        /// <returns></returns>
         [HttpPost]
         [Route("api/upload/file")]
         public async Task<JObjectResult> UpLoadFile()
@@ -74,7 +72,7 @@ namespace BossWellApi.Controllers
                 return result;
             }
 
-            if (!Request.Content.IsMimeMultipartContent() || heads["AFU_License"] == null || heads["Token"] == null)
+            if (!Request.Content.IsMimeMultipartContent() || heads["AFU_License"] == null || heads["AFU_Guid"] == null)
             {
                 result.code = 501;
                 result.msg = "Head Error";
@@ -82,19 +80,10 @@ namespace BossWellApi.Controllers
             }
 
             string license = heads["AFU_License"].ToString();
-            string token = heads["Token"].ToString();
-
-            //效验登录令牌
-            ClientEntity cltModel = cltAPP.GetCltEntityByToken(token);
-            if (cltModel == null)
-            {
-                result.code = 502;
-                result.msg = "token失效";
-                return result;
-            }
+            string GuId = heads["AFU_Guid"].ToString();
 
             //效验文件上传许可证是否正确
-            if (!fileAPP.CheckLicense(cltModel.AccountNo, license))
+            if (!fileAPP.CheckLicense(GuId, license))
             {
                 result.code = 503;
                 result.msg = "License错误";
@@ -102,14 +91,7 @@ namespace BossWellApi.Controllers
             }
 
             //上传
-            string Path = fileAPP.UpLoadFile(request.Files,cltModel.AccountNo);
-            if (string.IsNullOrEmpty(Path))
-            {
-                result.code = 504;
-                result.msg = "上传失败";
-                return result;
-            }
-            result.data = Path;
+            result.data = fileAPP.UpLoadFile(request.Files, GuId);
             return result;
         }
     }

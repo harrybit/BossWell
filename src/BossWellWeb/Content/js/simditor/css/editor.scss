@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 
 $simditor-button-height: 40px;
 $simditor-button-width: 46px;
@@ -284,7 +284,6 @@ $simditor-button-width: 46px;
         padding: 10px 1px;
 
         & > li {
-
           .menu-item {
             display: block;
             font-size:16px;
@@ -332,7 +331,6 @@ $simditor-button-width: 46px;
             margin: 6px 0;
           }
         }
-
       }
 
       &.toolbar-menu-color {
@@ -531,8 +529,6 @@ $simditor-button-width: 46px;
   }
 }
 
-
-
 .simditor .simditor-body, .editor-style {
   font-size: 16px;
   font-family: arial, sans-serif;
@@ -687,10 +683,8 @@ $simditor-button-width: 46px;
     }
   }
 
-
   img {
     margin: 0 5px;
     vertical-align: middle;
   }
-
 }

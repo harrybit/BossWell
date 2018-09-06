@@ -1,10 +1,8 @@
-﻿using Chloe.Extensions;
-using Chloe.DbExpressions;
-using Chloe.Descriptors;
+﻿using Chloe.DbExpressions;
+using Chloe.Extensions;
 using Chloe.Query.Mapping;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -12,8 +10,9 @@ namespace Chloe.Query
 {
     public class MappingFieldExpression : IMappingObjectExpression
     {
-        Type _type;
-        DbExpression _exp;
+        private Type _type;
+        private DbExpression _exp;
+
         public MappingFieldExpression(Type type, DbExpression exp)
         {
             this._type = type;
@@ -28,26 +27,32 @@ namespace Chloe.Query
         {
             throw new NotSupportedException();
         }
+
         public void AddComplexConstructorParameter(ParameterInfo p, IMappingObjectExpression exp)
         {
             throw new NotSupportedException();
         }
+
         public void AddMappingMemberExpression(MemberInfo p, DbExpression exp)
         {
             throw new NotSupportedException();
         }
+
         public void AddComplexMemberExpression(MemberInfo p, IMappingObjectExpression exp)
         {
             throw new NotSupportedException();
         }
+
         public DbExpression GetMappingMemberExpression(MemberInfo memberInfo)
         {
             throw new NotSupportedException();
         }
+
         public IMappingObjectExpression GetComplexMemberExpression(MemberInfo memberInfo)
         {
             throw new NotSupportedException();
         }
+
         public DbExpression GetDbExpression(MemberExpression memberExpressionDeriveParameter)
         {
             Stack<MemberExpression> memberExpressions = ExpressionExtension.Reverse(memberExpressionDeriveParameter);
@@ -68,6 +73,7 @@ namespace Chloe.Query
 
             return ret;
         }
+
         public IMappingObjectExpression GetComplexMemberExpression(MemberExpression exp)
         {
             throw new NotSupportedException();
@@ -84,7 +90,6 @@ namespace Chloe.Query
 
             return mf;
         }
-
 
         public IMappingObjectExpression ToNewObjectExpression(DbSqlQueryExpression sqlQuery, DbTable table)
         {
@@ -103,6 +108,5 @@ namespace Chloe.Query
             if (this.NullChecking == null)
                 this.NullChecking = exp;
         }
-
     }
 }

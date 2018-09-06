@@ -1,19 +1,20 @@
-﻿using BossWellFactory;
-using IBossWellService;
+﻿using ApiHelp;
+using BossWellApp.Basic;
+using BossWellFactory;
 using BossWellModel;
 using BossWellModel.Base;
-using System;
-using System.Collections.Generic;
-using BossWellApp.Basic;
 using BossWellModel.BossWellModel;
+using IBossWellService;
+using System.Collections.Generic;
 using System.Linq;
-using ApiHelp;
+
 namespace BossWellApp
 {
     public class OrganizeApp
     {
         private readonly IOrganizeService _service = SysAutoFactory.GetOrganizeService();
         private readonly IComClassService _comClaService = SysAutoFactory.GetComClassService();
+
         public string GetSelectTreeJson()
         {
             List<OrganizeEntity> allList = GetAllList();
@@ -67,7 +68,6 @@ namespace BossWellApp
                     isLeaf = childCount > 0 ? true : false,
                     expanded = childCount > 0 ? true : false,
                     entityJson = ApiHelper.JsonSerial(item)
-
                 });
             });
             return gridList.TreeGridJson();

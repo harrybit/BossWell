@@ -1,11 +1,10 @@
-﻿using Chloe.Extensions;
-using Chloe.InternalExtensions;
-using Chloe.DbExpressions;
+﻿using Chloe.DbExpressions;
 using Chloe.Descriptors;
+using Chloe.Extensions;
+using Chloe.InternalExtensions;
 using Chloe.Query.Mapping;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -17,6 +16,7 @@ namespace Chloe.Query
             : this(EntityConstructorDescriptor.GetInstance(constructor))
         {
         }
+
         public MappingObjectExpression(EntityConstructorDescriptor constructorDescriptor)
         {
             this.ConstructorDescriptor = constructorDescriptor;
@@ -33,6 +33,7 @@ namespace Chloe.Query
         /// 返回类型
         /// </summary>
         public EntityConstructorDescriptor ConstructorDescriptor { get; private set; }
+
         public Dictionary<ParameterInfo, DbExpression> MappingConstructorParameters { get; private set; }
         public Dictionary<ParameterInfo, IMappingObjectExpression> ComplexConstructorParameters { get; private set; }
         public Dictionary<MemberInfo, DbExpression> MappingMembers { get; protected set; }
@@ -42,20 +43,24 @@ namespace Chloe.Query
         {
             this.MappingConstructorParameters.Add(p, exp);
         }
+
         public void AddComplexConstructorParameter(ParameterInfo p, IMappingObjectExpression exp)
         {
             this.ComplexConstructorParameters.Add(p, exp);
         }
+
         public void AddMappingMemberExpression(MemberInfo memberInfo, DbExpression exp)
         {
             memberInfo = memberInfo.AsReflectedMemberOf(this.ConstructorDescriptor.ConstructorInfo.DeclaringType);
             this.MappingMembers.Add(memberInfo, exp);
         }
+
         public void AddComplexMemberExpression(MemberInfo memberInfo, IMappingObjectExpression moe)
         {
             memberInfo = memberInfo.AsReflectedMemberOf(this.ConstructorDescriptor.ConstructorInfo.DeclaringType);
             this.ComplexMembers.Add(memberInfo, moe);
         }
+
         /// <summary>
         /// 考虑匿名函数构造函数参数和其只读属性的对应
         /// </summary>
@@ -81,6 +86,7 @@ namespace Chloe.Query
 
             return ret;
         }
+
         public IMappingObjectExpression GetComplexMemberExpression(MemberInfo memberInfo)
         {
             memberInfo = memberInfo.AsReflectedMemberOf(this.ConstructorDescriptor.ConstructorInfo.DeclaringType);
@@ -102,6 +108,7 @@ namespace Chloe.Query
 
             return ret;
         }
+
         public DbExpression GetDbExpression(MemberExpression memberExpressionDeriveFromParameter)
         {
             Stack<MemberExpression> memberExpressions = ExpressionExtension.Reverse(memberExpressionDeriveFromParameter);
@@ -170,6 +177,7 @@ namespace Chloe.Query
 
             return ret;
         }
+
         public IMappingObjectExpression GetComplexMemberExpression(MemberExpression memberExpressionDeriveParameter)
         {
             Stack<MemberExpression> memberExpressions = ExpressionExtension.Reverse(memberExpressionDeriveParameter);
@@ -191,6 +199,7 @@ namespace Chloe.Query
 
             return ret;
         }
+
         public IObjectActivatorCreator GenarateObjectActivatorCreator(DbSqlQueryExpression sqlQuery)
         {
             MappingEntity mappingEntity = new MappingEntity(this.ConstructorDescriptor);

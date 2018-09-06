@@ -7,9 +7,10 @@ namespace Chloe.DbExpressions
 {
     public class DbMethodCallExpression : DbExpression
     {
-        DbExpression _object;
-        MethodInfo _method;
-        ReadOnlyCollection<DbExpression> _arguments;
+        private DbExpression _object;
+        private MethodInfo _method;
+        private ReadOnlyCollection<DbExpression> _arguments;
+
         public DbMethodCallExpression(DbExpression @object, MethodInfo method, IList<DbExpression> arguments)
             : base(DbExpressionType.Call)
         {

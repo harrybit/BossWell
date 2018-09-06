@@ -180,8 +180,6 @@
                 ht.push("</div>");
             }
 
-
-
             ht.push("</div>");
             if (nd.hasChildren) {
                 if (nd.isexpand) {
@@ -432,7 +430,6 @@
                 var item = getItem(path);
                 if (item) {
                     asnyloadc(item, true, function (data) {
-
                         item.complete = true;
                         item.ChildNodes = data;
                         item.isexpand = true;
@@ -535,7 +532,6 @@
         if (object.length != 0) {
             object.trigger("click");
         }
-
     }
     $.fn.setNoCheckedNodes = function (item) {
         var $id = $(this);

@@ -1,16 +1,17 @@
-﻿using System;
+﻿using Chloe.InternalExtensions;
+using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Linq;
-using Chloe.InternalExtensions;
+using System.Reflection;
 
 namespace Chloe.Descriptors
 {
     public abstract class MemberDescriptor
     {
-        Dictionary<Type, Attribute> _customAttributes = new Dictionary<Type, Attribute>();
-        MemberInfo _memberInfo;
-        TypeDescriptor _declaringTypeDescriptor;
+        private Dictionary<Type, Attribute> _customAttributes = new Dictionary<Type, Attribute>();
+        private MemberInfo _memberInfo;
+        private TypeDescriptor _declaringTypeDescriptor;
+
         protected MemberDescriptor(MemberInfo memberInfo, TypeDescriptor declaringTypeDescriptor)
         {
             this._declaringTypeDescriptor = declaringTypeDescriptor;
@@ -19,6 +20,7 @@ namespace Chloe.Descriptors
 
         public TypeDescriptor DeclaringTypeDescriptor { get { return this._declaringTypeDescriptor; } }
         public MemberInfo MemberInfo { get { return this._memberInfo; } }
+
         public Type MemberInfoType
         {
             get
@@ -41,6 +43,7 @@ namespace Chloe.Descriptors
 
             return val;
         }
+
         public bool IsDefined(Type attributeType)
         {
             return this.MemberInfo.IsDefined(attributeType, false);

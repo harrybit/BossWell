@@ -8,12 +8,11 @@ namespace Chloe.DbExpressions
         public DbMultiplyExpression(Type type, DbExpression left, DbExpression right)
             : this(type, left, right, null)
         {
-
         }
+
         public DbMultiplyExpression(Type type, DbExpression left, DbExpression right, MethodInfo method)
             : base(DbExpressionType.Multiply, type, left, right, method)
         {
-
         }
 
         public override T Accept<T>(DbExpressionVisitor<T> visitor)
@@ -21,5 +20,4 @@ namespace Chloe.DbExpressions
             return visitor.Visit(this);
         }
     }
-
 }

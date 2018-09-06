@@ -2,9 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Chloe
 {
@@ -13,8 +11,8 @@ namespace Chloe
     /// </summary>
     public class DbActionBag
     {
-        List<Func<int>> _actions = new List<Func<int>>();
-        IDbContext _dbContext;
+        private List<Func<int>> _actions = new List<Func<int>>();
+        private IDbContext _dbContext;
 
         public DbActionBag(IDbContext dbContext)
         {
@@ -30,6 +28,7 @@ namespace Chloe
                 return 1;
             });
         }
+
         public void PushInsert<T>(Expression<Func<T>> body)
         {
             this._actions.Add(() =>
@@ -38,6 +37,7 @@ namespace Chloe
                 return 1;
             });
         }
+
         public void PushUpdate<T>(T entity)
         {
             this._actions.Add(() =>
@@ -45,6 +45,7 @@ namespace Chloe
                 return this._dbContext.Update(entity);
             });
         }
+
         public void PushUpdate<T>(Expression<Func<T, bool>> condition, Expression<Func<T, T>> body)
         {
             this._actions.Add(() =>
@@ -52,6 +53,7 @@ namespace Chloe
                 return this._dbContext.Update(condition, body);
             });
         }
+
         public void PushDelete<T>(T entity)
         {
             this._actions.Add(() =>
@@ -59,6 +61,7 @@ namespace Chloe
                 return this._dbContext.Delete(entity);
             });
         }
+
         public void PushDelete<T>(Expression<Func<T, bool>> condition)
         {
             this._actions.Add(() =>
@@ -89,7 +92,6 @@ namespace Chloe
                 return affected;
             }
 
-
             affected = this._dbContext.DoWithTransaction(() =>
                 {
                     return this.InnerExecuteActions();
@@ -100,8 +102,7 @@ namespace Chloe
             return affected;
         }
 
-
-        int InnerExecuteActions()
+        private int InnerExecuteActions()
         {
             int affected = 0;
             for (int i = 0; i < this._actions.Count; i++)

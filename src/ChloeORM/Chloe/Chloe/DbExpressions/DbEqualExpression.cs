@@ -11,6 +11,7 @@ namespace Chloe.DbExpressions
             : this(left, right, null)
         {
         }
+
         public DbEqualExpression(DbExpression left, DbExpression right, MethodInfo method)
             : base(DbExpressionType.Equal, UtilConstants.TypeOfBoolean, left, right, method)
         {

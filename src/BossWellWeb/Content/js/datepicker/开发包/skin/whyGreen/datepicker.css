@@ -1,8 +1,8 @@
-/* 
+/*
  * My97 DatePicker 4.7
  * 皮肤名称:whyGreen
  */
- 
+
 /* 日期选择容器 DIV */
 .WdateDiv{
 	width:180px;
@@ -71,7 +71,7 @@
 	text-align:center;
 	border:#939393 1px solid;
 	font-weight:bold;
-	color:#034c50;	
+	color:#034c50;
 	height:20px;
 	width:50px;
 }
@@ -109,17 +109,17 @@
 }
 /* 时选择框的位置 DIV */
 .WdateDiv .hhMenu{
-	margin-top:-90px; 
+	margin-top:-90px;
 	margin-left:26px;
 }
 /* 分选择框的位置 DIV */
 .WdateDiv .mmMenu{
-	margin-top:-46px; 
+	margin-top:-46px;
 	margin-left:26px;
 }
 /* 秒选择框的位置 DIV */
 .WdateDiv .ssMenu{
-	margin-top:-24px; 
+	margin-top:-24px;
 	margin-left:26px;
 }
 
@@ -148,7 +148,7 @@
 }
 /* 日期栏表格 TABLE */
 .WdateDiv .WdayTable{
-	line-height:20px;	
+	line-height:20px;
 	color:#13777e;
 	background-color:#edfbfb;
 	border:#BEE9F0 1px solid;
@@ -186,14 +186,14 @@
 	background-color:#66F4DF;
 }
 /* 其他月份的日期 */
-.WdateDiv .WotherDay{ 
+.WdateDiv .WotherDay{
 	cursor:pointer;
-	color:#0099CC;	
+	color:#0099CC;
 }
 /* 其他月份的日期mouseover样式 */
-.WdateDiv .WotherDayOn{ 
+.WdateDiv .WotherDayOn{
 	cursor:pointer;
-	background-color:#C0EBEF;	
+	background-color:#C0EBEF;
 }
 /* 无效日期的样式,即在日期范围以外日期格的样式,不能选择的日期 */
 .WdateDiv .WinvalidDay{
@@ -220,7 +220,7 @@
 	width:18px;
 	text-align:center;
 	color:#333;
-	border:#61CAD0 1px solid;	
+	border:#61CAD0 1px solid;
 }
 /* 时间 时 INPUT */
 .WdateDiv #dpTime .tB{
@@ -267,7 +267,7 @@
 	text-align:right;
 	margin-top:3px;
 }
-.WdateDiv .dpButton{ 
+.WdateDiv .dpButton{
 	height:20px;
 	width:45px;
 	margin-top:2px;

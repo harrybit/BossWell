@@ -34,3 +34,8 @@ D:\Project_TY\Code\纯净版\src\Cache\Cache.Base\bin\Debug\Cache.Base.dll
 D:\Project_TY\Code\纯净版\src\Cache\Cache.Base\bin\Debug\Cache.Base.pdb
 D:\Project_TY\Code\纯净版\src\Cache\Cache.Base\obj\Debug\Cache.Base.dll
 D:\Project_TY\Code\纯净版\src\Cache\Cache.Base\obj\Debug\Cache.Base.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\Cache\Cache.Base\bin\Debug\Cache.Base.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\Cache\Cache.Base\bin\Debug\Cache.Base.pdb
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\Cache\Cache.Base\obj\Debug\Cache.Base.csprojResolveAssemblyReference.cache
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\Cache\Cache.Base\obj\Debug\Cache.Base.dll
+D:\Project_TY\Code\纯净版\GitInit\BossWell\src\Cache\Cache.Base\obj\Debug\Cache.Base.pdb

@@ -1,21 +1,17 @@
-﻿using Chloe.Core.Visitors;
-using Chloe.DbExpressions;
+﻿using Chloe.DbExpressions;
 using Chloe.Descriptors;
 using Chloe.Exceptions;
 using Chloe.Extensions;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
 
 namespace Chloe.Core.Visitors
 {
     public class DefaultExpressionParser : ExpressionVisitorBase
     {
-        TypeDescriptor _typeDescriptor;
-        DbTable _explicitDbTable;
+        private TypeDescriptor _typeDescriptor;
+        private DbTable _explicitDbTable;
 
         public DefaultExpressionParser(TypeDescriptor typeDescriptor, DbTable explicitDbTable)
         {
@@ -28,6 +24,7 @@ namespace Chloe.Core.Visitors
             lambda = ExpressionVisitorBase.ReBuildFilterPredicate(lambda);
             return this.Visit(lambda);
         }
+
         public DbExpression Parse(Expression exp)
         {
             return this.Visit(exp);

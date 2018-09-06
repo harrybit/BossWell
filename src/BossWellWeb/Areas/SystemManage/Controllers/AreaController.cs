@@ -1,6 +1,7 @@
 ﻿using BossWellApp;
 using BossWellModel;
 using System.Web.Mvc;
+
 namespace BossWellWeb.Areas.SystemManage.Controllers
 {
     public class AreaController : ControllerBase
@@ -27,6 +28,7 @@ namespace BossWellWeb.Areas.SystemManage.Controllers
         {
             return Content(areaAPP.GetFromDate(sid));
         }
+
         [HttpPost]
         [HandlerAjaxOnly]
         [ValidateAntiForgeryToken]
@@ -35,6 +37,7 @@ namespace BossWellWeb.Areas.SystemManage.Controllers
             areaAPP.SubmitForm(areaEntity, sid);
             return Success("保存成功。");
         }
+
         [HttpPost]
         [HandlerAjaxOnly]
         [HandlerAuthorize]
