@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{46A8D68D-A23F-459B-BA7D-925700BC11B9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BossWell.Model</RootNamespace>
+    <AssemblyName>BossWell.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Chloe, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Chloe.3.0.0\lib\net40\Chloe.dll</HintPath>
+    </Reference>
+    <Reference Include="Chloe.Extension, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Chloe.Extension.3.0.0\lib\net40\Chloe.Extension.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdminUserEntity.cs" />
+    <Compile Include="Admin\LogSearchModel.cs" />
+    <Compile Include="Admin\RoleAuthorizeMenuModel.cs" />
+    <Compile Include="Admin\RoleAuthorTreeModel.cs" />
+    <Compile Include="AreaEntity.cs" />
+    <Compile Include="BannerEntity.cs" />
+    <Compile Include="Base\BaseEntity.cs" />
+    <Compile Include="Base\QueryRequest.cs" />
+    <Compile Include="Base\QueryResponse.cs" />
+    <Compile Include="Basic\AjaxResult.cs" />
+    <Compile Include="Basic\Pagination.cs" />
+    <Compile Include="Basic\TreeGridModel.cs" />
+    <Compile Include="Basic\TreeSelectModel.cs" />
+    <Compile Include="Basic\TreeViewModel.cs" />
+    <Compile Include="ClientEntity.cs" />
+    <Compile Include="ComClassEntity.cs" />
+    <Compile Include="DeviceVersionEntity.cs" />
+    <Compile Include="Enum\LogEnum.cs" />
+    <Compile Include="Enum\ModuleEnum.cs" />
+    <Compile Include="Enum\ResultTypeEnum.cs" />
+    <Compile Include="LogEntity.cs" />
+    <Compile Include="ModuleEntity.cs" />
+    <Compile Include="NewsEntity.cs" />
+    <Compile Include="OrganizeEntity.cs" />
+    <Compile Include="Other\ComClassTreeModel.cs" />
+    <Compile Include="Other\QiNiuResult.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoleAuthorizeEntity.cs" />
+    <Compile Include="RoleEntity.cs" />
+    <Compile Include="SystemConfigEntity.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,15 @@
+D:\Project_TY\Code\设计模式\BossWell\BossWell.Cache\bin\Debug\BossWell.Cache.dll
+D:\Project_TY\Code\设计模式\BossWell\BossWell.Cache\bin\Debug\BossWell.Cache.pdb
+D:\Project_TY\Code\设计模式\BossWell\BossWell.Cache\bin\Debug\BossWell.ApiHelp.dll
+D:\Project_TY\Code\设计模式\BossWell\BossWell.Cache\bin\Debug\BossWell.Configuration.dll
+D:\Project_TY\Code\设计模式\BossWell\BossWell.Cache\bin\Debug\StackExchange.Redis.dll
+D:\Project_TY\Code\设计模式\BossWell\BossWell.Cache\bin\Debug\Newtonsoft.Json.dll
+D:\Project_TY\Code\设计模式\BossWell\BossWell.Cache\bin\Debug\BossWell.ApiHelp.pdb
+D:\Project_TY\Code\设计模式\BossWell\BossWell.Cache\bin\Debug\BossWell.Configuration.pdb
+D:\Project_TY\Code\设计模式\BossWell\BossWell.Cache\bin\Debug\StackExchange.Redis.xml
+D:\Project_TY\Code\设计模式\BossWell\BossWell.Cache\bin\Debug\Newtonsoft.Json.xml
+D:\Project_TY\Code\设计模式\BossWell\BossWell.Cache\obj\Debug\BossWell.Cache.csprojAssemblyReference.cache
+D:\Project_TY\Code\设计模式\BossWell\BossWell.Cache\obj\Debug\BossWell.Cache.csproj.CoreCompileInputs.cache
+D:\Project_TY\Code\设计模式\BossWell\BossWell.Cache\obj\Debug\BossWell.Cache.csproj.CopyComplete
+D:\Project_TY\Code\设计模式\BossWell\BossWell.Cache\obj\Debug\BossWell.Cache.dll
+D:\Project_TY\Code\设计模式\BossWell\BossWell.Cache\obj\Debug\BossWell.Cache.pdb

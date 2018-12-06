@@ -1,0 +1,8 @@
+D:\Project_TY\Code\设计模式\BossWell\BossWell.ApiHelp\bin\Debug\BossWell.ApiHelp.dll
+D:\Project_TY\Code\设计模式\BossWell\BossWell.ApiHelp\bin\Debug\BossWell.ApiHelp.pdb
+D:\Project_TY\Code\设计模式\BossWell\BossWell.ApiHelp\bin\Debug\Newtonsoft.Json.dll
+D:\Project_TY\Code\设计模式\BossWell\BossWell.ApiHelp\bin\Debug\Newtonsoft.Json.xml
+D:\Project_TY\Code\设计模式\BossWell\BossWell.ApiHelp\obj\Debug\BossWell.ApiHelp.csproj.CoreCompileInputs.cache
+D:\Project_TY\Code\设计模式\BossWell\BossWell.ApiHelp\obj\Debug\BossWell.ApiHelp.csproj.CopyComplete
+D:\Project_TY\Code\设计模式\BossWell\BossWell.ApiHelp\obj\Debug\BossWell.ApiHelp.dll
+D:\Project_TY\Code\设计模式\BossWell\BossWell.ApiHelp\obj\Debug\BossWell.ApiHelp.pdb

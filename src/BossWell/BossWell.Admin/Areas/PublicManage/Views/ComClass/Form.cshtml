@@ -1,0 +1,193 @@
+﻿@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<style type="text/css">
+    .coverimg {
+        width: 120px;
+        height: 80px;
+        float: left;
+    }
+
+    .coverimg2 {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        float: left;
+        margin-left: 30px;
+    }
+
+    .file {
+        position: relative;
+        float: left;
+        margin-top: 50px;
+        margin-left: 10px;
+        display: inline-block;
+        background: #48698B;
+        border: 1px solid #48698B;
+        border-radius: 2px;
+        padding: 4px 12px;
+        overflow: hidden;
+        color: #fff;
+        text-decoration: none;
+        text-indent: 0;
+        line-height: 20px;
+    }
+
+        .file input {
+            position: absolute;
+            right: 0;
+            top: 0;
+            opacity: 0;
+        }
+
+            .file input:hover {
+                cursor: pointer;
+            }
+
+        .file:hover {
+            cursor: pointer;
+            color: #fff;
+            text-decoration: none;
+        }
+</style>
+<script>
+    var keyValue = $.request("keyValue");
+    $(function () {
+        initControl();
+        if (!!keyValue) {
+            $.ajax({
+                url: "/PublicManage/ComClass/GetFormJson",
+                data: { keyValue: keyValue },
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    $("#form1").formSerialize(data);
+
+                    if (data.Logo != null && data.Logo.length > 10) {
+                        $(".coverimg").attr("src", data.Logo);
+                    }
+
+                    if (data.BGImages != null && data.BGImages.length > 10) {
+                        $(".coverimg2").attr("src", data.BGImages);
+                    }
+                }
+            });
+        }
+    });
+    function initControl() {
+        $("#ParentId").bindSelect({
+            url: "/PublicManage/ComClass/GetSelectTreeList",
+            param: { parentSid: "0" }
+        });
+    }
+    function submitForm() {
+        if (!$('#form1').formValid()) {
+            return false;
+        }
+        $.submitForm({
+            url: "/PublicManage/ComClass/SubmitForm",
+            param: $("#form1").formSerialize(),
+            success: function () {
+                $.currentWindow().$("#gridList").resetSelection();
+                $.currentWindow().$("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+
+    //上传图片
+    function Upload(e, errormsg, imgname, inputname) {
+        var files = e.files;
+        if (files.length < 1) { $.modalMsg("请选择上传的图片"); return; }
+
+        var data = new FormData();
+        data.append("file", files[0]);
+
+        let xhr = new XMLHttpRequest();
+        //xhr.upload.onprogress = function (ev) {
+        //    $("." + errormsg).text('获取文件进度：' + (100 * ev.loaded / ev.total).toFixed(2) + '%');
+        //}
+        xhr.open('POST', '/PublicManage/UpLoad/UpLoadImage', true);
+        xhr.send(data);
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var result = jQuery.parseJSON(this.response);
+                if (result == null || result.resultCode != 200) {
+                    $.modalMsg("上传失败。。。");
+                    return;
+                }
+                $("#" + inputname).val(result.path);
+                $("." + imgname).attr("src", result.path);
+                //$("." + errormsg).text(result.resultMsg);
+                $.modalMsg("上传成功");
+            }
+        }
+    }
+</script>
+<form id="form1">
+    <div style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
+        <div style="padding-top: 20px; margin-right: 30px;">
+            <table class="form">
+
+                <tr>
+                    <th class="formTitle">上级</th>
+                    <td class="formValue">
+                        <select id="ParentId" name="ParentId" class="form-control required">
+                            <option value="0">父节点</option>
+                        </select>
+                    </td>
+                    <th class="formTitle">排序</th>
+                    <td class="formValue">
+                        <input id="Sort" name="Sort" type="text" class="form-control number" placeholder="请输入排序" />
+                    </td>
+                </tr>
+                <tr>
+                    <th class="formTitle">列表图</th>
+                    <td class="formValue" colspan="3">
+                        <img src="~/Content/img/covering.png" alt="..." class="img-thumbnail coverimg">
+                        <a href="javascript:;" class="file">
+                            选择文件
+                            <input type="file" onchange="Upload(this,'UploadError','coverimg','Logo')">
+                        </a>
+                        <input id="Logo" name="Logo" type="hidden" value="~/Content/img/covering.png" />
+
+                        <img src="~/Content/img/covering.png" alt="..." class="img-thumbnail coverimg2">
+                        <a href="javascript:;" class="file">
+                            选择文件
+                            <input type="file" onchange="Upload(this,'UploadError','coverimg2','BGImages')">
+                        </a>
+                        <input id="BGImages" name="BGImages" type="hidden" value="~/Content/img/covering.png" />
+                    </td>
+                </tr>
+                <tr>
+                    <th class="formTitle">名称</th>
+                    <td class="formValue">
+                        <input id="Title" name="Title" type="text" class="form-control required" placeholder="请输入分类名称" />
+                        <!--表单标识-->
+                        <input id="Sid" name="Sid" type="hidden" class="form-control" />
+                    </td>
+                    <th class="formTitle">简称</th>
+                    <td class="formValue">
+                        <input id="Subtitle" name="Subtitle" type="text" class="form-control" placeholder="请输入分类简称" />
+                    </td>
+                </tr>
+                <tr>
+                    <th class="formTitle" style="height: 35px;">选项</th>
+                    <td class="formValue" style="padding-top: 1px;">
+                        <div class="ckbox">
+                            <input id="IsEnable" name="IsEnable" type="checkbox" checked="checked"><label for="IsEnable">启用</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="formTitle" valign="top" style="padding-top: 5px;">
+                        备注
+                    </th>
+                    <td class="formValue" colspan="3">
+                        <textarea id="Remark" name="Remark" class="form-control" style="height: 100px;"></textarea>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</form>

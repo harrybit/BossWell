@@ -1,0 +1,5 @@
+D:\Project_TY\Code\设计模式\BossWell\BossWell.Configuration\bin\Debug\BossWell.Configuration.dll
+D:\Project_TY\Code\设计模式\BossWell\BossWell.Configuration\bin\Debug\BossWell.Configuration.pdb
+D:\Project_TY\Code\设计模式\BossWell\BossWell.Configuration\obj\Debug\BossWell.Configuration.csproj.CoreCompileInputs.cache
+D:\Project_TY\Code\设计模式\BossWell\BossWell.Configuration\obj\Debug\BossWell.Configuration.dll
+D:\Project_TY\Code\设计模式\BossWell\BossWell.Configuration\obj\Debug\BossWell.Configuration.pdb

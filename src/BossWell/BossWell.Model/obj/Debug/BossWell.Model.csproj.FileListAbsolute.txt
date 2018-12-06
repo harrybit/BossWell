@@ -1,0 +1,11 @@
+D:\Project_TY\Code\设计模式\BossWell\BossWell.Model\bin\Debug\BossWell.Model.dll
+D:\Project_TY\Code\设计模式\BossWell\BossWell.Model\bin\Debug\BossWell.Model.pdb
+D:\Project_TY\Code\设计模式\BossWell\BossWell.Model\bin\Debug\Chloe.dll
+D:\Project_TY\Code\设计模式\BossWell\BossWell.Model\bin\Debug\Chloe.Extension.dll
+D:\Project_TY\Code\设计模式\BossWell\BossWell.Model\bin\Debug\Chloe.xml
+D:\Project_TY\Code\设计模式\BossWell\BossWell.Model\bin\Debug\Chloe.Extension.xml
+D:\Project_TY\Code\设计模式\BossWell\BossWell.Model\obj\Debug\BossWell.Model.csproj.CoreCompileInputs.cache
+D:\Project_TY\Code\设计模式\BossWell\BossWell.Model\obj\Debug\BossWell.Model.csproj.CopyComplete
+D:\Project_TY\Code\设计模式\BossWell\BossWell.Model\obj\Debug\BossWell.Model.dll
+D:\Project_TY\Code\设计模式\BossWell\BossWell.Model\obj\Debug\BossWell.Model.pdb
+D:\Project_TY\Code\设计模式\BossWell\BossWell.Model\obj\Debug\BossWell.Model.csprojAssemblyReference.cache

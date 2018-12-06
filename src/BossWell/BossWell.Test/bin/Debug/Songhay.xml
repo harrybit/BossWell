@@ -1,0 +1,3601 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Songhay</name>
+    </assembly>
+    <members>
+        <member name="T:Songhay.FrameworkAssemblyUtility">
+            <summary>
+            Static members related to <see cref="N:System.Reflection"/>.
+            </summary>
+            <summary>
+            Static members related to <see cref="N:System.Reflection"/>.
+            </summary>
+        </member>
+        <member name="M:Songhay.FrameworkAssemblyUtility.GetAssemblyInfo(System.Reflection.Assembly)">
+            <summary>
+            Returns a <see cref="T:System.String"/>
+            about the executing assembly.
+            </summary>
+            <param name="targetAssembly">
+            The executing <see cref="T:System.Reflection.Assembly"/>.
+            </param>
+            <returns>Returns <see cref="T:System.String"/></returns>
+        </member>
+        <member name="M:Songhay.FrameworkAssemblyUtility.GetAssemblyInfo(System.Reflection.Assembly,System.Boolean)">
+            <summary>
+            Returns a <see cref="T:System.String"/>
+            about the executing assembly.
+            </summary>
+            <param name="targetAssembly">
+            The executing <see cref="T:System.Reflection.Assembly"/>.
+            </param>
+            <param name="useConsoleChars">
+            When <c>true</c> selected “special” characters are formatted for the Windows Console.
+            </param>
+            <returns>Returns <see cref="T:System.String"/></returns>
+        </member>
+        <member name="M:Songhay.FrameworkAssemblyUtility.GetPathFromAssembly(System.Reflection.Assembly)">
+            <summary>
+            Gets the directory name from assembly.
+            </summary>
+            <param name="assembly">The assembly.</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">assembly;The expected assembly is not here.</exception>
+        </member>
+        <member name="M:Songhay.FrameworkAssemblyUtility.GetPathFromAssembly(System.Reflection.Assembly,System.String)">
+            <summary>
+            Gets the path from assembly.
+            </summary>
+            <param name="assembly">The assembly.</param>
+            <param name="fileSegment">The file segment.</param>
+        </member>
+        <member name="M:Songhay.FrameworkAssemblyUtility.SetEntryAssembly">
+            <summary>
+            Sets the entry assembly.
+            </summary>
+        </member>
+        <member name="M:Songhay.FrameworkAssemblyUtility.SetEntryAssembly(System.Reflection.Assembly)">
+            <summary>
+            Sets the entry assembly.
+            </summary>
+            <param name="assembly">The assembly.</param>
+            <remarks>
+            This member addresses the null entry assembly problem in VSTEST/MSTEST scenarios.
+            For detail, see http://stackoverflow.com/a/21888521/22944
+            </remarks>
+        </member>
+        <member name="T:Songhay.FrameworkFileUtility">
+            <summary>
+            A few static helper members
+            for <see cref="N:System.IO"/>.
+            </summary>
+            <summary>
+            A few static helper members
+            for <see cref="N:System.IO"/>.
+            </summary>
+            <summary>
+            A few static helper members
+            for <see cref="N:System.IO"/>.
+            </summary>
+        </member>
+        <member name="M:Songhay.FrameworkFileUtility.CountParentDirectoryChars(System.String)">
+            <summary>
+            Counts the parent directory chars.
+            </summary>
+            <param name="path">The path.</param>
+            <returns></returns>
+            <remarks>
+            This method is useful when running <see cref="M:Songhay.FrameworkFileUtility.GetParentDirectory(System.String,System.Int32)"/>.
+            </remarks>
+        </member>
+        <member name="M:Songhay.FrameworkFileUtility.FindParentDirectory(System.String,System.String,System.Int32)">
+            <summary>
+            Finds the parent directory.
+            </summary>
+            <param name="path">The path.</param>
+            <param name="parentName">Name of the parent.</param>
+            <param name="levels">The levels.</param>
+            <returns></returns>
+            <exception cref="T:System.IO.DirectoryNotFoundException">The expected directory is not here.</exception>
+        </member>
+        <member name="M:Songhay.FrameworkFileUtility.FindParentDirectoryInfo(System.String,System.String,System.Int32)">
+            <summary>
+            Finds the parent <see cref="T:System.IO.DirectoryInfo"/>.
+            </summary>
+            <param name="path">The path.</param>
+            <param name="parentName">Name of the parent.</param>
+            <param name="levels">The levels.</param>
+            <returns></returns>
+            <exception cref="T:System.IO.DirectoryNotFoundException">The expected directory is not here.</exception>
+        </member>
+        <member name="M:Songhay.FrameworkFileUtility.GetParentDirectory(System.String,System.Int32)">
+            <summary>
+            Gets the parent directory.
+            </summary>
+            <param name="path">The path.</param>
+            <param name="levels">The levels.</param>
+            <returns></returns>
+            <remarks>
+            A recursive wrapper for <see cref="M:System.IO.Directory.GetParent(System.String)"/>.
+            </remarks>
+        </member>
+        <member name="M:Songhay.FrameworkFileUtility.GetParentDirectoryInfo(System.String,System.Int32)">
+            <summary>
+            Gets the parent <see cref="T:System.IO.DirectoryInfo"/>.
+            </summary>
+            <param name="path">The path.</param>
+            <param name="levels">The levels.</param>
+            <returns></returns>
+            <remarks>
+            A recursive wrapper for <see cref="M:System.IO.Directory.GetParent(System.String)"/>.
+            </remarks>
+        </member>
+        <member name="M:Songhay.FrameworkFileUtility.TrimLeadingDirectorySeparatorChars(System.String)">
+            <summary>
+            Trims the leading directory separator chars.
+            </summary>
+            <param name="path">The path.</param>
+            <returns></returns>
+            <remarks>
+            Trims leading <see cref="F:System.IO.Path.AltDirectorySeparatorChar"/> and/or <see cref="F:System.IO.Path.DirectorySeparatorChar"/>,
+            formatting relative paths for <see cref="M:System.IO.Path.Combine(System.String,System.String)"/>.
+            </remarks>
+        </member>
+        <member name="M:Songhay.FrameworkFileUtility.TrimParentDirectoryChars(System.String)">
+            <summary>
+            Trims the parent directory chars.
+            </summary>
+            <param name="path">The path.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Songhay.FrameworkFileUtility.GetEncodedString(System.String)">
+            <summary>
+            Gets the UTF-8 encoded string.
+            </summary>
+            <param name="rawValue">The raw value.</param>
+        </member>
+        <member name="M:Songhay.FrameworkFileUtility.GetEncodedString(System.String,System.Text.Encoding)">
+            <summary>
+            Gets the encoded string.
+            </summary>
+            <param name="rawValue">The raw value (<see cref="P:System.Text.Encoding.ASCII"/> by default).</param>
+            <param name="encoding">The encoding.</param>
+        </member>
+        <member name="M:Songhay.FrameworkFileUtility.GetFileName(System.String)">
+            <summary>
+            Returns the file name
+            based on the specified path
+            and <see cref="F:System.IO.Path.DirectorySeparatorChar"/>.
+            </summary>
+            <param name="pathWithFile">
+            The specified path.
+            </param>
+        </member>
+        <member name="M:Songhay.FrameworkFileUtility.GetFileName(System.String,System.Nullable{System.Char})">
+            <summary>
+            Returns the file name
+            based on the specified path.
+            </summary>
+            <param name="pathWithFile">
+            The specified path.
+            </param>
+            <param name="pathDelimiter">
+            Path delimiter (e.g. \ or /).
+            </param>
+        </member>
+        <member name="M:Songhay.FrameworkFileUtility.GetPathRoot(System.String)">
+            <summary>
+            Returns the directory root
+            based on the specified path.
+            </summary>
+            <param name="pathWithFile">
+            The specified path.
+            </param>
+        </member>
+        <member name="M:Songhay.FrameworkFileUtility.GetPathRoot(System.String,System.Nullable{System.Char})">
+            <summary>
+            Returns the directory root
+            based on the specified path.
+            </summary>
+            <param name="pathWithFile">
+            The specified path.
+            </param>
+            <param name="pathDelimiter">
+            Path delimiter (e.g. \ or /).
+            </param>
+        </member>
+        <member name="M:Songhay.FrameworkFileUtility.JoinPathAndRoot(System.String,System.String)">
+            <summary>
+            Joins the path and root.
+            </summary>
+            <param name="path">The path.</param>
+            <param name="root">The root.</param>
+        </member>
+        <member name="M:Songhay.FrameworkFileUtility.JoinPathAndRoot(System.String,System.String,System.Nullable{System.Char})">
+            <summary>
+            Joins the path and root.
+            </summary>
+            <param name="path">The path.</param>
+            <param name="root">The root.</param>
+            <param name="pathDelimiter">
+            Path delimiter (e.g. \ or /).
+            </param>
+        </member>
+        <member name="M:Songhay.FrameworkFileUtility.Write(System.String,System.String)">
+            <summary>
+            Writes the specified content to a file.
+            </summary>
+            <param name="content">The content to write or overwrite.</param>
+            <param name="pathWithFile">The path to the file.</param>
+        </member>
+        <member name="T:Songhay.FrameworkTypeUtility">
+            <summary>
+            Static members for type handling.
+            </summary>
+            <summary>
+            Static members for type handling.
+            </summary>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.ConvertDateTimeFromUnixTime(System.Double)">
+            <summary>
+            Converts Unix time stamps
+            to <see cref="T:System.DateTime"/>.
+            </summary>
+            <param name="time">A <see cref="T:System.Double"/>.</param>
+            <returns>A <see cref="T:System.DateTime"/>.</returns>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.ConvertDateTimeToRfc3339DateTime(System.DateTime)">
+            <summary>
+            Converts the specified <see cref="T:System.DateTime"/> to RFC3339.
+            </summary>
+            <param name="utcDateTime">The UTC date and time.</param>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.ConvertDateTimeToRfc822DateTime(System.DateTime)">
+            <summary>
+            Converts the specified <see cref="T:System.DateTime"/> to RFC822.
+            </summary>
+            <param name="dateTime">The date and time.</param>
+            <remarks>
+            “Shortcomings of OPML… The RFC 822 date format is considered obsolete,
+            and amongst other things permits the representation of years as two digits.
+            (RFC 822 has been superseded by RFC 2822.)
+            In general, date and time formats should be represented according to RFC 3339.”
+            http://www.answers.com/topic/opml
+            </remarks>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.ConvertDateTimeToUnixTime">
+            <summary>
+            Converts the current time
+            to a Unix time stamp.
+            </summary>
+            <returns>A <see cref="T:System.Double"/>.</returns>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.ConvertDateTimeToUnixTime(System.DateTime)">
+            <summary>
+            Converts a <see cref="T:System.DateTime"/>
+            to a Unix time stamp.
+            </summary>
+            <param name="dateValue">The <see cref="T:System.DateTime"/>.</param>
+            <returns>A <see cref="T:System.Double"/>.</returns>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.ConvertInchesToPoints(System.Single)">
+            <summary>
+            Converts inches as a <see cref="T:System.Single"/>
+            to points.
+            </summary>
+            <param name="inches">The inches.</param>
+            <remarks>
+            1 point = 0.013837 inch
+            </remarks>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.ConvertPointsToInches(System.Single)">
+            <summary>
+            Converts points as a <see cref="T:System.Single"/>
+            to inches.
+            </summary>
+            <param name="points">The points.</param>
+            <remarks>
+            1 point = 0.013837 inch
+            </remarks>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.GenerateRandomPassword(System.Int32)">
+            <summary>
+            Generates the random password.
+            </summary>
+            <param name="passwordLength">Length of the password.</param>
+            <remarks>
+            See “Generate random password in C#” by Mads Kristensen
+            [http://madskristensen.net/post/Generate-random-password-in-C]
+            </remarks>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.GetDeepClone``1(``0)">
+            <summary>
+            Gets the deep clone.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj">The obj.</param>
+            <remarks>
+            See “How do you do a deep copy an object in .Net (C# specifically)?”
+            [http://stackoverflow.com/questions/129389/how-do-you-do-a-deep-copy-an-object-in-net-c-specifically]
+            See “Shallow Copy vs. Deep Copy in .NET”
+            [http://www.codeproject.com/Articles/28952/Shallow-Copy-vs-Deep-Copy-in-NET]
+            </remarks>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.IsNullOrEmptyString(System.Object)">
+            <summary>
+            Returns <c>true</c> when the specified value
+            is <c>null</c> or <see cref="F:System.String.Empty"/>.
+            </summary>
+            <param name="boxedString">The framework value.</param>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.IsNullOrEmptyOrNotArray(System.Object)">
+            <summary>
+            Returns <c>true</c> when the specified value
+            is an empty array, not an array or null.
+            </summary>
+            <param name="boxedArray">The specified value.</param>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.SetProperties``2(``0,``1)">
+            <summary>
+            Sets the properties of the output <see cref="T:System.Type" />.
+            </summary>
+            <typeparam name="TIn">The type of the in.</typeparam>
+            <typeparam name="TOut">The type of the out.</typeparam>
+            <param name="input">The input.</param>
+            <param name="output">The output.</param>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.SetProperties``2(``0,``1,System.Collections.Generic.ICollection{System.String})">
+            <summary>
+            Sets the properties of the output <see cref="T:System.Type" />.
+            </summary>
+            <typeparam name="TIn">The type of the in.</typeparam>
+            <typeparam name="TOut">The type of the out.</typeparam>
+            <param name="input">the input.</param>
+            <param name="output">the output.</param>
+            <param name="includedProperties">The included properties.</param>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.SetPropertiesExcluding``2(``0,``1,System.Collections.Generic.ICollection{System.String})">
+            <summary>
+            Sets the properties, excluding the specified property names.
+            </summary>
+            <typeparam name="TIn">The type of the in.</typeparam>
+            <typeparam name="TOut">The type of the out.</typeparam>
+            <param name="input">The input.</param>
+            <param name="output">The output.</param>
+            <param name="excludedProperties">The excluded properties.</param>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.SqlDatabaseNull">
+            <summary>
+            Returns the conventional database null
+            (<see cref="T:System.DBNull"/>)
+            for Microsoft SQL Server systems.
+            </summary>
+            <returns><see cref="T:System.DBNull"/></returns>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.ParseBoolean(System.Object)">
+            <summary>
+            Tries to convert the specified frameworkValue
+            to the <see cref="T:System.Nullable"></see> return type.
+            </summary>
+            <param name="frameworkValue">
+            The specified <see cref="T:System.Object"></see> box.
+            </param>
+            <returns>
+            Always returns a <see cref="T:System.Nullable"></see>
+            as parse failure means <c>HasValue</c>
+            is false.
+            </returns>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.ParseBoolean(System.Object,System.Boolean)">
+            <summary>
+            Tries to convert the specified frameworkValue
+            to the <see cref="T:System.Nullable"/> return type.
+            </summary>
+            <param name="frameworkValue">
+            The specified <see cref="T:System.Object"/> box.
+            </param>
+            <param name="supportBitStrings">
+            When <c>true</c>, support "1" and "0"
+            as Boolean strings.
+            </param>
+            <returns>
+            Always returns a <see cref="T:System.Nullable"/>
+            as parse failure means <c>HasValue</c>
+            is false.
+            </returns>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.ParseBoolean(System.Object,System.Boolean,System.Boolean)">
+            <summary>
+            Tries to convert the specified frameworkValue
+            to the <see cref="T:System.Nullable"/> return type.
+            </summary>
+            <param name="frameworkValue">
+            The specified <see cref="T:System.Object"/> box.
+            </param>
+            <param name="supportBitStrings">
+            When <c>true</c>, support "1" and "0"
+            as Boolean strings.
+            </param>
+            <param name="defaultValue">
+            The default frameworkValue to return when <c>Nullable.HasValue == false</c>.
+            </param>
+            <returns>
+            Always returns a <see cref="T:System.Nullable"/>
+            as parse failure means <c>HasValue</c>
+            is false.
+            </returns>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.ParseByte(System.Object)">
+            <summary>
+            Tries to convert the specified frameworkValue
+            to the <see cref="T:System.Nullable"/> return type.
+            </summary>
+            <param name="frameworkValue">
+            The specified <see cref="T:System.Object"/> box.
+            </param>
+            <returns>
+            Always returns a <see cref="T:System.Nullable"/>
+            as parse failure means <c>HasValue</c>
+            is false.
+            </returns>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.ParseByte(System.Object,System.Byte)">
+            <summary>
+            Tries to convert the specified frameworkValue
+            to the <see cref="T:System.Nullable"/> return type.
+            </summary>
+            <param name="frameworkValue">
+            The specified <see cref="T:System.Object"/> box.
+            </param>
+            <param name="defaultValue">
+            The default frameworkValue to return when <c>Nullable.HasValue == false</c>.
+            </param>
+            <returns>
+            Always returns a <see cref="T:System.Nullable"/>
+            as parse failure means <c>HasValue</c>
+            is false.
+            </returns>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.ParseDateTime(System.Object)">
+            <summary>
+            Tries to convert the specified frameworkValue
+            to the <see cref="T:System.Nullable"/> return type.
+            </summary>
+            <param name="frameworkValue">
+            The specified <see cref="T:System.Object"/> box.
+            </param>
+            <returns>
+            Always returns a <see cref="T:System.Nullable"/>
+            as parse failure means <c>HasValue</c>
+            is false.
+            </returns>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.ParseDateTime(System.Object,System.DateTime)">
+            <summary>
+            Tries to convert the specified frameworkValue
+            to the <see cref="T:System.Nullable"/> return type.
+            </summary>
+            <param name="frameworkValue">
+            The specified <see cref="T:System.Object"/> box.
+            </param>
+            <param name="defaultValue">
+            The default frameworkValue to return when <c>Nullable.HasValue == false</c>.
+            </param>
+            <returns>
+            Always returns a <see cref="T:System.Nullable"/>
+            as parse failure means <c>HasValue</c>
+            is false.
+            </returns>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.ParseDateTimeWithFormat(System.Object,System.String)">
+            <summary>
+            Tries to convert the specified frameworkValue
+            to the <see cref="T:System.Nullable"/> return type.
+            </summary>
+            <param name="frameworkValue">
+            The specified <see cref="T:System.Object"/> box.
+            </param>
+            <param name="formatExpression">
+            The string format expression.
+            </param>
+            <returns>
+            Always returns a <see cref="T:System.Nullable"/>
+            as parse failure means <c>HasValue</c>
+            is false.
+            </returns>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.ParseDateTimeWithFormat(System.Object,System.String,System.String)">
+            <summary>
+            Tries to convert the specified frameworkValue
+            to the <see cref="T:System.Nullable"/> return type.
+            </summary>
+            <param name="frameworkValue">
+            The specified <see cref="T:System.Object"/> box.
+            </param>
+            <param name="formatExpression">
+            The string format expression.
+            </param>
+            <param name="defaultValue">
+            The default frameworkValue to return when <c>Nullable.HasValue == false</c>.
+            </param>
+            <returns>
+            Always returns a <see cref="T:System.Nullable"/>
+            as parse failure means <c>HasValue</c>
+            is false.
+            </returns>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.ParseDecimal(System.Object)">
+            <summary>
+            Tries to convert the specified frameworkValue
+            to the <see cref="T:System.Nullable"/> return type.
+            </summary>
+            <param name="frameworkValue">
+            The specified <see cref="T:System.Object"/> box.
+            </param>
+            <returns>
+            Always returns a <see cref="T:System.Nullable"/>
+            as parse failure means <c>HasValue</c>
+            is false.
+            </returns>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.ParseDecimal(System.Object,System.Decimal)">
+            <summary>
+            Tries to convert the specified frameworkValue
+            to the <see cref="T:System.Nullable"/> return type.
+            </summary>
+            <param name="frameworkValue">
+            The specified <see cref="T:System.Object"/> box.
+            </param>
+            <param name="defaultValue">
+            The default frameworkValue to return when <c>Nullable.HasValue == false</c>.
+            </param>
+            <returns>
+            Always returns a <see cref="T:System.Nullable"/>
+            as parse failure means <c>HasValue</c>
+            is false.
+            </returns>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.ParseDouble(System.Object)">
+            <summary>
+            Tries to convert the specified frameworkValue
+            to the <see cref="T:System.Nullable"/> return type.
+            </summary>
+            <param name="frameworkValue">
+            The specified <see cref="T:System.Object"/> box.
+            </param>
+            <returns>
+            Always returns a <see cref="T:System.Nullable"/>
+            as parse failure means <c>HasValue</c>
+            is false.
+            </returns>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.ParseDouble(System.Object,System.Double)">
+            <summary>
+            Tries to convert the specified frameworkValue
+            to the <see cref="T:System.Nullable"/> return type.
+            </summary>
+            <param name="frameworkValue">
+            The specified <see cref="T:System.Object"/> box.
+            </param>
+            <param name="defaultValue">
+            The default frameworkValue to return when <c>Nullable.HasValue == false</c>.
+            </param>
+            <returns>
+            Always returns a <see cref="T:System.Nullable"/>
+            as parse failure means <c>HasValue</c>
+            is false.
+            </returns>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.ParseEnum``1(System.String,``0)">
+            <summary>
+            Tries to convert the specified frameworkValue
+            to the <see cref="T:System.Enum"/> return type.
+            </summary>
+            <typeparam name="TEnum">The type of the enum.</typeparam>
+            <param name="frameworkValue">The framework value.</param>
+            <param name="defaultValue">The default value.</param>
+            <returns></returns>
+            <remarks>
+            For background, see http://stackoverflow.com/a/15017429/22944
+            </remarks>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.ParseInt16(System.Object)">
+            <summary>
+            Tries to convert the specified frameworkValue
+            to the <see cref="T:System.Nullable"/> return type.
+            </summary>
+            <param name="frameworkValue">
+            The specified <see cref="T:System.Object"/> box.
+            </param>
+            <returns>
+            Always returns a <see cref="T:System.Nullable"/>
+            as parse failure means <c>HasValue</c>
+            is false.
+            </returns>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.ParseInt16(System.Object,System.Int16)">
+            <summary>
+            Tries to convert the specified frameworkValue
+            to the <see cref="T:System.Nullable"/> return type.
+            </summary>
+            <param name="frameworkValue">
+            The specified <see cref="T:System.Object"/> box.
+            </param>
+            <param name="defaultValue">
+            The default frameworkValue to return when <c>Nullable.HasValue == false</c>.
+            </param>
+            <returns>
+            Always returns a <see cref="T:System.Nullable"/>
+            as parse failure means <c>HasValue</c>
+            is false.
+            </returns>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.ParseInt32(System.Object)">
+            <summary>
+            Tries to convert the specified frameworkValue
+            to the <see cref="T:System.Nullable"/> return type.
+            </summary>
+            <param name="frameworkValue">
+            The specified <see cref="T:System.Object"/> box.
+            </param>
+            <returns>
+            Always returns a <see cref="T:System.Nullable"/>
+            as parse failure means <c>HasValue</c>
+            is false.
+            </returns>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.ParseInt32(System.Object,System.Int32)">
+            <summary>
+            Tries to convert the specified frameworkValue
+            to the <see cref="T:System.Nullable"/> return type.
+            </summary>
+            <param name="frameworkValue">
+            The specified <see cref="T:System.Object"/> box.
+            </param>
+            <param name="defaultValue">
+            The default frameworkValue to return when <c>Nullable.HasValue == false</c>.
+            </param>
+            <returns>
+            Always returns a <see cref="T:System.Nullable"/>
+            as parse failure means <c>HasValue</c>
+            is false.
+            </returns>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.ParseInt64(System.Object)">
+            <summary>
+            Tries to convert the specified frameworkValue
+            to the <see cref="T:System.Nullable"/> return type.
+            </summary>
+            <param name="frameworkValue">
+            The specified <see cref="T:System.Object"/> box.
+            </param>
+            <returns>
+            Always returns a <see cref="T:System.Nullable"/>
+            as parse failure means <c>HasValue</c>
+            is false.
+            </returns>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.ParseInt64(System.Object,System.Int64)">
+            <summary>
+            Tries to convert the specified frameworkValue
+            to the <see cref="T:System.Nullable"/> return type.
+            </summary>
+            <param name="frameworkValue">
+            The specified <see cref="T:System.Object"/> box.
+            </param>
+            <param name="defaultValue">
+            The default frameworkValue to return when <c>Nullable.HasValue == false</c>.
+            </param>
+            <returns>
+            Always returns a <see cref="T:System.Nullable"/>
+            as parse failure means <c>HasValue</c>
+            is false.
+            </returns>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.ParseRfc3339DateTime(System.String)">
+            <summary>
+            Parses the RFC3339 date and time.
+            </summary>
+            <param name="frameworkValue">The framework value.</param>
+            <remarks>
+                This member is based on patterns in the Argotic Syndication Framework (http://www.codeplex.com/Argotic).
+            </remarks>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.ParseRfc822DateTime(System.String)">
+            <summary>
+            Parses the RFC822 date and time.
+            </summary>
+            <param name="frameworkValue">The framework value.</param>
+            <remarks>
+                This member is based on patterns in the Argotic Syndication Framework (http://www.codeplex.com/Argotic).
+            </remarks>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.ParseString(System.Object)">
+            <summary>
+            Tries to convert the specified frameworkValue
+            to a <see cref="T:System.String"/>.
+            </summary>
+            <param name="frameworkValue">
+            The specified <see cref="T:System.Object"/> box.
+            </param>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.ParseString(System.Object,System.String)">
+            <summary>
+            Tries to convert the specified frameworkValue
+            to a <see cref="T:System.String"/>.
+            </summary>
+            <param name="frameworkValue">The frameworkValue.</param>
+            <param name="defaultValue">The default frameworkValue.</param>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.TryParseRfc3339DateTime(System.String,System.DateTime@)">
+            <summary>
+            Tries the parse RFC3339 date and time.
+            </summary>
+            <param name="frameworkValue">The framework value.</param>
+            <param name="result">The result.</param>
+            <remarks>
+                This member is based on patterns in the Argotic Syndication Framework (http://www.codeplex.com/Argotic).
+            </remarks>
+        </member>
+        <member name="M:Songhay.FrameworkTypeUtility.TryParseRfc822DateTime(System.String,System.DateTime@)">
+            <summary>
+            Tries the parse RFC822 date and time.
+            </summary>
+            <param name="frameworkValue">The framework value.</param>
+            <param name="result">The result.</param>
+            <remarks>
+                This member is based on patterns in the Argotic Syndication Framework (http://www.codeplex.com/Argotic).
+            </remarks>
+        </member>
+        <member name="T:Songhay.FrameworkUtility">
+            <summary>
+            Static members for framework-level procedures.
+            </summary>
+            <summary>
+            Static members for framework-level procedures.
+            </summary>
+            <summary>
+            Static members for framework-level procedures.
+            </summary>
+            <summary>
+            Static members for framework-level procedures.
+            </summary>
+        </member>
+        <member name="M:Songhay.FrameworkUtility.GetConsoleCharacters(System.String)">
+            <summary>
+            Gets the console characters.
+            </summary>
+            <param name="input">The input.</param>
+            <returns>Returns formatted input.</returns>
+        </member>
+        <member name="M:Songhay.FrameworkUtility.SplitArgs(System.String)">
+            <summary>
+            Splits the arguments.
+            </summary>
+            <param name="rawArguments">The raw/unsplit argument line.</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException">Unable to split argument.</exception>
+            <exception cref="T:System.ComponentModel.Win32Exception"></exception>
+            <remarks>
+            From “RegEx function to parse a command line without using a library”
+            [http://stackoverflow.com/a/17052018/22944]
+            </remarks>
+        </member>
+        <member name="M:Songhay.FrameworkUtility.GetCurrentMethodName">
+            <summary>
+            Gets the name of the current method.
+            </summary>
+        </member>
+        <member name="M:Songhay.FrameworkUtility.GetMethodName(System.Int32)">
+            <summary>
+            Gets the name of the current method.
+            </summary>
+            <param name="stackFrameIndex">Index of the stack frame.</param>
+        </member>
+        <member name="M:Songhay.FrameworkUtility.StartProcess(System.String)">
+            <summary>
+            Starts the process.
+            </summary>
+            <param name="command">The command.</param>
+        </member>
+        <member name="M:Songhay.FrameworkUtility.StartProcess(System.String,System.String,System.Boolean)">
+            <summary>
+            Starts the process.
+            </summary>
+            <param name="argumentOfExe">The argument of executable.</param>
+            <param name="pathToExe">The path to executable.</param>
+            <param name="useExe">if set to <c>true</c> use path to executable.</param>
+        </member>
+        <member name="T:Songhay.MathUtility">
+            <summary>
+            Static helpers for Math.
+            </summary>
+        </member>
+        <member name="M:Songhay.MathUtility.GetDigitInNumber(System.Int32,System.Int32)">
+            <summary>
+            Gets the digit in number.
+            </summary>
+            <param name="x">The x.</param>
+            <param name="place">The place (from right to left).</param>
+        </member>
+        <member name="M:Songhay.MathUtility.GetMantissa(System.Double,System.Int32)">
+            <summary>
+            Gets the mantissa.
+            </summary>
+            <param name="x">The x.</param>
+            <param name="round">The round.</param>
+        </member>
+        <member name="M:Songhay.MathUtility.TruncateNumber(System.Double)">
+            <summary>
+            Truncates the number.
+            </summary>
+            <param name="x">The x.</param>
+            <remarks>
+            Silverlight does not have <c>Math.Truncate()</c>.
+            </remarks>
+        </member>
+        <member name="T:Songhay.Models.CorsOrigins">
+            <summary>
+            Defines selected CORS origins.
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.CorsOrigins.BRollPlayer">
+            <summary>
+            Uri <see cref="T:System.String"/> constant
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.CorsOrigins.BRollPlayerCom">
+            <summary>
+            Uri <see cref="T:System.String"/> constant
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.CorsOrigins.CodePenIO">
+            <summary>
+            Uri <see cref="T:System.String"/> constant
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.CorsOrigins.CommaDelimiter">
+            <summary>
+            The comma delimiter
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.CorsOrigins.InOurTerribleness">
+            <summary>
+            Uri <see cref="T:System.String"/> constant
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.CorsOrigins.InOurTerriblenessCom">
+            <summary>
+            Uri <see cref="T:System.String"/> constant
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.CorsOrigins.KinteSpaceAzure">
+            <summary>
+            Uri <see cref="T:System.String"/> constant
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.CorsOrigins.KinteSpaceCom">
+            <summary>
+            Uri <see cref="T:System.String"/> constant
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.CorsOrigins.SonghayBlog">
+            <summary>
+            Uri <see cref="T:System.String"/> constant
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.CorsOrigins.SonghayDashboard">
+            <summary>
+            Uri <see cref="T:System.String"/> constant
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.CorsOrigins.SonghaySystemCom">
+            <summary>
+            Uri <see cref="T:System.String"/> constant
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.CorsOrigins.StaticsCodePenIO">
+            <summary>
+            Uri <see cref="T:System.String"/> constant
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.CorsOrigins.WordWalkingStickCom">
+            <summary>
+            Uri <see cref="T:System.String"/> constant
+            </summary>
+        </member>
+        <member name="T:Songhay.Models.FrameworkAssemblyInfo">
+            <summary>
+            Defines Assembly information.
+            </summary>
+            <remarks>
+            This definition was developed
+            for About… dialogs in Windows Forms.
+            </remarks>
+        </member>
+        <member name="M:Songhay.Models.FrameworkAssemblyInfo.#ctor(System.Reflection.Assembly)">
+            <summary>
+            Constructor of this class.
+            </summary>
+            <param name="targetAssembly">The target <see cref="T:System.Reflection.Assembly"/></param>
+        </member>
+        <member name="P:Songhay.Models.FrameworkAssemblyInfo.AssemblyTitle">
+            <summary>
+            Gets title of assembly.
+            </summary>
+        </member>
+        <member name="P:Songhay.Models.FrameworkAssemblyInfo.AssemblyVersion">
+            <summary>
+            Gets Assembly version information.
+            </summary>
+        </member>
+        <member name="P:Songhay.Models.FrameworkAssemblyInfo.AssemblyVersionDetail">
+            <summary>
+            Gets detailed Assembly version information.
+            </summary>
+        </member>
+        <member name="P:Songhay.Models.FrameworkAssemblyInfo.AssemblyDescription">
+            <summary>
+            Gets Assembly description information.
+            </summary>
+        </member>
+        <member name="P:Songhay.Models.FrameworkAssemblyInfo.AssemblyProduct">
+            <summary>
+            Gets Assembly product information.
+            </summary>
+        </member>
+        <member name="P:Songhay.Models.FrameworkAssemblyInfo.AssemblyCopyright">
+            <summary>
+            Gets Assembly copyright information.
+            </summary>
+        </member>
+        <member name="P:Songhay.Models.FrameworkAssemblyInfo.AssemblyCompany">
+            <summary>
+            Gets Assembly company information.
+            </summary>
+        </member>
+        <member name="M:Songhay.Models.FrameworkAssemblyInfo.ToString">
+            <summary>
+            Returns format: <c>[AssemblyCompany], [AssemblyTitle] Version: [AssemblyVersion], [AssemblyVersionDetail]</c>.
+            </summary>
+        </member>
+        <member name="T:Songhay.Models.HierarchicalNameValuePair">
+            <summary>
+            Defines hierarchical name-value pairs.
+            </summary>
+        </member>
+        <member name="P:Songhay.Models.HierarchicalNameValuePair.NameValuePairs">
+            <summary>
+            Gets or sets the name value pairs.
+            </summary>
+            <value>The name value pairs.</value>
+        </member>
+        <member name="T:Songhay.Models.IFrameworkAssemblyInfo">
+            <summary>
+            Contract for <see cref="T:Songhay.Models.FrameworkAssemblyInfo"/>
+            </summary>
+        </member>
+        <member name="P:Songhay.Models.IFrameworkAssemblyInfo.AssemblyCompany">
+            <summary>
+            Gets the assembly company.
+            </summary>
+            <value>The assembly company.</value>
+        </member>
+        <member name="P:Songhay.Models.IFrameworkAssemblyInfo.AssemblyCopyright">
+            <summary>
+            Gets the assembly copyright.
+            </summary>
+            <value>The assembly copyright.</value>
+        </member>
+        <member name="P:Songhay.Models.IFrameworkAssemblyInfo.AssemblyDescription">
+            <summary>
+            Gets the assembly description.
+            </summary>
+            <value>The assembly description.</value>
+        </member>
+        <member name="P:Songhay.Models.IFrameworkAssemblyInfo.AssemblyProduct">
+            <summary>
+            Gets the assembly product.
+            </summary>
+            <value>The assembly product.</value>
+        </member>
+        <member name="P:Songhay.Models.IFrameworkAssemblyInfo.AssemblyTitle">
+            <summary>
+            Gets the assembly title.
+            </summary>
+            <value>The assembly title.</value>
+        </member>
+        <member name="P:Songhay.Models.IFrameworkAssemblyInfo.AssemblyVersion">
+            <summary>
+            Gets the assembly version.
+            </summary>
+            <value>The assembly version.</value>
+        </member>
+        <member name="P:Songhay.Models.IFrameworkAssemblyInfo.AssemblyVersionDetail">
+            <summary>
+            Gets the assembly version detail.
+            </summary>
+            <value>The assembly version detail.</value>
+        </member>
+        <member name="T:Songhay.Models.MimeTypes">
+            <summary>
+            Selected MIME types
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.MimeTypes.ApplicationAtomXml">
+            <summary>
+            The application atom XML
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.MimeTypes.ApplicationFormUrlEncoded">
+            <summary>
+            The application form URL encoded
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.MimeTypes.ApplicationJson">
+            <summary>
+            The application json
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.MimeTypes.ApplicationOctetStream">
+            <summary>
+            The application octet stream
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.MimeTypes.ApplicationRssXml">
+            <summary>
+            The application RSS XML
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.MimeTypes.ApplicationVndMsFontObject">
+            <summary>
+            The application VND ms font object
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.MimeTypes.ApplicationXFontOtf">
+            <summary>
+            The application x font otf
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.MimeTypes.ApplicationXFontTtf">
+            <summary>
+            The application x font TTF
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.MimeTypes.ApplicationXFontWoff">
+            <summary>
+            The application x font woff
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.MimeTypes.ApplicationXml">
+            <summary>
+            The application XML
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.MimeTypes.ImageGif">
+            <summary>
+            The image GIF
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.MimeTypes.ImageJpeg">
+            <summary>
+            The image JPEG
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.MimeTypes.ImagePng">
+            <summary>
+            The image PNG
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.MimeTypes.ImageSvgXml">
+            <summary>
+            The image SVG XML
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.MimeTypes.ImageXIcon">
+            <summary>
+            The image x icon
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.MimeTypes.TextCss">
+            <summary>
+            The text CSS
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.MimeTypes.TextHtml">
+            <summary>
+            The text HTML
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.MimeTypes.TextJavascript">
+            <summary>
+            The text javascript
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.MimeTypes.TextPlain">
+            <summary>
+            The text plain
+            </summary>
+        </member>
+        <member name="T:Songhay.Models.NameValuePair">
+            <summary>
+            Defines name-value pair.
+            </summary>
+            <remarks>
+            Consider using the <see cref="T:System.Collections.Generic.KeyValuePair`2"/> structure
+            (from .NET 2.0 onwards) before using this type.
+            </remarks>
+        </member>
+        <member name="P:Songhay.Models.NameValuePair.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:Songhay.Models.NameValuePair.Value">
+            <summary>
+            Gets or sets the value.
+            </summary>
+            <value>The value.</value>
+        </member>
+        <member name="M:Songhay.Models.NameValuePair.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+            <returns>
+            A <see cref="T:System.String" /> that represents this instance.
+            </returns>
+        </member>
+        <member name="T:Songhay.Models.PackedResource">
+            <summary>
+            Defines the meta-data of an Application resource.
+            </summary>
+        </member>
+        <member name="P:Songhay.Models.PackedResource.DisplayName">
+            <summary>
+            Gets or sets the display name.
+            </summary>
+            <value>The display name.</value>
+        </member>
+        <member name="P:Songhay.Models.PackedResource.Key">
+            <summary>
+            Gets or sets the key.
+            </summary>
+            <value>The key.</value>
+        </member>
+        <member name="P:Songhay.Models.PackedResource.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="T:Songhay.Models.PackedResource`1">
+            <summary>
+            Defines the meta-data of an Application resource.
+            </summary>
+            <typeparam name="TResource">The type of the resource.</typeparam>
+        </member>
+        <member name="P:Songhay.Models.PackedResource`1.XamlString">
+            <summary>
+            Gets or sets the XAML string.
+            </summary>
+            <value>The XAML string.</value>
+        </member>
+        <member name="P:Songhay.Models.PackedResource`1.XamlObject">
+            <summary>
+            Gets or sets the XAML object.
+            </summary>
+            <value>The XAML object.</value>
+        </member>
+        <member name="T:Songhay.Models.RestApiMetadata">
+            <summary>
+            REST API Metadata
+            </summary>
+        </member>
+        <member name="P:Songhay.Models.RestApiMetadata.ApiBase">
+            <summary>
+            Gets or sets the API base.
+            </summary>
+            <value>
+            The API base.
+            </value>
+        </member>
+        <member name="P:Songhay.Models.RestApiMetadata.ApiKey">
+            <summary>
+            Gets or sets the API key.
+            </summary>
+            <value>
+            The API key.
+            </value>
+        </member>
+        <member name="P:Songhay.Models.RestApiMetadata.ClaimsSet">
+            <summary>
+            Gets or sets the claims set.
+            </summary>
+            <value>
+            The claims set.
+            </value>
+        </member>
+        <member name="P:Songhay.Models.RestApiMetadata.UriTemplates">
+            <summary>
+            Gets or sets the URI templates.
+            </summary>
+            <value>
+            The URI templates.
+            </value>
+        </member>
+        <member name="M:Songhay.Models.RestApiMetadata.ToString">
+            <summary>
+            Converts this instance into a <see cref="T:System.String"/> representation.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Songhay.Models.RestPagingMetadata">
+            <summary>
+            REST Paging Metadata
+            </summary>
+        </member>
+        <member name="P:Songhay.Models.RestPagingMetadata.ResultSetSize">
+            <summary>
+            Gets or sets the size of the result set.
+            </summary>
+            <value>
+            The size of the result set.
+            </value>
+        </member>
+        <member name="P:Songhay.Models.RestPagingMetadata.TotalSetSize">
+            <summary>
+            Gets or sets the total size of the set.
+            </summary>
+            <value>
+            The total size of the set.
+            </value>
+        </member>
+        <member name="P:Songhay.Models.RestPagingMetadata.StartPosition">
+            <summary>
+            Gets or sets the start position.
+            </summary>
+            <value>
+            The start position.
+            </value>
+        </member>
+        <member name="P:Songhay.Models.RestPagingMetadata.EndPosition">
+            <summary>
+            Gets or sets the end position.
+            </summary>
+            <value>
+            The end position.
+            </value>
+        </member>
+        <member name="P:Songhay.Models.RestPagingMetadata.FromDate">
+            <summary>
+            Gets or sets from date.
+            </summary>
+            <value>
+            From date.
+            </value>
+        </member>
+        <member name="P:Songhay.Models.RestPagingMetadata.ToDate">
+            <summary>
+            Gets or sets to date.
+            </summary>
+            <value>
+            To date.
+            </value>
+        </member>
+        <member name="P:Songhay.Models.RestPagingMetadata.NextUri">
+            <summary>
+            Gets or sets the next URI.
+            </summary>
+            <value>
+            The next URI.
+            </value>
+        </member>
+        <member name="P:Songhay.Models.RestPagingMetadata.PreviousUri">
+            <summary>
+            Gets or sets the previous URI.
+            </summary>
+            <value>
+            The previous URI.
+            </value>
+        </member>
+        <member name="M:Songhay.Models.RestPagingMetadata.ToShallowCopy">
+            <summary>
+            Returns the shallow copy from <see cref="M:System.Object.MemberwiseClone"/>.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Songhay.Models.RestPagingMetadata.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+            <returns>
+            A <see cref="T:System.String" /> that represents this instance.
+            </returns>
+        </member>
+        <member name="T:Songhay.Models.SystemErrorCodes">
+            <summary>
+            Defines the error codes of Windows
+            </summary>
+            <remarks>
+            See MSDN: https://msdn.microsoft.com/en-us/library/ms681382.aspx
+            </remarks>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_ACCESS_DENIED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_ADAP_HDW_ERR">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_ALREADY_ASSIGNED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_ALREADY_EXISTS">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_ARENA_TRASHED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_ATOMIC_LOCKS_NOT_SUPPORTED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_AUTODATASEG_EXCEEDS_64k">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_BAD_ARGUMENTS">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_BAD_COMMAND">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_BAD_DEV_TYPE">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_BAD_DRIVER_LEVEL">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_BAD_ENVIRONMENT">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_BAD_EXE_FORMAT">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_BAD_FILE_TYPE">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_BAD_FORMAT">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_BAD_LENGTH">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_BAD_NET_NAME">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_BAD_NET_RESP">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_BAD_NETPATH">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_BAD_PATHNAME">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_BAD_PIPE">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_BAD_REM_ADAP">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_BAD_THREADID_ADDR">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_BAD_UNIT">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_BROKEN_PIPE">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_BUFFER_OVERFLOW">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_BUSY_DRIVE">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_BUSY">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_CALL_NOT_IMPLEMENTED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_CANCEL_VIOLATION">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_CANNOT_COPY">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_CANNOT_MAKE">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_CHECKOUT_REQUIRED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_CHILD_NOT_COMPLETE">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_CRC">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_CURRENT_DIRECTORY">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_DELETE_PENDING">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_DEV_NOT_EXIST">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_DIR_NOT_EMPTY">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_DIR_NOT_ROOT">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_DIRECT_ACCESS_HANDLE">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_DIRECTORY">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_DISCARDED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_DISK_CHANGE">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_DISK_FULL">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_DISK_TOO_FRAGMENTED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_DRIVE_LOCKED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_DUP_NAME">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_DYNLINK_FROM_INVALID_RING">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_EA_FILE_CORRUPT">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_EA_LIST_INCONSISTENT">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_EA_TABLE_FULL">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_EAS_DIDNT_FIT">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_EAS_NOT_SUPPORTED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_ENVVAR_NOT_FOUND">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_EXCL_SEM_ALREADY_OWNED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_EXE_CANNOT_MODIFY_SIGNED_BINARY">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_EXE_CANNOT_MODIFY_STRONG_SIGNED_BINARY">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_EXE_MACHINE_TYPE_MISMATCH">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_EXE_MARKED_INVALID">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_FAIL_I24">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_FAIL_NOACTION_REBOOT">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_FAIL_RESTART">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_FAIL_SHUTDOWN">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_FILE_CHECKED_OUT">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_FILE_EXISTS">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_FILE_NOT_FOUND">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_FILE_TOO_LARGE">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_FILENAME_EXCED_RANGE">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_FORMS_AUTH_REQUIRED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_GEN_FAILURE">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_HANDLE_DISK_FULL">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_HANDLE_EOF">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_IMAGE_SUBSYSTEM_NOT_PRESENT">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INCOMPATIBLE_WITH_GLOBAL_SHORT_NAME_REGISTRY_SETTING">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INFLOOP_IN_RELOC_CHAIN">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INSUFFICIENT_BUFFER">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INVALID_ACCESS">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INVALID_ADDRESS">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INVALID_AT_INTERRUPT_TIME">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INVALID_BLOCK">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INVALID_CATEGORY">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INVALID_DATA">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INVALID_DRIVE">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INVALID_EA_HANDLE">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INVALID_EA_NAME">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INVALID_EVENT_COUNT">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INVALID_EXE_SIGNATURE">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INVALID_FLAG_NUMBER">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INVALID_FUNCTION">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INVALID_HANDLE">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INVALID_LEVEL">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INVALID_LIST_FORMAT">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INVALID_LOCK_RANGE">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INVALID_MINALLOCSIZE">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INVALID_MODULETYPE">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INVALID_NAME">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INVALID_OPLOCK_PROTOCOL">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INVALID_ORDINAL">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INVALID_PARAMETER">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INVALID_PASSWORD">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INVALID_SEGDPL">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INVALID_SEGMENT_NUMBER">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INVALID_SIGNAL_NUMBER">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INVALID_STACKSEG">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INVALID_STARTING_CODESEG">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INVALID_TARGET_HANDLE">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_INVALID_VERIFY_SWITCH">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_IOPL_NOT_ENABLED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_IS_JOIN_PATH">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_IS_JOIN_TARGET">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_IS_JOINED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_IS_SUBST_PATH">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_IS_SUBST_TARGET">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_IS_SUBSTED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_ITERATED_DATA_EXCEEDS_64k">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_JOIN_TO_JOIN">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_JOIN_TO_SUBST">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_LABEL_TOO_LONG">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_LOCK_FAILED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_LOCK_VIOLATION">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_LOCKED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_MAX_SESSIONS_REACHED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_MAX_THRDS_REACHED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_META_EXPANSION_TOO_LONG">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_MOD_NOT_FOUND">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_MORE_DATA">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_MR_MID_NOT_FOUND">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_NEGATIVE_SEEK">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_NESTING_NOT_ALLOWED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_NET_WRITE_FAULT">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_NETNAME_DELETED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_NETWORK_ACCESS_DENIED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_NETWORK_BUSY">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_NO_DATA">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_NO_MORE_FILES">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_NO_MORE_ITEMS">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_NO_MORE_SEARCH_HANDLES">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_NO_PROC_SLOTS">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_NO_SIGNAL_SENT">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_NO_SPOOL_SPACE">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_NO_VOLUME_LABEL">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_NOT_DOS_DISK">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_NOT_ENOUGH_MEMORY">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_NOT_JOINED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_NOT_LOCKED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_NOT_OWNER">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_NOT_READY">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_NOT_SAME_DEVICE">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_NOT_SUBSTED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_NOT_SUPPORTED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_NOTIFICATION_GUID_ALREADY_DEFINED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_OPEN_FAILED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_OPLOCK_NOT_GRANTED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_OUT_OF_PAPER">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_OUT_OF_STRUCTURES">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_OUTOFMEMORY">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_PARTIAL_COPY">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_PATH_BUSY">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_PATH_NOT_FOUND">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_PIPE_BUSY">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_PIPE_LOCAL">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_PIPE_NOT_CONNECTED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_PRINT_CANCELLED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_PRINTQ_FULL">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_PROC_NOT_FOUND">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_PROCESS_MODE_ALREADY_BACKGROUND">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_PROCESS_MODE_NOT_BACKGROUND">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_READ_FAULT">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_REDIR_PAUSED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_RELOC_CHAIN_XEEDS_SEGLIM">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_REM_NOT_LIST">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_REQ_NOT_ACCEP">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_RING2_STACK_IN_USE">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_RING2SEG_MUST_BE_MOVABLE">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_SAME_DRIVE">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_SCOPE_NOT_FOUND">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_SECTOR_NOT_FOUND">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_SECURITY_STREAM_IS_INCONSISTENT">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_SEEK_ON_DEVICE">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_SEEK">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_SEM_IS_SET">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_SEM_NOT_FOUND">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_SEM_OWNER_DIED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_SEM_TIMEOUT">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_SEM_USER_LIMIT">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_SHARING_BUFFER_EXCEEDED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_SHARING_PAUSED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_SHARING_VIOLATION">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_SHORT_NAMES_NOT_ENABLED_ON_VOLUME">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_SIGNAL_PENDING">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_SIGNAL_REFUSED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_SUBST_TO_JOIN">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_SUBST_TO_SUBST">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_SUCCESS">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_SYSTEM_TRACE">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_THREAD_1_INACTIVE">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_THREAD_MODE_ALREADY_BACKGROUND">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_THREAD_MODE_NOT_BACKGROUND">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_TOO_MANY_CMDS">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_TOO_MANY_MODULES">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_TOO_MANY_MUXWAITERS">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_TOO_MANY_NAMES">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_TOO_MANY_OPEN_FILES">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_TOO_MANY_POSTS">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_TOO_MANY_SEM_REQUESTS">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_TOO_MANY_SEMAPHORES">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_TOO_MANY_SESS">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_TOO_MANY_TCBS">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_UNEXP_NET_ERR">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_VC_DISCONNECTED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_VIRUS_DELETED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_VIRUS_INFECTED">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_WAIT_NO_CHILDREN">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_WRITE_FAULT">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_WRITE_PROTECT">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.ERROR_WRONG_DISK">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="F:Songhay.Models.SystemErrorCodes.WAIT_TIMEOUT">
+            <summary>
+            System error code
+            </summary>
+        </member>
+        <member name="M:Songhay.Models.SystemErrorCodes.GetErrorMessage(System.Int32)">
+            <summary>
+            Gets the error message.
+            </summary>
+            <param name="ERR">The error.</param>
+        </member>
+        <member name="T:Songhay.Models.SystemVariable">
+            <summary>
+            Defines the Data for displaying meta-data about variables.
+            </summary>
+        </member>
+        <member name="P:Songhay.Models.SystemVariable.VariableName">
+            <summary>
+            Gets or sets the name of the variable.
+            </summary>
+            <value>The name of the variable.</value>
+        </member>
+        <member name="P:Songhay.Models.SystemVariable.VariableDescription">
+            <summary>
+            Gets or sets the variable description.
+            </summary>
+            <value>The variable description.</value>
+        </member>
+        <member name="P:Songhay.Models.SystemVariable.VariableValue">
+            <summary>
+            Gets or sets the variable value.
+            </summary>
+            <value>The variable value.</value>
+        </member>
+        <member name="T:Songhay.Models.SystemVariable`1">
+            <summary>
+            Defines the Data for displaying meta-data about variables.
+            </summary>
+        </member>
+        <member name="P:Songhay.Models.SystemVariable`1.VariableName">
+            <summary>
+            Gets or sets the name of the variable.
+            </summary>
+            <value>The name of the variable.</value>
+        </member>
+        <member name="P:Songhay.Models.SystemVariable`1.VariableDescription">
+            <summary>
+            Gets or sets the variable description.
+            </summary>
+            <value>The variable description.</value>
+        </member>
+        <member name="P:Songhay.Models.SystemVariable`1.VariableValue">
+            <summary>
+            Gets or sets the variable value.
+            </summary>
+            <value>The variable value.</value>
+        </member>
+        <member name="T:Songhay.Models.XhtmlDocument">
+            <summary>
+            Defines an XHTML Document.
+            </summary>
+        </member>
+        <member name="P:Songhay.Models.XhtmlDocument.Location">
+            <summary>
+            Gets or sets the location.
+            </summary>
+            <value>The location.</value>
+        </member>
+        <member name="P:Songhay.Models.XhtmlDocument.Header">
+            <summary>
+            Gets or sets the header.
+            </summary>
+            <value>The header.</value>
+        </member>
+        <member name="P:Songhay.Models.XhtmlDocument.Title">
+            <summary>
+            Gets or sets the title.
+            </summary>
+            <value>The title.</value>
+        </member>
+        <member name="T:Songhay.Models.XhtmlDocuments">
+            <summary>
+            XHTML Documents
+            </summary>
+        </member>
+        <member name="P:Songhay.Models.XhtmlDocuments.Documents">
+            <summary>
+            Gets or sets the documents.
+            </summary>
+            <value>The documents.</value>
+        </member>
+        <member name="P:Songhay.Models.XhtmlDocuments.Title">
+            <summary>
+            Gets or sets the title.
+            </summary>
+            <value>The title.</value>
+        </member>
+        <member name="T:Songhay.Models.XhtmlImage">
+            <summary>
+            Defines an image used by XHTML(5) clients
+            </summary>
+        </member>
+        <member name="P:Songhay.Models.XhtmlImage.Location">
+            <summary>
+            Gets or sets the location.
+            </summary>
+            <value>
+            The location.
+            </value>
+        </member>
+        <member name="P:Songhay.Models.XhtmlImage.Height">
+            <summary>
+            Gets or sets the height.
+            </summary>
+            <value>
+            The height.
+            </value>
+        </member>
+        <member name="P:Songhay.Models.XhtmlImage.HeightInPixels">
+            <summary>
+            Gets or sets the height in pixels.
+            </summary>
+            <value>
+            The height in pixels.
+            </value>
+        </member>
+        <member name="P:Songhay.Models.XhtmlImage.Width">
+            <summary>
+            Gets or sets the width.
+            </summary>
+            <value>
+            The width.
+            </value>
+        </member>
+        <member name="P:Songhay.Models.XhtmlImage.WidthInPixels">
+            <summary>
+            Gets or sets the width in pixels.
+            </summary>
+            <value>
+            The width in pixels.
+            </value>
+        </member>
+        <member name="T:Songhay.OpcReferencedTypeStrategy">
+            <summary>
+            Names the strategies to use
+            to derive the Referenced Type
+            in a Pack URI.
+            </summary>
+        </member>
+        <member name="F:Songhay.OpcReferencedTypeStrategy.FromAssemblyFileName">
+            <summary>
+            Strategy Name
+            </summary>
+        </member>
+        <member name="F:Songhay.OpcReferencedTypeStrategy.FromTypeFullName">
+            <summary>
+            Strategy Name
+            </summary>
+        </member>
+        <member name="T:Songhay.OpcUtility">
+            <summary>
+            Static members for Open Packaging Conventions.
+            </summary>
+            <remarks>
+                See http://blogs.msdn.com/b/opc/.
+            </remarks>
+        </member>
+        <member name="M:Songhay.OpcUtility.GetPackUriFromType(System.Type,Songhay.OpcReferencedTypeStrategy)">
+            <summary>
+            Gets the Pack URI
+            from the specified <see cref="T:System.Type"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <param name="strategy">The strategy.</param>
+            <remarks>
+                The Pack URI we have is of the form:
+            
+                <c>pack://application:,,,/{ReferencedAssembly};component/Subfolder/{TypeName}.{Extension}</c>
+            
+            </remarks>
+        </member>
+        <member name="M:Songhay.OpcUtility.GetPackUriFromType(System.Type,Songhay.OpcReferencedTypeStrategy,System.String)">
+            <summary>
+            Gets the Pack URI
+            from the specified <see cref="T:System.Type"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <param name="strategy">The strategy.</param>
+            <param name="extension">The extension (<c>xaml</c> by default).</param>
+            <remarks>
+                The Pack URI we have is of the form:
+            
+                <c>pack://application:,,,/{ReferencedAssembly};component/Subfolder/{TypeName}.{Extension}</c>
+            
+            </remarks>
+        </member>
+        <member name="M:Songhay.OpcUtility.GetReferencedAssembly(System.Type,Songhay.OpcReferencedTypeStrategy)">
+            <summary>
+            Gets the referenced assembly.
+            </summary>
+            <param name="type">The type.</param>
+            <param name="strategy">The strategy.</param>
+        </member>
+        <member name="M:Songhay.OpcUtility.GetRelativePackUri(System.String)">
+            <summary>
+            Gets the relative pack URI.
+            </summary>
+            <param name="absoluteUri">The absolute URI.</param>
+        </member>
+        <member name="M:Songhay.OpcUtility.IsPackUriValid(System.String)">
+            <summary>
+            Returns <c>true</c> when the pack URI is valid.
+            </summary>
+            <param name="uri">The URI.</param>
+            <remarks>
+            For more detail, see:
+                “Pack URIs in WPF” (http://msdn.microsoft.com/en-us/library/aa970069.aspx)
+                “The "pack" URI Scheme” (http://tools.ietf.org/html/draft-shur-pack-uri-scheme-05)
+            </remarks>
+        </member>
+        <member name="T:Songhay.Xml.HtmlUtility">
+            <summary>
+            Static members for HTML text processing.
+            </summary>
+        </member>
+        <member name="M:Songhay.Xml.HtmlUtility.ConvertToHtml(System.String)">
+            <summary>
+            Returns a string of marked up text compatible
+            with browsers that do not support XHTML
+            (loosely towards HTML 4.x W3C standard).
+            </summary>
+            <param name="inputValue">
+            A string of marked up text.
+            </param>
+        </member>
+        <member name="M:Songhay.Xml.HtmlUtility.ConvertToXml(System.String)">
+            <summary>
+            Attempts to convert HTML to well-formed XML.
+            </summary>
+            <param name="html">
+            An HTML 
+            <see cref="T:System.String"/>.
+            </param>
+            <returns><see cref="T:System.String"/></returns>
+            <remarks>This task is simpler than converting to XHTML.</remarks>
+        </member>
+        <member name="M:Songhay.Xml.HtmlUtility.FormatXhtmlElements(System.String)">
+            <summary>
+            Returns an XHTML string derived from a .NET procedure.
+            </summary>
+            <param name="xmlFragment">
+            A well-formed <see cref="T:System.String"/> of XML.
+            </param>
+            <remarks>
+            This member addresses certain quirks
+            that well-formed XML cannot have in a contemporary Web browser.
+            </remarks>
+        </member>
+        <member name="M:Songhay.Xml.HtmlUtility.GetInnerXml(System.String,System.String)">
+            <summary>
+            Returns the …inner… fragment of XML
+            from the specified unique element.
+            </summary>
+            <param name="xmlFragment">
+            A well-formed <see cref="T:System.String"/> of XML.
+            </param>
+            <param name="elementName">
+            The local name of the element in the XML string.
+            </param>
+        </member>
+        <member name="M:Songhay.Xml.HtmlUtility.PublicDocType">
+            <summary>
+            Emits a public <c>DOCTYPE</c> tag.
+            </summary>
+            <returns>
+            A public <c>DOCTYPE</c> tag for XHTML 1.0 transitional.
+            </returns>
+        </member>
+        <member name="M:Songhay.Xml.HtmlUtility.PublicDocType(System.String,System.String,System.String)">
+            <summary>
+            Emits a public <c>DOCTYPE</c> tag.
+            </summary>
+            <param name="rootElement">
+            The root element of the DTD.
+            </param>
+            <param name="publicIdentifier">
+            The public identifier of the DTD.
+            </param>
+            <param name="resourceReference">
+            The link to reference material of the DTD.
+            </param>
+            <returns>
+            A public <c>DOCTYPE</c> tag.
+            </returns>
+        </member>
+        <member name="T:Songhay.Xml.LatinGlyphs">
+            <summary>
+            Condenses and expands Latin glyphs.
+            </summary>
+        </member>
+        <member name="M:Songhay.Xml.LatinGlyphs.Condense(System.String)">
+            <summary>
+            Condenses selected decimal entities
+            into their Latin glyph equivalent.
+            </summary>
+            <param name="entityText">
+            The <see cref="T:System.String"/>
+            containing the decimal entities.
+            </param>
+            <returns>
+            Returns a <see cref="T:System.String"/>
+            with Latin glyphs.
+            </returns>
+        </member>
+        <member name="M:Songhay.Xml.LatinGlyphs.Expand(System.String)">
+            <summary>
+            Expands selected Latin glyphs
+            into their decimal entity equivalent.
+            </summary>
+            <param name="glyphText">
+            The <see cref="T:System.String"/>
+            containing the glyphs.
+            </param>
+            <returns>
+            Returns a <see cref="T:System.String"/>
+            with decimal entities.
+            </returns>
+        </member>
+        <member name="T:Songhay.Xml.XmlUtility">
+            <summary>
+            Static helper members for XML-related routines.
+            </summary>
+            <remarks>
+            These definitions are biased toward
+            emitting <see cref="T:System.Xml.XPath.XPathDocument"/> sets.
+            However, many accept any input implementing the
+            <see cref="T:System.Xml.XPath.IXPathNavigable"/> interface.
+            </remarks>
+            <summary>
+            Static helper members for XML-related routines.
+            </summary>
+            <remarks>
+            These definitions are biased toward
+            emitting <see cref="T:System.Xml.XPath.XPathDocument"/> sets.
+            However, many accept any input implementing the
+            <see cref="T:System.Xml.XPath.IXPathNavigable"/> interface.
+            </remarks>
+            <summary>
+            Static helper members for XML-related routines.
+            </summary>
+            <remarks>
+            These definitions are biased toward
+            emitting <see cref="T:System.Xml.XPath.XPathDocument"/> sets.
+            However, many accept any input implementing the
+            <see cref="T:System.Xml.XPath.IXPathNavigable"/> interface.
+            </remarks>
+            <summary>
+            Static helper members for XML-related routines.
+            </summary>
+            <remarks>
+            These definitions are biased toward
+            emitting <see cref="T:System.Xml.XPath.XPathDocument"/> sets.
+            However, many accept any input implementing the
+            <see cref="T:System.Xml.XPath.IXPathNavigable"/> interface.
+            </remarks>
+            <summary>
+            Static helper members for XML-related routines.
+            </summary>
+            <remarks>
+            These definitions are biased toward
+            emitting <see cref="T:System.Xml.XPath.XPathDocument"/> sets.
+            However, many accept any input implementing the
+            <see cref="T:System.Xml.XPath.IXPathNavigable"/> interface.
+            </remarks>
+            <summary>
+            Static helper members for XML-related routines.
+            </summary>
+            <remarks>
+            These definitions are biased toward
+            emitting <see cref="T:System.Xml.XPath.XPathDocument"/> sets.
+            However, many accept any input implementing the
+            <see cref="T:System.Xml.XPath.IXPathNavigable"/> interface.
+            </remarks>
+            <summary>
+            Static helper members for XML-related routines.
+            </summary>
+            <remarks>
+            These definitions are biased toward
+            emitting <see cref="T:System.Xml.XPath.XPathDocument"/> sets.
+            However, many accept any input implementing the
+            <see cref="T:System.Xml.XPath.IXPathNavigable"/> interface.
+            </remarks>
+            <summary>
+            Static helper members for XML-related routines.
+            </summary>
+            <remarks>
+            These definitions are biased toward
+            emitting <see cref="T:System.Xml.XPath.XPathDocument"/> sets.
+            However, many accept any input implementing the
+            <see cref="T:System.Xml.XPath.IXPathNavigable"/> interface.
+            </remarks>
+            <summary>
+            Static helper members for XML-related routines.
+            </summary>
+            <remarks>
+            These definitions are biased toward
+            emitting <see cref="T:System.Xml.XPath.XPathDocument"/> sets.
+            However, many accept any input implementing the
+            <see cref="T:System.Xml.XPath.IXPathNavigable"/> interface.
+            </remarks>
+            <summary>
+            Static helper members for XML-related routines.
+            </summary>
+            <remarks>
+            These definitions are biased toward
+            emitting <see cref="T:System.Xml.XPath.XPathDocument"/> sets.
+            However, many accept any input implementing the
+            <see cref="T:System.Xml.XPath.IXPathNavigable"/> interface.
+            </remarks>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.CombineNavigableDocuments(System.Xml.XPath.IXPathNavigable,System.Xml.XPath.IXPathNavigable)">
+            <summary>
+            Combines two <see cref="T:System.Xml.XPath.IXPathNavigable"/> documents.
+            </summary>
+            <param name="parentDocument">The <see cref="T:System.Xml.XPath.IXPathNavigable"/> “hosting” document.</param>
+            <param name="childDocument">The <see cref="T:System.Xml.XPath.IXPathNavigable"/> child document.</param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.CombineNavigableDocuments(System.Xml.XPath.IXPathNavigable,System.Xml.XPath.IXPathNavigable,System.String)">
+            <summary>
+            Combines two <see cref="T:System.Xml.XPath.IXPathNavigable"/> documents.
+            </summary>
+            <param name="parentDocument">The <see cref="T:System.Xml.XPath.IXPathNavigable"/> “hosting” document.</param>
+            <param name="childDocument">The <see cref="T:System.Xml.XPath.IXPathNavigable"/> child document.</param>
+            <param name="setQuery">The XPath query to the child document loaction in the “hosting” document. </param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.ExpandSpecialChars(System.String)">
+            <summary>
+            Expands selected characters
+            in the specified <see cref="T:System.String"/>
+            into the standard XML entities.
+            </summary>
+            <param name="rawValue">The raw <see cref="T:System.String"/></param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetAttributeValue(System.Xml.XPath.IXPathNavigable,System.String)">
+            <summary>
+            An alternative to <see cref="M:System.Xml.XPath.XPathNavigator.GetAttribute(System.String,System.String)"/>.
+            </summary>
+            <param name="navigableSet">
+            The source <see cref="T:System.Xml.XPath.IXPathNavigable"/> set.
+            </param>
+            <param name="setQuery">
+            The value to be compiled
+            into an <see cref="T:System.Xml.XPath.XPathExpression"/>.
+            </param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetAttributeValue(System.Xml.XPath.IXPathNavigable,System.String,System.Xml.XmlNamespaceManager)">
+            <summary>
+            An alternative to <see cref="M:System.Xml.XPath.XPathNavigator.GetAttribute(System.String,System.String)"/>.
+            </summary>
+            <param name="navigableSet">
+            The source <see cref="T:System.Xml.XPath.IXPathNavigable"/> set.
+            </param>
+            <param name="setQuery">
+            The value to be compiled
+            into an <see cref="T:System.Xml.XPath.XPathExpression"/>.
+            </param>
+            <param name="nsMan">
+            The <see cref="T:System.Xml.XmlNamespaceManager"/>
+            to use to resolve prefixes.
+            </param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetInstance``1(System.String)">
+            <summary>
+            Deserializes based on the specified XML file.
+            </summary>
+            <typeparam name="T">
+            The specified type to deserialize.
+            </typeparam>
+            <param name="xmlPath">the XML file path</param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetInstanceRaw``1(System.String)">
+            <summary>
+            Deserializes based on the specified raw XML.
+            </summary>
+            <typeparam name="T">
+            The specified type to deserialize.
+            </typeparam>
+            <param name="xmlFragment">the raw XML</param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetInternalMessage(System.String)">
+            <summary>
+            Returns an XML <see cref="T:System.String"/>
+            based on the specified header and lines.
+            </summary>
+            <param name="messageHeader">Message header</param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetInternalMessage(System.String,System.String[])">
+            <summary>
+            Returns an XML <see cref="T:System.String"/>
+            based on the specified header and lines.
+            </summary>
+            <param name="messageHeader">Message header</param>
+            <param name="messageLines">Message lines</param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetInternalMessage(System.String,System.Collections.ObjectModel.ReadOnlyCollection{System.String})">
+            <summary>
+            Returns an XML <see cref="T:System.String"/>
+            based on the specified header and lines.
+            </summary>
+            <param name="messageHeader">Message header</param>
+            <param name="messageLines">Message lines</param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetInternalMessage(System.String,System.String,System.String[])">
+            <summary>
+            Returns an XML <see cref="T:System.String"/>
+            based on the specified header and lines.
+            </summary>
+            <param name="messageHeader">Message header</param>
+            <param name="messageCode">Message code for errors, exceptions or faults</param>
+            <param name="messageLines">Message lines</param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetInternalMessage(System.String,System.String,System.Collections.ObjectModel.ReadOnlyCollection{System.String})">
+            <summary>
+            Returns an XML <see cref="T:System.String"/>
+            based on the specified header and lines.
+            </summary>
+            <param name="messageHeader">Message header</param>
+            <param name="messageCode">Message code for errors, exceptions or faults</param>
+            <param name="messageLines">Message lines</param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetInternalMessage(System.String,System.String[],System.Xml.XmlWriter)">
+            <summary>
+            Write a message to the specified
+            </summary>
+            <param name="messageHeader">Message header</param>
+            <param name="messageLines">Message lines</param>
+            <param name="xmlDataWriter">The <see cref="T:System.Xml.XmlWriter"/></param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetInternalMessage(System.String,System.String,System.String[],System.Xml.XmlWriter)">
+            <summary>
+            Write a message to the specified
+            </summary>
+            <param name="messageHeader">Message header</param>
+            <param name="messageCode">Message code for errors, exceptions or faults</param>
+            <param name="messageLines">Message lines</param>
+            <param name="xmlDataWriter">The <see cref="T:System.Xml.XmlTextWriter"/></param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetInternalMessage(System.String,System.String[],System.Xml.XmlWriter,System.Boolean)">
+            <summary>
+            Write a message to the specified
+            </summary>
+            <param name="messageHeader">Message header</param>
+            <param name="messageLines">Message lines</param>
+            <param name="xmlDataWriter">The <see cref="T:System.Xml.XmlWriter"/></param>
+            <param name="isFragment">When <c>false</c> a new document is started.</param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetInternalMessage(System.String,System.String,System.String[],System.Xml.XmlWriter,System.Boolean)">
+            <summary>
+            Write a message to the specified
+            </summary>
+            <param name="messageHeader">Message header</param>
+            <param name="messageCode">Message code for errors, exceptions or faults</param>
+            <param name="messageLines">Message lines</param>
+            <param name="xmlDataWriter">The <see cref="T:System.Xml.XmlWriter"/></param>
+            <param name="isFragment">When <c>false</c> a new document is started.</param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetInternalMessageDocument(System.String,System.String[])">
+            <summary>
+            Returns an <see cref="T:System.Xml.XPath.XPathDocument"/>
+            based on the specified header and lines.
+            </summary>
+            <param name="messageHeader">Message header</param>
+            <param name="messageLines">Message lines</param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetInternalMessageDocument(System.String,System.String,System.String[])">
+            <summary>
+            Returns an <see cref="T:System.Xml.XPath.XPathDocument"/>
+            based on the specified header and lines.
+            </summary>
+            <param name="messageHeader">Message header</param>
+            <param name="messageCode">Message code for errors, exceptions or faults</param>
+            <param name="messageLines">Message lines</param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetNamespaceManager(System.Xml.XPath.IXPathNavigable)">
+            <summary>
+            Returns a <see cref="T:System.Xml.XmlNamespaceManager"/>
+            with respect to the document element of the specified
+            <see cref="T:System.Xml.XPath.IXPathNavigable"/> set.
+            </summary>
+            <param name="navigableSet">
+            The <see cref="T:System.Xml.XPath.IXPathNavigable"/> set.
+            </param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetNavigableDocument(System.String)">
+            <summary>
+            Returns an <see cref="T:System.Xml.XPath.XPathDocument"/>
+            based on the specified <see cref="T:System.String"/>.
+            </summary>
+            <param name="xmlFragment">
+            A well-formed XML <see cref="T:System.String"/>.
+            </param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetNavigableDocument(System.Xml.XPath.IXPathNavigable)">
+            <summary>
+            Returns an <see cref="T:System.Xml.XPath.XPathDocument"/>
+            based on the specified <see cref="T:System.Xml.XmlNode"/>.
+            </summary>
+            <param name="navigableSet">
+            The source <see cref="T:System.Xml.XPath.IXPathNavigable"/> set.
+            </param>
+            <remarks>
+            Use this member to convert <see cref="T:System.Xml.XmlDocument"/> sets.
+            </remarks>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetNavigableDocument(System.IO.Stream)">
+            <summary>
+            Returns an <see cref="T:System.Xml.XPath.XPathDocument"/>
+            based on the specified <see cref="T:System.IO.Stream"/>.
+            </summary>
+            <param name="stream">The stream.</param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetNavigableNode(System.Xml.XPath.IXPathNavigable,System.String)">
+            <summary>
+            Returns an <see cref="T:System.Xml.XPath.XPathNavigator"/>
+            based on the setQuery Expression toward the source document.
+            </summary>
+            <param name="navigableSet">
+            The source <see cref="T:System.Xml.XPath.IXPathNavigable"/> set.
+            </param>
+            <param name="setQuery">
+            The value to be compiled
+            into an <see cref="T:System.Xml.XPath.XPathExpression"/>.
+            </param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetNavigableNode(System.Xml.XPath.IXPathNavigable,System.String,System.Xml.XmlNamespaceManager)">
+            <summary>
+            Returns an <see cref="T:System.Xml.XPath.XPathNavigator"/>
+            based on the setQuery Expression toward the source document.
+            </summary>
+            <param name="navigableSet">
+            The source <see cref="T:System.Xml.XPath.IXPathNavigable"/> set.
+            </param>
+            <param name="setQuery">
+            The value to be compiled
+            into an <see cref="T:System.Xml.XPath.XPathExpression"/>.
+            </param>
+            <param name="nsMan">
+            The <see cref="T:System.Xml.XmlNamespaceManager"/>
+            to use to resolve prefixes.
+            </param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetNavigableNodes(System.Xml.XPath.IXPathNavigable,System.String)">
+            <summary>
+            Returns an <see cref="T:System.Xml.XPath.XPathNodeIterator"/>
+            based on the setQuery Expression toward the source document.
+            </summary>
+            <param name="navigableSet">
+            The source <see cref="T:System.Xml.XPath.IXPathNavigable"/> set.
+            </param>
+            <param name="setQuery">
+            The value to be compiled
+            into an <see cref="T:System.Xml.XPath.XPathExpression"/>.
+            </param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetNavigableNodes(System.Xml.XPath.IXPathNavigable,System.String,System.Xml.XmlNamespaceManager)">
+            <summary>
+            Returns an <see cref="T:System.Xml.XPath.XPathNodeIterator"/>
+            based on the setQuery Expression toward the source document.
+            </summary>
+            <param name="navigableSet">
+            The source <see cref="T:System.Xml.XPath.IXPathNavigable"/> set.
+            </param>
+            <param name="setQuery">
+            The value to be compiled
+            into an <see cref="T:System.Xml.XPath.XPathExpression"/>.
+            </param>
+            <param name="nsMan">
+            The <see cref="T:System.Xml.XmlNamespaceManager"/>
+            to use to resolve prefixes.
+            </param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetNodeValue(System.Xml.XPath.IXPathNavigable,System.String,System.Boolean)">
+            <summary>
+            Returns an object for parsing
+            and adding to a list of parameters for data access.
+            </summary>
+            <param name="node">The <see cref="T:System.Xml.XPath.IXPathNavigable"/></param>
+            <param name="setQuery">The <see cref="T:System.String"/></param>
+            <param name="throwException">When <code>true</code>, throw an exception for null nodes.</param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetNodeValue(System.Xml.XPath.IXPathNavigable,System.String,System.Boolean,System.Object)">
+            <summary>
+            Returns an object for parsing
+            and adding to a list of parameters for data access.
+            </summary>
+            <param name="node">The <see cref="T:System.Xml.XPath.IXPathNavigable"/></param>
+            <param name="setQuery">The <see cref="T:System.String"/></param>
+            <param name="throwException">When <code>true</code>, throw an exception for null nodes.</param>
+            <param name="defaultValue">Return the specified default value for “zero-length” text nodes</param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetNodeValue(System.Xml.XPath.IXPathNavigable,System.String,System.Boolean,System.Object,System.Xml.XmlNamespaceManager)">
+            <summary>
+            Returns an object for parsing
+            and adding to a list of parameters for data access.
+            </summary>
+            <param name="node">The <see cref="T:System.Xml.XPath.IXPathNavigable"/></param>
+            <param name="setQuery">The <see cref="T:System.String"/></param>
+            <param name="throwException">When <code>true</code>, throw an exception for null nodes.</param>
+            <param name="defaultValue">Return the specified default value for “zero-length” text nodes</param>
+            <param name="nsMan">
+            The <see cref="T:System.Xml.XmlNamespaceManager"/>
+            to use to resolve prefixes.
+            </param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetNodeValueAndParse``1(System.Xml.XPath.IXPathNavigable,System.String,System.Boolean,``0)">
+            <summary>
+            Returns an object for parsing
+            and adding to a list of parameters for data access.
+            </summary>
+            <param name="node">The <see cref="T:System.Xml.XPath.IXPathNavigable"/> to query.</param>
+            <param name="setQuery">The XPath <see cref="T:System.String"/>.</param>
+            <param name="throwException">When <code>true</code>, throw an exception for null nodes and nodes that do not parse into the specified type.</param>
+            <param name="defaultValue">Return a boxing <see cref="T:System.Object"/> for “zero-length” text nodes.</param>
+            <typeparam name="T">The type to parse from the node value.</typeparam>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetNodeValueAndParse``1(System.Xml.XPath.IXPathNavigable,System.String,System.Boolean,``0,System.Xml.XmlNamespaceManager)">
+            <summary>
+            Returns an object for parsing
+            and adding to a list of parameters for data access.
+            </summary>
+            <param name="node">The <see cref="T:System.Xml.XPath.IXPathNavigable"/> to query.</param>
+            <param name="setQuery">The XPath <see cref="T:System.String"/>.</param>
+            <param name="throwException">When <code>true</code>, throw an exception for null nodes and nodes that do not parse into the specified type.</param>
+            <param name="defaultValue">Return a boxing <see cref="T:System.Object"/> for “zero-length” text nodes.</param>
+            <param name="nsMan">
+            The <see cref="T:System.Xml.XmlNamespaceManager"/>
+            to use to resolve prefixes.
+            </param>
+            <typeparam name="T">The type to parse from the node value.</typeparam>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetText(System.IO.MemoryStream)">
+            <summary>
+            “Cleans” XML data returning
+            in a <see cref="T:System.IO.MemoryStream"/>.
+            </summary>
+            <param name="ramStream"><see cref="T:System.IO.MemoryStream"/></param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetXslResult(System.Xml.XPath.IXPathNavigable,System.Xml.XPath.IXPathNavigable)">
+            <summary>
+            Returns a <see cref="T:System.Xml.XPath.XPathDocument"/>
+            for the transformation of the XSLT document
+            and the XML document.
+            </summary>
+            <param name="xslSet">
+            The source <see cref="T:System.Xml.XPath.IXPathNavigable"/> XSL set.
+            </param>
+            <param name="navigableSet">
+            The source <see cref="T:System.Xml.XPath.IXPathNavigable"/> XML set.
+            </param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetXslResult(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.Xml.XPath.IXPathNavigable)">
+            <summary>
+            Returns a <see cref="T:System.Xml.XPath.XPathDocument"/>
+            for the transformation of the XSLT document
+            and the XML document.
+            </summary>
+            <param name="xslSet">
+            The source <see cref="T:System.Xml.XPath.IXPathNavigable"/> XSL set.
+            </param>
+            <param name="xslArgs">
+            The <see cref="T:System.Xml.Xsl.XsltArgumentList"/>.
+            </param>
+            <param name="navigableSet">
+            The source <see cref="T:System.Xml.XPath.IXPathNavigable"/> XML set.
+            </param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetXslString(System.Xml.XPath.IXPathNavigable,System.Xml.XPath.IXPathNavigable)">
+            <summary>
+            Returns a <see cref="T:System.String"/>
+            for the transformation of the XSLT document
+            and the XML document.
+            </summary>
+            <param name="xslSet">The source <see cref="T:System.Xml.XPath.IXPathNavigable"/> XSL set.</param>
+            <param name="navigableSet">The source <see cref="T:System.Xml.XPath.IXPathNavigable"/> XML set.</param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetNavigableDocument(System.Object)">
+            <summary>
+            Gets the navigable document.
+            </summary>
+            <param name="rss">The RSS.</param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetXslString(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.Xml.XPath.IXPathNavigable)">
+            <summary>
+            Returns a <see cref="T:System.String"/>
+            for the transformation of the XSLT document
+            and the XML document.
+            </summary>
+            <param name="xslSet">
+            The source <see cref="T:System.Xml.XPath.IXPathNavigable"/> XSL set.
+            </param>
+            <param name="xslArgs">
+            The <see cref="T:System.Xml.Xsl.XsltArgumentList"/>.
+            </param>
+            <param name="navigableSet">
+            The source <see cref="T:System.Xml.XPath.IXPathNavigable"/> XML set.
+            </param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetXslString(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltArgumentList,System.Xml.XPath.IXPathNavigable,System.Xml.XmlWriterSettings)">
+            <summary>
+            Returns a <see cref="T:System.String"/>
+            for the transformation of the XSLT document
+            and the XML document.
+            </summary>
+            <param name="xslSet">The source <see cref="T:System.Xml.XPath.IXPathNavigable"/> XSL set.</param>
+            <param name="xslArgs">The <see cref="T:System.Xml.Xsl.XsltArgumentList"/>.</param>
+            <param name="navigableSet">The source <see cref="T:System.Xml.XPath.IXPathNavigable"/> XML set.</param>
+            <param name="settings">The settings.</param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.InputAs``1(``0)">
+            <summary>
+            Returns an <see cref="T:System.Xml.XPath.XPathDocument"/>,
+            converted from the specified input.
+            </summary>
+            <typeparam name="TIn">The <see cref="T:System.Type"/> of the input.</typeparam>
+            <param name="input">The input.</param>
+            <returns>Returns an <see cref="T:System.Xml.XPath.XPathDocument"/>.</returns>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.IsNodeValue(System.Xml.XPath.IXPathNavigable,System.String,System.Boolean,System.String)">
+            <summary>
+            Returns true when the node has the specified value.
+            </summary>
+            <param name="node">The <see cref="T:System.Xml.XPath.IXPathNavigable"/></param>
+            <param name="setQuery">The query <see cref="T:System.String"/></param>
+            <param name="throwException">When <code>true</code>, throw an exception for null nodes.</param>
+            <param name="testValue">The specified value to test with the node value.</param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.IsNodeValue(System.Xml.XPath.IXPathNavigable,System.String,System.Boolean,System.String,System.StringComparison)">
+            <summary>
+            Returns true when the node has the specified value.
+            </summary>
+            <param name="node">The <see cref="T:System.Xml.XPath.IXPathNavigable"/></param>
+            <param name="setQuery">The query <see cref="T:System.String"/></param>
+            <param name="throwException">When <code>true</code>, throw an exception for null nodes.</param>
+            <param name="testValue">The specified value to test with the node value.</param>
+            <param name="comparisonType">The <see cref="T:System.StringComparison"/> type.</param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.IsNodeValue(System.Xml.XPath.IXPathNavigable,System.String,System.Boolean,System.String,System.Xml.XmlNamespaceManager)">
+            <summary>
+            Returns true when the node has the specified value.
+            </summary>
+            <param name="node">The <see cref="T:System.Xml.XPath.IXPathNavigable"/></param>
+            <param name="setQuery">The query <see cref="T:System.String"/></param>
+            <param name="throwException">When <code>true</code>, throw an exception for null nodes.</param>
+            <param name="testValue">The specified value to test with the node value.</param>
+            <param name="nsMan">
+            The <see cref="T:System.Xml.XmlNamespaceManager"/>
+            to use to resolve prefixes.
+            </param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.IsNodeValue(System.Xml.XPath.IXPathNavigable,System.String,System.Boolean,System.String,System.Xml.XmlNamespaceManager,System.StringComparison)">
+            <summary>
+            Returns true when the node has the specified value.
+            </summary>
+            <param name="node">The <see cref="T:System.Xml.XPath.IXPathNavigable"/></param>
+            <param name="setQuery">The query <see cref="T:System.String"/></param>
+            <param name="throwException">When <code>true</code>, throw an exception for null nodes.</param>
+            <param name="testValue">The specified value to test with the node value.</param>
+            <param name="nsMan">
+            The <see cref="T:System.Xml.XmlNamespaceManager"/>
+            to use to resolve prefixes.
+            </param>
+            <param name="comparisonType">The <see cref="T:System.StringComparison"/> type.</param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.IsNoNodeValue(System.Xml.XPath.IXPathNavigable,System.String,System.Boolean)">
+            <summary>
+            Returns true when the node has the value “no”.
+            </summary>
+            <param name="node">The <see cref="T:System.Xml.XPath.IXPathNavigable"/></param>
+            <param name="setQuery">The query <see cref="T:System.String"/></param>
+            <param name="throwException">When <code>true</code>, throw an exception for null nodes.</param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.IsYesNodeValue(System.Xml.XPath.IXPathNavigable,System.String,System.Boolean)">
+            <summary>
+            Returns true when the node has the value “yes”.
+            </summary>
+            <param name="node">The <see cref="T:System.Xml.XPath.IXPathNavigable"/></param>
+            <param name="setQuery">The query <see cref="T:System.String"/></param>
+            <param name="throwException">When <code>true</code>, throw an exception for null nodes.</param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.IsXml(System.String)">
+            <summary>
+            Returns <c>true</c> when the fragment is XML-like.
+            </summary>
+            <param name="fragment">The fragment to test.</param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.LoadXslTransform(System.String,System.String)">
+            <summary>
+            Returns a <see cref="T:System.String"/>
+            for the transformation of the XSLT file
+            and the XML file.
+            </summary>
+            <param name="xslPath">
+            outputPath to the XSLT file.
+            </param>
+            <param name="xmlPath">
+            outputPath to the XML file.
+            </param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.LoadXslTransform(System.String,System.String,System.String)">
+            <summary>
+            Returns a <see cref="T:System.String"/>
+            for the transformation of the XSLT file
+            and the XML file.
+            </summary>
+            <param name="xslPath">
+            outputPath to the XSLT file.
+            </param>
+            <param name="commandName">
+            The value for the <code>cmd</code>-parameter convention.
+            </param>
+            <param name="xmlFragment">
+            A well-formed XML <see cref="T:System.String"/>.
+            </param>
+            <remarks>
+            This convention is used in ASP.NET Web applications.
+            </remarks>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.LoadXslTransform(System.String,System.String,System.Xml.XPath.IXPathNavigable)">
+            <summary>
+            Returns a <see cref="T:System.String"/>
+            for the transformation of the XSLT file
+            and the XML file.
+            </summary>
+            <param name="xslPath">
+            outputPath to the XSLT file.
+            </param>
+            <param name="commandName">
+            The value for the <code>cmd</code>-parameter convention.
+            </param>
+            <param name="navigableSet">
+            The source <see cref="T:System.Xml.XPath.IXPathNavigable"/> set.
+            </param>
+            <remarks>
+            This convention is used in ASP.NET Web applications.
+            </remarks>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.LoadXslTransform(System.String,System.Xml.Xsl.XsltArgumentList,System.String)">
+            <summary>
+            Returns a <see cref="T:System.String"/>
+            for the transformation of the XSLT file
+            and the XML file.
+            </summary>
+            <param name="xslPath">
+            outputPath to the XSLT file.
+            </param>
+            <param name="xslArgs">
+            The <see cref="T:System.Xml.Xsl.XsltArgumentList"/>.
+            </param>
+            <param name="xmlPath">
+            outputPath to the XML file.
+            </param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.OutputAs``1(System.String)">
+            <summary>
+            Returns strongly typed output, converting the XML fragment.
+            </summary>
+            <typeparam name="TOut">The <see cref="T:System.Type"/> of output to return (constrained to <c>class</c>).</typeparam>
+            <param name="xmlFragment">An XML fragment or document as a well-formed <see cref="T:System.String"/>.</param>
+            <returns>Returns the specified <see cref="T:System.Type"/>.</returns>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.OutputAs``1(System.Xml.XPath.IXPathNavigable)">
+            <summary>
+            Returns strongly typed output, converting the Navigable document.
+            </summary>
+            <typeparam name="TOut">The <see cref="T:System.Type"/> of output to return (constrained to <c>class</c>).</typeparam>
+            <param name="navigableDocument">An <see cref="T:System.Xml.XPath.IXPathNavigable"/>.</param>
+            <returns>Returns the specified <see cref="T:System.Type"/>.</returns>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.StripNamespaces(System.String)">
+            <summary>
+            Strip the namespaces from specified <see cref="T:System.String"/>.
+            </summary>
+            <param name="xml">
+            The source <see cref="T:System.String"/>.
+            </param>
+            <remarks>
+            WARNING: Stripping namespaces “flattens” the document
+            and can cause local-name collisions.
+            
+            This routine does not remove namespace prefixes.
+            
+            </remarks>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.StripNamespaces(System.String,System.Boolean)">
+            <summary>
+            Strip the namespaces from specified <see cref="T:System.String"/>.
+            </summary>
+            <param name="xml">
+            The source <see cref="T:System.String"/>.
+            </param>
+            <param name="removeDocType">
+            When <c>true</c>, removes any DOCTYPE preambles.
+            </param>
+            <remarks>
+            WARNING: Stripping namespaces “flattens” the document
+            and can cause local-name collisions.
+            
+            This routine does not remove namespace prefixes.
+            
+            </remarks>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.StripNamespaces(System.Xml.XPath.IXPathNavigable)">
+            <summary>
+            Strip the namespaces from specified document.
+            </summary>
+            <param name="navigableSet">
+            The source <see cref="T:System.Xml.XPath.IXPathNavigable"/> set.
+            </param>
+            <remarks>
+            WARNING: Stripping namespaces “flattens” the document
+            and can cause local-name collisions.
+            
+            This routine does not remove namespace prefixes.
+            
+            </remarks>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.StripNamespaces(System.Xml.XPath.IXPathNavigable,System.Boolean)">
+            <summary>
+            Strip the namespaces from specified document.
+            </summary>
+            <param name="navigableSet">
+            The source <see cref="T:System.Xml.XPath.IXPathNavigable"/> set.
+            </param>
+            <param name="removeDocType">
+            When <c>true</c>, removes any DOCTYPE preambles.
+            </param>
+            <remarks>
+            WARNING: Stripping namespaces “flattens” the document
+            and can cause local-name collisions.
+            
+            This routine does not remove namespace prefixes.
+            
+            </remarks>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.GetXmlSchema(System.Xml.XPath.IXPathNavigable,System.Xml.Schema.ValidationEventHandler)">
+            <summary>
+            Returns an <see cref="T:System.Xml.Schema.XmlSchema"/> based
+            on the specified navigable set and validation event handler.
+            </summary>
+            <param name="navigableSet">
+            The source <see cref="T:System.Xml.XPath.IXPathNavigable"/> set.
+            </param>
+            <param name="eventHandler">
+            The <see cref="T:System.Xml.Schema.ValidationEventHandler"/>
+            with signature MyHandler(object sender, ValidationEventArgs args).
+            </param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.LoadXmlSchema(System.String,System.Xml.Schema.ValidationEventHandler)">
+            <summary>
+            Loads an <see cref="T:System.Xml.Schema.XmlSchema"/> based
+            on the specified navigable set and validation event handler.
+            </summary>
+            <param name="pathToSchema">
+            The valid path to an XML Schema file.
+            </param>
+            <param name="eventHandler">
+            The <see cref="T:System.Xml.Schema.ValidationEventHandler"/>
+            with signature MyHandler(object sender, ValidationEventArgs args).
+            </param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.ValidateNavigableNode(System.Xml.XPath.IXPathNavigable,System.Xml.Schema.XmlSchema,System.Xml.Schema.ValidationEventHandler)">
+            <summary>
+            Validates the specified navigable set
+            with the specified schema and validation event handler.
+            </summary>
+            <param name="navigableSet">
+            The source <see cref="T:System.Xml.XPath.IXPathNavigable"/> set.
+            </param>
+            <param name="schema">
+            The <see cref="T:System.Xml.Schema.XmlSchema"/>.
+            </param>
+            <param name="eventHandler">
+            The <see cref="T:System.Xml.Schema.ValidationEventHandler"/>
+            with signature MyHandler(object sender, ValidationEventArgs args).
+            </param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.Write``1(``0,System.String)">
+            <summary>
+            Serializes and writes to the specified path.
+            </summary>
+            <typeparam name="T">The type of the instance.</typeparam>
+            <param name="instance">The instance.</param>
+            <param name="path">The path.</param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.WriteReader(System.Xml.XmlReader,System.Xml.XmlWriter)">
+            <summary>
+            Transfers the data in the Source to the Destination.
+            </summary>
+            <param name="readerSource"><see cref="T:System.Xml.XmlReader"/></param>
+            <param name="writerDestination"><see cref="T:System.Xml.XmlWriter"/></param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.WriteXslTransform(System.Xml.XPath.IXPathNavigable,System.Xml.XPath.IXPathNavigable,System.String)">
+            <summary>
+            Transforms the specified navigable documents
+            and writes to disk with the specified path.
+            </summary>
+            <param name="xmlInput">The specified input.</param>
+            <param name="navigableSet">
+            The source <see cref="T:System.Xml.XPath.IXPathNavigable"/> set.
+            </param>
+            <param name="outputPath">
+            The file-system, target path.
+            </param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.WriteXslTransform(System.Xml.XmlReader,System.Xml.XPath.IXPathNavigable,System.String)">
+            <summary>
+            Transforms the specified input and writes to disk.
+            </summary>
+            <param name="xmlInput">The specified input.</param>
+            <param name="navigableSet">
+            The source <see cref="T:System.Xml.XPath.IXPathNavigable"/> set.
+            </param>
+            <param name="outputPath">
+            The file-system, target path.
+            </param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.XmlEncode(System.String)">
+            <summary>
+            XMLs the encode.
+            </summary>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Songhay.Xml.XmlUtility.XmlDecode(System.String)">
+            <summary>
+            XMLs the decode.
+            </summary>
+            <param name="value">The value.</param>
+        </member>
+        <member name="T:Songhay.Net.SmtpUtility">
+            <summary>
+            SMTP Utility
+            </summary>
+        </member>
+        <member name="M:Songhay.Net.SmtpUtility.GetAttachment(System.String)">
+            <summary>
+            Gets the attachment.
+            </summary>
+            <param name="path">The path.</param>
+            <returns></returns>
+            <exception cref="T:System.IO.FileNotFoundException"></exception>
+        </member>
+        <member name="M:Songhay.Net.SmtpUtility.GetAttachment(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Gets the attachment.
+            </summary>
+            <param name="paths">The paths.</param>
+            <returns></returns>
+            <exception cref="T:System.NullReferenceException">The expected paths are not here</exception>
+        </member>
+        <member name="M:Songhay.Net.SmtpUtility.SendMail(System.String,System.String,System.String,System.String)">
+            <summary>
+            Sends the mail.
+            </summary>
+            <param name="from">From.</param>
+            <param name="to">To.</param>
+            <param name="subject">The subject.</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Songhay.Net.SmtpUtility.SendMail(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Sends the mail.
+            </summary>
+            <param name="from">From.</param>
+            <param name="to">To.</param>
+            <param name="subject">The subject.</param>
+            <param name="message">The message.</param>
+            <param name="attachment">The attachment.</param>
+        </member>
+        <member name="M:Songhay.Net.SmtpUtility.SendMail(System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{System.Net.Mail.Attachment})">
+            <summary>
+            Sends the mail.
+            </summary>
+            <param name="from">From.</param>
+            <param name="to">To.</param>
+            <param name="subject">The subject.</param>
+            <param name="message">The message.</param>
+            <param name="attachments">The attachments.</param>
+        </member>
+    </members>
+</doc>
