@@ -1,9 +1,0 @@
-D:\Project_TY\20180502Rest\Job\flyinit\Flying\src\03业务控制\CommonConfig\bin\Debug\CommonConfig.dll
-D:\Project_TY\20180502Rest\Job\flyinit\Flying\src\03业务控制\CommonConfig\bin\Debug\CommonConfig.pdb
-D:\Project_TY\20180502Rest\Job\flyinit\Flying\src\03业务控制\CommonConfig\obj\Debug\CommonConfig.csprojResolveAssemblyReference.cache
-D:\Project_TY\20180502Rest\Job\flyinit\Flying\src\03业务控制\CommonConfig\obj\Debug\CommonConfig.dll
-D:\Project_TY\20180502Rest\Job\flyinit\Flying\src\03业务控制\CommonConfig\obj\Debug\CommonConfig.pdb
-D:\Project_TY\20180502Rest\纯净版\src\03业务控制\CommonConfig\bin\Debug\CommonConfig.dll
-D:\Project_TY\20180502Rest\纯净版\src\03业务控制\CommonConfig\bin\Debug\CommonConfig.pdb
-D:\Project_TY\20180502Rest\纯净版\src\03业务控制\CommonConfig\obj\Debug\CommonConfig.dll
-D:\Project_TY\20180502Rest\纯净版\src\03业务控制\CommonConfig\obj\Debug\CommonConfig.pdb

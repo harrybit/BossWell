@@ -1,7 +1,0 @@
-D:\Project_TY\Code\纯净版\GitInit\BossWell\src\BossWell.Model\BossWellModel\bin\Release\BossWellModel.dll
-D:\Project_TY\Code\纯净版\GitInit\BossWell\src\BossWell.Model\BossWellModel\bin\Release\BossWellModel.pdb
-D:\Project_TY\Code\纯净版\GitInit\BossWell\src\BossWell.Model\BossWellModel\bin\Release\SystemConfig.dll
-D:\Project_TY\Code\纯净版\GitInit\BossWell\src\BossWell.Model\BossWellModel\bin\Release\SystemConfig.pdb
-D:\Project_TY\Code\纯净版\GitInit\BossWell\src\BossWell.Model\BossWellModel\obj\Release\BossWellModel.csprojResolveAssemblyReference.cache
-D:\Project_TY\Code\纯净版\GitInit\BossWell\src\BossWell.Model\BossWellModel\obj\Release\BossWellModel.dll
-D:\Project_TY\Code\纯净版\GitInit\BossWell\src\BossWell.Model\BossWellModel\obj\Release\BossWellModel.pdb

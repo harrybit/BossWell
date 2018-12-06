@@ -1,5 +1,0 @@
-D:\Project_TY\Code\纯净版\GitInit\BossWell\src\Common\SystemConfig\bin\Release\SystemConfig.dll.config
-D:\Project_TY\Code\纯净版\GitInit\BossWell\src\Common\SystemConfig\bin\Release\SystemConfig.dll
-D:\Project_TY\Code\纯净版\GitInit\BossWell\src\Common\SystemConfig\bin\Release\SystemConfig.pdb
-D:\Project_TY\Code\纯净版\GitInit\BossWell\src\Common\SystemConfig\obj\Release\SystemConfig.dll
-D:\Project_TY\Code\纯净版\GitInit\BossWell\src\Common\SystemConfig\obj\Release\SystemConfig.pdb
